@@ -6,6 +6,7 @@
  */ 
 
 #include <avr/io.h>
+#include "functions.h"
 
 
 int main(void)
@@ -13,6 +14,8 @@ int main(void)
     /* Replace with your application code */
     while (1) 
     {
+		Lowrider_Mode();
+		System_Init();
     }
 }
 
