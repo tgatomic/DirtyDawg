@@ -37,6 +37,7 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../functions.c \
 ../main.c
 
 
@@ -47,15 +48,19 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+functions.o \
 main.o
 
 OBJS_AS_ARGS +=  \
+functions.o \
 main.o
 
 C_DEPS +=  \
+functions.d \
 main.d
 
 C_DEPS_AS_ARGS +=  \
+functions.d \
 main.d
 
 OUTPUT_FILE_PATH +=Dirty_Dawg_Master.elf
@@ -72,6 +77,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

@@ -1,5 +1,5 @@
-#ifndef FUNCTIONS_H_   /* Include guard */
-#define FUNCTIONS_H_
+#ifndef  functions_Header_h   /* Include guard */
+#define functions_Header_h
 
 void System_Init(void);
 void UART_Init(void);
