@@ -1,0 +1,623 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:ir_recieve
+LIBS:Project-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 3 4
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L ATTINY85-P IC?
+U 1 1 57175B9E
+P 7100 1650
+F 0 "IC?" H 5950 2050 50  0000 C CNN
+F 1 "ATTINY85-P" H 8100 1250 50  0000 C CNN
+F 2 "DIP8" H 8100 1650 50  0000 C CIN
+F 3 "" H 7100 1650 50  0000 C CNN
+	1    7100 1650
+	1    0    0    -1  
+$EndComp
+Text HLabel 5750 1600 0    60   BiDi ~ 0
+SCL
+Wire Wire Line
+	8950 1400 8450 1400
+Wire Wire Line
+	8450 1900 8550 1900
+Wire Wire Line
+	8550 1900 8550 2050
+$Comp
+L GND #PWR?
+U 1 1 57175BA8
+P 8550 2050
+F 0 "#PWR?" H 8550 1800 50  0001 C CNN
+F 1 "GND" H 8550 1900 50  0000 C CNN
+F 2 "" H 8550 2050 50  0000 C CNN
+F 3 "" H 8550 2050 50  0000 C CNN
+	1    8550 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L IR_Recieve D?
+U 1 1 57175BAE
+P 3200 3150
+F 0 "D?" H 3200 3250 50  0000 C CNN
+F 1 "IR_Recieve" H 3216 2983 50  0000 C CNN
+F 2 "" H 3200 3150 50  0000 C CNN
+F 3 "" H 3200 3150 50  0000 C CNN
+	1    3200 3150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L LED D?
+U 1 1 57175BB4
+P 2800 3150
+F 0 "D?" H 2800 3250 50  0000 C CNN
+F 1 "LED" V 2800 3050 50  0000 C CNN
+F 2 "" H 2800 3150 50  0000 C CNN
+F 3 "" H 2800 3150 50  0000 C CNN
+	1    2800 3150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L LED D?
+U 1 1 57175BBA
+P 3600 3150
+F 0 "D?" H 3600 3250 50  0000 C CNN
+F 1 "LED" V 3600 3050 50  0000 C CNN
+F 2 "" H 3600 3150 50  0000 C CNN
+F 3 "" H 3600 3150 50  0000 C CNN
+	1    3600 3150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R R?
+U 1 1 57175BC0
+P 3200 2600
+F 0 "R?" V 3280 2600 50  0000 C CNN
+F 1 "R" V 3200 2600 50  0000 C CNN
+F 2 "" V 3130 2600 50  0000 C CNN
+F 3 "" H 3200 2600 50  0000 C CNN
+	1    3200 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3200 2250 3200 2450
+Wire Wire Line
+	3200 2750 3200 2950
+Connection ~ 3200 2850
+Wire Wire Line
+	2800 3350 2800 3500
+Wire Wire Line
+	2800 3500 3600 3500
+Connection ~ 3200 3500
+Wire Wire Line
+	3600 3500 3600 3350
+Text HLabel 3200 2250 1    60   Input ~ 0
+5V
+$Comp
+L R R?
+U 1 1 57175BE1
+P 3600 2600
+F 0 "R?" V 3680 2600 50  0000 C CNN
+F 1 "R" V 3600 2600 50  0000 C CNN
+F 2 "" V 3530 2600 50  0000 C CNN
+F 3 "" H 3600 2600 50  0000 C CNN
+	1    3600 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 57175BE7
+P 2800 2600
+F 0 "R?" V 2880 2600 50  0000 C CNN
+F 1 "R" V 2800 2600 50  0000 C CNN
+F 2 "" V 2730 2600 50  0000 C CNN
+F 3 "" H 2800 2600 50  0000 C CNN
+	1    2800 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 2750 2800 2950
+Wire Wire Line
+	3600 2750 3600 2950
+Text HLabel 3600 2450 1    60   Input ~ 0
+5V
+Text HLabel 2800 2450 1    60   Input ~ 0
+5V
+Wire Wire Line
+	3200 2850 3400 2850
+Wire Wire Line
+	3400 2850 3400 2050
+Wire Wire Line
+	3400 2050 5150 2050
+Text Label 3400 2050 0    60   ~ 0
+Signal
+$Comp
+L IR_Recieve D?
+U 1 1 57175BF9
+P 1700 3150
+F 0 "D?" H 1700 3250 50  0000 C CNN
+F 1 "IR_Recieve" H 1716 2983 50  0000 C CNN
+F 2 "" H 1700 3150 50  0000 C CNN
+F 3 "" H 1700 3150 50  0000 C CNN
+	1    1700 3150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L LED D?
+U 1 1 57175BFF
+P 1300 3150
+F 0 "D?" H 1300 3250 50  0000 C CNN
+F 1 "LED" V 1300 3050 50  0000 C CNN
+F 2 "" H 1300 3150 50  0000 C CNN
+F 3 "" H 1300 3150 50  0000 C CNN
+	1    1300 3150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L LED D?
+U 1 1 57175C05
+P 2100 3150
+F 0 "D?" H 2100 3250 50  0000 C CNN
+F 1 "LED" V 2100 3050 50  0000 C CNN
+F 2 "" H 2100 3150 50  0000 C CNN
+F 3 "" H 2100 3150 50  0000 C CNN
+	1    2100 3150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R R?
+U 1 1 57175C0B
+P 1700 2600
+F 0 "R?" V 1780 2600 50  0000 C CNN
+F 1 "R" V 1700 2600 50  0000 C CNN
+F 2 "" V 1630 2600 50  0000 C CNN
+F 3 "" H 1700 2600 50  0000 C CNN
+	1    1700 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1700 2250 1700 2450
+Wire Wire Line
+	1700 2750 1700 2950
+Connection ~ 1700 2850
+Wire Wire Line
+	1300 3350 1300 3500
+Wire Wire Line
+	1300 3500 2100 3500
+Connection ~ 1700 3500
+Wire Wire Line
+	2100 3500 2100 3350
+$Comp
+L Q_NPN_BCE Q?
+U 1 1 57175C18
+P 3550 3850
+F 0 "Q?" H 3850 3900 50  0000 R CNN
+F 1 "Q_NPN_BCE" H 4150 3800 50  0001 R CNN
+F 2 "" H 3750 3950 50  0000 C CNN
+F 3 "" H 3550 3850 50  0000 C CNN
+	1    3550 3850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 57175C1F
+P 3900 3750
+F 0 "#PWR?" H 3900 3500 50  0001 C CNN
+F 1 "GND" H 3900 3600 50  0000 C CNN
+F 2 "" H 3900 3750 50  0000 C CNN
+F 3 "" H 3900 3750 50  0000 C CNN
+	1    3900 3750
+	-1   0    0    1   
+$EndComp
+$Comp
+L R R?
+U 1 1 57175C25
+P 3800 4050
+F 0 "R?" V 3880 4050 50  0000 C CNN
+F 1 "R" V 3800 4050 50  0000 C CNN
+F 2 "" V 3730 4050 50  0000 C CNN
+F 3 "" H 3800 4050 50  0000 C CNN
+	1    3800 4050
+	0    1    1    0   
+$EndComp
+Text HLabel 1700 2250 1    60   Input ~ 0
+5V
+$Comp
+L R R?
+U 1 1 57175C2C
+P 2100 2600
+F 0 "R?" V 2180 2600 50  0000 C CNN
+F 1 "R" V 2100 2600 50  0000 C CNN
+F 2 "" V 2030 2600 50  0000 C CNN
+F 3 "" H 2100 2600 50  0000 C CNN
+	1    2100 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 57175C32
+P 1300 2600
+F 0 "R?" V 1380 2600 50  0000 C CNN
+F 1 "R" V 1300 2600 50  0000 C CNN
+F 2 "" V 1230 2600 50  0000 C CNN
+F 3 "" H 1300 2600 50  0000 C CNN
+	1    1300 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1300 2750 1300 2950
+Wire Wire Line
+	2100 2750 2100 2950
+Text HLabel 2100 2450 1    60   Input ~ 0
+5V
+Text HLabel 1300 2450 1    60   Input ~ 0
+5V
+Wire Wire Line
+	1700 2850 1900 2850
+Wire Wire Line
+	1900 2850 1900 2050
+Wire Wire Line
+	1900 2050 2900 2050
+Wire Wire Line
+	3750 3750 3900 3750
+Wire Wire Line
+	3550 4050 3650 4050
+Text Label 1900 2050 0    60   ~ 0
+Signal
+Wire Wire Line
+	5150 2050 5150 1800
+Wire Wire Line
+	5150 1800 5750 1800
+Wire Wire Line
+	2900 2050 2900 1700
+Wire Wire Line
+	2900 1700 5750 1700
+Wire Wire Line
+	4600 2350 5450 2350
+Wire Wire Line
+	5450 2350 5450 1900
+Wire Wire Line
+	5450 1900 5750 1900
+Text HLabel 5750 1400 0    60   BiDi ~ 0
+SDA
+Text HLabel 8950 1400 2    60   Input ~ 0
+5V
+Wire Wire Line
+	1700 3350 1700 3750
+Wire Wire Line
+	1700 3750 3350 3750
+Wire Wire Line
+	3200 3350 3200 3750
+Connection ~ 3200 3750
+Wire Wire Line
+	4600 2350 4600 4050
+Wire Wire Line
+	4600 4050 3950 4050
+$Comp
+L ATTINY85-P IC?
+U 1 1 571781C6
+P 7100 4350
+F 0 "IC?" H 5950 4750 50  0000 C CNN
+F 1 "ATTINY85-P" H 8100 3950 50  0000 C CNN
+F 2 "DIP8" H 8100 4350 50  0000 C CIN
+F 3 "" H 7100 4350 50  0000 C CNN
+	1    7100 4350
+	1    0    0    -1  
+$EndComp
+Text HLabel 5750 4300 0    60   BiDi ~ 0
+SCL
+Wire Wire Line
+	8950 4100 8450 4100
+Wire Wire Line
+	8450 4600 8550 4600
+Wire Wire Line
+	8550 4600 8550 4750
+$Comp
+L GND #PWR?
+U 1 1 571781D0
+P 8550 4750
+F 0 "#PWR?" H 8550 4500 50  0001 C CNN
+F 1 "GND" H 8550 4600 50  0000 C CNN
+F 2 "" H 8550 4750 50  0000 C CNN
+F 3 "" H 8550 4750 50  0000 C CNN
+	1    8550 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L IR_Recieve D?
+U 1 1 571781D6
+P 3200 5850
+F 0 "D?" H 3200 5950 50  0000 C CNN
+F 1 "IR_Recieve" H 3216 5683 50  0000 C CNN
+F 2 "" H 3200 5850 50  0000 C CNN
+F 3 "" H 3200 5850 50  0000 C CNN
+	1    3200 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L LED D?
+U 1 1 571781DC
+P 2800 5850
+F 0 "D?" H 2800 5950 50  0000 C CNN
+F 1 "LED" V 2800 5750 50  0000 C CNN
+F 2 "" H 2800 5850 50  0000 C CNN
+F 3 "" H 2800 5850 50  0000 C CNN
+	1    2800 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L LED D?
+U 1 1 571781E2
+P 3600 5850
+F 0 "D?" H 3600 5950 50  0000 C CNN
+F 1 "LED" V 3600 5750 50  0000 C CNN
+F 2 "" H 3600 5850 50  0000 C CNN
+F 3 "" H 3600 5850 50  0000 C CNN
+	1    3600 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R R?
+U 1 1 571781E8
+P 3200 5300
+F 0 "R?" V 3280 5300 50  0000 C CNN
+F 1 "R" V 3200 5300 50  0000 C CNN
+F 2 "" V 3130 5300 50  0000 C CNN
+F 3 "" H 3200 5300 50  0000 C CNN
+	1    3200 5300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3200 4950 3200 5150
+Wire Wire Line
+	3200 5450 3200 5650
+Connection ~ 3200 5550
+Wire Wire Line
+	2800 6050 2800 6200
+Wire Wire Line
+	2800 6200 3600 6200
+Connection ~ 3200 6200
+Wire Wire Line
+	3600 6200 3600 6050
+Text HLabel 3200 4950 1    60   Input ~ 0
+5V
+$Comp
+L R R?
+U 1 1 571781F6
+P 3600 5300
+F 0 "R?" V 3680 5300 50  0000 C CNN
+F 1 "R" V 3600 5300 50  0000 C CNN
+F 2 "" V 3530 5300 50  0000 C CNN
+F 3 "" H 3600 5300 50  0000 C CNN
+	1    3600 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 571781FC
+P 2800 5300
+F 0 "R?" V 2880 5300 50  0000 C CNN
+F 1 "R" V 2800 5300 50  0000 C CNN
+F 2 "" V 2730 5300 50  0000 C CNN
+F 3 "" H 2800 5300 50  0000 C CNN
+	1    2800 5300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 5450 2800 5650
+Wire Wire Line
+	3600 5450 3600 5650
+Text HLabel 3600 5150 1    60   Input ~ 0
+5V
+Text HLabel 2800 5150 1    60   Input ~ 0
+5V
+Wire Wire Line
+	3200 5550 3400 5550
+Wire Wire Line
+	3400 5550 3400 4750
+Wire Wire Line
+	3400 4750 5150 4750
+Text Label 3400 4750 0    60   ~ 0
+Signal
+$Comp
+L IR_Recieve D?
+U 1 1 5717820A
+P 1700 5850
+F 0 "D?" H 1700 5950 50  0000 C CNN
+F 1 "IR_Recieve" H 1716 5683 50  0000 C CNN
+F 2 "" H 1700 5850 50  0000 C CNN
+F 3 "" H 1700 5850 50  0000 C CNN
+	1    1700 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L LED D?
+U 1 1 57178210
+P 1300 5850
+F 0 "D?" H 1300 5950 50  0000 C CNN
+F 1 "LED" V 1300 5750 50  0000 C CNN
+F 2 "" H 1300 5850 50  0000 C CNN
+F 3 "" H 1300 5850 50  0000 C CNN
+	1    1300 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L LED D?
+U 1 1 57178216
+P 2100 5850
+F 0 "D?" H 2100 5950 50  0000 C CNN
+F 1 "LED" V 2100 5750 50  0000 C CNN
+F 2 "" H 2100 5850 50  0000 C CNN
+F 3 "" H 2100 5850 50  0000 C CNN
+	1    2100 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R R?
+U 1 1 5717821C
+P 1700 5300
+F 0 "R?" V 1780 5300 50  0000 C CNN
+F 1 "R" V 1700 5300 50  0000 C CNN
+F 2 "" V 1630 5300 50  0000 C CNN
+F 3 "" H 1700 5300 50  0000 C CNN
+	1    1700 5300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1700 4950 1700 5150
+Wire Wire Line
+	1700 5450 1700 5650
+Connection ~ 1700 5550
+Wire Wire Line
+	1300 6050 1300 6200
+Wire Wire Line
+	1300 6200 2100 6200
+Connection ~ 1700 6200
+Wire Wire Line
+	2100 6200 2100 6050
+$Comp
+L Q_NPN_BCE Q?
+U 1 1 57178229
+P 3550 6550
+F 0 "Q?" H 3850 6600 50  0000 R CNN
+F 1 "Q_NPN_BCE" H 4150 6500 50  0001 R CNN
+F 2 "" H 3750 6650 50  0000 C CNN
+F 3 "" H 3550 6550 50  0000 C CNN
+	1    3550 6550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5717822F
+P 3900 6450
+F 0 "#PWR?" H 3900 6200 50  0001 C CNN
+F 1 "GND" H 3900 6300 50  0000 C CNN
+F 2 "" H 3900 6450 50  0000 C CNN
+F 3 "" H 3900 6450 50  0000 C CNN
+	1    3900 6450
+	-1   0    0    1   
+$EndComp
+$Comp
+L R R?
+U 1 1 57178235
+P 3800 6750
+F 0 "R?" V 3880 6750 50  0000 C CNN
+F 1 "R" V 3800 6750 50  0000 C CNN
+F 2 "" V 3730 6750 50  0000 C CNN
+F 3 "" H 3800 6750 50  0000 C CNN
+	1    3800 6750
+	0    1    1    0   
+$EndComp
+Text HLabel 1700 4950 1    60   Input ~ 0
+5V
+$Comp
+L R R?
+U 1 1 5717823C
+P 2100 5300
+F 0 "R?" V 2180 5300 50  0000 C CNN
+F 1 "R" V 2100 5300 50  0000 C CNN
+F 2 "" V 2030 5300 50  0000 C CNN
+F 3 "" H 2100 5300 50  0000 C CNN
+	1    2100 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 57178242
+P 1300 5300
+F 0 "R?" V 1380 5300 50  0000 C CNN
+F 1 "R" V 1300 5300 50  0000 C CNN
+F 2 "" V 1230 5300 50  0000 C CNN
+F 3 "" H 1300 5300 50  0000 C CNN
+	1    1300 5300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1300 5450 1300 5650
+Wire Wire Line
+	2100 5450 2100 5650
+Text HLabel 2100 5150 1    60   Input ~ 0
+5V
+Text HLabel 1300 5150 1    60   Input ~ 0
+5V
+Wire Wire Line
+	1700 5550 1900 5550
+Wire Wire Line
+	1900 5550 1900 4750
+Wire Wire Line
+	1900 4750 2900 4750
+Wire Wire Line
+	3750 6450 3900 6450
+Wire Wire Line
+	3550 6750 3650 6750
+Text Label 1900 4750 0    60   ~ 0
+Signal
+Wire Wire Line
+	5150 4750 5150 4500
+Wire Wire Line
+	5150 4500 5750 4500
+Wire Wire Line
+	2900 4750 2900 4400
+Wire Wire Line
+	2900 4400 5750 4400
+Wire Wire Line
+	4600 5050 5450 5050
+Wire Wire Line
+	5450 5050 5450 4600
+Wire Wire Line
+	5450 4600 5750 4600
+Text HLabel 5750 4100 0    60   BiDi ~ 0
+SDA
+Text HLabel 8950 4100 2    60   Input ~ 0
+5V
+Wire Wire Line
+	1700 6050 1700 6450
+Wire Wire Line
+	1700 6450 3350 6450
+Wire Wire Line
+	3200 6050 3200 6450
+Connection ~ 3200 6450
+Wire Wire Line
+	4600 5050 4600 6750
+Wire Wire Line
+	4600 6750 3950 6750
+$EndSCHEMATC
