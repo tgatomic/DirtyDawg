@@ -1,0 +1,466 @@
+[1mdiff --git a/KiCad/Project.bak b/KiCad/Project.bak[m
+[1mindex 0a601cd..8cb5a56 100644[m
+[1m--- a/KiCad/Project.bak[m
+[1m+++ b/KiCad/Project.bak[m
+[36m@@ -28,11 +28,13 @@[m [mLIBS:opto[m
+ LIBS:atmel[m
+ LIBS:contrib[m
+ LIBS:valves[m
+[32m+[m[32mLIBS:ir_recieve[m
+[32m+[m[32mLIBS:Project-cache[m
+ EELAYER 25 0[m
+ EELAYER END[m
+ $Descr A4 11693 8268[m
+ encoding utf-8[m
+[31m-Sheet 1 1[m
+[32m+[m[32mSheet 1 4[m
+ Title ""[m
+ Date ""[m
+ Rev ""[m
+[36m@@ -43,10 +45,10 @@[m [mComment3 ""[m
+ Comment4 ""[m
+ $EndDescr[m
+ $Comp[m
+[31m-L ATMEGA328-P IC?[m
+[32m+[m[32mL ATMEGA328-P IC1[m
+ U 1 1 5714DE10[m
+ P 2500 2350[m
+[31m-F 0 "IC?" H 1750 3600 50  0000 L BNN[m
+[32m+[m[32mF 0 "IC1" H 1750 3600 50  0000 L BNN[m
+ F 1 "ATMEGA328-P" H 2900 950 50  0000 L BNN[m
+ F 2 "DIL28" H 2500 2350 50  0000 C CIN[m
+ F 3 "" H 2500 2350 50  0000 C CNN[m
+[36m@@ -54,189 +56,234 @@[m [mF 3 "" H 2500 2350 50  0000 C CNN[m
+ 	1    0    0    -1  [m
+ $EndComp[m
+ $Comp[m
+[31m-L ATTINY85-P IC?[m
+[31m-U 1 1 5714DEE0[m
+[31m-P 8850 2600[m
+[31m-F 0 "IC?" H 7700 3000 50  0000 C CNN[m
+[31m-F 1 "ATTINY85-P" H 9850 2200 50  0000 C CNN[m
+[31m-F 2 "DIP8" H 9850 2600 50  0000 C CIN[m
+[31m-F 3 "" H 8850 2600 50  0000 C CNN[m
+[31m-	1    8850 2600[m
+[31m-	1    0    0    -1  [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L ATTINY85-P IC?[m
+[31m-U 1 1 5714DF7F[m
+[31m-P 8850 4150[m
+[31m-F 0 "IC?" H 7700 4550 50  0000 C CNN[m
+[31m-F 1 "ATTINY85-P" H 9850 3750 50  0000 C CNN[m
+[31m-F 2 "DIP8" H 9850 4150 50  0000 C CIN[m
+[31m-F 3 "" H 8850 4150 50  0000 C CNN[m
+[31m-	1    8850 4150[m
+[31m-	1    0    0    -1  [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L LED D?[m
+[31m-U 1 1 5714E09A[m
+[31m-P 8650 5600[m
+[31m-F 0 "D?" H 8650 5700 50  0000 C CNN[m
+[31m-F 1 "LED" H 8650 5500 50  0000 C CNN[m
+[31m-F 2 "" H 8650 5600 50  0000 C CNN[m
+[31m-F 3 "" H 8650 5600 50  0000 C CNN[m
+[31m-	1    8650 5600[m
+[31m-	0    -1   -1   0   [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L LED D?[m
+[31m-U 1 1 5714E1D0[m
+[31m-P 8350 5600[m
+[31m-F 0 "D?" H 8350 5700 50  0000 C CNN[m
+[31m-F 1 "LED" H 8350 5500 50  0000 C CNN[m
+[31m-F 2 "" H 8350 5600 50  0000 C CNN[m
+[31m-F 3 "" H 8350 5600 50  0000 C CNN[m
+[31m-	1    8350 5600[m
+[31m-	0    -1   -1   0   [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L LED D?[m
+[31m-U 1 1 5714E22F[m
+[31m-P 8050 5600[m
+[31m-F 0 "D?" H 8050 5700 50  0000 C CNN[m
+[31m-F 1 "LED" H 8050 5500 50  0000 C CNN[m
+[31m-F 2 "" H 8050 5600 50  0000 C CNN[m
+[31m-F 3 "" H 8050 5600 50  0000 C CNN[m
+[31m-	1    8050 5600[m
+[31m-	0    -1   -1   0   [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L LED D?[m
+[31m-U 1 1 5714E2D4[m
+[31m-P 7750 5600[m
+[31m-F 0 "D?" H 7750 5700 50  0000 C CNN[m
+[31m-F 1 "LED" H 7750 5500 50  0000 C CNN[m
+[31m-F 2 "" H 7750 5600 50  0000 C CNN[m
+[31m-F 3 "" H 7750 5600 50  0000 C CNN[m
+[31m-	1    7750 5600[m
+[31m-	0    -1   -1   0   [m
+[31m-$EndComp[m
+[31m-Wire Wire Line[m
+[31m-	3500 2500 5950 2500[m
+[31m-Wire Wire Line[m
+[31m-	5950 2500 5950 4250[m
+[31m-Wire Wire Line[m
+[31m-	3500 2600 5800 2600[m
+[31m-Wire Wire Line[m
+[31m-	5800 2600 5800 4750[m
+[31m-Wire Wire Line[m
+[31m-	7500 2350 5750 2350[m
+[31m-Wire Wire Line[m
+[31m-	5750 2350 5750 2500[m
+[31m-Connection ~ 5750 2500[m
+[31m-Wire Wire Line[m
+[31m-	7500 3900 7500 3400[m
+[31m-Wire Wire Line[m
+[31m-	7500 3400 5950 3400[m
+[31m-Connection ~ 5950 3400[m
+[31m-Wire Wire Line[m
+[31m-	7500 2550 6600 2550[m
+[31m-Wire Wire Line[m
+[31m-	6600 2550 6600 2750[m
+[31m-Wire Wire Line[m
+[31m-	6600 2750 5800 2750[m
+[31m-Connection ~ 5800 2750[m
+[31m-Wire Wire Line[m
+[31m-	7500 4100 6400 4100[m
+[31m-Wire Wire Line[m
+[31m-	6400 4100 6400 3900[m
+[31m-Wire Wire Line[m
+[31m-	6400 3900 5800 3900[m
+[31m-Connection ~ 5800 3900[m
+[31m-$Comp[m
+[31m-L +5V #PWR?[m
+[31m-U 1 1 5714EC2A[m
+[31m-P 10200 2350[m
+[31m-F 0 "#PWR?" H 10200 2200 50  0001 C CNN[m
+[31m-F 1 "+5V" H 10200 2490 50  0000 C CNN[m
+[31m-F 2 "" H 10200 2350 50  0000 C CNN[m
+[31m-F 3 "" H 10200 2350 50  0000 C CNN[m
+[31m-	1    10200 2350[m
+[31m-	0    1    1    0   [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L +5V #PWR?[m
+[31m-U 1 1 5714ECFB[m
+[31m-P 10200 3900[m
+[31m-F 0 "#PWR?" H 10200 3750 50  0001 C CNN[m
+[31m-F 1 "+5V" H 10200 4040 50  0000 C CNN[m
+[31m-F 2 "" H 10200 3900 50  0000 C CNN[m
+[31m-F 3 "" H 10200 3900 50  0000 C CNN[m
+[31m-	1    10200 3900[m
+[31m-	0    1    1    0   [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L +5V #PWR?[m
+[31m-U 1 1 5714EE20[m
+[31m-P 1600 1250[m
+[31m-F 0 "#PWR?" H 1600 1100 50  0001 C CNN[m
+[31m-F 1 "+5V" H 1600 1390 50  0000 C CNN[m
+[31m-F 2 "" H 1600 1250 50  0000 C CNN[m
+[31m-F 3 "" H 1600 1250 50  0000 C CNN[m
+[31m-	1    1600 1250[m
+[31m-	0    -1   -1   0   [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L GND #PWR?[m
+[31m-U 1 1 5714EEF8[m
+[31m-P 10200 2850[m
+[31m-F 0 "#PWR?" H 10200 2600 50  0001 C CNN[m
+[31m-F 1 "GND" H 10200 2700 50  0000 C CNN[m
+[31m-F 2 "" H 10200 2850 50  0000 C CNN[m
+[31m-F 3 "" H 10200 2850 50  0000 C CNN[m
+[31m-	1    10200 2850[m
+[31m-	0    -1   -1   0   [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L GND #PWR?[m
+[31m-U 1 1 5714EF1A[m
+[31m-P 10200 4400[m
+[31m-F 0 "#PWR?" H 10200 4150 50  0001 C CNN[m
+[31m-F 1 "GND" H 10200 4250 50  0000 C CNN[m
+[31m-F 2 "" H 10200 4400 50  0000 C CNN[m
+[31m-F 3 "" H 10200 4400 50  0000 C CNN[m
+[31m-	1    10200 4400[m
+[31m-	0    -1   -1   0   [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L GND #PWR?[m
+[31m-U 1 1 5714EFBA[m
+[31m-P 1600 3450[m
+[31m-F 0 "#PWR?" H 1600 3200 50  0001 C CNN[m
+[31m-F 1 "GND" H 1600 3300 50  0000 C CNN[m
+[31m-F 2 "" H 1600 3450 50  0000 C CNN[m
+[31m-F 3 "" H 1600 3450 50  0000 C CNN[m
+[31m-	1    1600 3450[m
+[31m-	0    1    1    0   [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L GND #PWR?[m
+[31m-U 1 1 5714EFDC[m
+[31m-P 1600 3550[m
+[31m-F 0 "#PWR?" H 1600 3300 50  0001 C CNN[m
+[31m-F 1 "GND" H 1600 3400 50  0000 C CNN[m
+[31m-F 2 "" H 1600 3550 50  0000 C CNN[m
+[31m-F 3 "" H 1600 3550 50  0000 C CNN[m
+[31m-	1    1600 3550[m
+[31m-	0    1    1    0   [m
+[31m-$EndComp[m
+[31m-$Comp[m
+[31m-L BlueSmirf U?[m
+[32m+[m[32mL BlueSmirf U1[m
+ U 1 1 5714FF78[m
+[31m-P 8050 1300[m
+[31m-F 0 "U?" H 7850 1150 60  0000 C CNN[m
+[31m-F 1 "BlueSmirf" H 8000 1500 60  0000 C TNN[m
+[31m-F 2 "" H 8050 1300 60  0000 C CNN[m
+[31m-F 3 "" H 8050 1300 60  0000 C CNN[m
+[31m-	1    8050 1300[m
+[32m+[m[32mP 8800 3550[m
+[32m+[m[32mF 0 "U1" H 8600 3400 60  0000 C CNN[m
+[32m+[m[32mF 1 "BlueSmirf" H 8750 3750 60  0000 C TNN[m
+[32m+[m[32mF 2 "" H 8800 3550 60  0000 C CNN[m
+[32m+[m[32mF 3 "" H 8800 3550 60  0000 C CNN[m
+[32m+[m	[32m1    8800 3550[m
+[32m+[m	[32m0    1    1    0[m[41m   [m
+[32m+[m[32m$EndComp[m
+[32m+[m[32m$Comp[m
+[32m+[m[32mL GND #PWR1[m
+[32m+[m[32mU 1 1 5715DC43[m
+[32m+[m[32mP 1500 3800[m
+[32m+[m[32mF 0 "#PWR1" H 1500 3550 50  0001 C CNN[m
+[32m+[m[32mF 1 "GND" H 1500 3650 50  0000 C CNN[m
+[32m+[m[32mF 2 "" H 1500 3800 50  0000 C CNN[m
+[32m+[m[32mF 3 "" H 1500 3800 50  0000 C CNN[m
+[32m+[m	[32m1    1500 3800[m
+[32m+[m	[32m1    0    0    -1[m[41m  [m
+[32m+[m[32m$EndComp[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m1600 3450 1500 3450[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m1500 3450 1500 3800[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m1600 3550 1500 3550[m
+[32m+[m[32mConnection ~ 1500 3550[m
+[32m+[m[32m$Sheet[m
+[32m+[m[32mS 9500 4950 1100 700[m[41m [m
+[32m+[m[32mU 57160B94[m
+[32m+[m[32mF0 "VoltRegulator" 60[m
+[32m+[m[32mF1 "VoltRegulator.sch" 60[m
+[32m+[m[32mF2 "9V" O L 9500 5200 60[m[41m [m
+[32m+[m[32mF3 "5V" O L 9500 5400 60[m[41m [m
+[32m+[m[32m$EndSheet[m
+[32m+[m[32m$Comp[m
+[32m+[m[32mL Q_NPN_BCE Q?[m
+[32m+[m[32mU 1 1 571628D5[m
+[32m+[m[32mP 10000 1750[m
+[32m+[m[32mF 0 "Q?" H 10300 1800 50  0000 R CNN[m
+[32m+[m[32mF 1 "Q_NPN_BCE" H 10600 1700 50  0000 R CNN[m
+[32m+[m[32mF 2 "" H 10200 1850 50  0000 C CNN[m
+[32m+[m[32mF 3 "" H 10000 1750 50  0000 C CNN[m
+[32m+[m	[32m1    10000 1750[m
+[32m+[m	[32m1    0    0    -1[m[41m  [m
+[32m+[m[32m$EndComp[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m9050 1750 9800 1750[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m10100 1950 10100 2450[m
+[32m+[m[32m$Comp[m
+[32m+[m[32mL GND #PWR?[m
+[32m+[m[32mU 1 1 571629AA[m
+[32m+[m[32mP 10100 2450[m
+[32m+[m[32mF 0 "#PWR?" H 10100 2200 50  0001 C CNN[m
+[32m+[m[32mF 1 "GND" H 10100 2300 50  0000 C CNN[m
+[32m+[m[32mF 2 "" H 10100 2450 50  0000 C CNN[m
+[32m+[m[32mF 3 "" H 10100 2450 50  0000 C CNN[m
+[32m+[m	[32m1    10100 2450[m
+[32m+[m	[32m1    0    0    -1[m[41m  [m
+[32m+[m[32m$EndComp[m
+[32m+[m[32m$Comp[m
+[32m+[m[32mL R R?[m
+[32m+[m[32mU 1 1 571629D2[m
+[32m+[m[32mP 10100 1150[m
+[32m+[m[32mF 0 "R?" V 10180 1150 50  0000 C CNN[m
+[32m+[m[32mF 1 "R" V 10100 1150 50  0000 C CNN[m
+[32m+[m[32mF 2 "" V 10030 1150 50  0000 C CNN[m
+[32m+[m[32mF 3 "" H 10100 1150 50  0000 C CNN[m
+[32m+[m	[32m1    10100 1150[m
+[32m+[m	[32m1    0    0    -1[m[41m  [m
+[32m+[m[32m$EndComp[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m10100 1300 10100 1550[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m10100 1450 11000 1450[m
+[32m+[m[32mConnection ~ 10100 1450[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m10100 1000 10100 650[m[41m [m
+[32m+[m[32mText Label 10650 1450 2    60   ~ 0[m
+[32m+[m[32mOutput[m
+[32m+[m[32mText Label 9500 1750 2    60   ~ 0[m
+[32m+[m[32mInput[m
+[32m+[m[32m$Sheet[m
+[32m+[m[32mS 5750 4350 1700 850[m[41m [m
+[32m+[m[32mU 571635B2[m
+[32m+[m[32mF0 "IR" 60[m
+[32m+[m[32mF1 "IR.sch" 60[m
+[32m+[m[32mF2 "5V" I R 7450 5000 60[m[41m [m
+[32m+[m[32mF3 "SDA" B L 5750 4600 60[m[41m [m
+[32m+[m[32mF4 "SCL" B L 5750 4950 60[m[41m [m
+[32m+[m[32m$EndSheet[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m9500 5400 8200 5400[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m8200 5400 8200 5000[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m8200 5000 7450 5000[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m8000 5000 8000 5850[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m8000 5850 900  5850[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m900  5850 900  1000[m
+[32m+[m[32mConnection ~ 8000 5000[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m900  1250 1600 1250[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m8950 4100 8950 5400[m
+[32m+[m[32mConnection ~ 8950 5400[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m8750 4100 8750 4550[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m8750 4550 7800 4550[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m7800 4550 7800 2850[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m7800 2850 3500 2850[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m3500 2950 7650 2950[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m7650 2950 7650 4700[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m7650 4700 8650 4700[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m8650 4700 8650 4100[m
+[32m+[m[32mNoConn ~ 8550 4100[m
+[32m+[m[32mNoConn ~ 9050 4100[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m8850 4100 8850 4900[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m8850 4900 8800 4900[m
+[32m+[m[32m$Comp[m
+[32m+[m[32mL GND #PWR?[m
+[32m+[m[32mU 1 1 57165880[m
+[32m+[m[32mP 8800 4900[m
+[32m+[m[32mF 0 "#PWR?" H 8800 4650 50  0001 C CNN[m
+[32m+[m[32mF 1 "GND" H 8800 4750 50  0000 C CNN[m
+[32m+[m[32mF 2 "" H 8800 4900 50  0000 C CNN[m
+[32m+[m[32mF 3 "" H 8800 4900 50  0000 C CNN[m
+[32m+[m	[32m1    8800 4900[m
+[32m+[m	[32m0    1    1    0[m[41m   [m
+[32m+[m[32m$EndComp[m
+[32m+[m[32m$Sheet[m
+[32m+[m[32mS 5750 950  1600 850[m[41m [m
+[32m+[m[32mU 57166F5B[m
+[32m+[m[32mF0 "lights" 60[m
+[32m+[m[32mF1 "Lights.sch" 60[m
+[32m+[m[32mF2 "5V" I L 5750 1150 60[m[41m [m
+[32m+[m[32mF3 "Brake" I L 5750 1400 60[m[41m [m
+[32m+[m[32mF4 "Headlight" I L 5750 1650 60[m[41m [m
+[32m+[m[32m$EndSheet[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m3500 1350 5050 1350[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m5050 1350 5050 1400[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m5050 1400 5750 1400[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m3500 1450 4950 1450[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m4950 1450 4950 1650[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m4950 1650 5750 1650[m
+[32m+[m[32mConnection ~ 900  1250[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m900  1000 5200 1000[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m5200 1000 5200 1150[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m5200 1150 5750 1150[m
+[32m+[m[32m$Comp[m
+[32m+[m[32mL Photores R?[m
+[32m+[m[32mU 1 1 5716DAD8[m
+[32m+[m[32mP 5000 2300[m
+[32m+[m[32mF 0 "R?" V 5080 2300 50  0000 C CNN[m
+[32m+[m[32mF 1 "Photores" V 5210 2300 50  0000 C TNN[m
+[32m+[m[32mF 2 "" V 4930 2300 50  0000 C CNN[m
+[32m+[m[32mF 3 "" H 5000 2300 50  0000 C CNN[m
+[32m+[m	[32m1    5000 2300[m
+[32m+[m	[32m0    -1   -1   0[m[41m   [m
+[32m+[m[32m$EndComp[m
+[32m+[m[32m$Comp[m
+[32m+[m[32mL R R?[m
+[32m+[m[32mU 1 1 5716E4CF[m
+[32m+[m[32mP 4450 2150[m
+[32m+[m[32mF 0 "R?" V 4530 2150 50  0000 C CNN[m
+[32m+[m[32mF 1 "10k" V 4450 2150 50  0000 C CNN[m
+[32m+[m[32mF 2 "" V 4380 2150 50  0000 C CNN[m
+[32m+[m[32mF 3 "" H 4450 2150 50  0000 C CNN[m
+[32m+[m	[32m1    4450 2150[m
+ 	-1   0    0    1   [m
+ $EndComp[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m5500 1150 5500 2300[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m5500 2300 5250 2300[m
+[32m+[m[32mConnection ~ 5500 1150[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m4750 2300 4150 2300[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m4150 2300 4150 2100[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m4150 2100 3500 2100[m
+[32m+[m[32m$Comp[m
+[32m+[m[32mL GND #PWR?[m
+[32m+[m[32mU 1 1 5716EE89[m
+[32m+[m[32mP 4450 1800[m
+[32m+[m[32mF 0 "#PWR?" H 4450 1550 50  0001 C CNN[m
+[32m+[m[32mF 1 "GND" H 4450 1650 50  0000 C CNN[m
+[32m+[m[32mF 2 "" H 4450 1800 50  0000 C CNN[m
+[32m+[m[32mF 3 "" H 4450 1800 50  0000 C CNN[m
+[32m+[m	[32m1    4450 1800[m
+[32m+[m	[32m0    -1   -1   0[m[41m   [m
+[32m+[m[32m$EndComp[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m4450 2000 4450 1800[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m3500 2500 4550 2500[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m4550 2500 4550 4600[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m4550 4600 5750 4600[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m5750 4950 4200 4950[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m4200 4950 4200 2600[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m4200 2600 3500 2600[m
+ $EndSCHEMATC[m
+[1mdiff --git a/KiCad/Project.sch b/KiCad/Project.sch[m
+[1mindex 8cb5a56..deba51f 100644[m
+[1m--- a/KiCad/Project.sch[m
+[1m+++ b/KiCad/Project.sch[m
+[36m@@ -286,4 +286,12 @@[m [mWire Wire Line[m
+ 	4200 4950 4200 2600[m
+ Wire Wire Line[m
+ 	4200 2600 3500 2600[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m6200 2100 6200 2650[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m6200 2100 7750 2100[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m7750 2100 7750 2650[m
+[32m+[m[32mWire Wire Line[m
+[32m+[m	[32m7750 2650 6200 2650[m
+ $EndSCHEMATC[m

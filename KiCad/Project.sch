@@ -29,12 +29,18 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:ir_recieve
+LIBS:I2C_LCD
+LIBS:LinkuraModule
+LIBS:i2cdisplay
+LIBS:ca3240e
+LIBS:SN754410NE
+LIBS:motor
 LIBS:Project-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 4
+Sheet 1 7
 Title ""
 Date ""
 Rev ""
@@ -85,12 +91,13 @@ Wire Wire Line
 	1600 3550 1500 3550
 Connection ~ 1500 3550
 $Sheet
-S 9500 4950 1100 700 
+S 9500 4900 1100 700 
 U 57160B94
 F0 "VoltRegulator" 60
 F1 "VoltRegulator.sch" 60
 F2 "9V" O L 9500 5200 60 
 F3 "5V" O L 9500 5400 60 
+F4 "3V" O L 9500 5000 60 
 $EndSheet
 $Comp
 L Q_NPN_BCE Q?
@@ -148,9 +155,9 @@ F1 "IR.sch" 60
 F2 "5V" I R 7450 5000 60 
 F3 "SDA" B L 5750 4600 60 
 F4 "SCL" B L 5750 4950 60 
+F5 "9V" I L 5750 5100 60 
+F6 "3V" I R 7450 4800 60 
 $EndSheet
-Wire Wire Line
-	9500 5400 8200 5400
 Wire Wire Line
 	8200 5400 8200 5000
 Wire Wire Line
@@ -242,12 +249,12 @@ $EndComp
 $Comp
 L R R?
 U 1 1 5716E4CF
-P 4450 2150
-F 0 "R?" V 4530 2150 50  0000 C CNN
-F 1 "10k" V 4450 2150 50  0000 C CNN
-F 2 "" V 4380 2150 50  0000 C CNN
-F 3 "" H 4450 2150 50  0000 C CNN
-	1    4450 2150
+P 4450 2050
+F 0 "R?" V 4530 2050 50  0000 C CNN
+F 1 "10k" V 4450 2050 50  0000 C CNN
+F 2 "" V 4380 2050 50  0000 C CNN
+F 3 "" H 4450 2050 50  0000 C CNN
+	1    4450 2050
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
@@ -273,8 +280,6 @@ F 3 "" H 4450 1800 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	4450 2000 4450 1800
-Wire Wire Line
 	3500 2500 4550 2500
 Wire Wire Line
 	4550 2500 4550 4600
@@ -286,4 +291,79 @@ Wire Wire Line
 	4200 4950 4200 2600
 Wire Wire Line
 	4200 2600 3500 2600
+$Sheet
+S 1750 4600 1100 650 
+U 5717B094
+F0 "Controller" 60
+F1 "Controller.sch" 60
+$EndSheet
+Wire Wire Line
+	8200 5400 9500 5400
+Wire Wire Line
+	9500 5000 8350 5000
+Wire Wire Line
+	8350 5000 8350 4800
+Wire Wire Line
+	8350 4800 7450 4800
+Wire Wire Line
+	9500 5200 7700 5200
+Wire Wire Line
+	7700 5200 7700 5500
+Wire Wire Line
+	7700 5500 5300 5500
+Wire Wire Line
+	5300 5500 5300 5100
+Wire Wire Line
+	5300 5100 5750 5100
+Wire Wire Line
+	4450 1800 4450 1900
+Wire Wire Line
+	4450 2200 4450 2300
+Connection ~ 4450 2300
+$Sheet
+S 5750 3200 1650 850 
+U 571BEA93
+F0 "Motor" 60
+F1 "Motor.sch" 60
+F2 "Forw." I L 5750 3350 60 
+F3 "Backw." I L 5750 3500 60 
+F4 "5V" I R 7400 3850 60 
+F5 "9V" I R 7400 3700 60 
+F6 "Right" I L 5750 3900 60 
+F7 "Left" I L 5750 3750 60 
+$EndSheet
+Wire Wire Line
+	5750 3350 5050 3350
+Wire Wire Line
+	5050 3350 5050 3150
+Wire Wire Line
+	5050 3150 3500 3150
+Wire Wire Line
+	5750 3500 4950 3500
+Wire Wire Line
+	4950 3500 4950 3350
+Wire Wire Line
+	4950 3350 3500 3350
+Wire Wire Line
+	5750 3750 4800 3750
+Wire Wire Line
+	4800 3750 4800 3450
+Wire Wire Line
+	4800 3450 3500 3450
+Wire Wire Line
+	5750 3900 4650 3900
+Wire Wire Line
+	4650 3900 4650 3550
+Wire Wire Line
+	4650 3550 3500 3550
+Wire Wire Line
+	7600 5000 7600 3850
+Wire Wire Line
+	7600 3850 7400 3850
+Connection ~ 7600 5000
+Wire Wire Line
+	8100 5200 8100 3700
+Wire Wire Line
+	8100 3700 7400 3700
+Connection ~ 8100 5200
 $EndSCHEMATC
