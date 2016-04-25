@@ -3,27 +3,27 @@ Dirty_Dawg_Master.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  000000e6  2**0
+  0 .data         00000000  00800100  00800100  000000f2  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000092  00000000  00000000  00000054  2**1
+  1 .text         0000009e  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  000000e6  2**0
+  2 .comment      00000030  00000000  00000000  000000f2  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000118  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000124  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000080  00000000  00000000  00000154  2**0
+  4 .debug_aranges 00000080  00000000  00000000  00000160  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000197  00000000  00000000  000001d4  2**0
+  5 .debug_info   000001da  00000000  00000000  000001e0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000092  00000000  00000000  0000036b  2**0
+  6 .debug_abbrev 000000b5  00000000  00000000  000003ba  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000109  00000000  00000000  000003fd  2**0
+  7 .debug_line   0000016f  00000000  00000000  0000046f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000000c8  00000000  00000000  00000508  2**2
+  8 .debug_frame  000000c8  00000000  00000000  000005e0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000001ca  00000000  00000000  000005d0  2**0
+  9 .debug_str    000001d2  00000000  00000000  000006a8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000060  00000000  00000000  0000079a  2**0
+ 10 .debug_ranges 00000060  00000000  00000000  0000087a  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -63,44 +63,55 @@ Disassembly of section .text:
   6e:	d8 e0       	ldi	r29, 0x08	; 8
   70:	de bf       	out	0x3e, r29	; 62
   72:	cd bf       	out	0x3d, r28	; 61
-  74:	0e 94 42 00 	call	0x84	; 0x84 <main>
-  78:	0c 94 47 00 	jmp	0x8e	; 0x8e <_exit>
+  74:	0e 94 48 00 	call	0x90	; 0x90 <main>
+  78:	0c 94 4d 00 	jmp	0x9a	; 0x9a <_exit>
 
 0000007c <__bad_interrupt>:
   7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000080 <System_Init>:
 
-#include "functions.h"
-
 
 void System_Init(void){
-  80:	08 95       	ret
+	
+	/*Setting ports*/
+	PORTB = (1<<BRAKELIGHT) | (1<<HEADLIGHT);
+  80:	86 e0       	ldi	r24, 0x06	; 6
+  82:	85 b9       	out	0x05, r24	; 5
+	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT);
+  84:	84 b9       	out	0x04, r24	; 4
+	
+	PORTD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<RIGHT);
+  86:	88 ee       	ldi	r24, 0xE8	; 232
+  88:	8b b9       	out	0x0b, r24	; 11
+	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<RIGHT);
+  8a:	8a b9       	out	0x0a, r24	; 10
+  8c:	08 95       	ret
 
-00000082 <Lowrider_Mode>:
+0000008e <Lowrider_Mode>:
 void INT_Crash(void){
 	
 	
 }
 
 void Lowrider_Mode(void){
-  82:	08 95       	ret
+  8e:	08 95       	ret
 
-00000084 <main>:
+00000090 <main>:
 int main(void)
 {
     /* Replace with your application code */
     while (1) 
     {
 		Lowrider_Mode();
-  84:	0e 94 41 00 	call	0x82	; 0x82 <Lowrider_Mode>
+  90:	0e 94 47 00 	call	0x8e	; 0x8e <Lowrider_Mode>
 		System_Init();
-  88:	0e 94 40 00 	call	0x80	; 0x80 <System_Init>
+  94:	0e 94 40 00 	call	0x80	; 0x80 <System_Init>
     }
-  8c:	fb cf       	rjmp	.-10     	; 0x84 <main>
+  98:	fb cf       	rjmp	.-10     	; 0x90 <main>
 
-0000008e <_exit>:
-  8e:	f8 94       	cli
+0000009a <_exit>:
+  9a:	f8 94       	cli
 
-00000090 <__stop_program>:
-  90:	ff cf       	rjmp	.-2      	; 0x90 <__stop_program>
+0000009c <__stop_program>:
+  9c:	ff cf       	rjmp	.-2      	; 0x9c <__stop_program>

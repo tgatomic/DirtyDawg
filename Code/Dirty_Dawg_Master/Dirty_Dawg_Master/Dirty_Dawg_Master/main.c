@@ -11,11 +11,10 @@
 
 int main(void)
 {
-    /* Replace with your application code */
-    while (1) 
-    {
-		Lowrider_Mode();
-		System_Init();
-    }
+	System_Init();
+	UART_Init(115200);
+	
+	
+	
 }
 
