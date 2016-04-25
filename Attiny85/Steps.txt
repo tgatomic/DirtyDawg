@@ -1,0 +1,10 @@
+Initiering och körning av ATTiny85
+
+Här är en start på de steg och i vilken ordning som de troligen bör vara i.
+
+1. Genom registret för portarna, sätt vilka portar du vill använda för IR lamporna och mottagare.
+2. Genom registret DDR (Data Direction Register) Sätt om portarna ska vara ingång eller utgång.
+3. Testa att sätta en port till output high och se om du kan koppla en LED till utgången. 
+4. Testa och se om du kan blicka den ledden. 
+
+
