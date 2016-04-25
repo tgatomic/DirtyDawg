@@ -33,6 +33,8 @@ LIBS:I2C_LCD
 LIBS:LinkuraModule
 LIBS:i2cdisplay
 LIBS:ca3240e
+LIBS:SN754410NE
+LIBS:motor
 LIBS:Project-cache
 EELAYER 25 0
 EELAYER END

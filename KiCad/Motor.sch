@@ -80,27 +80,6 @@ Text HLabel 5650 2400 2    60   Input ~ 0
 5V
 Text HLabel 4150 3400 0    60   Input ~ 0
 9V
-Wire Wire Line
-	2650 2400 3300 2400
-Wire Wire Line
-	3300 2400 3300 2700
-Wire Wire Line
-	3300 2700 4150 2700
-Wire Wire Line
-	2650 3500 3300 3500
-Wire Wire Line
-	3300 3500 3300 3100
-Wire Wire Line
-	3300 3100 4150 3100
-Wire Wire Line
-	5650 2400 5550 2400
-Wire Wire Line
-	4150 2100 4150 2400
-Connection ~ 5600 2400
-Wire Wire Line
-	5600 2400 5600 2100
-Wire Wire Line
-	5600 2100 4150 2100
 $Comp
 L GND #PWR?
 U 1 1 571C303C
@@ -123,20 +102,6 @@ F 3 "" H 5650 2900 50  0000 C CNN
 	1    5650 2900
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	5650 2850 5650 2950
-Wire Wire Line
-	5650 2850 5550 2850
-Wire Wire Line
-	5650 2950 5550 2950
-Connection ~ 5650 2900
-Wire Wire Line
-	4150 2850 4050 2850
-Wire Wire Line
-	4050 2850 4050 2950
-Wire Wire Line
-	4050 2950 4150 2950
-Connection ~ 4050 2900
 Text HLabel 5550 2550 2    60   Input ~ 0
 Right
 Text HLabel 5550 3250 2    60   Input ~ 0
@@ -155,41 +120,80 @@ F 3 "" H 7050 2950 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
+	2650 2400 3300 2400
+Wire Wire Line
+	3300 2400 3300 2700
+Wire Wire Line
+	3300 2700 4150 2700
+Wire Wire Line
+	2650 3500 3300 3500
+Wire Wire Line
+	3300 3500 3300 3100
+Wire Wire Line
+	3300 3100 4150 3100
+Wire Wire Line
+	5650 2400 5550 2400
+Wire Wire Line
+	4150 2100 4150 2400
+Connection ~ 5600 2400
+Wire Wire Line
+	5600 2400 5600 2100
+Wire Wire Line
+	5600 2100 4150 2100
+Wire Wire Line
+	5650 2850 5650 2950
+Wire Wire Line
+	5650 2850 5550 2850
+Wire Wire Line
+	5650 2950 5550 2950
+Connection ~ 5650 2900
+Wire Wire Line
+	4150 2850 4050 2850
+Wire Wire Line
+	4050 2850 4050 2950
+Wire Wire Line
+	4050 2950 4150 2950
+Connection ~ 4050 2900
+Wire Wire Line
+	6400 3100 6400 3500
+Wire Wire Line
+	6400 3500 7050 3500
+Wire Wire Line
+	6400 2700 6400 2400
+Wire Wire Line
 	6400 2400 7050 2400
-Wire Wire Line
-	6400 2400 6400 2700
-Wire Wire Line
-	7050 3500 6400 3500
-Wire Wire Line
-	6400 3500 6400 3100
 $Comp
 L R R?
-U 1 1 571CA76A
-P 6000 3100
-F 0 "R?" V 6080 3100 50  0000 C CNN
-F 1 "47" V 6000 3100 50  0000 C CNN
-F 2 "" V 5930 3100 50  0000 C CNN
-F 3 "" H 6000 3100 50  0000 C CNN
-	1    6000 3100
+U 1 1 571DE5C4
+P 6050 2700
+F 0 "R?" V 6130 2700 50  0000 C CNN
+F 1 "56" V 6050 2700 50  0000 C CNN
+F 2 "" V 5980 2700 50  0000 C CNN
+F 3 "" H 6050 2700 50  0000 C CNN
+	1    6050 2700
+	0    1    1    0   
+$EndComp
+$Comp
+L R R?
+U 1 1 571DE5F1
+P 6050 3100
+F 0 "R?" V 6130 3100 50  0000 C CNN
+F 1 "56" V 6050 3100 50  0000 C CNN
+F 2 "" V 5980 3100 50  0000 C CNN
+F 3 "" H 6050 3100 50  0000 C CNN
+	1    6050 3100
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	5850 3100 5550 3100
+	6400 3100 6200 3100
 Wire Wire Line
-	6400 3100 6150 3100
-$Comp
-L R R?
-U 1 1 571CA7D8
-P 6000 2700
-F 0 "R?" V 6080 2700 50  0000 C CNN
-F 1 "47" V 6000 2700 50  0000 C CNN
-F 2 "" V 5930 2700 50  0000 C CNN
-F 3 "" H 6000 2700 50  0000 C CNN
-	1    6000 2700
-	0    1    1    0   
-$EndComp
+	6400 2700 6200 2700
 Wire Wire Line
-	5850 2700 5550 2700
+	5900 2700 5550 2700
 Wire Wire Line
-	6400 2700 6150 2700
+	5900 3100 5550 3100
+Text Label 2800 2400 0    60   ~ 0
+Vroom
+Text Label 6550 2400 0    60   ~ 0
+Styrning
 $EndSCHEMATC
