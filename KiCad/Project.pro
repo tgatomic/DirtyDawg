@@ -1,4 +1,4 @@
-update=2016-04-18 11:50:41
+update=2016-04-22 09:18:29
 version=1
 last_client=kicad
 [pcbnew]
@@ -59,3 +59,20 @@ LibName27=atmel
 LibName28=contrib
 LibName29=valves
 LibName30=C:/Users/Atomic/Downloads/kk_atmel_library_/atmel
+LibName31=ir_recieve
+LibName32=I2C_LCD
+LibName33=LinkuraModule
+LibName34=i2cdisplay
+LibName35=ca3240e
+LibName36=SN754410NE
+LibName37=motor
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
