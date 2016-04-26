@@ -1,0 +1,62 @@
+[33mcommit f244ad72cdbf1bde6f2cc4a413a890eac0f1d4fb[m
+Author: Christoffer Bask <chrisse_b@hotmail.com>
+Date:   Tue Apr 19 18:30:27 2016 +0200
+
+    Added schematicsdocument
+    
+    Only the remote controller left
+
+[33mcommit 21bf27f3739a863c6882b859ac5967e871eacc11[m
+Merge: a5b3413 9efaf98
+Author: Christoffer <chrisse_b@hotmail.com>
+Date:   Mon Apr 18 13:24:08 2016 +0200
+
+    Merge pull request #1 from tgatomic/dokument
+    
+    Dokument
+
+[33mcommit 9efaf98b6d131a5e35ad7a93c20faf9cca9fc48e[m
+Author: Christoffer Bask <chrisse_b@hotmail.com>
+Date:   Mon Apr 18 13:22:19 2016 +0200
+
+    Added KiCad Project
+
+[33mcommit 1d16548e9d853f80cc1ac9c39485706cb611a062[m
+Author: Christoffer Bask <chrisse_b@hotmail.com>
+Date:   Mon Apr 18 11:28:07 2016 +0200
+
+    Lagt upp Testplan och Funktioner
+
+[33mcommit 8fc67d5e7d73eae2c22e44d7efc2b0834fece14a[m
+Author: Christoffer Bask <chrisse_b@hotmail.com>
+Date:   Wed Apr 13 15:40:29 2016 +0200
+
+    Updated kravlistan
+
+[33mcommit dcb4ef26a10b335b2370ceb3fb88dbcac5d6aac7[m
+Author: Christoffer Bask <chrisse_b@hotmail.com>
+Date:   Wed Apr 13 15:26:05 2016 +0200
+
+    Added documents
+    
+    Added Tidsplan, Kravlista, Tidsplan and Kalkyl
+
+[33mcommit a5b3413bf6f9ac78ade009a24f7e3d8d60b613c1[m
+Author: Christoffer Bask <chrisse_b@hotmail.com>
+Date:   Tue Apr 12 15:14:31 2016 +0200
+
+    Added the list of items
+
+[33mcommit 817b65a05d053eda713ecd050127329ba8007988[m
+Author: Christoffer Bask <chrisse_b@hotmail.com>
+Date:   Tue Apr 12 09:00:57 2016 +0200
+
+    Added content to readme
+    
+    Wrote a short description
+
+[33mcommit e4418f04c1a02bbcbd0516d15f7126acd33c4808[m
+Author: Christoffer <chrisse_b@hotmail.com>
+Date:   Mon Apr 11 20:42:57 2016 +0200
+
+    Initial commit
