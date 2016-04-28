@@ -45,6 +45,26 @@ uint8_t status;
 #define BT_STARTED 1<<2;
 
 
+/************************************************************************/
+/*								Datastruct                              */
+/************************************************************************/
+typedef struct data{
+
+	int lightvalue;
+
+	int left_sensor;
+	int right_sensor;
+	int front_sensor;
+	int back_sensor;
+	//Or Distsensor[4]	
+
+	uint8_t lights;
+
+	uint8_t state; 
+	
+} *dataptn;
+
+
 
 void System_Init(void);
 void UART_Init(unsigned int baud);

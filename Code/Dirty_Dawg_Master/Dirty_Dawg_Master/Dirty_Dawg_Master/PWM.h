@@ -9,7 +9,7 @@
 #ifndef PWM_H_
 #define PWM_H_
 
-void Init_PWM(void);
+void PWM_Init(void);
 void Stop_Moving(void);
 
 

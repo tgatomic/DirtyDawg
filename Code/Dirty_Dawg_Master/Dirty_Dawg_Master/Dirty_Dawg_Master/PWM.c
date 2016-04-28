@@ -9,7 +9,7 @@
 #include "functions.h"
 
 
-void Init_PWM(void){
+void PWM_Init(void){
 	
 	/*The PRTIM0 bit in ”Minimizing Power Consumption on page 42 must be written to zero to enable
 	Timer/Counter0 module.*/
