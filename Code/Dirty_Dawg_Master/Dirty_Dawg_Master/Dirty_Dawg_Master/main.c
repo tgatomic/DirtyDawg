@@ -7,6 +7,8 @@
 
 #include <avr/io.h>
 #include "functions.h"
+#include "TWI_Master.h"
+#include "PWM.h"
 
 
 int main(void)

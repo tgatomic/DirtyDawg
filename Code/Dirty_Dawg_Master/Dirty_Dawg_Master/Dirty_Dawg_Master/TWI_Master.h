@@ -13,8 +13,6 @@
 /*							Master Transmit Mode						*/
 /*								MT for short							*/
 /************************************************************************/
-#define MT_START 0x08
-#define MT_REPEAT_START 0x10
 #define MT_ADDRESS_ACK 0x18
 #define MT_ADDRESS_NACK 0x20
 #define MT_BYTE_ACK 0x28
@@ -22,13 +20,10 @@
 #define MT_ARBITRATION_LOST 0x38
 
 
-
 /************************************************************************/
 /*							Master Receive Mode                         */
 /*								MR for short							*/
 /************************************************************************/
-#define MR_START 0x08
-#define MR_REPEAT_START 0x10
 #define MR_ADDRESS_ACK 0x40
 #define MR_ADDRESS_NACK 0x48
 #define MR_BYTE_ACK 0x50
@@ -39,9 +34,14 @@
 /*									Misc.							    */
 /************************************************************************/
 #define MASK 0xF8
+#define START 0x08
+#define REPEAT_START 0x10
 
 
 void TWI_Master_Init(void);
+int TWI_Busy(void);
+void TWI_Send(uint8_t slaveAddress, uint8_t data);
+
 
 
 

@@ -37,8 +37,11 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../ADC.c \
 ../functions.c \
-../main.c
+../main.c \
+../PWM.c \
+../TWI_Master.c
 
 
 PREPROCESSING_SRCS += 
@@ -48,20 +51,32 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+ADC.o \
 functions.o \
-main.o
+main.o \
+PWM.o \
+TWI_Master.o
 
 OBJS_AS_ARGS +=  \
+ADC.o \
 functions.o \
-main.o
+main.o \
+PWM.o \
+TWI_Master.o
 
 C_DEPS +=  \
+ADC.d \
 functions.d \
-main.d
+main.d \
+PWM.d \
+TWI_Master.d
 
 C_DEPS_AS_ARGS +=  \
+ADC.d \
 functions.d \
-main.d
+main.d \
+PWM.d \
+TWI_Master.d
 
 OUTPUT_FILE_PATH +=Dirty_Dawg_Master.elf
 
@@ -77,6 +92,12 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 

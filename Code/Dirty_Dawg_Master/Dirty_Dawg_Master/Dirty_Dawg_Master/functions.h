@@ -13,7 +13,15 @@
 #define FORWARD PORTD3
 #define BACKWARD PORTD5
 #define LEFT PORTD6
-#define RIGHT PORTD7
+#define RIGHT PORTB3
+#define PWM_FORWARD OCR2B
+#define PWM_BACKWARD OCR0B
+#define PWM_LEFT OCR0A
+#define PWM_RIGHT OCR2A
+#define L 1
+#define R 2
+#define F 3
+#define B 4
 
 /************************************************************************/
 /*								Sensor                                  */

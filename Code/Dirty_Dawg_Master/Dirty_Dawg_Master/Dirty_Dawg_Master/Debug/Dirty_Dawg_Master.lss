@@ -3,58 +3,83 @@ Dirty_Dawg_Master.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  000000f2  2**0
+  0 .data         00000000  00800100  00800100  000001fe  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         0000009e  00000000  00000000  00000054  2**1
+  1 .text         0000018a  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  000000f2  2**0
+  2 .bss          00000001  00800100  00800100  000001fe  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000001fe  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000124  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000230  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000080  00000000  00000000  00000160  2**0
+  5 .debug_aranges 000000c8  00000000  00000000  0000026c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000001da  00000000  00000000  000001e0  2**0
+  6 .debug_info   00000471  00000000  00000000  00000334  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000000b5  00000000  00000000  000003ba  2**0
+  7 .debug_abbrev 00000273  00000000  00000000  000007a5  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000016f  00000000  00000000  0000046f  2**0
+  8 .debug_line   00000316  00000000  00000000  00000a18  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000000c8  00000000  00000000  000005e0  2**2
+  9 .debug_frame  00000148  00000000  00000000  00000d30  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000001d2  00000000  00000000  000006a8  2**0
+ 10 .debug_str    00000256  00000000  00000000  00000e78  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000060  00000000  00000000  0000087a  2**0
+ 11 .debug_loc    0000015b  00000000  00000000  000010ce  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000098  00000000  00000000  00001229  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
+
+
+uint16_t Read_ADC(void){
+	
+	//Starts conversion
+	ADCSRA = (1<<ADSC);
    0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
-   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+	//While the flag is set, wait
+	while (ADCSRA & (1<<ADSC));
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+	//while(ADCSRA & (1<<ADIF));
+	
+	uint16_t analogval = 0;
+	
+	//Saves the first two bits in variable
+	analogval = ADCH;
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+	//Shifts the value with 8
+	analogval = (analogval<<8);
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+	//Saves the rest in the first 8 bits
+	analogval += ADCL;
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+	
+
+	return analogval;
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
 
 00000068 <__ctors_end>:
   68:	11 24       	eor	r1, r1
@@ -63,55 +88,216 @@ Disassembly of section .text:
   6e:	d8 e0       	ldi	r29, 0x08	; 8
   70:	de bf       	out	0x3e, r29	; 62
   72:	cd bf       	out	0x3d, r28	; 61
-  74:	0e 94 48 00 	call	0x90	; 0x90 <main>
-  78:	0c 94 4d 00 	jmp	0x9a	; 0x9a <_exit>
 
-0000007c <__bad_interrupt>:
-  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
 
-00000080 <System_Init>:
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
 
+0000007e <.do_clear_bss_start>:
+  7e:	a1 30       	cpi	r26, 0x01	; 1
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 79 00 	call	0xf2	; 0xf2 <main>
+  88:	0c 94 c3 00 	jmp	0x186	; 0x186 <_exit>
 
-void System_Init(void){
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <System_Init>:
 	
-	/*Setting ports*/
+	status = 0;
+	
+	/*Setting ports - page 75*/
+	
+	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<RIGHT);
+  90:	8e e0       	ldi	r24, 0x0E	; 14
+  92:	84 b9       	out	0x04, r24	; 4
+	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT);
+  94:	88 e6       	ldi	r24, 0x68	; 104
+  96:	8a b9       	out	0x0a, r24	; 10
+	
 	PORTB = (1<<BRAKELIGHT) | (1<<HEADLIGHT);
-  80:	86 e0       	ldi	r24, 0x06	; 6
-  82:	85 b9       	out	0x05, r24	; 5
-	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT);
-  84:	84 b9       	out	0x04, r24	; 4
+  98:	86 e0       	ldi	r24, 0x06	; 6
+  9a:	85 b9       	out	0x05, r24	; 5
 	
-	PORTD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<RIGHT);
-  86:	88 ee       	ldi	r24, 0xE8	; 232
-  88:	8b b9       	out	0x0b, r24	; 11
-	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<RIGHT);
-  8a:	8a b9       	out	0x0a, r24	; 10
-  8c:	08 95       	ret
 
-0000008e <Lowrider_Mode>:
-void INT_Crash(void){
+	status = MCU_STARTED;
+  9c:	81 e0       	ldi	r24, 0x01	; 1
+  9e:	80 93 00 01 	sts	0x0100, r24
+  a2:	08 95       	ret
+
+000000a4 <UART_Init>:
+	
 	
 	
 }
 
-void Lowrider_Mode(void){
-  8e:	08 95       	ret
+void UART_Init(unsigned int baud){
+  a4:	cf 93       	push	r28
+  a6:	df 93       	push	r29
+	
+		
+	//Initiate in asynchronous mode
+	UCSR0C &= ~(1<<7) & ~(1<<6);
+  a8:	c2 ec       	ldi	r28, 0xC2	; 194
+  aa:	d0 e0       	ldi	r29, 0x00	; 0
+  ac:	28 81       	ld	r18, Y
+  ae:	2f 73       	andi	r18, 0x3F	; 63
+  b0:	28 83       	st	Y, r18
 
-00000090 <main>:
+	//Set baudrate
+	unsigned int baudrate;
+	baudrate = 8000000/16/baud;
+  b2:	9c 01       	movw	r18, r24
+  b4:	40 e0       	ldi	r20, 0x00	; 0
+  b6:	50 e0       	ldi	r21, 0x00	; 0
+  b8:	60 e2       	ldi	r22, 0x20	; 32
+  ba:	71 ea       	ldi	r23, 0xA1	; 161
+  bc:	87 e0       	ldi	r24, 0x07	; 7
+  be:	90 e0       	ldi	r25, 0x00	; 0
+  c0:	0e 94 a4 00 	call	0x148	; 0x148 <__divmodsi4>
+	//Double speed use frequency/8/baud
+	
+	//Set the baudrate in the registry
+	UBRR0H = (unsigned char) (baudrate>>8);
+  c4:	23 2f       	mov	r18, r19
+  c6:	33 27       	eor	r19, r19
+  c8:	20 93 c5 00 	sts	0x00C5, r18
+	UBRR0L = (unsigned char) (baudrate>>8);
+  cc:	20 93 c4 00 	sts	0x00C4, r18
+	
+	//Enables Receive and Transmit over UART
+	UCSR0B = (1<<RXEN0) | (1<<TXEN0);
+  d0:	88 e1       	ldi	r24, 0x18	; 24
+  d2:	80 93 c1 00 	sts	0x00C1, r24
+	
+	//Sets to 1 stop bit and 8 databits
+	UCSR0C &= ~(1<<USBS0) | (3<<UCSZ00);
+  d6:	88 81       	ld	r24, Y
+  d8:	87 7f       	andi	r24, 0xF7	; 247
+  da:	88 83       	st	Y, r24
+	
+	//Disables Parity
+	UCSR0C &= ~(1<<UPM01) & ~(1<<UPM00);
+  dc:	88 81       	ld	r24, Y
+  de:	8f 7c       	andi	r24, 0xCF	; 207
+  e0:	88 83       	st	Y, r24
+	
+	
+	status |= UART_STARTED;
+  e2:	80 91 00 01 	lds	r24, 0x0100
+  e6:	82 60       	ori	r24, 0x02	; 2
+  e8:	80 93 00 01 	sts	0x0100, r24
+	
+	
+}
+  ec:	df 91       	pop	r29
+  ee:	cf 91       	pop	r28
+  f0:	08 95       	ret
+
+000000f2 <main>:
+#include "PWM.h"
+
+
 int main(void)
 {
-    /* Replace with your application code */
-    while (1) 
-    {
-		Lowrider_Mode();
-  90:	0e 94 47 00 	call	0x8e	; 0x8e <Lowrider_Mode>
-		System_Init();
-  94:	0e 94 40 00 	call	0x80	; 0x80 <System_Init>
-    }
-  98:	fb cf       	rjmp	.-10     	; 0x90 <main>
+	System_Init();
+  f2:	0e 94 48 00 	call	0x90	; 0x90 <System_Init>
+	UART_Init(115200);
+  f6:	80 e0       	ldi	r24, 0x00	; 0
+  f8:	92 ec       	ldi	r25, 0xC2	; 194
+  fa:	0e 94 52 00 	call	0xa4	; 0xa4 <UART_Init>
+	
+	
+	
+}
+  fe:	80 e0       	ldi	r24, 0x00	; 0
+ 100:	90 e0       	ldi	r25, 0x00	; 0
+ 102:	08 95       	ret
 
-0000009a <_exit>:
-  9a:	f8 94       	cli
+00000104 <__udivmodsi4>:
+ 104:	a1 e2       	ldi	r26, 0x21	; 33
+ 106:	1a 2e       	mov	r1, r26
+ 108:	aa 1b       	sub	r26, r26
+ 10a:	bb 1b       	sub	r27, r27
+ 10c:	fd 01       	movw	r30, r26
+ 10e:	0d c0       	rjmp	.+26     	; 0x12a <__udivmodsi4_ep>
 
-0000009c <__stop_program>:
-  9c:	ff cf       	rjmp	.-2      	; 0x9c <__stop_program>
+00000110 <__udivmodsi4_loop>:
+ 110:	aa 1f       	adc	r26, r26
+ 112:	bb 1f       	adc	r27, r27
+ 114:	ee 1f       	adc	r30, r30
+ 116:	ff 1f       	adc	r31, r31
+ 118:	a2 17       	cp	r26, r18
+ 11a:	b3 07       	cpc	r27, r19
+ 11c:	e4 07       	cpc	r30, r20
+ 11e:	f5 07       	cpc	r31, r21
+ 120:	20 f0       	brcs	.+8      	; 0x12a <__udivmodsi4_ep>
+ 122:	a2 1b       	sub	r26, r18
+ 124:	b3 0b       	sbc	r27, r19
+ 126:	e4 0b       	sbc	r30, r20
+ 128:	f5 0b       	sbc	r31, r21
+
+0000012a <__udivmodsi4_ep>:
+ 12a:	66 1f       	adc	r22, r22
+ 12c:	77 1f       	adc	r23, r23
+ 12e:	88 1f       	adc	r24, r24
+ 130:	99 1f       	adc	r25, r25
+ 132:	1a 94       	dec	r1
+ 134:	69 f7       	brne	.-38     	; 0x110 <__udivmodsi4_loop>
+ 136:	60 95       	com	r22
+ 138:	70 95       	com	r23
+ 13a:	80 95       	com	r24
+ 13c:	90 95       	com	r25
+ 13e:	9b 01       	movw	r18, r22
+ 140:	ac 01       	movw	r20, r24
+ 142:	bd 01       	movw	r22, r26
+ 144:	cf 01       	movw	r24, r30
+ 146:	08 95       	ret
+
+00000148 <__divmodsi4>:
+ 148:	05 2e       	mov	r0, r21
+ 14a:	97 fb       	bst	r25, 7
+ 14c:	1e f4       	brtc	.+6      	; 0x154 <__divmodsi4+0xc>
+ 14e:	00 94       	com	r0
+ 150:	0e 94 bb 00 	call	0x176	; 0x176 <__negsi2>
+ 154:	57 fd       	sbrc	r21, 7
+ 156:	07 d0       	rcall	.+14     	; 0x166 <__divmodsi4_neg2>
+ 158:	0e 94 82 00 	call	0x104	; 0x104 <__udivmodsi4>
+ 15c:	07 fc       	sbrc	r0, 7
+ 15e:	03 d0       	rcall	.+6      	; 0x166 <__divmodsi4_neg2>
+ 160:	4e f4       	brtc	.+18     	; 0x174 <__divmodsi4_exit>
+ 162:	0c 94 bb 00 	jmp	0x176	; 0x176 <__negsi2>
+
+00000166 <__divmodsi4_neg2>:
+ 166:	50 95       	com	r21
+ 168:	40 95       	com	r20
+ 16a:	30 95       	com	r19
+ 16c:	21 95       	neg	r18
+ 16e:	3f 4f       	sbci	r19, 0xFF	; 255
+ 170:	4f 4f       	sbci	r20, 0xFF	; 255
+ 172:	5f 4f       	sbci	r21, 0xFF	; 255
+
+00000174 <__divmodsi4_exit>:
+ 174:	08 95       	ret
+
+00000176 <__negsi2>:
+ 176:	90 95       	com	r25
+ 178:	80 95       	com	r24
+ 17a:	70 95       	com	r23
+ 17c:	61 95       	neg	r22
+ 17e:	7f 4f       	sbci	r23, 0xFF	; 255
+ 180:	8f 4f       	sbci	r24, 0xFF	; 255
+ 182:	9f 4f       	sbci	r25, 0xFF	; 255
+ 184:	08 95       	ret
+
+00000186 <_exit>:
+ 186:	f8 94       	cli
+
+00000188 <__stop_program>:
+ 188:	ff cf       	rjmp	.-2      	; 0x188 <__stop_program>

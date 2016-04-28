@@ -1,6 +1,7 @@
 
-#include "functions.h"
 #include <avr/io.h>
+#include "functions.h"
+
 
 
 void System_Init(void){
@@ -8,15 +9,22 @@ void System_Init(void){
 	status = 0;
 	
 	/*Setting ports - page 75*/
+	
+	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<RIGHT);
+	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT);
+	
 	PORTB = (1<<BRAKELIGHT) | (1<<HEADLIGHT);
-	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT);
 	
-	PORTD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<RIGHT);
-	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<RIGHT);
-	
-	PORTC = (1<<LIGHTSENSOR);
-	
+
 	status = MCU_STARTED;
+	
+	
+	//PORT is output register
+	//Pin is input register
+	
+	
+	
+	
 }
 
 void UART_Init(unsigned int baud){
@@ -35,7 +43,7 @@ void UART_Init(unsigned int baud){
 	UBRR0L = (unsigned char) (baudrate>>8);
 	
 	//Enables Receive and Transmit over UART
-	UCSR0B = (1<<RXEN0) | (1<<TXEN0)
+	UCSR0B = (1<<RXEN0) | (1<<TXEN0);
 	
 	//Sets to 1 stop bit and 8 databits
 	UCSR0C &= ~(1<<USBS0) | (3<<UCSZ00);
@@ -119,11 +127,11 @@ void Error(unsigned int errorcode){
 	//Flashes the red lights and send errorcode through Bluetooth
 	unsigned long ticks = 0;
 	for(;;){
-		if(ticks%100000 = 0){
+		if(ticks%100000 == 0){
 			PINB = (1<<BRAKELIGHT);
 			BT_Send(errorcode);
 		}
-		if(ticks%100000 = 50000){
+		if(ticks%100000 == 50000){
 			PINB = ~(1<<BRAKELIGHT);
 		}
 		ticks++;
