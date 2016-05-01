@@ -15,7 +15,7 @@
 #define SENSOR_STATE 2
 #define DRIVE_STATE 3
 
-
+//Name of the main struct with all the data in for the different sensors and values
 dataptn DirtyDawg;
 
 int main(void)
@@ -29,7 +29,6 @@ int main(void)
 
 	//Wait here until we have a Bluetooth connection
 	while(!BT_Connect());
-
 
 	/************************************************************************/
 	/*								Tasks									*/
@@ -48,8 +47,12 @@ int main(void)
 	for(;;){
 
 		//Something thats needs to be done every pass???
-
-		switch(state){
+		int ticks = 0;
+		if(ticks++ == 10){
+			DirtyDawg.state = LIGHT_STATE;
+			ticks = 0;
+		}
+		switch(DirtyDawg->state){
 			case LIGHT_STATE:
 				Lights();
 				break;
@@ -65,12 +68,35 @@ int main(void)
 		}
 	}
 }
-
+/************************************************************************/
+/*							Lights state                                */
+/*																		*/
+/*	   Tasks:                                                           */
+/*     - Checks to see if the lights flags i set                        */
+/*     - Turns the Lights on if flag is set                             */
+/*     - Turns the Lights off if flag is cleared                        */
+/*     - Read Light sensor                                              */
+/*     - Turn headlight on if it is dark                                */
+/*                                                                      */
+/************************************************************************/
 void Lights(void){
-
+	
+	
+	
 
 	//set state
 }
+/************************************************************************/
+/*							Bluetooth State                             */
+/*																		*/
+/*	   Tasks:                                                           */
+/*     -  Read the buffer                     */
+/*     -  Save the content of buffer in appropriate variables                           */
+/*     -                         */
+/*     -                                              */
+/*     -                                 */
+/*                                                                      */
+/************************************************************************/
 void Bluetooth(void){
 
 

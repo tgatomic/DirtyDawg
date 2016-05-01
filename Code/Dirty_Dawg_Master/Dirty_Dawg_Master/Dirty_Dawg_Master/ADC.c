@@ -35,7 +35,7 @@ uint16_t Read_ADC(void){
 	ADCSRA = (1<<ADSC);
 	//While the flag is set, wait
 	while (ADCSRA & (1<<ADSC));
-	//OR THIS INTEAD
+	//OR THIS ISTEAD
 	//while(ADCSRA & (1<<ADIF));
 	
 	uint16_t analogval = 0;
