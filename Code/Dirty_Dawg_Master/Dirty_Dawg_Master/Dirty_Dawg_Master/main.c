@@ -6,6 +6,7 @@
  */ 
 
 #include <avr/io.h>
+#include <util/delay.h>
 #include "functions.h"
 #include "TWI_Master.h"
 #include "PWM.h"
@@ -20,15 +21,38 @@ dataptn DirtyDawg;
 
 int main(void)
 {
-	System_Init();
-	UART_Init(115200);
+	DDRB = (1<<PORTB1);
+	PORTB = (1<<PORTB1);
+	_delay_ms(1000);
+	
+	System_Init(); //Checked - OK!
+	UART_Init(115200); //Checked - OK!
+	
+	
+	BT_Init();
+	
+	
+	
+	PORTB = ~(1<<PORTB1);
+	
+	
+	
+	
+	PORTB = ~(1<<PORTB1);
+	while(1);
+	
+	
 	TWI_Master_Init();
 	PWM_Init();
 	ADC_init();
 	BT_Init();
+	
+	
+	PORTB = ~(1<<PORTB1);
+	_delay_ms(1000);
 
 	//Wait here until we have a Bluetooth connection
-	while(!BT_Connect());
+	//while(!BT_Connect());
 
 	/************************************************************************/
 	/*								States									*/
@@ -53,7 +77,7 @@ int main(void)
 		if(ticks++ == 10){
 			//Saves the current state to another variable
 			oldstate = DirtyDawg->state;
-			DirtyDawg.state = LIGHT_STATE;
+			//DirtyDawg.state = LIGHT_STATE;
 			ticks = 0;
 		}
 		
@@ -89,10 +113,10 @@ int main(void)
 void Lights(void){
 	
 	//If the controller prompted for the lights to be turned on and 
-	if(DirtyDawg->lights == 1 && !(DirtyDawg->status & LIGHT_ON)){
+	//if(DirtyDawg->lights == 1 && !(DirtyDawg->status & LIGHT_ON)){
 		
 		
-	}
+	
 	
 
 	//set state

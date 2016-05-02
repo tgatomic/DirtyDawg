@@ -41,7 +41,8 @@
 #define MCU_STARTED 1<<0;
 #define UART_STARTED 1<<1;
 #define BT_STARTED 1<<2;
-#define LIGHT_ON 1<<3;
+//#define LIGHT_ON 1<<3;
+int status; //Delete later
 
 
 /************************************************************************/

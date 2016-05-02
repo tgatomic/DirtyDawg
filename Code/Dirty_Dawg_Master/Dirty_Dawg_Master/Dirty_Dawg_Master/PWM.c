@@ -39,12 +39,12 @@ void PWM_Init(void){
 }
 
 void Stop_Moving(void){
-	l
+	
 	//Stops the car from moving
-	PWM_BACKWARD = 0;
-	PWM_FORWARD = 0;
-	PWM_LEFT = 0;
-	PWM_RIGHT = 0;
+	//PWM_BACKWARD = 0;
+	//PWM_FORWARD = 0;
+	//PWM_LEFT = 0;
+	//PWM_RIGHT = 0;
 	
 }
 

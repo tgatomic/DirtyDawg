@@ -1,5 +1,6 @@
 
 #include <avr/io.h>
+#include <util/delay.h>
 #include "functions.h"
 
 
@@ -9,13 +10,18 @@ void System_Init(void){
 	status = 0;
 	
 	/*Setting ports - page 75*/
-	
+		
 	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<RIGHT);
 	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT);
 	
+	//Turn on the front and backlights
+	_delay_ms(1000);
 	PORTB = (1<<BRAKELIGHT) | (1<<HEADLIGHT);
+	_delay_ms(1000);
+	PORTB = ~(1<<BRAKELIGHT) | ~(1<<HEADLIGHT);
 	
-
+	
+	//Signs the status
 	status = MCU_STARTED;
 	
 	
@@ -70,9 +76,11 @@ void BT_Send(unsigned char data){
 	
 	//Waits for the transmit buffer to be empty (wait for flag)
 	while(!(UCSR0A & (1<<UDRE0)));
-	
-	//Put data in buffer ad sends it
+	PORTB = ~(1<<PORTB1);
+	_delay_ms(1000);
+	//Put data in buffer and sends it
 	UDR0 = data;
+	PORTB = (1<<PORTB1);
 }
 
 void Uart_Flush(void){
@@ -83,13 +91,15 @@ void Uart_Flush(void){
 void BT_Init(void){
 	
 	for(int i = 0; i<3; i++) BT_Send('$');
+	_delay_ms(200);
 	if(BT_Recieve() == 'E'){
+		PORTB = ~(1<<PORTB1);
 		Error(0x01);
 	}
 	BT_Send('C');
 	BT_Send(',');
 	BT_Send(BT121ADRESS);
-
+	PORTB = ~(1<<PORTB1);
 }
 
 void I2C_Init(void){
