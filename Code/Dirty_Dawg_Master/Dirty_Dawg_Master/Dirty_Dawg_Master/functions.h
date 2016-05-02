@@ -38,11 +38,10 @@
 /************************************************************************/
 /*								Status                                 */
 /************************************************************************/
-uint8_t status;
-
 #define MCU_STARTED 1<<0;
 #define UART_STARTED 1<<1;
 #define BT_STARTED 1<<2;
+#define LIGHT_ON 1<<3;
 
 
 /************************************************************************/
@@ -58,8 +57,11 @@ typedef struct data{
 	int back_sensor;
 	//Or Distsensor[4]	
 
+	//Is one if the controller has prompted for the lights to be turned on
 	uint8_t lights;
-
+	
+	uint8_t status;
+	
 	uint8_t state; 
 	
 } *dataptn;

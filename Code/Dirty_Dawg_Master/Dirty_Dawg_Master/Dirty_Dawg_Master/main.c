@@ -31,7 +31,7 @@ int main(void)
 	while(!BT_Connect());
 
 	/************************************************************************/
-	/*								Tasks									*/
+	/*								States									*/
 	/*	Read ADC - If lights it low it will turn on lights the headlights	*/
 	/*  Read Bluetooth  - Reads the data to drive                           */
 	/*	Send Bluetooth	- Sends the distance data to controller				*/
@@ -43,18 +43,25 @@ int main(void)
 	/************************************************************************/
 
 	DirtyDawg->state = BLUETOOTH_STATE;
-
+	int ticks, oldstate = 0;
+	
 	for(;;){
 
 		//Something thats needs to be done every pass???
-		int ticks = 0;
+		
+		//Runs only every 10th pass, not so time crucial.
 		if(ticks++ == 10){
+			//Saves the current state to another variable
+			oldstate = DirtyDawg->state;
 			DirtyDawg.state = LIGHT_STATE;
 			ticks = 0;
 		}
+		
+		//Main state machine
 		switch(DirtyDawg->state){
 			case LIGHT_STATE:
 				Lights();
+				DirtyDawg->state = oldstate;
 				break;
 			case BLUETOOTH_STATE:
 				Bluetooth();
@@ -81,7 +88,11 @@ int main(void)
 /************************************************************************/
 void Lights(void){
 	
-	
+	//If the controller prompted for the lights to be turned on and 
+	if(DirtyDawg->lights == 1 && !(DirtyDawg->status & LIGHT_ON)){
+		
+		
+	}
 	
 
 	//set state
@@ -90,23 +101,48 @@ void Lights(void){
 /*							Bluetooth State                             */
 /*																		*/
 /*	   Tasks:                                                           */
-/*     -  Read the buffer                     */
-/*     -  Save the content of buffer in appropriate variables                           */
-/*     -                         */
-/*     -                                              */
-/*     -                                 */
+/*     -  Read the receive buffer				                        */
+/*     -  Save the content of buffer in appropriate variables           */
+/*     -  Read the send buffer											*/
+/*     -  Sends the content of send buffer                              */
+/*     -																*/
 /*                                                                      */
 /************************************************************************/
 void Bluetooth(void){
 
 
-	//set state
-}
-void Sensors(void){
+
 
 	//set state
 }
+/************************************************************************/
+/*							Sensors state	                            */
+/*																		*/
+/*	   Tasks:                                                           */
+/*     -  Send command on TWI bus to collect distance data		        */
+/*     -  Saves the distance data in buffer					            */
+/*                                                                      */
+/*                                                                      */
+/************************************************************************/
+void Sensors(void){
+
+
+
+
+	//set state
+}
+/************************************************************************/
+/*							Vroom state  	                            */
+/*																		*/
+/*	   Tasks:                                                           */
+/*     -  	Set the forward speed with PWM								*/
+/*     -  	Set direction of car 										*/
+/*       																*/
+/*       																*/
+/************************************************************************/
 void Vroom(void){
+
+
 
 
 	//set state

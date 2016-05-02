@@ -33,10 +33,13 @@ void PWM_Init(void){
 	TCCR0A = (1<<WGM00) | (1<<WGM01) | (1<<COM0A1);
 	TCCR0B = (1<<CS00); //Sets it to non inverted
 	
+	//Enables the pins = COM0A1 COM1A1
+	//TCNT1 use for something???
+	
 }
 
 void Stop_Moving(void){
-	
+	l
 	//Stops the car from moving
 	PWM_BACKWARD = 0;
 	PWM_FORWARD = 0;

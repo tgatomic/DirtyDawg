@@ -59,7 +59,7 @@ void TWI_Send(uint8_t slaveAddress, uint8_t data){
 	
 	//Loads the slave address and set the R/W bit to 1
 	TWDR = (slaveAddress<<1) | (1<<0);
-	TWCR = (1<<TWINT) | (1<<TWEN);
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
 	
 	while(!TWI_Busy());
 	if((TWSR & MASK) != MT_ADDRESS_ACK)Error(MT_ADDRESS_ACK);
@@ -74,7 +74,27 @@ void TWI_Send(uint8_t slaveAddress, uint8_t data){
 	//Sends the stop condition
 	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
 	
-
+	/*
+	In order to send many bytes we can save adress in the place 0 in the vector and then the data. 
+	Start | | Addr+R |ACK| |DATA|ACK| |DATA|ACK|DATA|NACK| |STOP| 
+	*/
+	/*
+	
+	ISR(TWI)
+		Switch(TWSR)
+			case(START):
+				Send address
+				TWDR = DATA[0];
+				TWCR = (1<<TWEN) | (1<<TWIE) | (1<<TWINT);
+				
+			case(ADDR_ACK):
+				send data
+				TWDR = DATA[1];
+				TWCR = (1<<TWEN) | (1<<TWIE) | (1<<TWINT);
+				
+			case(Data_NACK):
+				stop();
+	*/
 }
 
 uint8_t TWI_Receive(uint8_t slaveAddress){
@@ -109,3 +129,22 @@ uint8_t TWI_Receive(uint8_t slaveAddress){
 	
 	return data;
 }
+
+/*
+
+TWI with interrupt
+TWI_read(){
+	TWCR = (1<<TWEN) | (1<<TWIE) | (1<<TWINT) | (1<<TWEA)
+}
+
+ISR(TWI_vect){
+	switch(TWSR)
+	
+	case (READ_ACK)
+		Msg_load[0] = TWDR;
+	case ...
+	
+	
+
+
+*/
