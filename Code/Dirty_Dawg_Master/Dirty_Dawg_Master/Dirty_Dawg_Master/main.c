@@ -4,6 +4,7 @@
  * Created: 2016-04-18 13:32:02
  * Author : Atomic
  */ 
+#define F_CPU 8000000UL
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -16,29 +17,42 @@
 #define SENSOR_STATE 2
 #define DRIVE_STATE 3
 
+
+
 //Name of the main struct with all the data in for the different sensors and values
 dataptn DirtyDawg;
 
 int main(void)
 {
-	DDRB = (1<<PORTB1);
+
 	PORTB = (1<<PORTB1);
+
+	
 	_delay_ms(1000);
 	
 	System_Init(); //Checked - OK!
-	UART_Init(115200); //Checked - OK!
+	//Baudrate max is 19200 (double speed enabled)
+	UART_Init(19200); //Checked - OK!
 	
-	
-	BT_Init();
-	
-	
-	
-	PORTB = ~(1<<PORTB1);
+	//Connects to BT device
+	while(BT_Init()==0);
 	
 	
 	
+	PORTB = (1<<PORTB0);
 	
-	PORTB = ~(1<<PORTB1);
+	
+	_delay_ms(8000);
+	_delay_ms(8000);
+	_delay_ms(8000);
+	
+	
+	for(int i = 0; i<3; i++) BT_Send('$');
+	BT_Send('k');
+	BT_Send(',');
+	BT_Send('1');
+
+
 	while(1);
 	
 	

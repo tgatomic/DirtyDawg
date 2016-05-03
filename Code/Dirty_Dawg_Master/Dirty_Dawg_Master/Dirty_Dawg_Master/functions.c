@@ -11,14 +11,14 @@ void System_Init(void){
 	
 	/*Setting ports - page 75*/
 		
-	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<RIGHT);
-	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT);
+	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<RIGHT) | (1<<PORTB0); //PB0 is debug greenlight
+	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<PORTD7); //PD7 is debug yellow
 	
 	//Turn on the front and backlights
 	_delay_ms(1000);
 	PORTB = (1<<BRAKELIGHT) | (1<<HEADLIGHT);
 	_delay_ms(1000);
-	PORTB = ~(1<<BRAKELIGHT) | ~(1<<HEADLIGHT);
+	PORTB = (0<<BRAKELIGHT) | (0<<HEADLIGHT);
 	
 	
 	//Signs the status
@@ -35,32 +35,30 @@ void System_Init(void){
 
 void UART_Init(unsigned int baud){
 	
-		
-	//Initiate in asynchronous mode
-	UCSR0C &= ~(1<<7) & ~(1<<6);
-
+	//Set double speed
+	UCSR0A = (1<<U2X0);
+	
 	//Set baudrate
 	unsigned int baudrate;
-	baudrate = 8000000/16/baud;
+	baudrate = 8000000/8/baud-1;
 	//Double speed use frequency/8/baud
 	
 	//Set the baudrate in the registry
 	UBRR0H = (unsigned char) (baudrate>>8);
-	UBRR0L = (unsigned char) (baudrate>>8);
+	UBRR0L = (unsigned char) (baudrate);
+
 	
 	//Enables Receive and Transmit over UART
 	UCSR0B = (1<<RXEN0) | (1<<TXEN0);
 	
 	//Sets to 1 stop bit and 8 databits
-	UCSR0C &= ~(1<<USBS0) | (3<<UCSZ00);
+	UCSR0C = (0<<USBS0) | (3<<UCSZ00);
 	
 	//Disables Parity
-	UCSR0C &= ~(1<<UPM01) & ~(1<<UPM00);
+	UCSR0C |= (0<<UPM01) | (0<<UPM00);
 	
 	
 	status |= UART_STARTED;
-	
-	
 }
 
 uint8_t BT_Recieve(void){
@@ -74,13 +72,15 @@ uint8_t BT_Recieve(void){
 
 void BT_Send(unsigned char data){
 	
+	//PORTB = ~(1<<PORTB1);
+	//_delay_ms(1000);
 	//Waits for the transmit buffer to be empty (wait for flag)
 	while(!(UCSR0A & (1<<UDRE0)));
-	PORTB = ~(1<<PORTB1);
-	_delay_ms(1000);
+	
 	//Put data in buffer and sends it
 	UDR0 = data;
-	PORTB = (1<<PORTB1);
+	//PORTB = (1<<PORTB1);
+	//_delay_ms(1000);
 }
 
 void Uart_Flush(void){
@@ -88,18 +88,56 @@ void Uart_Flush(void){
 	while (UCSR0A & (1<<RXC0)) dummy = UDR0;	
 }
 
-void BT_Init(void){
+int BT_Init(void){
 	
+	
+	//Wait for 1 second to ensure the device has power
+	_delay_ms(8000);
+
+	//Sends command to enter command mode
 	for(int i = 0; i<3; i++) BT_Send('$');
-	_delay_ms(200);
+
+	//If it fails to go into command mode
 	if(BT_Recieve() == 'E'){
-		PORTB = ~(1<<PORTB1);
 		Error(0x01);
 	}
-	BT_Send('C');
+	//Wait for 1 second to ensure the device has power
+	_delay_ms(8000);
+	
+	Uart_Flush();
+	
+	unsigned char adress[12] = {'0','0','0','6','6','6','7','6','A','1','3','F'};
+	
+	BT_Send('c');
 	BT_Send(',');
-	BT_Send(BT121ADRESS);
-	PORTB = ~(1<<PORTB1);
+	for(int i = 0; i < 12;i++){
+		BT_Send(adress[i]);
+	}
+	BT_Send(0x0A); //NL
+	BT_Send(0x0D); //CR
+
+	//Wait two seconds
+	//_delay_ms(8000);
+	_delay_ms(8000);
+	
+	for(int i = 0; i<6;i++){
+		BT_Recieve();
+	}
+	
+	
+	if(BT_Recieve() == '%'){
+		PORTB = (1<<PORTB1);
+		Uart_Flush();
+		return 1;
+		/*
+		if(BT_Recieve()=='C'){
+			status |= BT_CONNECTED;
+		}
+		else if(BT_Recieve()=='E'){
+			Error('E');
+		}*/
+	}
+	return 0;
 }
 
 void I2C_Init(void){

@@ -33,14 +33,15 @@
 /************************************************************************/
 #define RX PORTD0
 #define TX PORTD1
-#define BT121ADRESS 0x12345
+#define BT121ADRESS 00033343A13F
 
 /************************************************************************/
 /*								Status                                 */
 /************************************************************************/
-#define MCU_STARTED 1<<0;
-#define UART_STARTED 1<<1;
-#define BT_STARTED 1<<2;
+#define MCU_STARTED 1<<0
+#define UART_STARTED 1<<1
+#define BT_STARTED 1<<2
+#define BT_CONNECTED 1<<3
 //#define LIGHT_ON 1<<3;
 int status; //Delete later
 
@@ -71,7 +72,7 @@ typedef struct data{
 
 void System_Init(void);
 void UART_Init(unsigned int baud);
-void BT_Init(void);
+int BT_Init(void);
 void I2C_Init(void);
 void BT_Connect(void);
 void Connected(void);
