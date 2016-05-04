@@ -3,31 +3,31 @@ Dirty_Dawg_Master.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         0000000c  00800100  000003f0  00000484  2**0
+  0 .data         00000000  00800100  00800100  00000af6  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000003f0  00000000  00000000  00000094  2**1
+  1 .text         00000a82  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000002  0080010c  0080010c  00000490  2**0
+  2 .bss          00000002  00800100  00800100  00000af6  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000490  2**0
+  3 .comment      00000030  00000000  00000000  00000af6  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000004c0  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000b28  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000e8  00000000  00000000  000004fc  2**0
+  5 .debug_aranges 00000150  00000000  00000000  00000b64  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000a19  00000000  00000000  000005e4  2**0
+  6 .debug_info   000019c4  00000000  00000000  00000cb4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 0000040b  00000000  00000000  00000ffd  2**0
+  7 .debug_abbrev 000006bf  00000000  00000000  00002678  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000492  00000000  00000000  00001408  2**0
+  8 .debug_line   00000aaf  00000000  00000000  00002d37  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000001a0  00000000  00000000  0000189c  2**2
+  9 .debug_frame  000002a0  00000000  00000000  000037e8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000032f  00000000  00000000  00001a3c  2**0
+ 10 .debug_str    000003bd  00000000  00000000  00003a88  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000218  00000000  00000000  00001d6b  2**0
+ 11 .debug_loc    000004cc  00000000  00000000  00003e45  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000b8  00000000  00000000  00001f83  2**0
+ 12 .debug_ranges 00000100  00000000  00000000  00004311  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -93,18 +93,18 @@ uint16_t Read_ADC(void){
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e0 ef       	ldi	r30, 0xF0	; 240
-  7c:	f3 e0       	ldi	r31, 0x03	; 3
+  7a:	e2 e8       	ldi	r30, 0x82	; 130
+  7c:	fa e0       	ldi	r31, 0x0A	; 10
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
   82:	0d 92       	st	X+, r0
-  84:	ac 30       	cpi	r26, 0x0C	; 12
+  84:	a0 30       	cpi	r26, 0x00	; 0
   86:	b1 07       	cpc	r27, r17
   88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
 
 0000008a <__do_clear_bss>:
   8a:	21 e0       	ldi	r18, 0x01	; 1
-  8c:	ac e0       	ldi	r26, 0x0C	; 12
+  8c:	a0 e0       	ldi	r26, 0x00	; 0
   8e:	b1 e0       	ldi	r27, 0x01	; 1
   90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
 
@@ -112,89 +112,85 @@ uint16_t Read_ADC(void){
   92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-  94:	ae 30       	cpi	r26, 0x0E	; 14
+  94:	a2 30       	cpi	r26, 0x02	; 2
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
-  9a:	0e 94 6a 01 	call	0x2d4	; 0x2d4 <main>
-  9e:	0c 94 f6 01 	jmp	0x3ec	; 0x3ec <_exit>
+  9a:	0e 94 93 04 	call	0x926	; 0x926 <main>
+  9e:	0c 94 3f 05 	jmp	0xa7e	; 0xa7e <_exit>
 
 000000a2 <__bad_interrupt>:
   a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 000000a6 <System_Init>:
-
-
-
-void System_Init(void){
-	
-	status = 0;
-  a6:	10 92 0d 01 	sts	0x010D, r1
-  aa:	10 92 0c 01 	sts	0x010C, r1
-	
-	/*Setting ports - page 75*/
-		
-	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<RIGHT) | (1<<PORTB0); //PB0 is debug greenlight
-  ae:	8f e0       	ldi	r24, 0x0F	; 15
-  b0:	84 b9       	out	0x04, r24	; 4
-	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<PORTD7); //PD7 is debug yellow
-  b2:	88 ee       	ldi	r24, 0xE8	; 232
-  b4:	8a b9       	out	0x0a, r24	; 10
+	BT_Send('c');
+	BT_Send(',');
+	for(int i = 0; i < 12;i++){
+		BT_Send(adress[i]);
+	}
+	BT_Send(0x0A); //NL
+  a6:	10 92 01 01 	sts	0x0101, r1
+	BT_Send(0x0D); //CR
+  aa:	10 92 00 01 	sts	0x0100, r1
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-  b6:	2f e3       	ldi	r18, 0x3F	; 63
-  b8:	8d e0       	ldi	r24, 0x0D	; 13
-  ba:	93 e0       	ldi	r25, 0x03	; 3
+  ae:	8f e0       	ldi	r24, 0x0F	; 15
+  b0:	84 b9       	out	0x04, r24	; 4
+  b2:	88 ee       	ldi	r24, 0xE8	; 232
+  b4:	8a b9       	out	0x0a, r24	; 10
+  b6:	2f ef       	ldi	r18, 0xFF	; 255
+  b8:	89 e6       	ldi	r24, 0x69	; 105
+  ba:	98 e1       	ldi	r25, 0x18	; 24
   bc:	21 50       	subi	r18, 0x01	; 1
   be:	80 40       	sbci	r24, 0x00	; 0
+	//Wait two seconds
+	//_delay_ms(8000);
+	_delay_ms(8000);
+	
+	for(int i = 0; i<6;i++){
+		BT_Recieve();
   c0:	90 40       	sbci	r25, 0x00	; 0
   c2:	e1 f7       	brne	.-8      	; 0xbc <System_Init+0x16>
   c4:	00 c0       	rjmp	.+0      	; 0xc6 <System_Init+0x20>
   c6:	00 00       	nop
-	
-	//Turn on the front and backlights
-	_delay_ms(1000);
-	PORTB = (1<<BRAKELIGHT) | (1<<HEADLIGHT);
-  c8:	86 e0       	ldi	r24, 0x06	; 6
+  c8:	87 e0       	ldi	r24, 0x07	; 7
   ca:	85 b9       	out	0x05, r24	; 5
-  cc:	2f e3       	ldi	r18, 0x3F	; 63
-  ce:	8d e0       	ldi	r24, 0x0D	; 13
-  d0:	93 e0       	ldi	r25, 0x03	; 3
+  cc:	2f ef       	ldi	r18, 0xFF	; 255
+  ce:	89 e6       	ldi	r24, 0x69	; 105
+  d0:	98 e1       	ldi	r25, 0x18	; 24
   d2:	21 50       	subi	r18, 0x01	; 1
   d4:	80 40       	sbci	r24, 0x00	; 0
   d6:	90 40       	sbci	r25, 0x00	; 0
+	}
+	
+	
+	if(BT_Recieve() == '%'){
   d8:	e1 f7       	brne	.-8      	; 0xd2 <System_Init+0x2c>
   da:	00 c0       	rjmp	.+0      	; 0xdc <System_Init+0x36>
   dc:	00 00       	nop
-	_delay_ms(1000);
-	PORTB = (0<<BRAKELIGHT) | (0<<HEADLIGHT);
   de:	15 b8       	out	0x05, r1	; 5
-	
-	
-	//Signs the status
-	status = MCU_STARTED;
+		PORTB = (1<<PORTB1);
   e0:	81 e0       	ldi	r24, 0x01	; 1
   e2:	90 e0       	ldi	r25, 0x00	; 0
-  e4:	90 93 0d 01 	sts	0x010D, r25
-  e8:	80 93 0c 01 	sts	0x010C, r24
+		Uart_Flush();
+  e4:	90 93 01 01 	sts	0x0101, r25
+		return 1;
+  e8:	80 93 00 01 	sts	0x0100, r24
   ec:	08 95       	ret
 
 000000ee <UART_Init>:
-}
-
-void UART_Init(unsigned int baud){
-	
-	//Set double speed
-	UCSR0A = (1<<U2X0);
+		}
+		else if(BT_Recieve()=='E'){
+			Error('E');
+		}*/
+	}
+	return 0;
   ee:	22 e0       	ldi	r18, 0x02	; 2
   f0:	20 93 c0 00 	sts	0x00C0, r18
-	
-	//Set baudrate
-	unsigned int baudrate;
-	baudrate = 8000000/8/baud-1;
+}
   f4:	9c 01       	movw	r18, r24
   f6:	40 e0       	ldi	r20, 0x00	; 0
   f8:	50 e0       	ldi	r21, 0x00	; 0
@@ -202,20 +198,21 @@ void UART_Init(unsigned int baud){
   fc:	72 e4       	ldi	r23, 0x42	; 66
   fe:	8f e0       	ldi	r24, 0x0F	; 15
  100:	90 e0       	ldi	r25, 0x00	; 0
- 102:	0e 94 d7 01 	call	0x3ae	; 0x3ae <__divmodsi4>
+ 102:	0e 94 20 05 	call	0xa40	; 0xa40 <__divmodsi4>
  106:	21 50       	subi	r18, 0x01	; 1
  108:	31 09       	sbc	r19, r1
+ 10a:	30 93 c5 00 	sts	0x00C5, r19
+	baudrate = 8000000/8/baud-1;
 	//Double speed use frequency/8/baud
 	
 	//Set the baudrate in the registry
 	UBRR0H = (unsigned char) (baudrate>>8);
- 10a:	30 93 c5 00 	sts	0x00C5, r19
 	UBRR0L = (unsigned char) (baudrate);
  10e:	20 93 c4 00 	sts	0x00C4, r18
 
 	
 	//Enables Receive and Transmit over UART
-	UCSR0B = (1<<RXEN0) | (1<<TXEN0);
+	UCSR0B = (1<<RXEN0) | (1<<TXEN0); //RXCIE och TXCIE for interrupt based UART.
  112:	88 e1       	ldi	r24, 0x18	; 24
  114:	80 93 c1 00 	sts	0x00C1, r24
 	
@@ -233,502 +230,1533 @@ void UART_Init(unsigned int baud){
 	
 	
 	status |= UART_STARTED;
- 124:	80 91 0c 01 	lds	r24, 0x010C
- 128:	90 91 0d 01 	lds	r25, 0x010D
+ 124:	80 91 00 01 	lds	r24, 0x0100
+ 128:	90 91 01 01 	lds	r25, 0x0101
  12c:	82 60       	ori	r24, 0x02	; 2
- 12e:	90 93 0d 01 	sts	0x010D, r25
- 132:	80 93 0c 01 	sts	0x010C, r24
+ 12e:	90 93 01 01 	sts	0x0101, r25
+ 132:	80 93 00 01 	sts	0x0100, r24
  136:	08 95       	ret
 
-00000138 <BT_Recieve>:
-}
-
-uint8_t BT_Recieve(void){
-	
-	//Wait for data to be received (wait for flag to be set)
-	while(!(UCSR0A & (1<<RXC0)));
- 138:	e0 ec       	ldi	r30, 0xC0	; 192
- 13a:	f0 e0       	ldi	r31, 0x00	; 0
- 13c:	80 81       	ld	r24, Z
- 13e:	88 23       	and	r24, r24
- 140:	ec f7       	brge	.-6      	; 0x13c <BT_Recieve+0x4>
-	
-	//Returns the data from buffer
-	return UDR0;
- 142:	80 91 c6 00 	lds	r24, 0x00C6
-}
- 146:	08 95       	ret
-
-00000148 <BT_Send>:
+00000138 <BT_Send>:
 void BT_Send(unsigned char data){
 	
 	//PORTB = ~(1<<PORTB1);
 	//_delay_ms(1000);
 	//Waits for the transmit buffer to be empty (wait for flag)
 	while(!(UCSR0A & (1<<UDRE0)));
- 148:	e0 ec       	ldi	r30, 0xC0	; 192
- 14a:	f0 e0       	ldi	r31, 0x00	; 0
- 14c:	90 81       	ld	r25, Z
- 14e:	95 ff       	sbrs	r25, 5
- 150:	fd cf       	rjmp	.-6      	; 0x14c <BT_Send+0x4>
+ 138:	e0 ec       	ldi	r30, 0xC0	; 192
+ 13a:	f0 e0       	ldi	r31, 0x00	; 0
+ 13c:	90 81       	ld	r25, Z
+ 13e:	95 ff       	sbrs	r25, 5
+ 140:	fd cf       	rjmp	.-6      	; 0x13c <BT_Send+0x4>
 	
 	//Put data in buffer and sends it
 	UDR0 = data;
- 152:	80 93 c6 00 	sts	0x00C6, r24
- 156:	08 95       	ret
+ 142:	80 93 c6 00 	sts	0x00C6, r24
+ 146:	08 95       	ret
 
-00000158 <Uart_Flush>:
-	//_delay_ms(1000);
-}
-
-void Uart_Flush(void){
-	unsigned char dummy;
-	while (UCSR0A & (1<<RXC0)) dummy = UDR0;	
- 158:	80 91 c0 00 	lds	r24, 0x00C0
- 15c:	88 23       	and	r24, r24
- 15e:	44 f4       	brge	.+16     	; 0x170 <Uart_Flush+0x18>
- 160:	a6 ec       	ldi	r26, 0xC6	; 198
- 162:	b0 e0       	ldi	r27, 0x00	; 0
- 164:	e0 ec       	ldi	r30, 0xC0	; 192
- 166:	f0 e0       	ldi	r31, 0x00	; 0
- 168:	8c 91       	ld	r24, X
- 16a:	80 81       	ld	r24, Z
- 16c:	88 23       	and	r24, r24
- 16e:	e4 f3       	brlt	.-8      	; 0x168 <Uart_Flush+0x10>
- 170:	08 95       	ret
-
-00000172 <Error>:
+00000148 <Error>:
 void Sense_Light(void){
 	
 	
 }
 
 void Error(unsigned int errorcode){
- 172:	d8 2f       	mov	r29, r24
+ 148:	d8 2f       	mov	r29, r24
 	
 	//Flashes the red lights and send errorcode through Bluetooth
 	unsigned long ticks = 0;
- 174:	c1 2c       	mov	r12, r1
- 176:	d1 2c       	mov	r13, r1
- 178:	76 01       	movw	r14, r12
+ 14a:	c1 2c       	mov	r12, r1
+ 14c:	d1 2c       	mov	r13, r1
+ 14e:	76 01       	movw	r14, r12
 	for(;;){
-		if(ticks%100000 == 0){
- 17a:	0f 2e       	mov	r0, r31
- 17c:	f0 ea       	ldi	r31, 0xA0	; 160
- 17e:	8f 2e       	mov	r8, r31
- 180:	f6 e8       	ldi	r31, 0x86	; 134
- 182:	9f 2e       	mov	r9, r31
- 184:	aa 24       	eor	r10, r10
- 186:	a3 94       	inc	r10
- 188:	b1 2c       	mov	r11, r1
- 18a:	f0 2d       	mov	r31, r0
+		if(ticks%10000 == 0){
+ 150:	0f 2e       	mov	r0, r31
+ 152:	f0 e1       	ldi	r31, 0x10	; 16
+ 154:	8f 2e       	mov	r8, r31
+ 156:	f7 e2       	ldi	r31, 0x27	; 39
+ 158:	9f 2e       	mov	r9, r31
+ 15a:	a1 2c       	mov	r10, r1
+ 15c:	b1 2c       	mov	r11, r1
+ 15e:	f0 2d       	mov	r31, r0
 			PINB = (1<<BRAKELIGHT);
-			BT_Send(errorcode);
-		}
-		if(ticks%100000 == 50000){
-			PINB = ~(1<<BRAKELIGHT);
- 18c:	1d ef       	ldi	r17, 0xFD	; 253
-	
-	//Flashes the red lights and send errorcode through Bluetooth
-	unsigned long ticks = 0;
-	for(;;){
-		if(ticks%100000 == 0){
-			PINB = (1<<BRAKELIGHT);
- 18e:	c2 e0       	ldi	r28, 0x02	; 2
+ 160:	c2 e0       	ldi	r28, 0x02	; 2
 void Error(unsigned int errorcode){
 	
 	//Flashes the red lights and send errorcode through Bluetooth
 	unsigned long ticks = 0;
 	for(;;){
-		if(ticks%100000 == 0){
- 190:	c7 01       	movw	r24, r14
- 192:	b6 01       	movw	r22, r12
- 194:	a5 01       	movw	r20, r10
- 196:	94 01       	movw	r18, r8
- 198:	0e 94 b5 01 	call	0x36a	; 0x36a <__udivmodsi4>
- 19c:	61 15       	cp	r22, r1
- 19e:	71 05       	cpc	r23, r1
- 1a0:	81 05       	cpc	r24, r1
- 1a2:	91 05       	cpc	r25, r1
- 1a4:	29 f4       	brne	.+10     	; 0x1b0 <Error+0x3e>
+		if(ticks%10000 == 0){
+ 162:	c7 01       	movw	r24, r14
+ 164:	b6 01       	movw	r22, r12
+ 166:	a5 01       	movw	r20, r10
+ 168:	94 01       	movw	r18, r8
+ 16a:	0e 94 fe 04 	call	0x9fc	; 0x9fc <__udivmodsi4>
+ 16e:	67 2b       	or	r22, r23
+ 170:	68 2b       	or	r22, r24
+ 172:	69 2b       	or	r22, r25
+ 174:	21 f4       	brne	.+8      	; 0x17e <Error+0x36>
 			PINB = (1<<BRAKELIGHT);
- 1a6:	c3 b9       	out	0x03, r28	; 3
+ 176:	c3 b9       	out	0x03, r28	; 3
 			BT_Send(errorcode);
- 1a8:	8d 2f       	mov	r24, r29
- 1aa:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
- 1ae:	06 c0       	rjmp	.+12     	; 0x1bc <Error+0x4a>
+ 178:	8d 2f       	mov	r24, r29
+ 17a:	0e 94 9c 00 	call	0x138	; 0x138 <BT_Send>
 		}
-		if(ticks%100000 == 50000){
- 1b0:	60 35       	cpi	r22, 0x50	; 80
- 1b2:	73 4c       	sbci	r23, 0xC3	; 195
- 1b4:	81 05       	cpc	r24, r1
- 1b6:	91 05       	cpc	r25, r1
- 1b8:	09 f4       	brne	.+2      	; 0x1bc <Error+0x4a>
-			PINB = ~(1<<BRAKELIGHT);
- 1ba:	13 b9       	out	0x03, r17	; 3
+		if(ticks%10000 == 50000){
+			PINB = (0<<BRAKELIGHT);
 		}
 		ticks++;
- 1bc:	8f ef       	ldi	r24, 0xFF	; 255
- 1be:	c8 1a       	sub	r12, r24
- 1c0:	d8 0a       	sbc	r13, r24
- 1c2:	e8 0a       	sbc	r14, r24
- 1c4:	f8 0a       	sbc	r15, r24
+ 17e:	8f ef       	ldi	r24, 0xFF	; 255
+ 180:	c8 1a       	sub	r12, r24
+ 182:	d8 0a       	sbc	r13, r24
+ 184:	e8 0a       	sbc	r14, r24
+ 186:	f8 0a       	sbc	r15, r24
 	}
- 1c6:	e4 cf       	rjmp	.-56     	; 0x190 <Error+0x1e>
+ 188:	ec cf       	rjmp	.-40     	; 0x162 <Error+0x1a>
 
-000001c8 <BT_Init>:
-void Uart_Flush(void){
-	unsigned char dummy;
-	while (UCSR0A & (1<<RXC0)) dummy = UDR0;	
+0000018a <LCD_Init>:
+//#include <inttypes.h>
+#include "TWI_Master.h"
+#include "LCD.h"
+
+
+void LCD_Init(uint8_t addr){
+ 18a:	6f 92       	push	r6
+ 18c:	7f 92       	push	r7
+ 18e:	8f 92       	push	r8
+ 190:	9f 92       	push	r9
+ 192:	af 92       	push	r10
+ 194:	bf 92       	push	r11
+ 196:	cf 92       	push	r12
+ 198:	df 92       	push	r13
+ 19a:	ef 92       	push	r14
+ 19c:	ff 92       	push	r15
+ 19e:	0f 93       	push	r16
+ 1a0:	1f 93       	push	r17
+ 1a2:	cf 93       	push	r28
+ 1a4:	df 93       	push	r29
+ 1a6:	f8 2e       	mov	r15, r24
+ 1a8:	2f ef       	ldi	r18, 0xFF	; 255
+ 1aa:	89 e6       	ldi	r24, 0x69	; 105
+ 1ac:	98 e1       	ldi	r25, 0x18	; 24
+ 1ae:	21 50       	subi	r18, 0x01	; 1
+ 1b0:	80 40       	sbci	r24, 0x00	; 0
+ 1b2:	90 40       	sbci	r25, 0x00	; 0
+ 1b4:	e1 f7       	brne	.-8      	; 0x1ae <LCD_Init+0x24>
+ 1b6:	00 c0       	rjmp	.+0      	; 0x1b8 <LCD_Init+0x2e>
+ 1b8:	00 00       	nop
+
+	
+	_delay_ms(8000);
+	
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 1ba:	84 ea       	ldi	r24, 0xA4	; 164
+ 1bc:	80 93 bc 00 	sts	0x00BC, r24
+		
+	while(!TWI_Busy());
+ 1c0:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 1c4:	89 2b       	or	r24, r25
+ 1c6:	e1 f3       	breq	.-8      	; 0x1c0 <LCD_Init+0x36>
+	if((TWSR & MASK) != START)Error(START);
+ 1c8:	80 91 b9 00 	lds	r24, 0x00B9
+ 1cc:	88 7f       	andi	r24, 0xF8	; 248
+ 1ce:	88 30       	cpi	r24, 0x08	; 8
+ 1d0:	21 f0       	breq	.+8      	; 0x1da <LCD_Init+0x50>
+ 1d2:	88 e0       	ldi	r24, 0x08	; 8
+ 1d4:	90 e0       	ldi	r25, 0x00	; 0
+ 1d6:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (addr<<1) | (1<<0);
+ 1da:	8f 2d       	mov	r24, r15
+ 1dc:	88 0f       	add	r24, r24
+ 1de:	81 60       	ori	r24, 0x01	; 1
+ 1e0:	f8 2e       	mov	r15, r24
+ 1e2:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 1e6:	84 e8       	ldi	r24, 0x84	; 132
+ 1e8:	80 93 bc 00 	sts	0x00BC, r24
+		
+	while(!TWI_Busy());
+ 1ec:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 1f0:	89 2b       	or	r24, r25
+ 1f2:	e1 f3       	breq	.-8      	; 0x1ec <LCD_Init+0x62>
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error((TWSR & MASK));
+ 1f4:	80 91 b9 00 	lds	r24, 0x00B9
+ 1f8:	88 7f       	andi	r24, 0xF8	; 248
+ 1fa:	80 34       	cpi	r24, 0x40	; 64
+ 1fc:	31 f0       	breq	.+12     	; 0x20a <LCD_Init+0x80>
+ 1fe:	80 91 b9 00 	lds	r24, 0x00B9
+ 202:	88 7f       	andi	r24, 0xF8	; 248
+ 204:	90 e0       	ldi	r25, 0x00	; 0
+ 206:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the data to the slave
+	TWDR = 0x0; //8bits 
+ 20a:	10 92 bb 00 	sts	0x00BB, r1
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 20e:	84 e8       	ldi	r24, 0x84	; 132
+ 210:	80 93 bc 00 	sts	0x00BC, r24
+	while(!TWI_Busy());
+ 214:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 218:	89 2b       	or	r24, r25
+ 21a:	e1 f3       	breq	.-8      	; 0x214 <LCD_Init+0x8a>
+	if((TWSR & MASK) !=  MR_BYTE_NACK)Error((TWSR & MASK));
+ 21c:	80 91 b9 00 	lds	r24, 0x00B9
+ 220:	88 7f       	andi	r24, 0xF8	; 248
+ 222:	88 35       	cpi	r24, 0x58	; 88
+ 224:	31 f0       	breq	.+12     	; 0x232 <LCD_Init+0xa8>
+ 226:	80 91 b9 00 	lds	r24, 0x00B9
+ 22a:	88 7f       	andi	r24, 0xF8	; 248
+ 22c:	90 e0       	ldi	r25, 0x00	; 0
+ 22e:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the stop condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);	
+ 232:	ec eb       	ldi	r30, 0xBC	; 188
+ 234:	f0 e0       	ldi	r31, 0x00	; 0
+ 236:	84 e9       	ldi	r24, 0x94	; 148
+ 238:	80 83       	st	Z, r24
+ 23a:	2f ef       	ldi	r18, 0xFF	; 255
+ 23c:	89 e6       	ldi	r24, 0x69	; 105
+ 23e:	98 e1       	ldi	r25, 0x18	; 24
+ 240:	21 50       	subi	r18, 0x01	; 1
+ 242:	80 40       	sbci	r24, 0x00	; 0
+ 244:	90 40       	sbci	r25, 0x00	; 0
+ 246:	e1 f7       	brne	.-8      	; 0x240 <LCD_Init+0xb6>
+ 248:	00 c0       	rjmp	.+0      	; 0x24a <LCD_Init+0xc0>
+ 24a:	00 00       	nop
+	dataport |= (1<<LCD_DATA1_PIN);
+	dataport |= (1<<LCD_DATA0_PIN);
+	
+	
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 24c:	84 ea       	ldi	r24, 0xA4	; 164
+ 24e:	80 83       	st	Z, r24
+	
+	
+	while(!TWI_Busy());
+ 250:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 254:	89 2b       	or	r24, r25
+ 256:	e1 f3       	breq	.-8      	; 0x250 <LCD_Init+0xc6>
+	if((TWSR & MASK) != START)Error(START);
+ 258:	80 91 b9 00 	lds	r24, 0x00B9
+ 25c:	88 7f       	andi	r24, 0xF8	; 248
+ 25e:	88 30       	cpi	r24, 0x08	; 8
+ 260:	21 f0       	breq	.+8      	; 0x26a <LCD_Init+0xe0>
+ 262:	88 e0       	ldi	r24, 0x08	; 8
+ 264:	90 e0       	ldi	r25, 0x00	; 0
+ 266:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (addr<<1) | (1<<0);
+ 26a:	f0 92 bb 00 	sts	0x00BB, r15
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 26e:	84 e8       	ldi	r24, 0x84	; 132
+ 270:	80 93 bc 00 	sts	0x00BC, r24
+	
+	while(!TWI_Busy());
+ 274:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 278:	89 2b       	or	r24, r25
+ 27a:	e1 f3       	breq	.-8      	; 0x274 <LCD_Init+0xea>
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error((TWSR & MASK));
+ 27c:	80 91 b9 00 	lds	r24, 0x00B9
+ 280:	88 7f       	andi	r24, 0xF8	; 248
+ 282:	80 34       	cpi	r24, 0x40	; 64
+ 284:	31 f0       	breq	.+12     	; 0x292 <LCD_Init+0x108>
+ 286:	80 91 b9 00 	lds	r24, 0x00B9
+ 28a:	88 7f       	andi	r24, 0xF8	; 248
+ 28c:	90 e0       	ldi	r25, 0x00	; 0
+ 28e:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Sends the data to the slave
+	TWDR = dataport; //8bits
+ 292:	83 e0       	ldi	r24, 0x03	; 3
+ 294:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 298:	84 e8       	ldi	r24, 0x84	; 132
+ 29a:	80 93 bc 00 	sts	0x00BC, r24
+	while(!TWI_Busy());
+ 29e:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 2a2:	89 2b       	or	r24, r25
+ 2a4:	e1 f3       	breq	.-8      	; 0x29e <LCD_Init+0x114>
+	if((TWSR & MASK) !=  MR_BYTE_NACK)Error((TWSR & MASK));
+ 2a6:	80 91 b9 00 	lds	r24, 0x00B9
+ 2aa:	88 7f       	andi	r24, 0xF8	; 248
+ 2ac:	88 35       	cpi	r24, 0x58	; 88
+ 2ae:	31 f0       	breq	.+12     	; 0x2bc <LCD_Init+0x132>
+ 2b0:	80 91 b9 00 	lds	r24, 0x00B9
+ 2b4:	88 7f       	andi	r24, 0xF8	; 248
+ 2b6:	90 e0       	ldi	r25, 0x00	; 0
+ 2b8:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Sends the stop condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 2bc:	84 e9       	ldi	r24, 0x94	; 148
+ 2be:	80 93 bc 00 	sts	0x00BC, r24
+ 2c2:	ef ef       	ldi	r30, 0xFF	; 255
+ 2c4:	f9 e6       	ldi	r31, 0x69	; 105
+ 2c6:	28 e1       	ldi	r18, 0x18	; 24
+ 2c8:	e1 50       	subi	r30, 0x01	; 1
+ 2ca:	f0 40       	sbci	r31, 0x00	; 0
+ 2cc:	20 40       	sbci	r18, 0x00	; 0
+ 2ce:	e1 f7       	brne	.-8      	; 0x2c8 <LCD_Init+0x13e>
+ 2d0:	00 c0       	rjmp	.+0      	; 0x2d2 <LCD_Init+0x148>
+ 2d2:	00 00       	nop
+ 2d4:	0f 2e       	mov	r0, r31
+ 2d6:	f3 e0       	ldi	r31, 0x03	; 3
+ 2d8:	af 2e       	mov	r10, r31
+ 2da:	b1 2c       	mov	r11, r1
+ 2dc:	f0 2d       	mov	r31, r0
+
+
+	for(int i = 0; i<3; i++){	
+		
+		//Sends the start condition
+		TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 2de:	cc eb       	ldi	r28, 0xBC	; 188
+ 2e0:	d0 e0       	ldi	r29, 0x00	; 0
+ 2e2:	0f 2e       	mov	r0, r31
+ 2e4:	f4 ea       	ldi	r31, 0xA4	; 164
+ 2e6:	8f 2e       	mov	r8, r31
+ 2e8:	f0 2d       	mov	r31, r0
+ 2ea:	68 2c       	mov	r6, r8
+		
+		while(!TWI_Busy());
+		if((TWSR & MASK) != START)Error(START);
+ 2ec:	09 eb       	ldi	r16, 0xB9	; 185
+ 2ee:	10 e0       	ldi	r17, 0x00	; 0
+		
+		//Loads the slave address and set the R/W bit to 1
+		TWDR = (addr<<1) | (1<<0);
+ 2f0:	0f 2e       	mov	r0, r31
+ 2f2:	fb eb       	ldi	r31, 0xBB	; 187
+ 2f4:	cf 2e       	mov	r12, r31
+ 2f6:	d1 2c       	mov	r13, r1
+ 2f8:	f0 2d       	mov	r31, r0
+		TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 2fa:	0f 2e       	mov	r0, r31
+ 2fc:	f4 e8       	ldi	r31, 0x84	; 132
+ 2fe:	ef 2e       	mov	r14, r31
+ 300:	f0 2d       	mov	r31, r0
+		
+		while(!TWI_Busy());
+		if((TWSR & MASK) != MR_ADDRESS_ACK)Error(MR_ADDRESS_ACK);
+		
+		//Sends the data to the slave
+		TWDR = 1<<4; //8bits
+ 302:	68 94       	set
+ 304:	77 24       	eor	r7, r7
+ 306:	74 f8       	bld	r7, 4
+		TWCR = (1<<TWINT) | (1<<TWEN);
+		while(!TWI_Busy());
+		if((TWSR & MASK) !=  MR_BYTE_NACK)Error(MR_BYTE_NACK);
+		
+		//Sends the stop condition
+		TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 308:	0f 2e       	mov	r0, r31
+ 30a:	f4 e9       	ldi	r31, 0x94	; 148
+ 30c:	9f 2e       	mov	r9, r31
+ 30e:	f0 2d       	mov	r31, r0
+
+
+	for(int i = 0; i<3; i++){	
+		
+		//Sends the start condition
+		TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 310:	68 82       	st	Y, r6
+		
+		while(!TWI_Busy());
+ 312:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 316:	89 2b       	or	r24, r25
+ 318:	e1 f3       	breq	.-8      	; 0x312 <LCD_Init+0x188>
+		if((TWSR & MASK) != START)Error(START);
+ 31a:	f8 01       	movw	r30, r16
+ 31c:	80 81       	ld	r24, Z
+ 31e:	88 7f       	andi	r24, 0xF8	; 248
+ 320:	88 30       	cpi	r24, 0x08	; 8
+ 322:	21 f0       	breq	.+8      	; 0x32c <LCD_Init+0x1a2>
+ 324:	88 e0       	ldi	r24, 0x08	; 8
+ 326:	90 e0       	ldi	r25, 0x00	; 0
+ 328:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+		//Loads the slave address and set the R/W bit to 1
+		TWDR = (addr<<1) | (1<<0);
+ 32c:	f6 01       	movw	r30, r12
+ 32e:	f0 82       	st	Z, r15
+		TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 330:	e8 82       	st	Y, r14
+		
+		while(!TWI_Busy());
+ 332:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 336:	89 2b       	or	r24, r25
+ 338:	e1 f3       	breq	.-8      	; 0x332 <LCD_Init+0x1a8>
+		if((TWSR & MASK) != MR_ADDRESS_ACK)Error(MR_ADDRESS_ACK);
+ 33a:	f8 01       	movw	r30, r16
+ 33c:	80 81       	ld	r24, Z
+ 33e:	88 7f       	andi	r24, 0xF8	; 248
+ 340:	80 34       	cpi	r24, 0x40	; 64
+ 342:	21 f0       	breq	.+8      	; 0x34c <LCD_Init+0x1c2>
+ 344:	80 e4       	ldi	r24, 0x40	; 64
+ 346:	90 e0       	ldi	r25, 0x00	; 0
+ 348:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+		//Sends the data to the slave
+		TWDR = 1<<4; //8bits
+ 34c:	f6 01       	movw	r30, r12
+ 34e:	70 82       	st	Z, r7
+		TWCR = (1<<TWINT) | (1<<TWEN);
+ 350:	e8 82       	st	Y, r14
+		while(!TWI_Busy());
+ 352:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 356:	89 2b       	or	r24, r25
+ 358:	e1 f3       	breq	.-8      	; 0x352 <LCD_Init+0x1c8>
+		if((TWSR & MASK) !=  MR_BYTE_NACK)Error(MR_BYTE_NACK);
+ 35a:	f8 01       	movw	r30, r16
+ 35c:	80 81       	ld	r24, Z
+ 35e:	88 7f       	andi	r24, 0xF8	; 248
+ 360:	88 35       	cpi	r24, 0x58	; 88
+ 362:	21 f0       	breq	.+8      	; 0x36c <LCD_Init+0x1e2>
+ 364:	88 e5       	ldi	r24, 0x58	; 88
+ 366:	90 e0       	ldi	r25, 0x00	; 0
+ 368:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+		//Sends the stop condition
+		TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 36c:	98 82       	st	Y, r9
+ 36e:	ff ef       	ldi	r31, 0xFF	; 255
+ 370:	24 e3       	ldi	r18, 0x34	; 52
+ 372:	8c e0       	ldi	r24, 0x0C	; 12
+ 374:	f1 50       	subi	r31, 0x01	; 1
+ 376:	20 40       	sbci	r18, 0x00	; 0
+ 378:	80 40       	sbci	r24, 0x00	; 0
+ 37a:	e1 f7       	brne	.-8      	; 0x374 <LCD_Init+0x1ea>
+ 37c:	00 c0       	rjmp	.+0      	; 0x37e <LCD_Init+0x1f4>
+ 37e:	00 00       	nop
+	
+		_delay_ms(4000);
+	
+	
+		//Sends the start condition
+		TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 380:	88 82       	st	Y, r8
+		
+		while(!TWI_Busy());
+ 382:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 386:	89 2b       	or	r24, r25
+ 388:	e1 f3       	breq	.-8      	; 0x382 <LCD_Init+0x1f8>
+		if((TWSR & MASK) != START)Error(START);
+ 38a:	f8 01       	movw	r30, r16
+ 38c:	80 81       	ld	r24, Z
+ 38e:	88 7f       	andi	r24, 0xF8	; 248
+ 390:	88 30       	cpi	r24, 0x08	; 8
+ 392:	21 f0       	breq	.+8      	; 0x39c <LCD_Init+0x212>
+ 394:	88 e0       	ldi	r24, 0x08	; 8
+ 396:	90 e0       	ldi	r25, 0x00	; 0
+ 398:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+		//Loads the slave address and set the R/W bit to 1
+		TWDR = (addr<<1) | (1<<0);
+ 39c:	f6 01       	movw	r30, r12
+ 39e:	f0 82       	st	Z, r15
+		TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 3a0:	e8 82       	st	Y, r14
+		
+		while(!TWI_Busy());
+ 3a2:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 3a6:	89 2b       	or	r24, r25
+ 3a8:	e1 f3       	breq	.-8      	; 0x3a2 <LCD_Init+0x218>
+		if((TWSR & MASK) != MR_ADDRESS_ACK)Error((TWSR & MASK));
+ 3aa:	f8 01       	movw	r30, r16
+ 3ac:	80 81       	ld	r24, Z
+ 3ae:	88 7f       	andi	r24, 0xF8	; 248
+ 3b0:	80 34       	cpi	r24, 0x40	; 64
+ 3b2:	29 f0       	breq	.+10     	; 0x3be <LCD_Init+0x234>
+ 3b4:	80 81       	ld	r24, Z
+ 3b6:	88 7f       	andi	r24, 0xF8	; 248
+ 3b8:	90 e0       	ldi	r25, 0x00	; 0
+ 3ba:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+		//Sends the data to the slave
+		TWDR = (0<<4); //8bits
+ 3be:	f6 01       	movw	r30, r12
+ 3c0:	10 82       	st	Z, r1
+		TWCR = (1<<TWINT) | (1<<TWEN);
+ 3c2:	e8 82       	st	Y, r14
+		while(!TWI_Busy());
+ 3c4:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 3c8:	89 2b       	or	r24, r25
+ 3ca:	e1 f3       	breq	.-8      	; 0x3c4 <LCD_Init+0x23a>
+		if((TWSR & MASK) !=  MR_BYTE_NACK)Error((TWSR & MASK));
+ 3cc:	f8 01       	movw	r30, r16
+ 3ce:	80 81       	ld	r24, Z
+ 3d0:	88 7f       	andi	r24, 0xF8	; 248
+ 3d2:	88 35       	cpi	r24, 0x58	; 88
+ 3d4:	29 f0       	breq	.+10     	; 0x3e0 <LCD_Init+0x256>
+ 3d6:	80 81       	ld	r24, Z
+ 3d8:	88 7f       	andi	r24, 0xF8	; 248
+ 3da:	90 e0       	ldi	r25, 0x00	; 0
+ 3dc:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+		//Sends the stop condition
+		TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 3e0:	98 82       	st	Y, r9
+ 3e2:	ff ef       	ldi	r31, 0xFF	; 255
+ 3e4:	24 e3       	ldi	r18, 0x34	; 52
+ 3e6:	8c e0       	ldi	r24, 0x0C	; 12
+ 3e8:	f1 50       	subi	r31, 0x01	; 1
+ 3ea:	20 40       	sbci	r18, 0x00	; 0
+ 3ec:	80 40       	sbci	r24, 0x00	; 0
+ 3ee:	e1 f7       	brne	.-8      	; 0x3e8 <LCD_Init+0x25e>
+ 3f0:	00 c0       	rjmp	.+0      	; 0x3f2 <LCD_Init+0x268>
+ 3f2:	00 00       	nop
+ 3f4:	91 e0       	ldi	r25, 0x01	; 1
+ 3f6:	a9 1a       	sub	r10, r25
+ 3f8:	b1 08       	sbc	r11, r1
+	/************************************************************************/
+	/* Toggle pin					                                        */
+	/************************************************************************/
+
+
+	for(int i = 0; i<3; i++){	
+ 3fa:	09 f0       	breq	.+2      	; 0x3fe <LCD_Init+0x274>
+ 3fc:	89 cf       	rjmp	.-238    	; 0x310 <LCD_Init+0x186>
+	/************************************************************************/	
+		
+	dataport &= ~_BV(LCD_DATA0_PIN);	
+		
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 3fe:	84 ea       	ldi	r24, 0xA4	; 164
+ 400:	80 93 bc 00 	sts	0x00BC, r24
+		
+	while(!TWI_Busy());
+ 404:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 408:	89 2b       	or	r24, r25
+ 40a:	e1 f3       	breq	.-8      	; 0x404 <LCD_Init+0x27a>
+	if((TWSR & MASK) != START)Error(START);
+ 40c:	80 91 b9 00 	lds	r24, 0x00B9
+ 410:	88 7f       	andi	r24, 0xF8	; 248
+ 412:	88 30       	cpi	r24, 0x08	; 8
+ 414:	21 f0       	breq	.+8      	; 0x41e <LCD_Init+0x294>
+ 416:	88 e0       	ldi	r24, 0x08	; 8
+ 418:	90 e0       	ldi	r25, 0x00	; 0
+ 41a:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (addr<<1) | (1<<0);
+ 41e:	f0 92 bb 00 	sts	0x00BB, r15
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 422:	84 e8       	ldi	r24, 0x84	; 132
+ 424:	80 93 bc 00 	sts	0x00BC, r24
+		
+	while(!TWI_Busy());
+ 428:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 42c:	89 2b       	or	r24, r25
+ 42e:	e1 f3       	breq	.-8      	; 0x428 <LCD_Init+0x29e>
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error((TWSR & MASK));
+ 430:	80 91 b9 00 	lds	r24, 0x00B9
+ 434:	88 7f       	andi	r24, 0xF8	; 248
+ 436:	80 34       	cpi	r24, 0x40	; 64
+ 438:	31 f0       	breq	.+12     	; 0x446 <LCD_Init+0x2bc>
+ 43a:	80 91 b9 00 	lds	r24, 0x00B9
+ 43e:	88 7f       	andi	r24, 0xF8	; 248
+ 440:	90 e0       	ldi	r25, 0x00	; 0
+ 442:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the data to the slave
+	TWDR = dataport; //8bits
+ 446:	82 e0       	ldi	r24, 0x02	; 2
+ 448:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 44c:	84 e8       	ldi	r24, 0x84	; 132
+ 44e:	80 93 bc 00 	sts	0x00BC, r24
+	while(!TWI_Busy());
+ 452:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 456:	89 2b       	or	r24, r25
+ 458:	e1 f3       	breq	.-8      	; 0x452 <LCD_Init+0x2c8>
+	if((TWSR & MASK) !=  MR_BYTE_NACK)Error((TWSR & MASK));
+ 45a:	80 91 b9 00 	lds	r24, 0x00B9
+ 45e:	88 7f       	andi	r24, 0xF8	; 248
+ 460:	88 35       	cpi	r24, 0x58	; 88
+ 462:	31 f0       	breq	.+12     	; 0x470 <LCD_Init+0x2e6>
+ 464:	80 91 b9 00 	lds	r24, 0x00B9
+ 468:	88 7f       	andi	r24, 0xF8	; 248
+ 46a:	90 e0       	ldi	r25, 0x00	; 0
+ 46c:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the stop condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);	
+ 470:	ec eb       	ldi	r30, 0xBC	; 188
+ 472:	f0 e0       	ldi	r31, 0x00	; 0
+ 474:	84 e9       	ldi	r24, 0x94	; 148
+ 476:	80 83       	st	Z, r24
+ 478:	2f ef       	ldi	r18, 0xFF	; 255
+ 47a:	89 e6       	ldi	r24, 0x69	; 105
+ 47c:	98 e1       	ldi	r25, 0x18	; 24
+ 47e:	21 50       	subi	r18, 0x01	; 1
+ 480:	80 40       	sbci	r24, 0x00	; 0
+ 482:	90 40       	sbci	r25, 0x00	; 0
+ 484:	e1 f7       	brne	.-8      	; 0x47e <LCD_Init+0x2f4>
+ 486:	00 c0       	rjmp	.+0      	; 0x488 <LCD_Init+0x2fe>
+ 488:	00 00       	nop
+	/************************************************************************/
+	/* Toggle pin					                                        */
+	/************************************************************************/
+		
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 48a:	84 ea       	ldi	r24, 0xA4	; 164
+ 48c:	80 83       	st	Z, r24
+		
+	while(!TWI_Busy());
+ 48e:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 492:	89 2b       	or	r24, r25
+ 494:	e1 f3       	breq	.-8      	; 0x48e <LCD_Init+0x304>
+	if((TWSR & MASK) != START)Error(START);
+ 496:	80 91 b9 00 	lds	r24, 0x00B9
+ 49a:	88 7f       	andi	r24, 0xF8	; 248
+ 49c:	88 30       	cpi	r24, 0x08	; 8
+ 49e:	21 f0       	breq	.+8      	; 0x4a8 <LCD_Init+0x31e>
+ 4a0:	88 e0       	ldi	r24, 0x08	; 8
+ 4a2:	90 e0       	ldi	r25, 0x00	; 0
+ 4a4:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (addr<<1) | (1<<0);
+ 4a8:	f0 92 bb 00 	sts	0x00BB, r15
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 4ac:	84 e8       	ldi	r24, 0x84	; 132
+ 4ae:	80 93 bc 00 	sts	0x00BC, r24
+		
+	while(!TWI_Busy());
+ 4b2:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 4b6:	89 2b       	or	r24, r25
+ 4b8:	e1 f3       	breq	.-8      	; 0x4b2 <LCD_Init+0x328>
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error(MR_ADDRESS_ACK);
+ 4ba:	80 91 b9 00 	lds	r24, 0x00B9
+ 4be:	88 7f       	andi	r24, 0xF8	; 248
+ 4c0:	80 34       	cpi	r24, 0x40	; 64
+ 4c2:	21 f0       	breq	.+8      	; 0x4cc <LCD_Init+0x342>
+ 4c4:	80 e4       	ldi	r24, 0x40	; 64
+ 4c6:	90 e0       	ldi	r25, 0x00	; 0
+ 4c8:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the data to the slave
+	TWDR = 1<<4; //8bits
+ 4cc:	80 e1       	ldi	r24, 0x10	; 16
+ 4ce:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 4d2:	84 e8       	ldi	r24, 0x84	; 132
+ 4d4:	80 93 bc 00 	sts	0x00BC, r24
+	while(!TWI_Busy());
+ 4d8:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 4dc:	89 2b       	or	r24, r25
+ 4de:	e1 f3       	breq	.-8      	; 0x4d8 <LCD_Init+0x34e>
+	if((TWSR & MASK) !=  MR_BYTE_NACK)Error(MR_BYTE_NACK);
+ 4e0:	80 91 b9 00 	lds	r24, 0x00B9
+ 4e4:	88 7f       	andi	r24, 0xF8	; 248
+ 4e6:	88 35       	cpi	r24, 0x58	; 88
+ 4e8:	21 f0       	breq	.+8      	; 0x4f2 <LCD_Init+0x368>
+ 4ea:	88 e5       	ldi	r24, 0x58	; 88
+ 4ec:	90 e0       	ldi	r25, 0x00	; 0
+ 4ee:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the stop condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 4f2:	ec eb       	ldi	r30, 0xBC	; 188
+ 4f4:	f0 e0       	ldi	r31, 0x00	; 0
+ 4f6:	84 e9       	ldi	r24, 0x94	; 148
+ 4f8:	80 83       	st	Z, r24
+ 4fa:	2f ef       	ldi	r18, 0xFF	; 255
+ 4fc:	84 e3       	ldi	r24, 0x34	; 52
+ 4fe:	9c e0       	ldi	r25, 0x0C	; 12
+ 500:	21 50       	subi	r18, 0x01	; 1
+ 502:	80 40       	sbci	r24, 0x00	; 0
+ 504:	90 40       	sbci	r25, 0x00	; 0
+ 506:	e1 f7       	brne	.-8      	; 0x500 <LCD_Init+0x376>
+ 508:	00 c0       	rjmp	.+0      	; 0x50a <LCD_Init+0x380>
+ 50a:	00 00       	nop
+		
+	_delay_ms(4000);
+		
+		
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 50c:	84 ea       	ldi	r24, 0xA4	; 164
+ 50e:	80 83       	st	Z, r24
+		
+	while(!TWI_Busy());
+ 510:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 514:	89 2b       	or	r24, r25
+ 516:	e1 f3       	breq	.-8      	; 0x510 <LCD_Init+0x386>
+	if((TWSR & MASK) != START)Error(START);
+ 518:	80 91 b9 00 	lds	r24, 0x00B9
+ 51c:	88 7f       	andi	r24, 0xF8	; 248
+ 51e:	88 30       	cpi	r24, 0x08	; 8
+ 520:	21 f0       	breq	.+8      	; 0x52a <LCD_Init+0x3a0>
+ 522:	88 e0       	ldi	r24, 0x08	; 8
+ 524:	90 e0       	ldi	r25, 0x00	; 0
+ 526:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (addr<<1) | (1<<0);
+ 52a:	f0 92 bb 00 	sts	0x00BB, r15
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 52e:	84 e8       	ldi	r24, 0x84	; 132
+ 530:	80 93 bc 00 	sts	0x00BC, r24
+		
+	while(!TWI_Busy());
+ 534:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 538:	89 2b       	or	r24, r25
+ 53a:	e1 f3       	breq	.-8      	; 0x534 <LCD_Init+0x3aa>
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error(MR_ADDRESS_ACK);
+ 53c:	80 91 b9 00 	lds	r24, 0x00B9
+ 540:	88 7f       	andi	r24, 0xF8	; 248
+ 542:	80 34       	cpi	r24, 0x40	; 64
+ 544:	21 f0       	breq	.+8      	; 0x54e <LCD_Init+0x3c4>
+ 546:	80 e4       	ldi	r24, 0x40	; 64
+ 548:	90 e0       	ldi	r25, 0x00	; 0
+ 54a:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the data to the slave
+	TWDR = (0<<4); //8bits
+ 54e:	10 92 bb 00 	sts	0x00BB, r1
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 552:	84 e8       	ldi	r24, 0x84	; 132
+ 554:	80 93 bc 00 	sts	0x00BC, r24
+	while(!TWI_Busy());
+ 558:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 55c:	89 2b       	or	r24, r25
+ 55e:	e1 f3       	breq	.-8      	; 0x558 <LCD_Init+0x3ce>
+	if((TWSR & MASK) !=  MR_BYTE_NACK)Error(MR_BYTE_NACK);
+ 560:	80 91 b9 00 	lds	r24, 0x00B9
+ 564:	88 7f       	andi	r24, 0xF8	; 248
+ 566:	88 35       	cpi	r24, 0x58	; 88
+ 568:	21 f0       	breq	.+8      	; 0x572 <LCD_Init+0x3e8>
+ 56a:	88 e5       	ldi	r24, 0x58	; 88
+ 56c:	90 e0       	ldi	r25, 0x00	; 0
+ 56e:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the stop condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 572:	84 e9       	ldi	r24, 0x94	; 148
+ 574:	80 93 bc 00 	sts	0x00BC, r24
+ 578:	ef ef       	ldi	r30, 0xFF	; 255
+ 57a:	f9 e6       	ldi	r31, 0x69	; 105
+ 57c:	28 e1       	ldi	r18, 0x18	; 24
+ 57e:	e1 50       	subi	r30, 0x01	; 1
+ 580:	f0 40       	sbci	r31, 0x00	; 0
+ 582:	20 40       	sbci	r18, 0x00	; 0
+ 584:	e1 f7       	brne	.-8      	; 0x57e <LCD_Init+0x3f4>
+ 586:	00 c0       	rjmp	.+0      	; 0x588 <LCD_Init+0x3fe>
+ 588:	00 00       	nop
+	
+	//TWI_Send((0x27, LCD_DISPLAY_ON)
+
+
+
+}
+ 58a:	df 91       	pop	r29
+ 58c:	cf 91       	pop	r28
+ 58e:	1f 91       	pop	r17
+ 590:	0f 91       	pop	r16
+ 592:	ff 90       	pop	r15
+ 594:	ef 90       	pop	r14
+ 596:	df 90       	pop	r13
+ 598:	cf 90       	pop	r12
+ 59a:	bf 90       	pop	r11
+ 59c:	af 90       	pop	r10
+ 59e:	9f 90       	pop	r9
+ 5a0:	8f 90       	pop	r8
+ 5a2:	7f 90       	pop	r7
+ 5a4:	6f 90       	pop	r6
+ 5a6:	08 95       	ret
+
+000005a8 <LCD_toggle>:
 }
 
-int BT_Init(void){
- 1c8:	ef 92       	push	r14
- 1ca:	ff 92       	push	r15
- 1cc:	0f 93       	push	r16
- 1ce:	1f 93       	push	r17
- 1d0:	cf 93       	push	r28
- 1d2:	df 93       	push	r29
- 1d4:	cd b7       	in	r28, 0x3d	; 61
- 1d6:	de b7       	in	r29, 0x3e	; 62
- 1d8:	2c 97       	sbiw	r28, 0x0c	; 12
- 1da:	0f b6       	in	r0, 0x3f	; 63
- 1dc:	f8 94       	cli
- 1de:	de bf       	out	0x3e, r29	; 62
- 1e0:	0f be       	out	0x3f, r0	; 63
- 1e2:	cd bf       	out	0x3d, r28	; 61
- 1e4:	2f ef       	ldi	r18, 0xFF	; 255
- 1e6:	89 e6       	ldi	r24, 0x69	; 105
- 1e8:	98 e1       	ldi	r25, 0x18	; 24
- 1ea:	21 50       	subi	r18, 0x01	; 1
- 1ec:	80 40       	sbci	r24, 0x00	; 0
- 1ee:	90 40       	sbci	r25, 0x00	; 0
- 1f0:	e1 f7       	brne	.-8      	; 0x1ea <BT_Init+0x22>
- 1f2:	00 c0       	rjmp	.+0      	; 0x1f4 <BT_Init+0x2c>
- 1f4:	00 00       	nop
+void LCD_toggle(void){
 	
-	//Wait for 1 second to ensure the device has power
-	_delay_ms(8000);
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 5a8:	84 ea       	ldi	r24, 0xA4	; 164
+ 5aa:	80 93 bc 00 	sts	0x00BC, r24
+	
+	while(!TWI_Busy());
+ 5ae:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 5b2:	89 2b       	or	r24, r25
+ 5b4:	e1 f3       	breq	.-8      	; 0x5ae <LCD_toggle+0x6>
+	if((TWSR & MASK) != START)Error(START);
+ 5b6:	80 91 b9 00 	lds	r24, 0x00B9
+ 5ba:	88 7f       	andi	r24, 0xF8	; 248
+ 5bc:	88 30       	cpi	r24, 0x08	; 8
+ 5be:	21 f0       	breq	.+8      	; 0x5c8 <LCD_toggle+0x20>
+ 5c0:	88 e0       	ldi	r24, 0x08	; 8
+ 5c2:	90 e0       	ldi	r25, 0x00	; 0
+ 5c4:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (0x27<<1) | (1<<0);
+ 5c8:	8f e4       	ldi	r24, 0x4F	; 79
+ 5ca:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 5ce:	84 e8       	ldi	r24, 0x84	; 132
+ 5d0:	80 93 bc 00 	sts	0x00BC, r24
+	
+	while(!TWI_Busy());
+ 5d4:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 5d8:	89 2b       	or	r24, r25
+ 5da:	e1 f3       	breq	.-8      	; 0x5d4 <LCD_toggle+0x2c>
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error(MR_ADDRESS_ACK);
+ 5dc:	80 91 b9 00 	lds	r24, 0x00B9
+ 5e0:	88 7f       	andi	r24, 0xF8	; 248
+ 5e2:	80 34       	cpi	r24, 0x40	; 64
+ 5e4:	21 f0       	breq	.+8      	; 0x5ee <LCD_toggle+0x46>
+ 5e6:	80 e4       	ldi	r24, 0x40	; 64
+ 5e8:	90 e0       	ldi	r25, 0x00	; 0
+ 5ea:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Sends the data to the slave
+	TWDR = 1<<4; //8bits
+ 5ee:	80 e1       	ldi	r24, 0x10	; 16
+ 5f0:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 5f4:	84 e8       	ldi	r24, 0x84	; 132
+ 5f6:	80 93 bc 00 	sts	0x00BC, r24
+	while(!TWI_Busy());
+ 5fa:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 5fe:	89 2b       	or	r24, r25
+ 600:	e1 f3       	breq	.-8      	; 0x5fa <LCD_toggle+0x52>
+	if((TWSR & MASK) !=  MR_BYTE_NACK)Error(MR_BYTE_NACK);
+ 602:	80 91 b9 00 	lds	r24, 0x00B9
+ 606:	88 7f       	andi	r24, 0xF8	; 248
+ 608:	88 35       	cpi	r24, 0x58	; 88
+ 60a:	21 f0       	breq	.+8      	; 0x614 <LCD_toggle+0x6c>
+ 60c:	88 e5       	ldi	r24, 0x58	; 88
+ 60e:	90 e0       	ldi	r25, 0x00	; 0
+ 610:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Sends the stop condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 614:	ec eb       	ldi	r30, 0xBC	; 188
+ 616:	f0 e0       	ldi	r31, 0x00	; 0
+ 618:	84 e9       	ldi	r24, 0x94	; 148
+ 61a:	80 83       	st	Z, r24
+ 61c:	2f ef       	ldi	r18, 0xFF	; 255
+ 61e:	84 e3       	ldi	r24, 0x34	; 52
+ 620:	9c e0       	ldi	r25, 0x0C	; 12
+ 622:	21 50       	subi	r18, 0x01	; 1
+ 624:	80 40       	sbci	r24, 0x00	; 0
+ 626:	90 40       	sbci	r25, 0x00	; 0
+ 628:	e1 f7       	brne	.-8      	; 0x622 <LCD_toggle+0x7a>
+ 62a:	00 c0       	rjmp	.+0      	; 0x62c <LCD_toggle+0x84>
+ 62c:	00 00       	nop
+	
+	_delay_ms(4000);
+	
+	
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 62e:	84 ea       	ldi	r24, 0xA4	; 164
+ 630:	80 83       	st	Z, r24
+	
+	while(!TWI_Busy());
+ 632:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 636:	89 2b       	or	r24, r25
+ 638:	e1 f3       	breq	.-8      	; 0x632 <LCD_toggle+0x8a>
+	if((TWSR & MASK) != START)Error(START);
+ 63a:	80 91 b9 00 	lds	r24, 0x00B9
+ 63e:	88 7f       	andi	r24, 0xF8	; 248
+ 640:	88 30       	cpi	r24, 0x08	; 8
+ 642:	21 f0       	breq	.+8      	; 0x64c <LCD_toggle+0xa4>
+ 644:	88 e0       	ldi	r24, 0x08	; 8
+ 646:	90 e0       	ldi	r25, 0x00	; 0
+ 648:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (0x27<<1) | (1<<0);
+ 64c:	8f e4       	ldi	r24, 0x4F	; 79
+ 64e:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 652:	84 e8       	ldi	r24, 0x84	; 132
+ 654:	80 93 bc 00 	sts	0x00BC, r24
+	
+	while(!TWI_Busy());
+ 658:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 65c:	89 2b       	or	r24, r25
+ 65e:	e1 f3       	breq	.-8      	; 0x658 <LCD_toggle+0xb0>
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error((TWSR & MASK));
+ 660:	80 91 b9 00 	lds	r24, 0x00B9
+ 664:	88 7f       	andi	r24, 0xF8	; 248
+ 666:	80 34       	cpi	r24, 0x40	; 64
+ 668:	31 f0       	breq	.+12     	; 0x676 <LCD_toggle+0xce>
+ 66a:	80 91 b9 00 	lds	r24, 0x00B9
+ 66e:	88 7f       	andi	r24, 0xF8	; 248
+ 670:	90 e0       	ldi	r25, 0x00	; 0
+ 672:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Sends the data to the slave
+	TWDR = (0<<4); //8bits
+ 676:	10 92 bb 00 	sts	0x00BB, r1
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 67a:	84 e8       	ldi	r24, 0x84	; 132
+ 67c:	80 93 bc 00 	sts	0x00BC, r24
+	while(!TWI_Busy());
+ 680:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 684:	89 2b       	or	r24, r25
+ 686:	e1 f3       	breq	.-8      	; 0x680 <LCD_toggle+0xd8>
+	if((TWSR & MASK) !=  MR_BYTE_NACK)Error((TWSR & MASK));
+ 688:	80 91 b9 00 	lds	r24, 0x00B9
+ 68c:	88 7f       	andi	r24, 0xF8	; 248
+ 68e:	88 35       	cpi	r24, 0x58	; 88
+ 690:	31 f0       	breq	.+12     	; 0x69e <LCD_toggle+0xf6>
+ 692:	80 91 b9 00 	lds	r24, 0x00B9
+ 696:	88 7f       	andi	r24, 0xF8	; 248
+ 698:	90 e0       	ldi	r25, 0x00	; 0
+ 69a:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Sends the stop condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 69e:	84 e9       	ldi	r24, 0x94	; 148
+ 6a0:	80 93 bc 00 	sts	0x00BC, r24
+ 6a4:	2f ef       	ldi	r18, 0xFF	; 255
+ 6a6:	84 e3       	ldi	r24, 0x34	; 52
+ 6a8:	9c e0       	ldi	r25, 0x0C	; 12
+ 6aa:	21 50       	subi	r18, 0x01	; 1
+ 6ac:	80 40       	sbci	r24, 0x00	; 0
+ 6ae:	90 40       	sbci	r25, 0x00	; 0
+ 6b0:	e1 f7       	brne	.-8      	; 0x6aa <LCD_toggle+0x102>
+ 6b2:	00 c0       	rjmp	.+0      	; 0x6b4 <LCD_toggle+0x10c>
+ 6b4:	00 00       	nop
+ 6b6:	08 95       	ret
 
-	//Sends command to enter command mode
-	for(int i = 0; i<3; i++) BT_Send('$');
- 1f6:	84 e2       	ldi	r24, 0x24	; 36
- 1f8:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
- 1fc:	84 e2       	ldi	r24, 0x24	; 36
- 1fe:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
- 202:	84 e2       	ldi	r24, 0x24	; 36
- 204:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
+000006b8 <LCD_Command>:
 
-	//If it fails to go into command mode
-	if(BT_Recieve() == 'E'){
- 208:	0e 94 9c 00 	call	0x138	; 0x138 <BT_Recieve>
- 20c:	85 34       	cpi	r24, 0x45	; 69
- 20e:	21 f4       	brne	.+8      	; 0x218 <BT_Init+0x50>
-		Error(0x01);
- 210:	81 e0       	ldi	r24, 0x01	; 1
- 212:	90 e0       	ldi	r25, 0x00	; 0
- 214:	0e 94 b9 00 	call	0x172	; 0x172 <Error>
- 218:	ef ef       	ldi	r30, 0xFF	; 255
- 21a:	f9 e6       	ldi	r31, 0x69	; 105
- 21c:	28 e1       	ldi	r18, 0x18	; 24
- 21e:	e1 50       	subi	r30, 0x01	; 1
- 220:	f0 40       	sbci	r31, 0x00	; 0
- 222:	20 40       	sbci	r18, 0x00	; 0
- 224:	e1 f7       	brne	.-8      	; 0x21e <BT_Init+0x56>
- 226:	00 c0       	rjmp	.+0      	; 0x228 <BT_Init+0x60>
- 228:	00 00       	nop
-	}
-	//Wait for 1 second to ensure the device has power
-	_delay_ms(8000);
-	
-	Uart_Flush();
- 22a:	0e 94 ac 00 	call	0x158	; 0x158 <Uart_Flush>
-	
-	unsigned char adress[12] = {'0','0','0','6','6','6','7','6','A','1','3','F'};
- 22e:	8c e0       	ldi	r24, 0x0C	; 12
- 230:	e0 e0       	ldi	r30, 0x00	; 0
- 232:	f1 e0       	ldi	r31, 0x01	; 1
- 234:	de 01       	movw	r26, r28
- 236:	11 96       	adiw	r26, 0x01	; 1
- 238:	01 90       	ld	r0, Z+
- 23a:	0d 92       	st	X+, r0
- 23c:	8a 95       	dec	r24
- 23e:	e1 f7       	brne	.-8      	; 0x238 <BT_Init+0x70>
-	
-	BT_Send('c');
- 240:	83 e6       	ldi	r24, 0x63	; 99
- 242:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
-	BT_Send(',');
- 246:	8c e2       	ldi	r24, 0x2C	; 44
- 248:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
- 24c:	8e 01       	movw	r16, r28
- 24e:	0f 5f       	subi	r16, 0xFF	; 255
- 250:	1f 4f       	sbci	r17, 0xFF	; 255
- 252:	7e 01       	movw	r14, r28
- 254:	8d e0       	ldi	r24, 0x0D	; 13
- 256:	e8 0e       	add	r14, r24
- 258:	f1 1c       	adc	r15, r1
-	for(int i = 0; i < 12;i++){
-		BT_Send(adress[i]);
- 25a:	f8 01       	movw	r30, r16
- 25c:	81 91       	ld	r24, Z+
- 25e:	8f 01       	movw	r16, r30
- 260:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
-	
-	unsigned char adress[12] = {'0','0','0','6','6','6','7','6','A','1','3','F'};
-	
-	BT_Send('c');
-	BT_Send(',');
-	for(int i = 0; i < 12;i++){
- 264:	0e 15       	cp	r16, r14
- 266:	1f 05       	cpc	r17, r15
- 268:	c1 f7       	brne	.-16     	; 0x25a <BT_Init+0x92>
-		BT_Send(adress[i]);
-	}
-	BT_Send(0x0A); //NL
- 26a:	8a e0       	ldi	r24, 0x0A	; 10
- 26c:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
-	BT_Send(0x0D); //CR
- 270:	8d e0       	ldi	r24, 0x0D	; 13
- 272:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
- 276:	ff ef       	ldi	r31, 0xFF	; 255
- 278:	29 e6       	ldi	r18, 0x69	; 105
- 27a:	88 e1       	ldi	r24, 0x18	; 24
- 27c:	f1 50       	subi	r31, 0x01	; 1
- 27e:	20 40       	sbci	r18, 0x00	; 0
- 280:	80 40       	sbci	r24, 0x00	; 0
- 282:	e1 f7       	brne	.-8      	; 0x27c <BT_Init+0xb4>
- 284:	00 c0       	rjmp	.+0      	; 0x286 <BT_Init+0xbe>
- 286:	00 00       	nop
-	//Wait two seconds
-	//_delay_ms(8000);
-	_delay_ms(8000);
-	
-	for(int i = 0; i<6;i++){
-		BT_Recieve();
- 288:	0e 94 9c 00 	call	0x138	; 0x138 <BT_Recieve>
- 28c:	0e 94 9c 00 	call	0x138	; 0x138 <BT_Recieve>
- 290:	0e 94 9c 00 	call	0x138	; 0x138 <BT_Recieve>
- 294:	0e 94 9c 00 	call	0x138	; 0x138 <BT_Recieve>
- 298:	0e 94 9c 00 	call	0x138	; 0x138 <BT_Recieve>
- 29c:	0e 94 9c 00 	call	0x138	; 0x138 <BT_Recieve>
-	}
-	
-	
-	if(BT_Recieve() == '%'){
- 2a0:	0e 94 9c 00 	call	0x138	; 0x138 <BT_Recieve>
- 2a4:	85 32       	cpi	r24, 0x25	; 37
- 2a6:	39 f4       	brne	.+14     	; 0x2b6 <BT_Init+0xee>
-		PORTB = (1<<PORTB1);
- 2a8:	82 e0       	ldi	r24, 0x02	; 2
- 2aa:	85 b9       	out	0x05, r24	; 5
-		Uart_Flush();
- 2ac:	0e 94 ac 00 	call	0x158	; 0x158 <Uart_Flush>
-		return 1;
- 2b0:	81 e0       	ldi	r24, 0x01	; 1
- 2b2:	90 e0       	ldi	r25, 0x00	; 0
- 2b4:	02 c0       	rjmp	.+4      	; 0x2ba <BT_Init+0xf2>
-		}
-		else if(BT_Recieve()=='E'){
-			Error('E');
-		}*/
-	}
-	return 0;
- 2b6:	80 e0       	ldi	r24, 0x00	; 0
- 2b8:	90 e0       	ldi	r25, 0x00	; 0
+
+
 }
- 2ba:	2c 96       	adiw	r28, 0x0c	; 12
- 2bc:	0f b6       	in	r0, 0x3f	; 63
- 2be:	f8 94       	cli
- 2c0:	de bf       	out	0x3e, r29	; 62
- 2c2:	0f be       	out	0x3f, r0	; 63
- 2c4:	cd bf       	out	0x3d, r28	; 61
- 2c6:	df 91       	pop	r29
- 2c8:	cf 91       	pop	r28
- 2ca:	1f 91       	pop	r17
- 2cc:	0f 91       	pop	r16
- 2ce:	ff 90       	pop	r15
- 2d0:	ef 90       	pop	r14
- 2d2:	08 95       	ret
 
-000002d4 <main>:
-dataptn DirtyDawg;
+void LCD_Command(uint8_t command){
+ 6b8:	cf 93       	push	r28
+ 6ba:	df 93       	push	r29
+ 6bc:	c8 2f       	mov	r28, r24
+	dataport &= (0<<LCD_RS_PIN);
+	dataport &= (0<<LCD_RW_PIN);
+	
+
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 6be:	84 ea       	ldi	r24, 0xA4	; 164
+ 6c0:	80 93 bc 00 	sts	0x00BC, r24
+		
+		
+	while(!TWI_Busy());
+ 6c4:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 6c8:	89 2b       	or	r24, r25
+ 6ca:	e1 f3       	breq	.-8      	; 0x6c4 <LCD_Command+0xc>
+	if((TWSR & MASK) != START)Error(START);
+ 6cc:	80 91 b9 00 	lds	r24, 0x00B9
+ 6d0:	88 7f       	andi	r24, 0xF8	; 248
+ 6d2:	88 30       	cpi	r24, 0x08	; 8
+ 6d4:	21 f0       	breq	.+8      	; 0x6de <LCD_Command+0x26>
+ 6d6:	88 e0       	ldi	r24, 0x08	; 8
+ 6d8:	90 e0       	ldi	r25, 0x00	; 0
+ 6da:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (0x27<<1) | (1<<0);
+ 6de:	8f e4       	ldi	r24, 0x4F	; 79
+ 6e0:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 6e4:	84 e8       	ldi	r24, 0x84	; 132
+ 6e6:	80 93 bc 00 	sts	0x00BC, r24
+		
+	while(!TWI_Busy());
+ 6ea:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 6ee:	89 2b       	or	r24, r25
+ 6f0:	e1 f3       	breq	.-8      	; 0x6ea <LCD_Command+0x32>
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error((TWSR & MASK));
+ 6f2:	80 91 b9 00 	lds	r24, 0x00B9
+ 6f6:	88 7f       	andi	r24, 0xF8	; 248
+ 6f8:	80 34       	cpi	r24, 0x40	; 64
+ 6fa:	31 f0       	breq	.+12     	; 0x708 <LCD_Command+0x50>
+ 6fc:	80 91 b9 00 	lds	r24, 0x00B9
+ 700:	88 7f       	andi	r24, 0xF8	; 248
+ 702:	90 e0       	ldi	r25, 0x00	; 0
+ 704:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the data to the slave
+	TWDR = dataport; //8bits
+ 708:	10 92 bb 00 	sts	0x00BB, r1
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 70c:	84 e8       	ldi	r24, 0x84	; 132
+ 70e:	80 93 bc 00 	sts	0x00BC, r24
+	while(!TWI_Busy());
+ 712:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 716:	89 2b       	or	r24, r25
+ 718:	e1 f3       	breq	.-8      	; 0x712 <LCD_Command+0x5a>
+	if((TWSR & MASK) !=  MR_BYTE_NACK)Error((TWSR & MASK));
+ 71a:	80 91 b9 00 	lds	r24, 0x00B9
+ 71e:	88 7f       	andi	r24, 0xF8	; 248
+ 720:	88 35       	cpi	r24, 0x58	; 88
+ 722:	31 f0       	breq	.+12     	; 0x730 <LCD_Command+0x78>
+ 724:	80 91 b9 00 	lds	r24, 0x00B9
+ 728:	88 7f       	andi	r24, 0xF8	; 248
+ 72a:	90 e0       	ldi	r25, 0x00	; 0
+ 72c:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the stop condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 730:	84 e9       	ldi	r24, 0x94	; 148
+ 732:	80 93 bc 00 	sts	0x00BC, r24
+ 736:	2f ef       	ldi	r18, 0xFF	; 255
+ 738:	84 e3       	ldi	r24, 0x34	; 52
+ 73a:	9c e0       	ldi	r25, 0x0C	; 12
+ 73c:	21 50       	subi	r18, 0x01	; 1
+ 73e:	80 40       	sbci	r24, 0x00	; 0
+ 740:	90 40       	sbci	r25, 0x00	; 0
+ 742:	e1 f7       	brne	.-8      	; 0x73c <LCD_Command+0x84>
+ 744:	00 c0       	rjmp	.+0      	; 0x746 <LCD_Command+0x8e>
+ 746:	00 00       	nop
+	
+	dataport &= (0<<LCD_DATA3_PIN);
+	dataport &= (0<<LCD_DATA2_PIN);
+	dataport &= (0<<LCD_DATA1_PIN);
+	dataport &= (0<<LCD_DATA0_PIN);
+	if(command & 0x80) dataport |= (1<<LCD_DATA3_PIN);
+ 748:	dc 2f       	mov	r29, r28
+ 74a:	dd 1f       	adc	r29, r29
+ 74c:	dd 27       	eor	r29, r29
+ 74e:	dd 1f       	adc	r29, r29
+ 750:	dd 0f       	add	r29, r29
+ 752:	dd 0f       	add	r29, r29
+ 754:	dd 0f       	add	r29, r29
+	if(command & 0x40) dataport |= (1<<LCD_DATA2_PIN);
+ 756:	c6 fd       	sbrc	r28, 6
+ 758:	d4 60       	ori	r29, 0x04	; 4
+	if(command & 0x20) dataport |= (1<<LCD_DATA1_PIN);
+ 75a:	c5 fd       	sbrc	r28, 5
+ 75c:	d2 60       	ori	r29, 0x02	; 2
+	if(command & 0x10) dataport |= (1<<LCD_DATA0_PIN);
+ 75e:	c4 fd       	sbrc	r28, 4
+ 760:	d1 60       	ori	r29, 0x01	; 1
+	
+	
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 762:	84 ea       	ldi	r24, 0xA4	; 164
+ 764:	80 93 bc 00 	sts	0x00BC, r24
+	
+	
+	while(!TWI_Busy());
+ 768:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 76c:	89 2b       	or	r24, r25
+ 76e:	e1 f3       	breq	.-8      	; 0x768 <LCD_Command+0xb0>
+	if((TWSR & MASK) != START)Error(START);
+ 770:	80 91 b9 00 	lds	r24, 0x00B9
+ 774:	88 7f       	andi	r24, 0xF8	; 248
+ 776:	88 30       	cpi	r24, 0x08	; 8
+ 778:	21 f0       	breq	.+8      	; 0x782 <LCD_Command+0xca>
+ 77a:	88 e0       	ldi	r24, 0x08	; 8
+ 77c:	90 e0       	ldi	r25, 0x00	; 0
+ 77e:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (0x27<<1) | (1<<0);
+ 782:	8f e4       	ldi	r24, 0x4F	; 79
+ 784:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 788:	84 e8       	ldi	r24, 0x84	; 132
+ 78a:	80 93 bc 00 	sts	0x00BC, r24
+	
+	while(!TWI_Busy());
+ 78e:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 792:	89 2b       	or	r24, r25
+ 794:	e1 f3       	breq	.-8      	; 0x78e <LCD_Command+0xd6>
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error((TWSR & MASK));
+ 796:	80 91 b9 00 	lds	r24, 0x00B9
+ 79a:	88 7f       	andi	r24, 0xF8	; 248
+ 79c:	80 34       	cpi	r24, 0x40	; 64
+ 79e:	31 f0       	breq	.+12     	; 0x7ac <LCD_Command+0xf4>
+ 7a0:	80 91 b9 00 	lds	r24, 0x00B9
+ 7a4:	88 7f       	andi	r24, 0xF8	; 248
+ 7a6:	90 e0       	ldi	r25, 0x00	; 0
+ 7a8:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Sends the data to the slave
+	TWDR = dataport; //8bits
+ 7ac:	d0 93 bb 00 	sts	0x00BB, r29
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 7b0:	84 e8       	ldi	r24, 0x84	; 132
+ 7b2:	80 93 bc 00 	sts	0x00BC, r24
+	while(!TWI_Busy());
+ 7b6:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 7ba:	89 2b       	or	r24, r25
+ 7bc:	e1 f3       	breq	.-8      	; 0x7b6 <LCD_Command+0xfe>
+	if((TWSR & MASK) !=  MR_BYTE_NACK)Error((TWSR & MASK));
+ 7be:	80 91 b9 00 	lds	r24, 0x00B9
+ 7c2:	88 7f       	andi	r24, 0xF8	; 248
+ 7c4:	88 35       	cpi	r24, 0x58	; 88
+ 7c6:	31 f0       	breq	.+12     	; 0x7d4 <LCD_Command+0x11c>
+ 7c8:	80 91 b9 00 	lds	r24, 0x00B9
+ 7cc:	88 7f       	andi	r24, 0xF8	; 248
+ 7ce:	90 e0       	ldi	r25, 0x00	; 0
+ 7d0:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Sends the stop condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 7d4:	84 e9       	ldi	r24, 0x94	; 148
+ 7d6:	80 93 bc 00 	sts	0x00BC, r24
+ 7da:	2f ef       	ldi	r18, 0xFF	; 255
+ 7dc:	84 e3       	ldi	r24, 0x34	; 52
+ 7de:	9c e0       	ldi	r25, 0x0C	; 12
+ 7e0:	21 50       	subi	r18, 0x01	; 1
+ 7e2:	80 40       	sbci	r24, 0x00	; 0
+ 7e4:	90 40       	sbci	r25, 0x00	; 0
+ 7e6:	e1 f7       	brne	.-8      	; 0x7e0 <LCD_Command+0x128>
+ 7e8:	00 c0       	rjmp	.+0      	; 0x7ea <LCD_Command+0x132>
+ 7ea:	00 00       	nop
+	
+	_delay_ms(4000);
+	
+	LCD_toggle();
+ 7ec:	0e 94 d4 02 	call	0x5a8	; 0x5a8 <LCD_toggle>
+	
+	dataport &= (0<<LCD_DATA3_PIN);
+	dataport &= (0<<LCD_DATA2_PIN);
+	dataport &= (0<<LCD_DATA1_PIN);
+	dataport &= (0<<LCD_DATA0_PIN);
+	if(command & 0x08) dataport |= (1<<LCD_DATA3_PIN);
+ 7f0:	c3 ff       	sbrs	r28, 3
+ 7f2:	02 c0       	rjmp	.+4      	; 0x7f8 <LCD_Command+0x140>
+ 7f4:	d8 e0       	ldi	r29, 0x08	; 8
+ 7f6:	01 c0       	rjmp	.+2      	; 0x7fa <LCD_Command+0x142>
+	LCD_toggle();
+	
+	dataport &= (0<<LCD_DATA3_PIN);
+	dataport &= (0<<LCD_DATA2_PIN);
+	dataport &= (0<<LCD_DATA1_PIN);
+	dataport &= (0<<LCD_DATA0_PIN);
+ 7f8:	d0 e0       	ldi	r29, 0x00	; 0
+	if(command & 0x08) dataport |= (1<<LCD_DATA3_PIN);
+	if(command & 0x04) dataport |= (1<<LCD_DATA2_PIN);
+ 7fa:	c2 fd       	sbrc	r28, 2
+ 7fc:	d4 60       	ori	r29, 0x04	; 4
+	if(command & 0x02) dataport |= (1<<LCD_DATA1_PIN);
+ 7fe:	c1 fd       	sbrc	r28, 1
+ 800:	d2 60       	ori	r29, 0x02	; 2
+	if(command & 0x01) dataport |= (1<<LCD_DATA0_PIN);
+ 802:	c0 fd       	sbrc	r28, 0
+ 804:	d1 60       	ori	r29, 0x01	; 1
+	
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 806:	84 ea       	ldi	r24, 0xA4	; 164
+ 808:	80 93 bc 00 	sts	0x00BC, r24
+		
+		
+	while(!TWI_Busy());
+ 80c:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 810:	89 2b       	or	r24, r25
+ 812:	e1 f3       	breq	.-8      	; 0x80c <LCD_Command+0x154>
+	if((TWSR & MASK) != START)Error(START);
+ 814:	80 91 b9 00 	lds	r24, 0x00B9
+ 818:	88 7f       	andi	r24, 0xF8	; 248
+ 81a:	88 30       	cpi	r24, 0x08	; 8
+ 81c:	21 f0       	breq	.+8      	; 0x826 <LCD_Command+0x16e>
+ 81e:	88 e0       	ldi	r24, 0x08	; 8
+ 820:	90 e0       	ldi	r25, 0x00	; 0
+ 822:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (0x27<<1) | (1<<0);
+ 826:	8f e4       	ldi	r24, 0x4F	; 79
+ 828:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 82c:	84 e8       	ldi	r24, 0x84	; 132
+ 82e:	80 93 bc 00 	sts	0x00BC, r24
+		
+	while(!TWI_Busy());
+ 832:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 836:	89 2b       	or	r24, r25
+ 838:	e1 f3       	breq	.-8      	; 0x832 <LCD_Command+0x17a>
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error((TWSR & MASK));
+ 83a:	80 91 b9 00 	lds	r24, 0x00B9
+ 83e:	88 7f       	andi	r24, 0xF8	; 248
+ 840:	80 34       	cpi	r24, 0x40	; 64
+ 842:	31 f0       	breq	.+12     	; 0x850 <LCD_Command+0x198>
+ 844:	80 91 b9 00 	lds	r24, 0x00B9
+ 848:	88 7f       	andi	r24, 0xF8	; 248
+ 84a:	90 e0       	ldi	r25, 0x00	; 0
+ 84c:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the data to the slave
+	TWDR = dataport; //8bits
+ 850:	d0 93 bb 00 	sts	0x00BB, r29
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 854:	84 e8       	ldi	r24, 0x84	; 132
+ 856:	80 93 bc 00 	sts	0x00BC, r24
+	while(!TWI_Busy());
+ 85a:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 85e:	89 2b       	or	r24, r25
+ 860:	e1 f3       	breq	.-8      	; 0x85a <LCD_Command+0x1a2>
+	if((TWSR & MASK) !=  MR_BYTE_NACK)Error((TWSR & MASK));
+ 862:	80 91 b9 00 	lds	r24, 0x00B9
+ 866:	88 7f       	andi	r24, 0xF8	; 248
+ 868:	88 35       	cpi	r24, 0x58	; 88
+ 86a:	31 f0       	breq	.+12     	; 0x878 <LCD_Command+0x1c0>
+ 86c:	80 91 b9 00 	lds	r24, 0x00B9
+ 870:	88 7f       	andi	r24, 0xF8	; 248
+ 872:	90 e0       	ldi	r25, 0x00	; 0
+ 874:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+		
+	//Sends the stop condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 878:	cc eb       	ldi	r28, 0xBC	; 188
+ 87a:	d0 e0       	ldi	r29, 0x00	; 0
+ 87c:	84 e9       	ldi	r24, 0x94	; 148
+ 87e:	88 83       	st	Y, r24
+ 880:	2f ef       	ldi	r18, 0xFF	; 255
+ 882:	84 e3       	ldi	r24, 0x34	; 52
+ 884:	9c e0       	ldi	r25, 0x0C	; 12
+ 886:	21 50       	subi	r18, 0x01	; 1
+ 888:	80 40       	sbci	r24, 0x00	; 0
+ 88a:	90 40       	sbci	r25, 0x00	; 0
+ 88c:	e1 f7       	brne	.-8      	; 0x886 <LCD_Command+0x1ce>
+ 88e:	00 c0       	rjmp	.+0      	; 0x890 <LCD_Command+0x1d8>
+ 890:	00 00       	nop
+		
+	_delay_ms(4000);
+		
+	LCD_toggle();
+ 892:	0e 94 d4 02 	call	0x5a8	; 0x5a8 <LCD_toggle>
+	dataport |= (1<<LCD_DATA1_PIN);
+	dataport |= (1<<LCD_DATA2_PIN);
+	dataport |= (1<<LCD_DATA3_PIN);
+	
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 896:	84 ea       	ldi	r24, 0xA4	; 164
+ 898:	88 83       	st	Y, r24
+	
+	
+	while(!TWI_Busy());
+ 89a:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 89e:	89 2b       	or	r24, r25
+ 8a0:	e1 f3       	breq	.-8      	; 0x89a <LCD_Command+0x1e2>
+	if((TWSR & MASK) != START)Error(START);
+ 8a2:	80 91 b9 00 	lds	r24, 0x00B9
+ 8a6:	88 7f       	andi	r24, 0xF8	; 248
+ 8a8:	88 30       	cpi	r24, 0x08	; 8
+ 8aa:	21 f0       	breq	.+8      	; 0x8b4 <LCD_Command+0x1fc>
+ 8ac:	88 e0       	ldi	r24, 0x08	; 8
+ 8ae:	90 e0       	ldi	r25, 0x00	; 0
+ 8b0:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (0x27<<1) | (1<<0);
+ 8b4:	8f e4       	ldi	r24, 0x4F	; 79
+ 8b6:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+ 8ba:	84 e8       	ldi	r24, 0x84	; 132
+ 8bc:	80 93 bc 00 	sts	0x00BC, r24
+	
+	while(!TWI_Busy());
+ 8c0:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 8c4:	89 2b       	or	r24, r25
+ 8c6:	e1 f3       	breq	.-8      	; 0x8c0 <LCD_Command+0x208>
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error((TWSR & MASK));
+ 8c8:	80 91 b9 00 	lds	r24, 0x00B9
+ 8cc:	88 7f       	andi	r24, 0xF8	; 248
+ 8ce:	80 34       	cpi	r24, 0x40	; 64
+ 8d0:	31 f0       	breq	.+12     	; 0x8de <LCD_Command+0x226>
+ 8d2:	80 91 b9 00 	lds	r24, 0x00B9
+ 8d6:	88 7f       	andi	r24, 0xF8	; 248
+ 8d8:	90 e0       	ldi	r25, 0x00	; 0
+ 8da:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Sends the data to the slave
+	TWDR = dataport; //8bits
+ 8de:	8f e0       	ldi	r24, 0x0F	; 15
+ 8e0:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 8e4:	84 e8       	ldi	r24, 0x84	; 132
+ 8e6:	80 93 bc 00 	sts	0x00BC, r24
+	while(!TWI_Busy());
+ 8ea:	0e 94 f9 04 	call	0x9f2	; 0x9f2 <TWI_Busy>
+ 8ee:	89 2b       	or	r24, r25
+ 8f0:	e1 f3       	breq	.-8      	; 0x8ea <LCD_Command+0x232>
+	if((TWSR & MASK) !=  MR_BYTE_NACK)Error((TWSR & MASK));
+ 8f2:	80 91 b9 00 	lds	r24, 0x00B9
+ 8f6:	88 7f       	andi	r24, 0xF8	; 248
+ 8f8:	88 35       	cpi	r24, 0x58	; 88
+ 8fa:	31 f0       	breq	.+12     	; 0x908 <__stack+0x9>
+ 8fc:	80 91 b9 00 	lds	r24, 0x00B9
+ 900:	88 7f       	andi	r24, 0xF8	; 248
+ 902:	90 e0       	ldi	r25, 0x00	; 0
+ 904:	0e 94 a4 00 	call	0x148	; 0x148 <Error>
+	
+	//Sends the stop condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 908:	84 e9       	ldi	r24, 0x94	; 148
+ 90a:	80 93 bc 00 	sts	0x00BC, r24
+ 90e:	2f ef       	ldi	r18, 0xFF	; 255
+ 910:	84 e3       	ldi	r24, 0x34	; 52
+ 912:	9c e0       	ldi	r25, 0x0C	; 12
+ 914:	21 50       	subi	r18, 0x01	; 1
+ 916:	80 40       	sbci	r24, 0x00	; 0
+ 918:	90 40       	sbci	r25, 0x00	; 0
+ 91a:	e1 f7       	brne	.-8      	; 0x914 <__stack+0x15>
+ 91c:	00 c0       	rjmp	.+0      	; 0x91e <__stack+0x1f>
+ 91e:	00 00       	nop
+	
+	_delay_ms(4000);
+}
+ 920:	df 91       	pop	r29
+ 922:	cf 91       	pop	r28
+ 924:	08 95       	ret
+
+00000926 <main>:
 
 int main(void)
 {
 
-	PORTB = (1<<PORTB1);
- 2d4:	82 e0       	ldi	r24, 0x02	; 2
- 2d6:	85 b9       	out	0x05, r24	; 5
- 2d8:	2f ef       	ldi	r18, 0xFF	; 255
- 2da:	89 e6       	ldi	r24, 0x69	; 105
- 2dc:	98 e1       	ldi	r25, 0x18	; 24
- 2de:	21 50       	subi	r18, 0x01	; 1
- 2e0:	80 40       	sbci	r24, 0x00	; 0
- 2e2:	90 40       	sbci	r25, 0x00	; 0
- 2e4:	e1 f7       	brne	.-8      	; 0x2de <main+0xa>
- 2e6:	00 c0       	rjmp	.+0      	; 0x2e8 <main+0x14>
- 2e8:	00 00       	nop
 
-	
-	_delay_ms(1000);
-	
 	System_Init(); //Checked - OK!
- 2ea:	0e 94 53 00 	call	0xa6	; 0xa6 <System_Init>
+ 926:	0e 94 53 00 	call	0xa6	; 0xa6 <System_Init>
 	//Baudrate max is 19200 (double speed enabled)
+
 	UART_Init(19200); //Checked - OK!
- 2ee:	80 e0       	ldi	r24, 0x00	; 0
- 2f0:	9b e4       	ldi	r25, 0x4B	; 75
- 2f2:	0e 94 77 00 	call	0xee	; 0xee <UART_Init>
-	
+ 92a:	80 e0       	ldi	r24, 0x00	; 0
+ 92c:	9b e4       	ldi	r25, 0x4B	; 75
+ 92e:	0e 94 77 00 	call	0xee	; 0xee <UART_Init>
+
 	//Connects to BT device
-	while(BT_Init()==0);
- 2f6:	0e 94 e4 00 	call	0x1c8	; 0x1c8 <BT_Init>
- 2fa:	89 2b       	or	r24, r25
- 2fc:	e1 f3       	breq	.-8      	; 0x2f6 <main+0x22>
+	//while(BT_Init()==0);
 	
+	TWI_Master_Init();
+ 932:	0e 94 e5 04 	call	0x9ca	; 0x9ca <TWI_Master_Init>
 	
-	
-	PORTB = (1<<PORTB0);
- 2fe:	81 e0       	ldi	r24, 0x01	; 1
- 300:	85 b9       	out	0x05, r24	; 5
- 302:	2f ef       	ldi	r18, 0xFF	; 255
- 304:	8f e4       	ldi	r24, 0x4F	; 79
- 306:	93 ec       	ldi	r25, 0xC3	; 195
- 308:	21 50       	subi	r18, 0x01	; 1
- 30a:	80 40       	sbci	r24, 0x00	; 0
- 30c:	90 40       	sbci	r25, 0x00	; 0
- 30e:	e1 f7       	brne	.-8      	; 0x308 <main+0x34>
- 310:	00 c0       	rjmp	.+0      	; 0x312 <main+0x3e>
- 312:	00 00       	nop
- 314:	2f ef       	ldi	r18, 0xFF	; 255
- 316:	8f e4       	ldi	r24, 0x4F	; 79
- 318:	93 ec       	ldi	r25, 0xC3	; 195
- 31a:	21 50       	subi	r18, 0x01	; 1
- 31c:	80 40       	sbci	r24, 0x00	; 0
- 31e:	90 40       	sbci	r25, 0x00	; 0
- 320:	e1 f7       	brne	.-8      	; 0x31a <main+0x46>
- 322:	00 c0       	rjmp	.+0      	; 0x324 <main+0x50>
- 324:	00 00       	nop
- 326:	2f ef       	ldi	r18, 0xFF	; 255
- 328:	8f e4       	ldi	r24, 0x4F	; 79
- 32a:	93 ec       	ldi	r25, 0xC3	; 195
- 32c:	21 50       	subi	r18, 0x01	; 1
- 32e:	80 40       	sbci	r24, 0x00	; 0
- 330:	90 40       	sbci	r25, 0x00	; 0
- 332:	e1 f7       	brne	.-8      	; 0x32c <main+0x58>
- 334:	00 c0       	rjmp	.+0      	; 0x336 <main+0x62>
- 336:	00 00       	nop
+	LCD_Init(0x27);
+ 936:	87 e2       	ldi	r24, 0x27	; 39
+ 938:	0e 94 c5 00 	call	0x18a	; 0x18a <LCD_Init>
+ 93c:	2f ef       	ldi	r18, 0xFF	; 255
+ 93e:	8f e4       	ldi	r24, 0x4F	; 79
+ 940:	93 ec       	ldi	r25, 0xC3	; 195
+ 942:	21 50       	subi	r18, 0x01	; 1
+ 944:	80 40       	sbci	r24, 0x00	; 0
+ 946:	90 40       	sbci	r25, 0x00	; 0
+ 948:	e1 f7       	brne	.-8      	; 0x942 <main+0x1c>
+ 94a:	00 c0       	rjmp	.+0      	; 0x94c <main+0x26>
+ 94c:	00 00       	nop
+
 	_delay_ms(8000);
+	LCD_Command(0x28); //4bit two line
+ 94e:	88 e2       	ldi	r24, 0x28	; 40
+ 950:	0e 94 5c 03 	call	0x6b8	; 0x6b8 <LCD_Command>
+ 954:	2f ef       	ldi	r18, 0xFF	; 255
+ 956:	8f e4       	ldi	r24, 0x4F	; 79
+ 958:	93 ec       	ldi	r25, 0xC3	; 195
+ 95a:	21 50       	subi	r18, 0x01	; 1
+ 95c:	80 40       	sbci	r24, 0x00	; 0
+ 95e:	90 40       	sbci	r25, 0x00	; 0
+ 960:	e1 f7       	brne	.-8      	; 0x95a <main+0x34>
+ 962:	00 c0       	rjmp	.+0      	; 0x964 <main+0x3e>
+ 964:	00 00       	nop
 	_delay_ms(8000);
+	LCD_Command(0x08); //display off
+ 966:	88 e0       	ldi	r24, 0x08	; 8
+ 968:	0e 94 5c 03 	call	0x6b8	; 0x6b8 <LCD_Command>
+ 96c:	2f ef       	ldi	r18, 0xFF	; 255
+ 96e:	8f e4       	ldi	r24, 0x4F	; 79
+ 970:	93 ec       	ldi	r25, 0xC3	; 195
+ 972:	21 50       	subi	r18, 0x01	; 1
+ 974:	80 40       	sbci	r24, 0x00	; 0
+ 976:	90 40       	sbci	r25, 0x00	; 0
+ 978:	e1 f7       	brne	.-8      	; 0x972 <main+0x4c>
+ 97a:	00 c0       	rjmp	.+0      	; 0x97c <main+0x56>
+ 97c:	00 00       	nop
 	_delay_ms(8000);
+ 	LCD_Command(0x01); //Clear screen
+ 97e:	81 e0       	ldi	r24, 0x01	; 1
+ 980:	0e 94 5c 03 	call	0x6b8	; 0x6b8 <LCD_Command>
+ 984:	2f ef       	ldi	r18, 0xFF	; 255
+ 986:	8f e4       	ldi	r24, 0x4F	; 79
+ 988:	93 ec       	ldi	r25, 0xC3	; 195
+ 98a:	21 50       	subi	r18, 0x01	; 1
+ 98c:	80 40       	sbci	r24, 0x00	; 0
+ 98e:	90 40       	sbci	r25, 0x00	; 0
+ 990:	e1 f7       	brne	.-8      	; 0x98a <main+0x64>
+ 992:	00 c0       	rjmp	.+0      	; 0x994 <main+0x6e>
+ 994:	00 00       	nop
+	_delay_ms(8000);
+	LCD_Command(LCD_MODE_DEFAULT); //LCD MODE FEDAULT
+ 996:	84 e4       	ldi	r24, 0x44	; 68
+ 998:	0e 94 5c 03 	call	0x6b8	; 0x6b8 <LCD_Command>
+ 99c:	2f ef       	ldi	r18, 0xFF	; 255
+ 99e:	8f e4       	ldi	r24, 0x4F	; 79
+ 9a0:	93 ec       	ldi	r25, 0xC3	; 195
+ 9a2:	21 50       	subi	r18, 0x01	; 1
+ 9a4:	80 40       	sbci	r24, 0x00	; 0
+ 9a6:	90 40       	sbci	r25, 0x00	; 0
+ 9a8:	e1 f7       	brne	.-8      	; 0x9a2 <main+0x7c>
+ 9aa:	00 c0       	rjmp	.+0      	; 0x9ac <main+0x86>
+ 9ac:	00 00       	nop
+	_delay_ms(8000);
+	LCD_Command(0x0E); //Dispattr
+ 9ae:	8e e0       	ldi	r24, 0x0E	; 14
+ 9b0:	0e 94 5c 03 	call	0x6b8	; 0x6b8 <LCD_Command>
+ 9b4:	2f ef       	ldi	r18, 0xFF	; 255
+ 9b6:	8f e4       	ldi	r24, 0x4F	; 79
+ 9b8:	93 ec       	ldi	r25, 0xC3	; 195
+ 9ba:	21 50       	subi	r18, 0x01	; 1
+ 9bc:	80 40       	sbci	r24, 0x00	; 0
+ 9be:	90 40       	sbci	r25, 0x00	; 0
+ 9c0:	e1 f7       	brne	.-8      	; 0x9ba <main+0x94>
+ 9c2:	00 c0       	rjmp	.+0      	; 0x9c4 <main+0x9e>
+ 9c4:	00 00       	nop
+	 
+	 
+	 
+	 
+	while(1){
+		PORTB |= (1<<PORTB0);
+ 9c6:	28 9a       	sbi	0x05, 0	; 5
+	}
+ 9c8:	fe cf       	rjmp	.-4      	; 0x9c6 <main+0xa0>
+
+000009ca <TWI_Master_Init>:
+
+
+void TWI_Master_Init (void){
 	
+	//Sets the power reduction register for TWI to 0.
+	PRR &= ~(1<<PRTWI);
+ 9ca:	e4 e6       	ldi	r30, 0x64	; 100
+ 9cc:	f0 e0       	ldi	r31, 0x00	; 0
+ 9ce:	80 81       	ld	r24, Z
+ 9d0:	8f 77       	andi	r24, 0x7F	; 127
+ 9d2:	80 83       	st	Z, r24
 	
-	for(int i = 0; i<3; i++) BT_Send('$');
- 338:	84 e2       	ldi	r24, 0x24	; 36
- 33a:	90 e0       	ldi	r25, 0x00	; 0
- 33c:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
- 340:	84 e2       	ldi	r24, 0x24	; 36
- 342:	90 e0       	ldi	r25, 0x00	; 0
- 344:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
- 348:	84 e2       	ldi	r24, 0x24	; 36
- 34a:	90 e0       	ldi	r25, 0x00	; 0
- 34c:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
-	BT_Send('k');
- 350:	8b e6       	ldi	r24, 0x6B	; 107
- 352:	90 e0       	ldi	r25, 0x00	; 0
- 354:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
-	BT_Send(',');
- 358:	8c e2       	ldi	r24, 0x2C	; 44
- 35a:	90 e0       	ldi	r25, 0x00	; 0
- 35c:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
-	BT_Send('1');
- 360:	81 e3       	ldi	r24, 0x31	; 49
- 362:	90 e0       	ldi	r25, 0x00	; 0
- 364:	0e 94 a4 00 	call	0x148	; 0x148 <BT_Send>
+	//Sets the prescaler to 1 by setting TWPS1 and 0 to 0
+	TWSR &= ~(1<<TWPS1) & ~(1<<TWPS0); 
+ 9d4:	e9 eb       	ldi	r30, 0xB9	; 185
+ 9d6:	f0 e0       	ldi	r31, 0x00	; 0
+ 9d8:	80 81       	ld	r24, Z
+ 9da:	8c 7f       	andi	r24, 0xFC	; 252
+ 9dc:	80 83       	st	Z, r24
+	
+	//Sets the speed of TWI to 100khz
+	TWBR = 0x20;
+ 9de:	80 e2       	ldi	r24, 0x20	; 32
+ 9e0:	80 93 b8 00 	sts	0x00B8, r24
+		TWWC - Write Collision Flag
+		TWEN - Enable Bit
+		TWIE - Interrupt Enable
 
+	************************************************************************/
+	TWDR = 0xFF;
+ 9e4:	8f ef       	ldi	r24, 0xFF	; 255
+ 9e6:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (0<<TWINT) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWWC) | (1<<TWIE) | (1<<TWEN);
+ 9ea:	85 e0       	ldi	r24, 0x05	; 5
+ 9ec:	80 93 bc 00 	sts	0x00BC, r24
+ 9f0:	08 95       	ret
 
-	while(1);
- 368:	ff cf       	rjmp	.-2      	; 0x368 <main+0x94>
+000009f2 <TWI_Busy>:
 
-0000036a <__udivmodsi4>:
- 36a:	a1 e2       	ldi	r26, 0x21	; 33
- 36c:	1a 2e       	mov	r1, r26
- 36e:	aa 1b       	sub	r26, r26
- 370:	bb 1b       	sub	r27, r27
- 372:	fd 01       	movw	r30, r26
- 374:	0d c0       	rjmp	.+26     	; 0x390 <__udivmodsi4_ep>
+}
 
-00000376 <__udivmodsi4_loop>:
- 376:	aa 1f       	adc	r26, r26
- 378:	bb 1f       	adc	r27, r27
- 37a:	ee 1f       	adc	r30, r30
- 37c:	ff 1f       	adc	r31, r31
- 37e:	a2 17       	cp	r26, r18
- 380:	b3 07       	cpc	r27, r19
- 382:	e4 07       	cpc	r30, r20
- 384:	f5 07       	cpc	r31, r21
- 386:	20 f0       	brcs	.+8      	; 0x390 <__udivmodsi4_ep>
- 388:	a2 1b       	sub	r26, r18
- 38a:	b3 0b       	sbc	r27, r19
- 38c:	e4 0b       	sbc	r30, r20
- 38e:	f5 0b       	sbc	r31, r21
+int TWI_Busy(void){
+	//Returns 0 if the MCU is busy
+	return TWCR & (1<<TWINT);
+ 9f2:	80 91 bc 00 	lds	r24, 0x00BC
+ 9f6:	80 78       	andi	r24, 0x80	; 128
+}
+ 9f8:	90 e0       	ldi	r25, 0x00	; 0
+ 9fa:	08 95       	ret
 
-00000390 <__udivmodsi4_ep>:
- 390:	66 1f       	adc	r22, r22
- 392:	77 1f       	adc	r23, r23
- 394:	88 1f       	adc	r24, r24
- 396:	99 1f       	adc	r25, r25
- 398:	1a 94       	dec	r1
- 39a:	69 f7       	brne	.-38     	; 0x376 <__udivmodsi4_loop>
- 39c:	60 95       	com	r22
- 39e:	70 95       	com	r23
- 3a0:	80 95       	com	r24
- 3a2:	90 95       	com	r25
- 3a4:	9b 01       	movw	r18, r22
- 3a6:	ac 01       	movw	r20, r24
- 3a8:	bd 01       	movw	r22, r26
- 3aa:	cf 01       	movw	r24, r30
- 3ac:	08 95       	ret
+000009fc <__udivmodsi4>:
+ 9fc:	a1 e2       	ldi	r26, 0x21	; 33
+ 9fe:	1a 2e       	mov	r1, r26
+ a00:	aa 1b       	sub	r26, r26
+ a02:	bb 1b       	sub	r27, r27
+ a04:	fd 01       	movw	r30, r26
+ a06:	0d c0       	rjmp	.+26     	; 0xa22 <__udivmodsi4_ep>
 
-000003ae <__divmodsi4>:
- 3ae:	05 2e       	mov	r0, r21
- 3b0:	97 fb       	bst	r25, 7
- 3b2:	1e f4       	brtc	.+6      	; 0x3ba <__divmodsi4+0xc>
- 3b4:	00 94       	com	r0
- 3b6:	0e 94 ee 01 	call	0x3dc	; 0x3dc <__negsi2>
- 3ba:	57 fd       	sbrc	r21, 7
- 3bc:	07 d0       	rcall	.+14     	; 0x3cc <__divmodsi4_neg2>
- 3be:	0e 94 b5 01 	call	0x36a	; 0x36a <__udivmodsi4>
- 3c2:	07 fc       	sbrc	r0, 7
- 3c4:	03 d0       	rcall	.+6      	; 0x3cc <__divmodsi4_neg2>
- 3c6:	4e f4       	brtc	.+18     	; 0x3da <__divmodsi4_exit>
- 3c8:	0c 94 ee 01 	jmp	0x3dc	; 0x3dc <__negsi2>
+00000a08 <__udivmodsi4_loop>:
+ a08:	aa 1f       	adc	r26, r26
+ a0a:	bb 1f       	adc	r27, r27
+ a0c:	ee 1f       	adc	r30, r30
+ a0e:	ff 1f       	adc	r31, r31
+ a10:	a2 17       	cp	r26, r18
+ a12:	b3 07       	cpc	r27, r19
+ a14:	e4 07       	cpc	r30, r20
+ a16:	f5 07       	cpc	r31, r21
+ a18:	20 f0       	brcs	.+8      	; 0xa22 <__udivmodsi4_ep>
+ a1a:	a2 1b       	sub	r26, r18
+ a1c:	b3 0b       	sbc	r27, r19
+ a1e:	e4 0b       	sbc	r30, r20
+ a20:	f5 0b       	sbc	r31, r21
 
-000003cc <__divmodsi4_neg2>:
- 3cc:	50 95       	com	r21
- 3ce:	40 95       	com	r20
- 3d0:	30 95       	com	r19
- 3d2:	21 95       	neg	r18
- 3d4:	3f 4f       	sbci	r19, 0xFF	; 255
- 3d6:	4f 4f       	sbci	r20, 0xFF	; 255
- 3d8:	5f 4f       	sbci	r21, 0xFF	; 255
+00000a22 <__udivmodsi4_ep>:
+ a22:	66 1f       	adc	r22, r22
+ a24:	77 1f       	adc	r23, r23
+ a26:	88 1f       	adc	r24, r24
+ a28:	99 1f       	adc	r25, r25
+ a2a:	1a 94       	dec	r1
+ a2c:	69 f7       	brne	.-38     	; 0xa08 <__udivmodsi4_loop>
+ a2e:	60 95       	com	r22
+ a30:	70 95       	com	r23
+ a32:	80 95       	com	r24
+ a34:	90 95       	com	r25
+ a36:	9b 01       	movw	r18, r22
+ a38:	ac 01       	movw	r20, r24
+ a3a:	bd 01       	movw	r22, r26
+ a3c:	cf 01       	movw	r24, r30
+ a3e:	08 95       	ret
 
-000003da <__divmodsi4_exit>:
- 3da:	08 95       	ret
+00000a40 <__divmodsi4>:
+ a40:	05 2e       	mov	r0, r21
+ a42:	97 fb       	bst	r25, 7
+ a44:	1e f4       	brtc	.+6      	; 0xa4c <__divmodsi4+0xc>
+ a46:	00 94       	com	r0
+ a48:	0e 94 37 05 	call	0xa6e	; 0xa6e <__negsi2>
+ a4c:	57 fd       	sbrc	r21, 7
+ a4e:	07 d0       	rcall	.+14     	; 0xa5e <__divmodsi4_neg2>
+ a50:	0e 94 fe 04 	call	0x9fc	; 0x9fc <__udivmodsi4>
+ a54:	07 fc       	sbrc	r0, 7
+ a56:	03 d0       	rcall	.+6      	; 0xa5e <__divmodsi4_neg2>
+ a58:	4e f4       	brtc	.+18     	; 0xa6c <__divmodsi4_exit>
+ a5a:	0c 94 37 05 	jmp	0xa6e	; 0xa6e <__negsi2>
 
-000003dc <__negsi2>:
- 3dc:	90 95       	com	r25
- 3de:	80 95       	com	r24
- 3e0:	70 95       	com	r23
- 3e2:	61 95       	neg	r22
- 3e4:	7f 4f       	sbci	r23, 0xFF	; 255
- 3e6:	8f 4f       	sbci	r24, 0xFF	; 255
- 3e8:	9f 4f       	sbci	r25, 0xFF	; 255
- 3ea:	08 95       	ret
+00000a5e <__divmodsi4_neg2>:
+ a5e:	50 95       	com	r21
+ a60:	40 95       	com	r20
+ a62:	30 95       	com	r19
+ a64:	21 95       	neg	r18
+ a66:	3f 4f       	sbci	r19, 0xFF	; 255
+ a68:	4f 4f       	sbci	r20, 0xFF	; 255
+ a6a:	5f 4f       	sbci	r21, 0xFF	; 255
 
-000003ec <_exit>:
- 3ec:	f8 94       	cli
+00000a6c <__divmodsi4_exit>:
+ a6c:	08 95       	ret
 
-000003ee <__stop_program>:
- 3ee:	ff cf       	rjmp	.-2      	; 0x3ee <__stop_program>
+00000a6e <__negsi2>:
+ a6e:	90 95       	com	r25
+ a70:	80 95       	com	r24
+ a72:	70 95       	com	r23
+ a74:	61 95       	neg	r22
+ a76:	7f 4f       	sbci	r23, 0xFF	; 255
+ a78:	8f 4f       	sbci	r24, 0xFF	; 255
+ a7a:	9f 4f       	sbci	r25, 0xFF	; 255
+ a7c:	08 95       	ret
+
+00000a7e <_exit>:
+ a7e:	f8 94       	cli
+
+00000a80 <__stop_program>:
+ a80:	ff cf       	rjmp	.-2      	; 0xa80 <__stop_program>

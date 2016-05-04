@@ -15,12 +15,12 @@ void System_Init(void){
 	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<PORTD7); //PD7 is debug yellow
 	
 	//Turn on the front and backlights
-	_delay_ms(1000);
-	PORTB = (1<<BRAKELIGHT) | (1<<HEADLIGHT);
-	_delay_ms(1000);
-	PORTB = (0<<BRAKELIGHT) | (0<<HEADLIGHT);
+	_delay_ms(8000);
+	PORTB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<PORTB0);
+	_delay_ms(8000);
+	PORTB = (0<<BRAKELIGHT) | (0<<HEADLIGHT) | (0<<PORTB0);
 	
-	
+
 	//Signs the status
 	status = MCU_STARTED;
 	
@@ -49,7 +49,7 @@ void UART_Init(unsigned int baud){
 
 	
 	//Enables Receive and Transmit over UART
-	UCSR0B = (1<<RXEN0) | (1<<TXEN0);
+	UCSR0B = (1<<RXEN0) | (1<<TXEN0); //RXCIE och TXCIE for interrupt based UART.
 	
 	//Sets to 1 stop bit and 8 databits
 	UCSR0C = (0<<USBS0) | (3<<UCSZ00);
@@ -175,13 +175,21 @@ void Error(unsigned int errorcode){
 	//Flashes the red lights and send errorcode through Bluetooth
 	unsigned long ticks = 0;
 	for(;;){
-		if(ticks%100000 == 0){
+		if(ticks%10000 == 0){
 			PINB = (1<<BRAKELIGHT);
 			BT_Send(errorcode);
 		}
-		if(ticks%100000 == 50000){
-			PINB = ~(1<<BRAKELIGHT);
+		if(ticks%10000 == 50000){
+			PINB = (0<<BRAKELIGHT);
 		}
 		ticks++;
 	}
 }
+
+
+/*
+Interrupt based UART
+ISR(USART_RX_vect){
+	BT_Recieve = UART;
+}
+*/

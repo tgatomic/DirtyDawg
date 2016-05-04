@@ -6,9 +6,13 @@ ADC.c
 
 functions.c
 
+LCD.c
+
 main.c
 
 PWM.c
+
+twimaster.c
 
 TWI_Master.c
 

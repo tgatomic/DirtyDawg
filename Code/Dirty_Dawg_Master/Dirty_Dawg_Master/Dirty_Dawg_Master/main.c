@@ -11,6 +11,7 @@
 #include "functions.h"
 #include "TWI_Master.h"
 #include "PWM.h"
+#include "LCD.h"
 
 #define LIGHT_STATE 0
 #define BLUETOOTH_STATE 1
@@ -25,45 +26,51 @@ dataptn DirtyDawg;
 int main(void)
 {
 
-	PORTB = (1<<PORTB1);
 
-	
-	_delay_ms(1000);
-	
 	System_Init(); //Checked - OK!
 	//Baudrate max is 19200 (double speed enabled)
+
 	UART_Init(19200); //Checked - OK!
-	
+
 	//Connects to BT device
-	while(BT_Init()==0);
-	
-	
-	
-	PORTB = (1<<PORTB0);
-	
-	
-	_delay_ms(8000);
-	_delay_ms(8000);
-	_delay_ms(8000);
-	
-	
-	for(int i = 0; i<3; i++) BT_Send('$');
-	BT_Send('k');
-	BT_Send(',');
-	BT_Send('1');
-
-
-	while(1);
-	
+	//while(BT_Init()==0);
 	
 	TWI_Master_Init();
+	
+	LCD_Init(0x27);
+
+	_delay_ms(8000);
+	LCD_Command(0x28); //4bit two line
+	_delay_ms(8000);
+	LCD_Command(0x08); //display off
+	_delay_ms(8000);
+ 	LCD_Command(0x01); //Clear screen
+	_delay_ms(8000);
+	LCD_Command(LCD_MODE_DEFAULT); //LCD MODE FEDAULT
+	_delay_ms(8000);
+	LCD_Command(0x0E); //Dispattr
+	_delay_ms(8000);
+	LCD_Print('S');
+
+
+
+	 
+	 
+	 
+	 
+	while(1){
+		PORTB |= (1<<PORTB0);
+	}
+	
+	//TWI_Send(0x27, data);
+	
+	
 	PWM_Init();
 	ADC_init();
 	BT_Init();
 	
 	
-	PORTB = ~(1<<PORTB1);
-	_delay_ms(1000);
+
 
 	//Wait here until we have a Bluetooth connection
 	//while(!BT_Connect());

@@ -34,7 +34,7 @@ void TWI_Master_Init (void){
 
 	************************************************************************/
 	TWDR = 0xFF;
-	TWCR = ~(1<<TWINT) | ~(1<<TWSTA) | ~(1<<TWSTO) | ~(1<<TWWC) | (1<<TWIE) | (1<<TWEN);
+	TWCR = (0<<TWINT) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWWC) | (1<<TWIE) | (1<<TWEN);
 
 
 	//För en interrupt ska ske måste interrupt vara enabled dvs TWIEN och

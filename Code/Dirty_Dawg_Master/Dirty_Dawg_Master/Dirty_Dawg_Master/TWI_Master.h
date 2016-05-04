@@ -49,3 +49,20 @@ void TWI_Send(uint8_t slaveAddress, uint8_t data);
 
 
 #endif /* TWI_MASTER_H_ */
+
+/*
+TWI_Init_Slave(void){
+	
+	TWAR = addr;
+	TWCR = (1<<TWEN);
+		
+	
+}
+
+ISR(TWI_vect){
+	switch(twsr){
+		case....
+	}
+}
+
+*/
