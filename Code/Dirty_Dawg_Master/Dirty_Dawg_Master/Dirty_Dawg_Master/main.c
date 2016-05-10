@@ -53,10 +53,6 @@ int main(void)
 	LCD_Print('S');
 
 
-
-	 
-	 
-	 
 	 
 	while(1){
 		PORTB |= (1<<PORTB0);
