@@ -142,7 +142,7 @@ void LCD_Init(uint8_t addr){
 			
 	LCD_Command(0x08); //display off
 	_delay_ms(8000);
-	LCD_Command(0x01); //Clear screen
+	LCD_Command(0x01);//Clear screen
 
 	_delay_ms(8000);
 	uint8_t mode = 0;
@@ -150,7 +150,7 @@ void LCD_Init(uint8_t addr){
 	LCD_Command(mode);//D MODE FEDAULT
 	_delay_ms(8000);
 
-	LCD_Command(0x0F); //Dispattr
+	LCD_Command(0x0C); //Dispattr
 	
 												Y_LED_On();
 												while(1);

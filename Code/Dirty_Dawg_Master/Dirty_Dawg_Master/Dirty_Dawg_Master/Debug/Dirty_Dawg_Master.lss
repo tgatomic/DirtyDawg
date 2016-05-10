@@ -1271,7 +1271,7 @@ void LCD_Init(uint8_t addr){
  79c:	00 c0       	rjmp	.+0      	; 0x79e <LCD_Init+0x24e>
  79e:	00 00       	nop
 	_delay_ms(8000);
-	LCD_Command(0x01); //Clear screen
+	LCD_Command(0x01);//Clear screen
  7a0:	81 e0       	ldi	r24, 0x01	; 1
  7a2:	0e 94 48 01 	call	0x290	; 0x290 <LCD_Command>
  7a6:	8f ef       	ldi	r24, 0xFF	; 255
@@ -1301,8 +1301,8 @@ void LCD_Init(uint8_t addr){
  7ce:	00 00       	nop
 	_delay_ms(8000);
 
-	LCD_Command(0x0F); //Dispattr
- 7d0:	8f e0       	ldi	r24, 0x0F	; 15
+	LCD_Command(0x0C); //Dispattr
+ 7d0:	8c e0       	ldi	r24, 0x0C	; 12
  7d2:	0e 94 48 01 	call	0x290	; 0x290 <LCD_Command>
 	
 												Y_LED_On();
