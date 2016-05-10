@@ -85,4 +85,8 @@ void Uart_Flush(void);
 void Error(unsigned int errorcode);
 
 
+void Y_LED_On(void);
+void Y_LED_Off(void);
+
+
 #endif // FUNCTIONS_H_

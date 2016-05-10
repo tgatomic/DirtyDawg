@@ -193,3 +193,11 @@ ISR(USART_RX_vect){
 	BT_Recieve = UART;
 }
 */
+
+void Y_LED_On(void){
+	PORTD |= (1<<PORTD7);
+}
+void Y_LED_Off(void){
+	PORTD &= (0<<PORTD7);
+}
+	

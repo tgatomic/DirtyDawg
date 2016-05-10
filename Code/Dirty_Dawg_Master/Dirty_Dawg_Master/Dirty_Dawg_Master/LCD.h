@@ -22,11 +22,21 @@
 #define LCD_ENTRY_INC 6
 #define LCD_MODE_DEFAULT ((1<<LCD_ENTRY_MODE) | (1<<LCD_ENTRY_INC))
 
+#define LCD_WRITE (0<<0)
+#define LCD_READ (1<<0)
+
+uint8_t dataport;
+
+
 
 void LCD_Init(uint8_t addr);
 void LCD_Command(uint8_t command);
 void LCD_toggle(void);
 void LCD_Print(uint8_t command);
+void LCD_set_outputpinhigh(void);
+void LCD_set_outputpinlow(void);
+void LCD_Busy(void);
+uint8_t LCD_Read();
 
 	
 	
