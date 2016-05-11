@@ -27,26 +27,29 @@ dataptn DirtyDawg;
 int main(void)
 {
 
-
+	//Initiate the hardware
 	System_Init(); //Checked - OK!
+	
 	//Baudrate max is 19200 (double speed enabled)
-
 	UART_Init(19200); //Checked - OK!
 
-	//Connects to BT device
-	//while(BT_Init()==0);
-	
+	//Initiate TWI
 	TWI_Master_Init();
 	
-	
-	
+	//Initiate LCD
 	LCD_Init();
-	uint8_t array1[] = {'H','E','L','L','O'};
-	uint8_t array2[] = {'W','O','R','L','D', '!'};
+	LCD_Byte('B', LCD_CHR);
+	LCD_Byte('O', LCD_CHR);
+	LCD_Byte('O', LCD_CHR);
+	LCD_Byte('T', LCD_CHR);
+	LCD_Byte('E', LCD_CHR);
+	LCD_Byte('D', LCD_CHR);
 	
-	LCD_String(array1, ARR_SIZE(array1),array2, ARR_SIZE(array2));
+	//Initiate PWM
+	PWM_Init();
 	
-	
+	Drive(4,255);
+
 	
 	Y_LED_On();
 	while(1);
