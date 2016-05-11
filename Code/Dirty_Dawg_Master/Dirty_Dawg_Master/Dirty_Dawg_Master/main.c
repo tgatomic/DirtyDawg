@@ -11,13 +11,14 @@
 #include "functions.h"
 #include "TWI_Master.h"
 #include "PWM.h"
-#include "LCD.h"
+#include "TWI_LCD.h"
 
 #define LIGHT_STATE 0
 #define BLUETOOTH_STATE 1
 #define SENSOR_STATE 2
 #define DRIVE_STATE 3
 
+#define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
 
 
 //Name of the main struct with all the data in for the different sensors and values
@@ -37,28 +38,21 @@ int main(void)
 	
 	TWI_Master_Init();
 	
-	LCD_Init(0x27);
-
-	_delay_ms(8000);
-	LCD_Command(0x28); //4bit two line
-	_delay_ms(8000);
-	LCD_Command(0x08); //display off
-	_delay_ms(8000);
- 	LCD_Command(0x01); //Clear screen
-	_delay_ms(8000);
-	LCD_Command(LCD_MODE_DEFAULT); //LCD MODE FEDAULT
-	_delay_ms(8000);
-	LCD_Command(0x0E); //Dispattr
-	_delay_ms(8000);
-	LCD_Print('S');
-
-
-	 
-	while(1){
-		PORTB |= (1<<PORTB0);
-	}
 	
-	//TWI_Send(0x27, data);
+	
+	LCD_Init();
+	uint8_t array1[] = {'H','E','L','L','O'};
+	uint8_t array2[] = {'W','O','R','L','D', '!'};
+	
+	LCD_String(array1, ARR_SIZE(array1),array2, ARR_SIZE(array2));
+	
+	
+	
+	Y_LED_On();
+	while(1);
+	
+
+
 	
 	
 	PWM_Init();

@@ -147,12 +147,6 @@
     <Compile Include="i2cmaster.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="LCD.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="LCD.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -163,6 +157,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="twimaster.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TWI_LCD.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TWI_LCD.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="TWI_Master.c">

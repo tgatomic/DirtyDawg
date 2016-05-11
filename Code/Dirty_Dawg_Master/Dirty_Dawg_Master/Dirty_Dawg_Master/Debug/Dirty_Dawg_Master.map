@@ -17,7 +17,6 @@ Allocating common symbols
 Common symbol       size              file
 
 DirtyDawg           0x2               main.o
-dataport            0x1               LCD.o
 status              0x2               ADC.o
 
 Discarded input sections
@@ -54,13 +53,6 @@ Discarded input sections
  .text.BT_Init  0x00000000      0x10c functions.o
  .text.Y_LED_Off
                 0x00000000        0x6 functions.o
- .text          0x00000000        0x0 LCD.o
- .data          0x00000000        0x0 LCD.o
- .bss           0x00000000        0x0 LCD.o
- .text.LCD_Busy
-                0x00000000        0x2 LCD.o
- .text.LCD_Read
-                0x00000000       0x92 LCD.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
@@ -116,6 +108,9 @@ Discarded input sections
  .debug_str     0x00000000      0x202 twimaster.o
  .comment       0x00000000       0x31 twimaster.o
  .debug_frame   0x00000000       0xa0 twimaster.o
+ .text          0x00000000        0x0 TWI_LCD.o
+ .data          0x00000000        0x0 TWI_LCD.o
+ .bss           0x00000000        0x0 TWI_LCD.o
  .text          0x00000000        0x0 TWI_Master.o
  .data          0x00000000        0x0 TWI_Master.o
  .bss           0x00000000        0x0 TWI_Master.o
@@ -232,10 +227,10 @@ Address of section .data set to 0x800100
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.90/gcc/dev/atmega328/avr5/crtatmega328.o
 LOAD ADC.o
 LOAD functions.o
-LOAD LCD.o
 LOAD main.o
 LOAD PWM.o
 LOAD twimaster.o
+LOAD TWI_LCD.o
 LOAD TWI_Master.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libm.a
@@ -337,7 +332,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xc0c
+.text           0x00000000      0x462
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.90/gcc/dev/atmega328/avr5/crtatmega328.o
                 0x00000000                __vector_default
@@ -435,46 +430,43 @@ END GROUP
  .text.Y_LED_On
                 0x0000018a        0x4 functions.o
                 0x0000018a                Y_LED_On
- .text.LCD_set_outputpinhigh
-                0x0000018e       0x74 LCD.o
-                0x0000018e                LCD_set_outputpinhigh
- .text.LCD_set_outputpinlow
-                0x00000202       0x72 LCD.o
-                0x00000202                LCD_set_outputpinlow
- .text.LCD_toggle
-                0x00000274       0x1c LCD.o
-                0x00000274                LCD_toggle
- .text.LCD_Command
-                0x00000290      0x2c0 LCD.o
-                0x00000290                LCD_Command
+ .text.main     0x0000018e       0x68 main.o
+                0x0000018e                main
+ .text.Write_Byte
+                0x000001f6       0x86 TWI_LCD.o
+                0x000001f6                Write_Byte
+ .text.LCD_Toggle_enable
+                0x0000027c       0x40 TWI_LCD.o
+                0x0000027c                LCD_Toggle_enable
+ .text.LCD_Byte
+                0x000002bc       0x3a TWI_LCD.o
+                0x000002bc                LCD_Byte
  .text.LCD_Init
-                0x00000550      0x28c LCD.o
-                0x00000550                LCD_Init
- .text.LCD_Print
-                0x000007dc      0x2ce LCD.o
-                0x000007dc                LCD_Print
- .text.main     0x00000aaa       0xaa main.o
-                0x00000aaa                main
+                0x000002f6       0x3e TWI_LCD.o
+                0x000002f6                LCD_Init
+ .text.LCD_String
+                0x00000334       0x76 TWI_LCD.o
+                0x00000334                LCD_String
  .text.TWI_Master_Init
-                0x00000b54       0x28 TWI_Master.o
-                0x00000b54                TWI_Master_Init
+                0x000003aa       0x28 TWI_Master.o
+                0x000003aa                TWI_Master_Init
  .text.TWI_Busy
-                0x00000b7c        0xa TWI_Master.o
-                0x00000b7c                TWI_Busy
+                0x000003d2        0xa TWI_Master.o
+                0x000003d2                TWI_Busy
  .text.libgcc.div
-                0x00000b86       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000b86                __udivmodsi4
+                0x000003dc       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
+                0x000003dc                __udivmodsi4
  .text.libgcc.div
-                0x00000bca       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_divmodsi4.o)
-                0x00000bca                __divmodsi4
+                0x00000420       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_divmodsi4.o)
+                0x00000420                __divmodsi4
  .text.libgcc.div
-                0x00000bf8       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_negsi2.o)
-                0x00000bf8                __negsi2
-                0x00000c08                . = ALIGN (0x2)
+                0x0000044e       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_negsi2.o)
+                0x0000044e                __negsi2
+                0x0000045e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000c08        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
-                0x00000c08                _exit
-                0x00000c08                exit
+ .fini9         0x0000045e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+                0x0000045e                _exit
+                0x0000045e                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -493,40 +485,40 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000c08        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000045e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000c0c                _etext = .
+                0x00000462                _etext = .
 
-.data           0x00800100        0x0 load address 0x00000c0c
+.data           0x00800100        0xc load address 0x00000462
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  *(.rodata)
+ .rodata        0x00800100        0xb main.o
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x00800100                . = ALIGN (0x2)
-                0x00800100                _edata = .
-                0x00800100                PROVIDE (__data_end, .)
+                0x0080010c                . = ALIGN (0x2)
+ *fill*         0x0080010b        0x1 
+                0x0080010c                _edata = .
+                0x0080010c                PROVIDE (__data_end, .)
 
-.bss            0x00800100        0x3
-                0x00800100                PROVIDE (__bss_start, .)
+.bss            0x0080010c        0x2
+                0x0080010c                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  *(COMMON)
- COMMON         0x00800100        0x2 ADC.o
-                0x00800100                status
- COMMON         0x00800102        0x1 LCD.o
-                0x00800102                dataport
-                0x00800103                PROVIDE (__bss_end, .)
-                0x00000c0c                __data_load_start = LOADADDR (.data)
-                0x00000c0c                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0080010c        0x2 ADC.o
+                0x0080010c                status
+                0x0080010e                PROVIDE (__bss_end, .)
+                0x00000462                __data_load_start = LOADADDR (.data)
+                0x0000046e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800103        0x0
-                0x00800103                PROVIDE (__noinit_start, .)
+.noinit         0x0080010e        0x0
+                0x0080010e                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800103                PROVIDE (__noinit_end, .)
-                0x00800103                _end = .
-                0x00800103                PROVIDE (__heap_start, .)
+                0x0080010e                PROVIDE (__noinit_end, .)
+                0x0080010e                _end = .
+                0x0080010e                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -570,8 +562,8 @@ END GROUP
  .comment       0x00000000       0x30 ADC.o
                                  0x31 (size before relaxing)
  .comment       0x00000030       0x31 functions.o
- .comment       0x00000030       0x31 LCD.o
  .comment       0x00000030       0x31 main.o
+ .comment       0x00000030       0x31 TWI_LCD.o
  .comment       0x00000030       0x31 TWI_Master.o
 
 .note.gnu.avr.deviceinfo
@@ -594,73 +586,74 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x188
+.debug_aranges  0x00000000      0x170
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x28 ADC.o
  .debug_aranges
                 0x00000028       0x90 functions.o
  .debug_aranges
-                0x000000b8       0x58 LCD.o
+                0x000000b8       0x40 main.o
  .debug_aranges
-                0x00000110       0x40 main.o
+                0x000000f8       0x40 TWI_LCD.o
  .debug_aranges
-                0x00000150       0x38 TWI_Master.o
+                0x00000138       0x38 TWI_Master.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1dc6
+.debug_info     0x00000000     0x101e
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000       0xce ADC.o
  .debug_info    0x000000ce      0x53d functions.o
- .debug_info    0x0000060b     0x1127 LCD.o
- .debug_info    0x00001732      0x48f main.o
- .debug_info    0x00001bc1      0x205 TWI_Master.o
+ .debug_info    0x0000060b      0x2dd main.o
+ .debug_info    0x000008e8      0x531 TWI_LCD.o
+ .debug_info    0x00000e19      0x205 TWI_Master.o
 
-.debug_abbrev   0x00000000      0x73a
+.debug_abbrev   0x00000000      0x62d
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0x8d ADC.o
  .debug_abbrev  0x0000008d      0x1c9 functions.o
- .debug_abbrev  0x00000256      0x227 LCD.o
- .debug_abbrev  0x0000047d      0x199 main.o
- .debug_abbrev  0x00000616      0x124 TWI_Master.o
+ .debug_abbrev  0x00000256      0x13a main.o
+ .debug_abbrev  0x00000390      0x179 TWI_LCD.o
+ .debug_abbrev  0x00000509      0x124 TWI_Master.o
 
-.debug_line     0x00000000      0xbf1
+.debug_line     0x00000000      0x7a0
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0xc7 ADC.o
  .debug_line    0x000000c7      0x272 functions.o
- .debug_line    0x00000339      0x574 LCD.o
- .debug_line    0x000008ad      0x1be main.o
- .debug_line    0x00000a6b      0x186 TWI_Master.o
+ .debug_line    0x00000339      0x113 main.o
+ .debug_line    0x0000044c      0x1ce TWI_LCD.o
+ .debug_line    0x0000061a      0x186 TWI_Master.o
 
-.debug_frame    0x00000000      0x2d4
+.debug_frame    0x00000000      0x2f0
  *(.debug_frame)
  .debug_frame   0x00000000       0x34 ADC.o
  .debug_frame   0x00000034      0x128 functions.o
- .debug_frame   0x0000015c       0xac LCD.o
- .debug_frame   0x00000208       0x64 main.o
- .debug_frame   0x0000026c       0x68 TWI_Master.o
+ .debug_frame   0x0000015c       0x74 main.o
+ .debug_frame   0x000001d0       0xb8 TWI_LCD.o
+ .debug_frame   0x00000288       0x68 TWI_Master.o
 
-.debug_str      0x00000000      0x41c
+.debug_str      0x00000000      0x428
  *(.debug_str)
  .debug_str     0x00000000      0x187 ADC.o
                                 0x1bb (size before relaxing)
  .debug_str     0x00000187      0x12c functions.o
                                 0x2b7 (size before relaxing)
- .debug_str     0x000002b3       0x96 LCD.o
-                                0x279 (size before relaxing)
- .debug_str     0x00000349       0x9f main.o
-                                0x2cd (size before relaxing)
- .debug_str     0x000003e8       0x34 TWI_Master.o
+ .debug_str     0x000002b3       0xc1 main.o
+                                0x28e (size before relaxing)
+ .debug_str     0x00000374       0x80 TWI_LCD.o
+                                0x269 (size before relaxing)
+ .debug_str     0x000003f4       0x34 TWI_Master.o
                                 0x1e3 (size before relaxing)
 
-.debug_loc      0x00000000      0x397
+.debug_loc      0x00000000      0x678
  *(.debug_loc)
  .debug_loc     0x00000000       0x47 ADC.o
  .debug_loc     0x00000047      0x199 functions.o
- .debug_loc     0x000001e0       0xe2 LCD.o
- .debug_loc     0x000002c2       0xd5 TWI_Master.o
+ .debug_loc     0x000001e0       0x47 main.o
+ .debug_loc     0x00000227      0x37c TWI_LCD.o
+ .debug_loc     0x000005a3       0xd5 TWI_Master.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -680,13 +673,13 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x138
+.debug_ranges   0x00000000      0x120
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x18 ADC.o
  .debug_ranges  0x00000018       0x80 functions.o
- .debug_ranges  0x00000098       0x48 LCD.o
- .debug_ranges  0x000000e0       0x30 main.o
- .debug_ranges  0x00000110       0x28 TWI_Master.o
+ .debug_ranges  0x00000098       0x30 main.o
+ .debug_ranges  0x000000c8       0x30 TWI_LCD.o
+ .debug_ranges  0x000000f8       0x28 TWI_Master.o
 
 .debug_macro
  *(.debug_macro)
