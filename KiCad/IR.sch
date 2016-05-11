@@ -40,7 +40,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 7
+Sheet 3 6
 Title ""
 Date ""
 Rev ""
@@ -64,10 +64,10 @@ $EndComp
 Text HLabel 5750 1600 0    60   BiDi ~ 0
 SCL
 $Comp
-L GND #PWR013
+L GND #PWR016
 U 1 1 57175BA8
 P 8550 2050
-F 0 "#PWR013" H 8550 1800 50  0001 C CNN
+F 0 "#PWR016" H 8550 1800 50  0001 C CNN
 F 1 "GND" H 8550 1900 50  0000 C CNN
 F 2 "" H 8550 2050 50  0000 C CNN
 F 3 "" H 8550 2050 50  0000 C CNN
@@ -80,7 +80,7 @@ U 1 1 57175BAE
 P 3200 3150
 F 0 "D9" H 3200 3250 50  0000 C CNN
 F 1 "IR_Recieve" H 3216 2983 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 3200 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 3200 3150 50  0001 C CNN
 F 3 "" H 3200 3150 50  0000 C CNN
 	1    3200 3150
 	0    -1   -1   0   
@@ -91,7 +91,7 @@ U 1 1 57175BB4
 P 2800 3150
 F 0 "D7" H 2800 3250 50  0000 C CNN
 F 1 "LED" V 2800 3050 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 2800 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 2800 3150 50  0001 C CNN
 F 3 "" H 2800 3150 50  0000 C CNN
 	1    2800 3150
 	0    -1   -1   0   
@@ -102,7 +102,7 @@ U 1 1 57175BBA
 P 3600 3150
 F 0 "D11" H 3600 3250 50  0000 C CNN
 F 1 "LED" V 3600 3050 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 3600 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 3600 3150 50  0001 C CNN
 F 3 "" H 3600 3150 50  0000 C CNN
 	1    3600 3150
 	0    -1   -1   0   
@@ -113,7 +113,7 @@ U 1 1 57175BC0
 P 3200 2600
 F 0 "R16" V 3280 2600 50  0000 C CNN
 F 1 "100" V 3200 2600 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 3130 2600 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 3130 2600 50  0001 C CNN
 F 3 "" H 3200 2600 50  0000 C CNN
 	1    3200 2600
 	1    0    0    -1  
@@ -124,7 +124,7 @@ U 1 1 57175BE1
 P 3600 2600
 F 0 "R18" V 3680 2600 50  0000 C CNN
 F 1 "22" V 3600 2600 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 3530 2600 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 3530 2600 50  0001 C CNN
 F 3 "" H 3600 2600 50  0000 C CNN
 	1    3600 2600
 	1    0    0    -1  
@@ -135,7 +135,7 @@ U 1 1 57175BE7
 P 2800 2600
 F 0 "R14" V 2880 2600 50  0000 C CNN
 F 1 "22" V 2800 2600 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 2730 2600 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 2730 2600 50  0001 C CNN
 F 3 "" H 2800 2600 50  0000 C CNN
 	1    2800 2600
 	1    0    0    -1  
@@ -148,7 +148,7 @@ U 1 1 57175BF9
 P 1700 3150
 F 0 "D3" H 1700 3250 50  0000 C CNN
 F 1 "IR_Recieve" H 1716 2983 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 1700 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 1700 3150 50  0001 C CNN
 F 3 "" H 1700 3150 50  0000 C CNN
 	1    1700 3150
 	0    -1   -1   0   
@@ -159,7 +159,7 @@ U 1 1 57175BFF
 P 1300 3150
 F 0 "D1" H 1300 3250 50  0000 C CNN
 F 1 "LED" V 1300 3050 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 1300 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 1300 3150 50  0001 C CNN
 F 3 "" H 1300 3150 50  0000 C CNN
 	1    1300 3150
 	0    -1   -1   0   
@@ -170,7 +170,7 @@ U 1 1 57175C05
 P 2100 3150
 F 0 "D5" H 2100 3250 50  0000 C CNN
 F 1 "LED" V 2100 3050 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 2100 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 2100 3150 50  0001 C CNN
 F 3 "" H 2100 3150 50  0000 C CNN
 	1    2100 3150
 	0    -1   -1   0   
@@ -181,7 +181,7 @@ U 1 1 57175C0B
 P 1700 2600
 F 0 "R10" V 1780 2600 50  0000 C CNN
 F 1 "100" V 1700 2600 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 1630 2600 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 1630 2600 50  0001 C CNN
 F 3 "" H 1700 2600 50  0000 C CNN
 	1    1700 2600
 	1    0    0    -1  
@@ -198,10 +198,10 @@ F 3 "" H 3550 3850 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR014
+L GND #PWR017
 U 1 1 57175C1F
 P 3900 3750
-F 0 "#PWR014" H 3900 3500 50  0001 C CNN
+F 0 "#PWR017" H 3900 3500 50  0001 C CNN
 F 1 "GND" H 3900 3600 50  0000 C CNN
 F 2 "" H 3900 3750 50  0000 C CNN
 F 3 "" H 3900 3750 50  0000 C CNN
@@ -214,7 +214,7 @@ U 1 1 57175C25
 P 3800 4050
 F 0 "R20" V 3880 4050 50  0000 C CNN
 F 1 "1K" V 3800 4050 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 3730 4050 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 3730 4050 50  0001 C CNN
 F 3 "" H 3800 4050 50  0000 C CNN
 	1    3800 4050
 	0    1    1    0   
@@ -225,7 +225,7 @@ U 1 1 57175C2C
 P 2100 2600
 F 0 "R12" V 2180 2600 50  0000 C CNN
 F 1 "22" V 2100 2600 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 2030 2600 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 2030 2600 50  0001 C CNN
 F 3 "" H 2100 2600 50  0000 C CNN
 	1    2100 2600
 	1    0    0    -1  
@@ -236,7 +236,7 @@ U 1 1 57175C32
 P 1300 2600
 F 0 "R8" V 1380 2600 50  0000 C CNN
 F 1 "22" V 1300 2600 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 1230 2600 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 1230 2600 50  0001 C CNN
 F 3 "" H 1300 2600 50  0000 C CNN
 	1    1300 2600
 	1    0    0    -1  
@@ -269,10 +269,10 @@ $EndComp
 Text HLabel 5750 4650 0    60   BiDi ~ 0
 SCL
 $Comp
-L GND #PWR015
+L GND #PWR018
 U 1 1 5718B310
 P 8550 5100
-F 0 "#PWR015" H 8550 4850 50  0001 C CNN
+F 0 "#PWR018" H 8550 4850 50  0001 C CNN
 F 1 "GND" H 8550 4950 50  0000 C CNN
 F 2 "" H 8550 5100 50  0000 C CNN
 F 3 "" H 8550 5100 50  0000 C CNN
@@ -285,7 +285,7 @@ U 1 1 5718B316
 P 3200 6200
 F 0 "D10" H 3200 6300 50  0000 C CNN
 F 1 "IR_Recieve" H 3216 6033 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 3200 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 3200 6200 50  0001 C CNN
 F 3 "" H 3200 6200 50  0000 C CNN
 	1    3200 6200
 	0    -1   -1   0   
@@ -296,7 +296,7 @@ U 1 1 5718B31C
 P 2800 6200
 F 0 "D8" H 2800 6300 50  0000 C CNN
 F 1 "LED" V 2800 6100 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 2800 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 2800 6200 50  0001 C CNN
 F 3 "" H 2800 6200 50  0000 C CNN
 	1    2800 6200
 	0    -1   -1   0   
@@ -307,7 +307,7 @@ U 1 1 5718B322
 P 3600 6200
 F 0 "D12" H 3600 6300 50  0000 C CNN
 F 1 "LED" V 3600 6100 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 3600 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 3600 6200 50  0001 C CNN
 F 3 "" H 3600 6200 50  0000 C CNN
 	1    3600 6200
 	0    -1   -1   0   
@@ -318,7 +318,7 @@ U 1 1 5718B328
 P 3200 5650
 F 0 "R17" V 3280 5650 50  0000 C CNN
 F 1 "100" V 3200 5650 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 3130 5650 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 3130 5650 50  0001 C CNN
 F 3 "" H 3200 5650 50  0000 C CNN
 	1    3200 5650
 	1    0    0    -1  
@@ -329,7 +329,7 @@ U 1 1 5718B32E
 P 3600 5650
 F 0 "R19" V 3680 5650 50  0000 C CNN
 F 1 "22" V 3600 5650 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 3530 5650 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 3530 5650 50  0001 C CNN
 F 3 "" H 3600 5650 50  0000 C CNN
 	1    3600 5650
 	1    0    0    -1  
@@ -340,7 +340,7 @@ U 1 1 5718B334
 P 2800 5650
 F 0 "R15" V 2880 5650 50  0000 C CNN
 F 1 "22" V 2800 5650 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 2730 5650 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 2730 5650 50  0001 C CNN
 F 3 "" H 2800 5650 50  0000 C CNN
 	1    2800 5650
 	1    0    0    -1  
@@ -353,7 +353,7 @@ U 1 1 5718B33B
 P 1700 6200
 F 0 "D4" H 1700 6300 50  0000 C CNN
 F 1 "IR_Recieve" H 1716 6033 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 1700 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 1700 6200 50  0001 C CNN
 F 3 "" H 1700 6200 50  0000 C CNN
 	1    1700 6200
 	0    -1   -1   0   
@@ -364,7 +364,7 @@ U 1 1 5718B341
 P 1300 6200
 F 0 "D2" H 1300 6300 50  0000 C CNN
 F 1 "LED" V 1300 6100 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 1300 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 1300 6200 50  0001 C CNN
 F 3 "" H 1300 6200 50  0000 C CNN
 	1    1300 6200
 	0    -1   -1   0   
@@ -375,7 +375,7 @@ U 1 1 5718B347
 P 2100 6200
 F 0 "D6" H 2100 6300 50  0000 C CNN
 F 1 "LED" V 2100 6100 50  0000 C CNN
-F 2 "LEDs:LED-5MM" H 2100 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 2100 6200 50  0001 C CNN
 F 3 "" H 2100 6200 50  0000 C CNN
 	1    2100 6200
 	0    -1   -1   0   
@@ -386,7 +386,7 @@ U 1 1 5718B34D
 P 1700 5650
 F 0 "R11" V 1780 5650 50  0000 C CNN
 F 1 "100" V 1700 5650 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 1630 5650 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 1630 5650 50  0001 C CNN
 F 3 "" H 1700 5650 50  0000 C CNN
 	1    1700 5650
 	1    0    0    -1  
@@ -403,10 +403,10 @@ F 3 "" H 3550 6900 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR016
+L GND #PWR019
 U 1 1 5718B359
 P 3900 6800
-F 0 "#PWR016" H 3900 6550 50  0001 C CNN
+F 0 "#PWR019" H 3900 6550 50  0001 C CNN
 F 1 "GND" H 3900 6650 50  0000 C CNN
 F 2 "" H 3900 6800 50  0000 C CNN
 F 3 "" H 3900 6800 50  0000 C CNN
@@ -419,7 +419,7 @@ U 1 1 5718B35F
 P 3800 7100
 F 0 "R21" V 3880 7100 50  0000 C CNN
 F 1 "1K" V 3800 7100 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 3730 7100 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 3730 7100 50  0001 C CNN
 F 3 "" H 3800 7100 50  0000 C CNN
 	1    3800 7100
 	0    1    1    0   
@@ -430,7 +430,7 @@ U 1 1 5718B365
 P 2100 5650
 F 0 "R13" V 2180 5650 50  0000 C CNN
 F 1 "22" V 2100 5650 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 2030 5650 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 2030 5650 50  0001 C CNN
 F 3 "" H 2100 5650 50  0000 C CNN
 	1    2100 5650
 	1    0    0    -1  
@@ -441,7 +441,7 @@ U 1 1 5718B36B
 P 1300 5650
 F 0 "R9" V 1380 5650 50  0000 C CNN
 F 1 "22" V 1300 5650 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 1230 5650 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 1230 5650 50  0001 C CNN
 F 3 "" H 1300 5650 50  0000 C CNN
 	1    1300 5650
 	1    0    0    -1  
@@ -460,17 +460,6 @@ Text HLabel 2800 5500 1    60   Input ~ 0
 3V
 Text HLabel 3600 5500 1    60   Input ~ 0
 3V
-$Sheet
-S 9550 4950 950  950 
-U 5718B39F
-F0 "OpAmp" 60
-F1 "OpAmp.sch" 60
-F2 "SignalIn(A)" I L 9550 5100 60 
-F3 "SignaOut(A)" O R 10500 5250 60 
-F4 "9V" I R 10500 5800 60 
-F5 "SignaOut(B)" O R 10500 5400 60 
-F6 "SignalIn(B)" I L 9550 5550 60 
-$EndSheet
 Wire Wire Line
 	8950 1400 8450 1400
 Wire Wire Line

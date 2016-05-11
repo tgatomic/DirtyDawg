@@ -40,7 +40,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 6 7
+Sheet 5 6
 Title ""
 Date ""
 Rev ""
@@ -56,7 +56,7 @@ U 1 1 5717C731
 P 4000 6600
 F 0 "U5" H 4300 6750 60  0000 C CNN
 F 1 "Linkura" H 3800 6650 60  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_0-8mmDrill" H 4000 6600 60  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 4000 6600 60  0001 C CNN
 F 3 "" H 4000 6600 60  0000 C CNN
 	1    4000 6600
 	-1   0    0    1   
@@ -78,7 +78,7 @@ U 1 1 5717CD37
 P 5000 2650
 F 0 "DS1" H 4200 3050 50  0000 C CNN
 F 1 "I2C_LCD16X2" H 5700 3050 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Angled_2x03" H 5000 2600 50  0000 C CIN
+F 2 "Pin_Headers:Pin_Header_Straight_2x03_Pitch2.00mm" H 5000 2600 50  0000 C CIN
 F 3 "" H 5000 2650 50  0000 C CNN
 	1    5000 2650
 	1    0    0    -1  
@@ -149,7 +149,7 @@ U 1 1 5717DAA2
 P 5750 4000
 F 0 "SW1" H 5900 4110 50  0000 C CNN
 F 1 "Reverse" H 5750 3900 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_0-8mmDrill" H 5750 4000 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 5750 4000 50  0001 C CNN
 F 3 "" H 5750 4000 50  0000 C CNN
 	1    5750 4000
 	0    1    1    0   
@@ -160,7 +160,7 @@ U 1 1 5717DAF5
 P 6350 4300
 F 0 "SW2" H 6500 4410 50  0000 C CNN
 F 1 "Start" H 6350 4220 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_0-8mmDrill" H 6350 4300 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 6350 4300 50  0001 C CNN
 F 3 "" H 6350 4300 50  0000 C CNN
 	1    6350 4300
 	0    1    1    0   
@@ -171,7 +171,7 @@ U 1 1 5717DB44
 P 6950 4600
 F 0 "SW3" H 7100 4710 50  0000 C CNN
 F 1 "Lights" H 6950 4520 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_0-8mmDrill" H 6950 4600 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 6950 4600 50  0001 C CNN
 F 3 "" H 6950 4600 50  0000 C CNN
 	1    6950 4600
 	0    1    1    0   
@@ -209,7 +209,7 @@ U 1 1 5717E19D
 P 5600 4450
 F 0 "R34" V 5680 4450 50  0000 C CNN
 F 1 "R" V 5600 4450 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 5530 4450 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 5530 4450 50  0001 C CNN
 F 3 "" H 5600 4450 50  0000 C CNN
 	1    5600 4450
 	0    1    1    0   
@@ -220,7 +220,7 @@ U 1 1 5717E455
 P 6200 4750
 F 0 "R35" V 6280 4750 50  0000 C CNN
 F 1 "R" V 6200 4750 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 6130 4750 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 6130 4750 50  0001 C CNN
 F 3 "" H 6200 4750 50  0000 C CNN
 	1    6200 4750
 	0    1    1    0   
@@ -231,7 +231,7 @@ U 1 1 5717E48F
 P 6800 5050
 F 0 "R36" V 6880 5050 50  0000 C CNN
 F 1 "R" V 6800 5050 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 6730 5050 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 6730 5050 50  0001 C CNN
 F 3 "" H 6800 5050 50  0000 C CNN
 	1    6800 5050
 	0    1    1    0   
