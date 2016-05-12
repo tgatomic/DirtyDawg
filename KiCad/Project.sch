@@ -40,7 +40,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 6
+Sheet 1 5
 Title ""
 Date ""
 Rev ""
@@ -67,7 +67,7 @@ U 1 1 5714FF78
 P 8800 3550
 F 0 "U1" H 8600 3400 60  0000 C CNN
 F 1 "BlueSmirf" H 8750 3750 60  0000 C TNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x06" H 8800 3550 60  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x06_Pitch2.00mm" H 8800 3550 60  0001 C CNN
 F 3 "" H 8800 3550 60  0000 C CNN
 	1    8800 3550
 	0    1    1    0   
@@ -229,12 +229,6 @@ Wire Wire Line
 	4200 4950 4200 2600
 Wire Wire Line
 	4200 2600 3500 2600
-$Sheet
-S 1750 4600 1100 650 
-U 5717B094
-F0 "Controller" 60
-F1 "Controller.sch" 60
-$EndSheet
 Wire Wire Line
 	8200 5400 9500 5400
 Wire Wire Line
@@ -301,7 +295,7 @@ U 1 1 5733918F
 P 3950 1650
 F 0 "P1" H 3950 1850 50  0000 C CNN
 F 1 "CONN_02X03" H 3950 1450 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Angled_2x03" H 3950 450 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x03" H 3950 450 50  0001 C CNN
 F 3 "" H 3950 450 50  0000 C CNN
 	1    3950 1650
 	1    0    0    -1  
@@ -312,11 +306,6 @@ Wire Wire Line
 	3700 1650 3500 1650
 Wire Wire Line
 	3700 1750 3500 1750
-Wire Wire Line
-	4550 1000 4550 1550
-Wire Wire Line
-	4550 1550 4200 1550
-Connection ~ 4550 1000
 Wire Wire Line
 	4200 1750 4300 1750
 Wire Wire Line
@@ -498,4 +487,35 @@ Wire Wire Line
 	5200 3150 5200 3500
 Wire Wire Line
 	5200 3500 5750 3500
+$Comp
+L CONN_01X02 P2
+U 1 1 5734FE54
+P 8350 2400
+F 0 "P2" H 8350 2550 50  0000 C CNN
+F 1 "CONN_01X02" V 8450 2400 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 8350 2400 50  0001 C CNN
+F 3 "" H 8350 2400 50  0000 C CNN
+	1    8350 2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8150 2350 7450 2350
+Wire Wire Line
+	7450 2350 7450 2850
+Connection ~ 7450 2850
+Wire Wire Line
+	7550 2450 7550 2950
+Wire Wire Line
+	7550 2450 8150 2450
+Connection ~ 7550 2950
+NoConn ~ 4200 1550
+NoConn ~ 8550 4100
+NoConn ~ 9050 4100
+NoConn ~ 3500 1350
+NoConn ~ 3500 1450
+NoConn ~ 3500 2200
+NoConn ~ 3500 2300
+NoConn ~ 3500 3250
+NoConn ~ 3500 3550
+NoConn ~ 1600 1550
 $EndSCHEMATC
