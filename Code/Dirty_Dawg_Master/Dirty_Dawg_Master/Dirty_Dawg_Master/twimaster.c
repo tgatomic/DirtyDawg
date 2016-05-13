@@ -10,6 +10,7 @@
 #include <compat/twi.h>
 
 #include "i2cmaster.h"
+#include "functions.h"
 
 
 /* define CPU frequency in Mhz here if not defined in Makefile */

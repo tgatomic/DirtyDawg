@@ -4,7 +4,7 @@
  * Created: 2016-04-18 13:32:02
  * Author : Atomic
  */ 
-#define F_CPU 8000000UL
+
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -12,31 +12,31 @@
 #include "TWI_Master.h"
 #include "PWM.h"
 #include "TWI_LCD.h"
+#include "Bluetooth.h"
 
 #define LIGHT_STATE 0
 #define BLUETOOTH_STATE 1
 #define SENSOR_STATE 2
 #define DRIVE_STATE 3
+#define BT_PAIRING 4
 
 #define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
 
 
-//Name of the main struct with all the data in for the different sensors and values
-dataptn DirtyDawg;
 
 int main(void)
 {
 
-	//Initiate the hardware
-	System_Init(); //Checked - OK!
+	//Initiate the hardware - Working
+	System_Init();
 	
-	//Baudrate max is 19200 (double speed enabled)
-	UART_Init(19200); //Checked - OK!
+	//Baudrate max is 19200 (double speed enabled) - Working
+	UART_Init(19200);
 
-	//Initiate TWI
+	//Initiate TWI - Working
 	TWI_Master_Init();
 	
-	//Initiate LCD
+	//Initiate LCD - Working
 	LCD_Init();
 	LCD_Byte('B', LCD_CHR);
 	LCD_Byte('O', LCD_CHR);
@@ -45,28 +45,19 @@ int main(void)
 	LCD_Byte('E', LCD_CHR);
 	LCD_Byte('D', LCD_CHR);
 	
-	//Initiate PWM
+	//Initiate PWM - Working
 	PWM_Init();
-	
-	Drive(4,255);
-
 	
 	Y_LED_On();
 	while(1);
 	
-
-
-	
-	
-	PWM_Init();
+	//Initiate ADC - Not tested
 	ADC_init();
+	
+	//Initiate BT - Needs to be changed to only initiate and not wait for connection
 	BT_Init();
 	
 	
-
-
-	//Wait here until we have a Bluetooth connection
-	//while(!BT_Connect());
 
 	/************************************************************************/
 	/*								States									*/
@@ -109,6 +100,14 @@ int main(void)
 				break;
 			case DRIVE_STATE:
 				Vroom();
+				break;
+			case BT_PAIRING:
+				Pairing();
+				break;
+			
+			//Activates if there is no state or error occured
+			default:
+				Error('S');
 				break;
 		}
 	}
@@ -179,6 +178,22 @@ void Sensors(void){
 /*       																*/
 /************************************************************************/
 void Vroom(void){
+
+
+
+
+	//set state
+}
+/************************************************************************/
+/*						Bluetooth Pairing 	                            */
+/*																		*/
+/*	   Tasks:                                                           */
+/*     -  	Activate Bluetooth											*/
+/*     -  	Tries to connect while button is pressed					*/
+/*       																*/
+/*       																*/
+/************************************************************************/
+void Pairing(void){
 
 
 

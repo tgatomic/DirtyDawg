@@ -9,6 +9,7 @@
 #include <util/delay.h>
 #include "TWI_Master.h"
 #include "TWI_LCD.h"
+#include "functions.h"
 
 
 void LCD_Init(void){

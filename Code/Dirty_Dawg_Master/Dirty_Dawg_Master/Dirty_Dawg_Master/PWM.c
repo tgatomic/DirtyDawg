@@ -55,8 +55,10 @@ void Stop_Moving(void){
 
 void Drive(uint8_t direction, uint8_t speed){
 	
+	DirtyDawg->back_sensor;
+	
 	while(1){
-		OCR0B = 50;
+		OCR0B = DirtyDawg->back_sensor;
 		OCR0A = 50;
 		_delay_ms(1000);
 		OCR0B = 100;

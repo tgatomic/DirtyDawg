@@ -138,6 +138,12 @@
     <Compile Include="ADC.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Bluetooth.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Bluetooth.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="functions.c">
       <SubType>compile</SubType>
     </Compile>
@@ -154,9 +160,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="PWM.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="twimaster.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="TWI_LCD.c">

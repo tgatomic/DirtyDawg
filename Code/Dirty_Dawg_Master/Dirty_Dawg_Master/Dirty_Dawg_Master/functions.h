@@ -51,38 +51,47 @@ int status; //Delete later
 /************************************************************************/
 typedef struct data{
 
+	//The value from the LDR
 	int lightvalue;
 
+	//The distance values received on TWI-bus
 	int left_sensor;
 	int right_sensor;
 	int front_sensor;
 	int back_sensor;
-	//Or Distsensor[4]	
-
-	//Is one if the controller has prompted for the lights to be turned on
-	uint8_t lights;
 	
+	//Buffer for send and transmit
+	uint8_t BT_send_buffer[20];
+	uint8_t BT_recieve_buffer[20];
+	
+	//Statusflags to know what is set and not
 	uint8_t status;
+	#define LIGHTS (1<<0)
+	#define STOP (1<<0)
+	#define FORWARD (1<<0)
+	
 	
 	uint8_t state; 
 	
+	
 } *dataptn;
 
+//Name of the main struct with all the data in for the different sensors and values
+dataptn DirtyDawg;
 
+
+#define F_CPU 8000000UL
 
 void System_Init(void);
-void UART_Init(unsigned int baud);
-int BT_Init(void);
-void I2C_Init(void);
-void BT_Connect(void);
-void Connected(void);
+
+
+
 void INT_Crash(void);
 void Lowrider_Mode(void);
 void Sense_Light(void);
 
-uint8_t BT_Recieve(void);
-void Uart_Flush(void);
-void Error(unsigned int errorcode);
+
+
 
 
 void Y_LED_On(void);
