@@ -1,0 +1,369 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:ir_recieve
+LIBS:I2C_LCD
+LIBS:LinkuraModule
+LIBS:i2cdisplay
+LIBS:ca3240e
+LIBS:SN754410NE
+LIBS:motor
+LIBS:Project-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 7
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L ATMEGA328-P IC1
+U 1 1 5714DE10
+P 2500 2350
+F 0 "IC1" H 1750 3600 50  0000 L BNN
+F 1 "ATMEGA328-P" H 2900 950 50  0000 L BNN
+F 2 "Housings_DIP:DIP-28_W7.62mm" H 2500 2350 50  0000 C CIN
+F 3 "" H 2500 2350 50  0000 C CNN
+	1    2500 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L BlueSmirf U1
+U 1 1 5714FF78
+P 8800 3550
+F 0 "U1" H 8600 3400 60  0000 C CNN
+F 1 "BlueSmirf" H 8750 3750 60  0000 C TNN
+F 2 "Pin_Headers:Pin_Header_Angled_2x03" H 8800 3550 60  0001 C CNN
+F 3 "" H 8800 3550 60  0000 C CNN
+	1    8800 3550
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR01
+U 1 1 5715DC43
+P 1500 3800
+F 0 "#PWR01" H 1500 3550 50  0001 C CNN
+F 1 "GND" H 1500 3650 50  0000 C CNN
+F 2 "" H 1500 3800 50  0000 C CNN
+F 3 "" H 1500 3800 50  0000 C CNN
+	1    1500 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1600 3450 1500 3450
+Wire Wire Line
+	1500 3450 1500 3800
+Wire Wire Line
+	1600 3550 1500 3550
+Connection ~ 1500 3550
+$Sheet
+S 9500 4900 1100 700 
+U 57160B94
+F0 "VoltRegulator" 60
+F1 "VoltRegulator.sch" 60
+F2 "9V" O L 9500 5200 60 
+F3 "5V" O L 9500 5400 60 
+F4 "3V" O L 9500 5000 60 
+$EndSheet
+$Comp
+L Q_NPN_BCE Q1
+U 1 1 571628D5
+P 10000 1750
+F 0 "Q1" H 10300 1800 50  0000 R CNN
+F 1 "Q_NPN_BCE" H 10600 1700 50  0000 R CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Inline_Narrow_Oval" H 10200 1850 50  0001 C CNN
+F 3 "" H 10000 1750 50  0000 C CNN
+	1    10000 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9050 1750 9800 1750
+Wire Wire Line
+	10100 1950 10100 2450
+$Comp
+L GND #PWR02
+U 1 1 571629AA
+P 10100 2450
+F 0 "#PWR02" H 10100 2200 50  0001 C CNN
+F 1 "GND" H 10100 2300 50  0000 C CNN
+F 2 "" H 10100 2450 50  0000 C CNN
+F 3 "" H 10100 2450 50  0000 C CNN
+	1    10100 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R3
+U 1 1 571629D2
+P 10100 1150
+F 0 "R3" V 10180 1150 50  0000 C CNN
+F 1 "R" V 10100 1150 50  0000 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 10030 1150 50  0001 C CNN
+F 3 "" H 10100 1150 50  0000 C CNN
+	1    10100 1150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10100 1300 10100 1550
+Wire Wire Line
+	10100 1450 11000 1450
+Connection ~ 10100 1450
+Wire Wire Line
+	10100 1000 10100 650 
+Text Label 10650 1450 2    60   ~ 0
+Output
+Text Label 9500 1750 2    60   ~ 0
+Input
+$Sheet
+S 5750 4350 1700 850 
+U 571635B2
+F0 "IR" 60
+F1 "IR.sch" 60
+F2 "5V" I R 7450 5000 60 
+F3 "SDA" B L 5750 4600 60 
+F4 "SCL" B L 5750 4950 60 
+F5 "9V" I L 5750 5100 60 
+F6 "3V" I R 7450 4800 60 
+$EndSheet
+Wire Wire Line
+	8200 5000 8200 5400
+Wire Wire Line
+	7450 5000 8200 5000
+Wire Wire Line
+	8000 5000 8000 5850
+Wire Wire Line
+	8000 5850 900  5850
+Wire Wire Line
+	900  5850 900  1000
+Connection ~ 8000 5000
+Wire Wire Line
+	900  1250 1600 1250
+Wire Wire Line
+	8950 4100 8950 5400
+Connection ~ 8950 5400
+Wire Wire Line
+	8750 4100 8750 4550
+Wire Wire Line
+	8750 4550 7800 4550
+Wire Wire Line
+	7800 4550 7800 2850
+Wire Wire Line
+	7800 2850 3500 2850
+Wire Wire Line
+	3500 2950 7650 2950
+Wire Wire Line
+	7650 2950 7650 4700
+Wire Wire Line
+	7650 4700 8650 4700
+Wire Wire Line
+	8650 4700 8650 4100
+NoConn ~ 8550 4100
+NoConn ~ 9050 4100
+Wire Wire Line
+	8850 4100 8850 4900
+Wire Wire Line
+	8850 4900 8800 4900
+$Comp
+L GND #PWR03
+U 1 1 57165880
+P 8800 4900
+F 0 "#PWR03" H 8800 4650 50  0001 C CNN
+F 1 "GND" H 8800 4750 50  0000 C CNN
+F 2 "" H 8800 4900 50  0000 C CNN
+F 3 "" H 8800 4900 50  0000 C CNN
+	1    8800 4900
+	0    1    1    0   
+$EndComp
+$Sheet
+S 5750 950  1600 850 
+U 57166F5B
+F0 "lights" 60
+F1 "Lights.sch" 60
+F2 "5V" I L 5750 1150 60 
+F3 "Brake" I L 5750 1400 60 
+F4 "Headlight" I L 5750 1650 60 
+$EndSheet
+Wire Wire Line
+	3500 1350 5050 1350
+Wire Wire Line
+	5050 1350 5050 1400
+Wire Wire Line
+	5050 1400 5750 1400
+Wire Wire Line
+	3500 1450 4950 1450
+Wire Wire Line
+	4950 1450 4950 1650
+Wire Wire Line
+	4950 1650 5750 1650
+Connection ~ 900  1250
+Wire Wire Line
+	900  1000 5200 1000
+Wire Wire Line
+	5200 1000 5200 1150
+Wire Wire Line
+	5200 1150 5750 1150
+$Comp
+L Photores R2
+U 1 1 5716DAD8
+P 5000 2300
+F 0 "R2" V 5080 2300 50  0000 C CNN
+F 1 "Photores" V 5210 2300 50  0000 C TNN
+F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 4930 2300 50  0001 C CNN
+F 3 "" H 5000 2300 50  0000 C CNN
+	1    5000 2300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R R1
+U 1 1 5716E4CF
+P 4450 2050
+F 0 "R1" V 4530 2050 50  0000 C CNN
+F 1 "10k" V 4450 2050 50  0000 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM20mm" V 4380 2050 50  0001 C CNN
+F 3 "" H 4450 2050 50  0000 C CNN
+	1    4450 2050
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5500 1150 5500 2300
+Wire Wire Line
+	5500 2300 5250 2300
+Connection ~ 5500 1150
+Wire Wire Line
+	4150 2300 4750 2300
+Wire Wire Line
+	4150 2300 4150 2100
+Wire Wire Line
+	4150 2100 3500 2100
+$Comp
+L GND #PWR04
+U 1 1 5716EE89
+P 4450 1800
+F 0 "#PWR04" H 4450 1550 50  0001 C CNN
+F 1 "GND" H 4450 1650 50  0000 C CNN
+F 2 "" H 4450 1800 50  0000 C CNN
+F 3 "" H 4450 1800 50  0000 C CNN
+	1    4450 1800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3500 2500 4550 2500
+Wire Wire Line
+	4550 2500 4550 4600
+Wire Wire Line
+	4550 4600 5750 4600
+Wire Wire Line
+	5750 4950 4200 4950
+Wire Wire Line
+	4200 4950 4200 2600
+Wire Wire Line
+	4200 2600 3500 2600
+$Sheet
+S 1750 4600 1100 650 
+U 5717B094
+F0 "Controller" 60
+F1 "Controller.sch" 60
+$EndSheet
+Wire Wire Line
+	8200 5400 9500 5400
+Wire Wire Line
+	9500 5000 8350 5000
+Wire Wire Line
+	8350 5000 8350 4800
+Wire Wire Line
+	8350 4800 7450 4800
+Wire Wire Line
+	7700 5200 9500 5200
+Wire Wire Line
+	7700 5200 7700 5500
+Wire Wire Line
+	7700 5500 5300 5500
+Wire Wire Line
+	5300 5500 5300 5100
+Wire Wire Line
+	5300 5100 5750 5100
+Wire Wire Line
+	4450 1800 4450 1900
+Wire Wire Line
+	4450 2200 4450 2300
+Connection ~ 4450 2300
+$Sheet
+S 5750 3200 1650 850 
+U 571BEA93
+F0 "Motor" 60
+F1 "Motor.sch" 60
+F2 "Forw." I L 5750 3350 60 
+F3 "Backw." I L 5750 3500 60 
+F4 "5V" I R 7400 3850 60 
+F5 "9V" I R 7400 3700 60 
+F6 "Right" I L 5750 3900 60 
+F7 "Left" I L 5750 3750 60 
+$EndSheet
+Wire Wire Line
+	5750 3350 5050 3350
+Wire Wire Line
+	5050 3350 5050 3150
+Wire Wire Line
+	5050 3150 3500 3150
+Wire Wire Line
+	5750 3500 4950 3500
+Wire Wire Line
+	4950 3500 4950 3350
+Wire Wire Line
+	4950 3350 3500 3350
+Wire Wire Line
+	5750 3750 4800 3750
+Wire Wire Line
+	4800 3750 4800 3450
+Wire Wire Line
+	4800 3450 3500 3450
+Wire Wire Line
+	5750 3900 4650 3900
+Wire Wire Line
+	4650 3900 4650 3550
+Wire Wire Line
+	4650 3550 3500 3550
+Wire Wire Line
+	7600 5000 7600 3850
+Wire Wire Line
+	7600 3850 7400 3850
+Connection ~ 7600 5000
+Wire Wire Line
+	8100 5200 8100 3700
+Wire Wire Line
+	8100 3700 7400 3700
+Connection ~ 8100 5200
+$EndSCHEMATC
