@@ -24,7 +24,7 @@
 #define DELAY_MS 8 //Equals 1 ms
 #define LCD_WRITE (0<<0)
 
-#ifndef ARR_SIZE(x)
+#ifndef ARR_SIZE
 #define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
 #endif
 

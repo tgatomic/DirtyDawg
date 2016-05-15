@@ -4,15 +4,15 @@
 
 ADC.c
 
-functions.c
+Bluetooth.c
 
-LCD.c
+functions.c
 
 main.c
 
 PWM.c
 
-twimaster.c
+TWI_LCD.c
 
 TWI_Master.c
 

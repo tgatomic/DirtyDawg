@@ -11,6 +11,7 @@
 
 void PWM_Init(void);
 void Stop_Moving(void);
+void Drive(uint8_t direction, uint8_t speed);
 
 
 

@@ -4,7 +4,7 @@
  * Created: 2016-04-18 13:32:02
  * Author : Atomic
  */ 
-
+#define F_CPU 8000000UL
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -13,50 +13,44 @@
 #include "PWM.h"
 #include "TWI_LCD.h"
 #include "Bluetooth.h"
+#include "ADC.h"
 
 #define LIGHT_STATE 0
 #define BLUETOOTH_STATE 1
 #define SENSOR_STATE 2
 #define DRIVE_STATE 3
-#define BT_PAIRING 4
 
 #define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
 
+void Lights(void);
+void Bluetooth(void);
+void Sensors(void);
+void Vroom(void);
 
 
 int main(void)
 {
 
-	//Initiate the hardware - Working
+	// Initiate the hardware - Working
 	System_Init();
 	
-	//Baudrate max is 19200 (double speed enabled) - Working
+	// Baud rate max is 19200 (double speed enabled) - Working
 	UART_Init(19200);
 
-	//Initiate TWI - Working
+	// Initiate TWI - Working
 	TWI_Master_Init();
 	
-	//Initiate LCD - Working
+	// Initiate LCD - Working
 	LCD_Init();
-	LCD_Byte('B', LCD_CHR);
-	LCD_Byte('O', LCD_CHR);
-	LCD_Byte('O', LCD_CHR);
-	LCD_Byte('T', LCD_CHR);
-	LCD_Byte('E', LCD_CHR);
-	LCD_Byte('D', LCD_CHR);
-	
-	//Initiate PWM - Working
+
+	// Initiate PWM - Working
 	PWM_Init();
 	
 	Y_LED_On();
 	while(1);
 	
-	//Initiate ADC - Not tested
+	// Initiate ADC - Not tested
 	ADC_init();
-	
-	//Initiate BT - Needs to be changed to only initiate and not wait for connection
-	BT_Init();
-	
 	
 
 	/************************************************************************/
@@ -71,26 +65,29 @@ int main(void)
 	/*                                                                      */
 	/************************************************************************/
 
+	// Set the state to start in
 	DirtyDawg->state = BLUETOOTH_STATE;
-	int ticks, oldstate = 0;
+	
+	int ticks = 0;
 	
 	for(;;){
 
-		//Something thats needs to be done every pass???
+		// Something thats needs to be done every pass???
 		
-		//Runs only every 10th pass, not so time crucial.
+		// Runs only every 10th pass, not so time crucial.
 		if(ticks++ == 10){
-			//Saves the current state to another variable
-			oldstate = DirtyDawg->state;
-			//DirtyDawg.state = LIGHT_STATE;
+			// Saves the current state to another variable
+			DirtyDawg->oldstate = DirtyDawg->state;
+			
+			// Changes the state
+			DirtyDawg->state = LIGHT_STATE;
 			ticks = 0;
 		}
 		
-		//Main state machine
+		// Main state machine
 		switch(DirtyDawg->state){
 			case LIGHT_STATE:
 				Lights();
-				DirtyDawg->state = oldstate;
 				break;
 			case BLUETOOTH_STATE:
 				Bluetooth();
@@ -101,17 +98,15 @@ int main(void)
 			case DRIVE_STATE:
 				Vroom();
 				break;
-			case BT_PAIRING:
-				Pairing();
-				break;
 			
-			//Activates if there is no state or error occured
+			// Activates if there is no state or error occured
 			default:
 				Error('S');
 				break;
 		}
 	}
 }
+
 /************************************************************************/
 /*							Lights state                                */
 /*																		*/
@@ -125,15 +120,18 @@ int main(void)
 /************************************************************************/
 void Lights(void){
 	
-	//If the controller prompted for the lights to be turned on and 
-	//if(DirtyDawg->lights == 1 && !(DirtyDawg->status & LIGHT_ON)){
-		
-		
-	
-	
+	DirtyDawg->lightvalue = Read_ADC();
 
-	//set state
+	if( status & LIGHTS || DirtyDawg->lightvalue < LIGHT_THRESHOLD ){
+		PORTB |= (1<<HEADLIGHT);
+	} else {
+		PORTB &= ~(1<<HEADLIGHT);
+	}
+	
+	DirtyDawg->state = DirtyDawg->oldstate;
+	
 }
+
 /************************************************************************/
 /*							Bluetooth State                             */
 /*																		*/
@@ -147,11 +145,40 @@ void Lights(void){
 /************************************************************************/
 void Bluetooth(void){
 
+	//If there is nothing in recieve buffer
+	if(DirtyDawg->BT_recieve_buffer[0] != 0){
+		DirtyDawg->state = DRIVE_STATE;
+		return;
+	}
+	// Saves the speed data
+	DirtyDawg->forward = DirtyDawg->BT_recieve_buffer[0];
+	DirtyDawg->backward = DirtyDawg->BT_recieve_buffer[1];
+	DirtyDawg->left= DirtyDawg->BT_recieve_buffer[2];
+	DirtyDawg->right = DirtyDawg->BT_recieve_buffer[3];
+	
+	// Saves the button configuration
+	status = DirtyDawg->BT_recieve_buffer[4];
+	
+	// Clears the receive buffer
+	for(int i = 0; i < 5 ; i++){
+		DirtyDawg->BT_recieve_buffer[i] = 0;
+	}
+	
+	// Send the content in send buffer to controller
+	for(int i = 0; i < 4; i++){
+		BT_Send(DirtyDawg->BT_send_buffer[i]);
+	}
+	
+	// Clears the content in send buffer
+	for(int i = 0; i < 4 ; i++){
+		DirtyDawg->BT_send_buffer[i] = 0;
+	}
+	
+	
+	DirtyDawg->state = DRIVE_STATE;
 
-
-
-	//set state
 }
+
 /************************************************************************/
 /*							Sensors state	                            */
 /*																		*/
@@ -167,7 +194,9 @@ void Sensors(void){
 
 
 	//set state
+	DirtyDawg->state = BLUETOOTH_STATE;
 }
+
 /************************************************************************/
 /*							Vroom state  	                            */
 /*																		*/
@@ -179,24 +208,11 @@ void Sensors(void){
 /************************************************************************/
 void Vroom(void){
 
+	Drive(F, DirtyDawg->forward);
+	Drive(B, DirtyDawg->backward);
+	Drive(L, DirtyDawg->left);
+	Drive(R, DirtyDawg->right);
 
 
-
-	//set state
-}
-/************************************************************************/
-/*						Bluetooth Pairing 	                            */
-/*																		*/
-/*	   Tasks:                                                           */
-/*     -  	Activate Bluetooth											*/
-/*     -  	Tries to connect while button is pressed					*/
-/*       																*/
-/*       																*/
-/************************************************************************/
-void Pairing(void){
-
-
-
-
-	//set state
+	DirtyDawg->state = SENSOR_STATE;
 }

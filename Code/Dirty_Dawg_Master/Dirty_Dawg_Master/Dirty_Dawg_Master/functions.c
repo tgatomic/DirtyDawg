@@ -1,6 +1,9 @@
 
+#define F_CPU 8000000UL
+
 #include <avr/io.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 #include "functions.h"
 
 
@@ -11,7 +14,7 @@ void System_Init(void){
 	
 	/*Setting ports - page 75*/
 		
-	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<RIGHT) | (1<<PORTB0); //PB0 is debug greenlight
+	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<RIGHT) | (1<<PORTB0); //PB0 is debug green light
 	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<PORTD7); //PD7 is debug yellow
 	
 	//Turn on the front and backlights
@@ -20,17 +23,11 @@ void System_Init(void){
 	_delay_ms(8000);
 	PORTB = (0<<BRAKELIGHT) | (0<<HEADLIGHT) | (0<<PORTB0);
 	
+	
+	// Enables global interrupt
+	sei();
 
-	//Signs the status
-	status = MCU_STARTED;
-	
-	
-	//PORT is output register
-	//Pin is input register
-	
-	
-	
-	
+
 }
 
 
@@ -48,10 +45,6 @@ void Sense_Light(void){
 	
 	
 }
-
-
-
-
 
 
 void Y_LED_On(void){

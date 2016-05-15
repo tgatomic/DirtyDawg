@@ -38,11 +38,11 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../ADC.c \
+../Bluetooth.c \
 ../functions.c \
-../LCD.c \
 ../main.c \
 ../PWM.c \
-../twimaster.c \
+../TWI_LCD.c \
 ../TWI_Master.c
 
 
@@ -54,38 +54,38 @@ ASM_SRCS +=
 
 OBJS +=  \
 ADC.o \
+Bluetooth.o \
 functions.o \
-LCD.o \
 main.o \
 PWM.o \
-twimaster.o \
+TWI_LCD.o \
 TWI_Master.o
 
 OBJS_AS_ARGS +=  \
 ADC.o \
+Bluetooth.o \
 functions.o \
-LCD.o \
 main.o \
 PWM.o \
-twimaster.o \
+TWI_LCD.o \
 TWI_Master.o
 
 C_DEPS +=  \
 ADC.d \
+Bluetooth.d \
 functions.d \
-LCD.d \
 main.d \
 PWM.d \
-twimaster.d \
+TWI_LCD.d \
 TWI_Master.d
 
 C_DEPS_AS_ARGS +=  \
 ADC.d \
+Bluetooth.d \
 functions.d \
-LCD.d \
 main.d \
 PWM.d \
-twimaster.d \
+TWI_LCD.d \
 TWI_Master.d
 
 OUTPUT_FILE_PATH +=Dirty_Dawg_Master.elf

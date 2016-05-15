@@ -4,9 +4,12 @@
  * Created: 2016-04-26 09:18:32
  *  Author: Atomic
  */ 
+#define F_CPU 8000000UL
+
 #include <avr/io.h>
 #include "TWI_Master.h"
 #include "functions.h"
+#include "Bluetooth.h"
 
 
 void TWI_Master_Init (void){

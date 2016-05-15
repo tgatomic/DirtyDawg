@@ -4,11 +4,13 @@
  * Created: 2016-04-28 09:53:56
  *  Author: Atomic
  */ 
+#define F_CPU 8000000UL
+
 #include <avr/io.h>
 #include <util/delay.h>
 #include "PWM.h"
 #include "functions.h"
-
+#include "Bluetooth.h"
 
 void PWM_Init(void){
 	
@@ -55,8 +57,7 @@ void Stop_Moving(void){
 
 void Drive(uint8_t direction, uint8_t speed){
 	
-	DirtyDawg->back_sensor;
-	
+	/*
 	while(1){
 		OCR0B = DirtyDawg->back_sensor;
 		OCR0A = 50;
@@ -80,22 +81,27 @@ void Drive(uint8_t direction, uint8_t speed){
 
 
 	}
+	*/
 	
 	
+	//If speed is greater or smaller than the possible value
+	if( (speed < 0) | (speed > 255) ) Error('E');
 	
 	
-	/*switch(direction){
-		case L:
-			PWM_LEFT = speed;
-			break;
-		case R:
-			PWM_RIGHT = speed;
-			break;
+	switch(direction){
 		case F:
 			PWM_FORWARD = speed;
 			break;
 		case B:
 			PWM_BACKWARD = speed;
 			break;
-	}*/
+		case L:
+			PWM_LEFT = speed;
+			break;
+		case R:
+			PWM_RIGHT = speed;
+			break;
+	}
+	
+	
 }

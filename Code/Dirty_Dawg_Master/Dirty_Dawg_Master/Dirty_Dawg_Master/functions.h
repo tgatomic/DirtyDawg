@@ -1,6 +1,7 @@
 #ifndef  functions_Header_h   /* Include guard */
 #define functions_Header_h
 
+
 /************************************************************************/
 /*								LIGHTS                                  */
 /************************************************************************/
@@ -18,15 +19,19 @@
 #define PWM_BACKWARD OCR0B
 #define PWM_LEFT OCR0A
 #define PWM_RIGHT OCR2A
-#define L 1
-#define R 2
-#define F 3
-#define B 4
+#define F 1
+#define B 2
+#define L 3
+#define R 4
 
 /************************************************************************/
-/*								Sensor                                  */
+/*							Sensor and Buttons                          */
 /************************************************************************/
 #define LIGHTSENSOR PORTC0
+#define LIGHT_THRESHOLD 500 
+#define BUTTON 
+#define HIGH 1 
+#define LOW 0
 
 /************************************************************************/
 /*								Communication                           */
@@ -38,12 +43,13 @@
 /************************************************************************/
 /*								Status                                 */
 /************************************************************************/
-#define MCU_STARTED 1<<0
-#define UART_STARTED 1<<1
-#define BT_STARTED 1<<2
-#define BT_CONNECTED 1<<3
-//#define LIGHT_ON 1<<3;
-int status; //Delete later
+
+uint8_t status;
+
+#define LIGHTS (1<<0)
+#define STOP (1<<1)
+#define F_OR_B (1<<2)
+
 
 
 /************************************************************************/
@@ -51,26 +57,30 @@ int status; //Delete later
 /************************************************************************/
 typedef struct data{
 
-	//The value from the LDR
+	// The value from the LDR
 	int lightvalue;
-
-	//The distance values received on TWI-bus
-	int left_sensor;
-	int right_sensor;
-	int front_sensor;
-	int back_sensor;
 	
-	//Buffer for send and transmit
+	// State value
+	int oldstate;
+
+	// The distance values received on TWI-bus
+	uint8_t  front_sensor;
+	uint8_t  back_sensor;
+	uint8_t  left_sensor;
+	uint8_t  right_sensor;
+	
+
+	// The speed data for driving
+	uint8_t forward;
+	uint8_t backward;
+	uint8_t left;
+	uint8_t right;
+	
+	// Buffer for send and transmit
 	uint8_t BT_send_buffer[20];
 	uint8_t BT_recieve_buffer[20];
 	
-	//Statusflags to know what is set and not
-	uint8_t status;
-	#define LIGHTS (1<<0)
-	#define STOP (1<<0)
-	#define FORWARD (1<<0)
-	
-	
+	// Keeps the record on what state we are in
 	uint8_t state; 
 	
 	
@@ -80,11 +90,7 @@ typedef struct data{
 dataptn DirtyDawg;
 
 
-#define F_CPU 8000000UL
-
 void System_Init(void);
-
-
 
 void INT_Crash(void);
 void Lowrider_Mode(void);

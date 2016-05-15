@@ -4,12 +4,14 @@
  * Created: 2016-05-11 11:15:44
  *  Author: Atomic
  */ 
+#define F_CPU 8000000UL
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include "TWI_Master.h"
 #include "TWI_LCD.h"
 #include "functions.h"
+#include "Bluetooth.h"
 
 
 void LCD_Init(void){
@@ -30,6 +32,14 @@ void LCD_Init(void){
 	// Clears display and DDRAM
 	LCD_Byte(0x01, LCD_CMD); 
 	_delay_ms(DELAY_MS*5); //5 ms delay
+	
+	//Print welcome message
+	LCD_Byte('B', LCD_CHR);
+	LCD_Byte('O', LCD_CHR);
+	LCD_Byte('O', LCD_CHR);
+	LCD_Byte('T', LCD_CHR);
+	LCD_Byte('E', LCD_CHR);
+	LCD_Byte('D', LCD_CHR);
 	
 }
 

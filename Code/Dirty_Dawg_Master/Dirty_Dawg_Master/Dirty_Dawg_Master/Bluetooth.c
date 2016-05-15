@@ -4,63 +4,40 @@
  * Created: 2016-05-13 16:35:15
  *  Author: Atomic
  */ 
+#define F_CPU 8000000UL
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 #include "Bluetooth.h"
 #include "functions.h"
 
 
-int BT_Init(void){
+void BT_Pair(void){
 	
-	
-	//Wait for 1 second to ensure the device has power
-	_delay_ms(8000);
+	//As long as the button is pressed
+	while(1){
+		//Sends command to enter command mode
+		for(int i = 0; i<3; i++) BT_Send('$');
 
-	//Sends command to enter command mode
-	for(int i = 0; i<3; i++) BT_Send('$');
-
-	//If it fails to go into command mode
-	if(BT_Recieve() == 'E'){
-		Error(0x01);
-	}
-	//Wait for 1 second to ensure the device has power
-	_delay_ms(8000);
-	
-	Uart_Flush();
-	
-	unsigned char adress[12] = {'0','0','0','6','6','6','7','6','A','1','3','F'};
-	
-	BT_Send('c');
-	BT_Send(',');
-	for(int i = 0; i < 12;i++){
-		BT_Send(adress[i]);
-	}
-	BT_Send(0x0A); //NL
-	BT_Send(0x0D); //CR
-
-	//Wait two seconds
-	//_delay_ms(8000);
-	_delay_ms(8000);
-	
-	for(int i = 0; i<6;i++){
-		BT_Recieve();
-	}
-	
-	
-	if(BT_Recieve() == '%'){
-		PORTB = (1<<PORTB1);
-		Uart_Flush();
-		return 1;
-		/*
-		if(BT_Recieve()=='C'){
-			status |= BT_CONNECTED;
+		//If it fails to go into command mode
+		if(BT_Recieve() == 'E'){
+			Error(0x01);
 		}
-		else if(BT_Recieve()=='E'){
-			Error('E');
-		}*/
+	
+		Uart_Flush();
+	
+		unsigned char adress[12] = {'0','0','0','6','6','6','7','6','A','1','3','F'};
+	
+		BT_Send('c');
+		BT_Send(',');
+		for(int i = 0; i < 12;i++){
+			BT_Send(adress[i]);
+		}
+		BT_Send(0x0A); //NL
+		BT_Send(0x0D); //CR
 	}
-	return 0;
+	
 }
 
 
@@ -80,16 +57,15 @@ void UART_Init(unsigned int baud){
 
 	
 	//Enables Receive and Transmit over UART
-	UCSR0B = (1<<RXEN0) | (1<<TXEN0); //RXCIE och TXCIE for interrupt based UART.
+	UCSR0B = (1<<RXEN0) | (1<<TXEN0) | (1<<RXCIE0); 
 	
-	//Sets to 1 stop bit and 8 databits
+	//Sets to 1 stop bit and 8 data bits
 	UCSR0C = (0<<USBS0) | (3<<UCSZ00);
 	
 	//Disables Parity
 	UCSR0C |= (0<<UPM01) | (0<<UPM00);
 	
-	
-	status |= UART_STARTED;
+
 }
 
 
@@ -105,15 +81,12 @@ uint8_t BT_Recieve(void){
 
 void BT_Send(unsigned char data){
 	
-	//PORTB = ~(1<<PORTB1);
-	//_delay_ms(1000);
 	//Waits for the transmit buffer to be empty (wait for flag)
 	while(!(UCSR0A & (1<<UDRE0)));
 	
 	//Put data in buffer and sends it
 	UDR0 = data;
-	//PORTB = (1<<PORTB1);
-	//_delay_ms(1000);
+
 }
 
 
@@ -139,9 +112,27 @@ void Error(unsigned int errorcode){
 	}
 }
 
-/*
-Interrupt based UART
+//Interrupt for UART
 ISR(USART_RX_vect){
-	BT_Recieve = UART;
+	
+	int i;
+	
+	// Receives the total number of bytes
+	uint8_t nmbr_bytes = UDR0;
+	
+	// Saves it in the buffer
+	for( i = 0; i < nmbr_bytes; i++){
+		DirtyDawg->BT_recieve_buffer[i] = BT_Recieve();
+	}
+	
+	// Test with echoing back the packages
+	for( i = 0; i < nmbr_bytes; i++){
+		BT_Send(DirtyDawg->BT_recieve_buffer[i]);
+	}
+	
 }
-*/
+
+//Activates if the pairing button is pressed
+ISR(PCINT2_vect){
+	BT_Pair();
+}
