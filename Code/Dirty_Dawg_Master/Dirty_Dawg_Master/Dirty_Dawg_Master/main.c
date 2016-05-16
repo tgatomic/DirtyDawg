@@ -43,45 +43,10 @@ int main(void)
 	// Initiate LCD - Working
 	//LCD_Init();
 
-	// Initiate PWM - Working
+	// Initiate PWM - Working Drive working as well
 	PWM_Init();
 	
-	PWM_FORWARD = 250;
-	_delay_ms(2000);
-	
-	
-	PWM_FORWARD = 170;
-	_delay_ms(2000);
-	
-	PWM_FORWARD = 100;
-	_delay_ms(2000);
-	
-	PWM_FORWARD = 50;
-	_delay_ms(2000);
-	
-	PWM_FORWARD = 0;
-	_delay_ms(2000);
 
-	
-
-	for(int i = 0; i < 255;){
-		Drive(F,i);
-		_delay_ms(250);
-		i += 10;
-	}
-	Drive(F,0);
-	_delay_ms(2000);
-	
-	for(int i = 0; i < 255; ){
-		Drive(B,i);
-		_delay_ms(250);
-		i += 10;
-	}
-	Drive(B,0);
-	Y_LED_On();
-	while(1);
-
-	
 	
 	// Initiate ADC - Not tested
 	ADC_init();
