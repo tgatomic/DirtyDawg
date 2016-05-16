@@ -33,21 +33,55 @@ int main(void)
 
 	// Initiate the hardware - Working
 	System_Init();
-	
+
 	// Baud rate max is 19200 (double speed enabled) - Working
 	UART_Init(19200);
 
 	// Initiate TWI - Working
 	TWI_Master_Init();
-	
+
 	// Initiate LCD - Working
-	LCD_Init();
+	//LCD_Init();
 
 	// Initiate PWM - Working
 	PWM_Init();
 	
+	PWM_FORWARD = 250;
+	_delay_ms(2000);
+	
+	
+	PWM_FORWARD = 170;
+	_delay_ms(2000);
+	
+	PWM_FORWARD = 100;
+	_delay_ms(2000);
+	
+	PWM_FORWARD = 50;
+	_delay_ms(2000);
+	
+	PWM_FORWARD = 0;
+	_delay_ms(2000);
+
+	
+
+	for(int i = 0; i < 255;){
+		Drive(F,i);
+		_delay_ms(250);
+		i += 10;
+	}
+	Drive(F,0);
+	_delay_ms(2000);
+	
+	for(int i = 0; i < 255; ){
+		Drive(B,i);
+		_delay_ms(250);
+		i += 10;
+	}
+	Drive(B,0);
 	Y_LED_On();
 	while(1);
+
+	
 	
 	// Initiate ADC - Not tested
 	ADC_init();

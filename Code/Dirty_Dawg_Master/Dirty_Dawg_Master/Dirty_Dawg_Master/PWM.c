@@ -18,7 +18,8 @@ void PWM_Init(void){
 	Timer/Counter0 module.*/
 	PRR &= (0<<PRTIM0); 
 	
-	DDRD = (1<<PD5) | (1<<PD6);
+	DDRD = (1<<PORTD5) | (1<<PORTD6) | (1<<PORTD3);
+	DDRB |= (1<<PORTB3);
 	
 	//, TCNT0 for accessing Timer/Counter0 counter value and so on.
 	
@@ -32,11 +33,20 @@ void PWM_Init(void){
 	/* Mode = Fast PWM														*/
 	/* PWM Output = Non inverted                                            */                         
 	/************************************************************************/
-	TCCR2A = (1<<WGM21) | (1<<WGM20) | (1<<COM2B1);
-	TCCR2B = (1<<CS20); //Sets it to non inverted
+	//TCCR2A = (1<<WGM21) | (1<<WGM20) | (1<<COM2B1);
+	//TCCR2B = (1<<CS20); //Sets it to non inverted
 	
-	TCCR0A = (1<<WGM00) | (1<<WGM01) | (1<<COM0A1) | (1<<COM0A0) | (1<<COM0B1) | (1<<COM0B0);
+	//WGM = Fast PWM
+	//Fast pwm = Non inverted. only com0A1 set
+	//no prescaler
+	TCCR0A = (1<<WGM00) | (1<<WGM01) | (1<<COM0A1) | (1<<COM0B1);
 	TCCR0B = (1<<CS00); //Sets it to non inverted
+	
+	
+	
+	//
+	TCCR2A = (1<<WGM20) | (1<<WGM21) | (1<<COM2A1) | (1<<COM2B1);
+	TCCR2B = (1<<CS20); //No prescaler
 	
 	//Enables the pins = COM0A1 COM1A1
 	//TCNT1 use for something???
@@ -48,9 +58,9 @@ void PWM_Init(void){
 void Stop_Moving(void){
 	
 	//Stops the car from moving
-	PWM_BACKWARD = 0;
+	PWM_BACKWARD = 0; //OK
 	PWM_FORWARD = 0;
-	PWM_LEFT = 0;
+	PWM_LEFT = 0; //OK
 	PWM_RIGHT = 0;
 	
 }
@@ -85,7 +95,7 @@ void Drive(uint8_t direction, uint8_t speed){
 	
 	
 	//If speed is greater or smaller than the possible value
-	if( (speed < 0) | (speed > 255) ) Error('E');
+	//if( (speed < 0) | (speed > 255) ) Error('E');
 	
 	
 	switch(direction){

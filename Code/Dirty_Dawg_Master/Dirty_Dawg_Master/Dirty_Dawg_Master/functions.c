@@ -18,9 +18,9 @@ void System_Init(void){
 	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<PORTD7); //PD7 is debug yellow
 	
 	//Turn on the front and backlights
-	_delay_ms(8000);
+	_delay_ms(1000);
 	PORTB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<PORTB0);
-	_delay_ms(8000);
+	_delay_ms(1000);
 	PORTB = (0<<BRAKELIGHT) | (0<<HEADLIGHT) | (0<<PORTB0);
 	
 	
