@@ -11,6 +11,7 @@
 #include <avr/interrupt.h>
 #include "Bluetooth.h"
 #include "functions.h"
+#include "Error_Codes.h"
 
 
 void BT_Pair(void){
@@ -22,7 +23,7 @@ void BT_Pair(void){
 
 		//If it fails to go into command mode
 		if(BT_Recieve() == 'E'){
-			Error(0x01);
+			Error(CMD_FAIL);
 		}
 	
 		Uart_Flush();
@@ -126,9 +127,9 @@ ISR(USART_RX_vect){
 	}
 	
 	// Test with echoing back the packages
-	for( i = 0; i < nmbr_bytes; i++){
-		BT_Send(DirtyDawg->BT_recieve_buffer[i]);
-	}
+	//for( i = 0; i < nmbr_bytes; i++){
+		///BT_Send(DirtyDawg->BT_recieve_buffer[i]);
+	//}
 	
 }
 

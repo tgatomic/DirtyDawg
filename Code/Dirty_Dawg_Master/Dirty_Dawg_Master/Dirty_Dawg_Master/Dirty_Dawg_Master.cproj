@@ -144,6 +144,9 @@
     <Compile Include="Bluetooth.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Error_Codes.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="functions.c">
       <SubType>compile</SubType>
     </Compile>

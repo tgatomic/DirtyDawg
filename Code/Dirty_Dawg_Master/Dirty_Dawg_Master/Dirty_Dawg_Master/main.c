@@ -46,10 +46,9 @@ int main(void)
 	// Initiate PWM - Working Drive working as well
 	PWM_Init();
 	
-
-	
 	// Initiate ADC - Not tested
 	ADC_init();
+	
 	
 
 	/************************************************************************/
@@ -67,7 +66,7 @@ int main(void)
 	// Set the state to start in
 	DirtyDawg->state = BLUETOOTH_STATE;
 	
-	int ticks = 0;
+	uint8_t ticks = 0;
 	
 	for(;;){
 
@@ -98,9 +97,9 @@ int main(void)
 				Vroom();
 				break;
 			
-			// Activates if there is no state or error occured
+			// Activates if there is no state or error occurred
 			default:
-				Error('S');
+				Error(NO_STATE);
 				break;
 		}
 	}
@@ -119,7 +118,7 @@ int main(void)
 /************************************************************************/
 void Lights(void){
 	
-	DirtyDawg->lightvalue = Read_ADC();
+	DirtyDawg->lightvalue = Read_ADC(LDR_Pin);
 
 	if( status & LIGHTS || DirtyDawg->lightvalue < LIGHT_THRESHOLD ){
 		PORTB |= (1<<HEADLIGHT);
@@ -144,12 +143,13 @@ void Lights(void){
 /************************************************************************/
 void Bluetooth(void){
 
-	//If there is nothing in recieve buffer
+	//If there is nothing in receive buffer
 	if(DirtyDawg->BT_recieve_buffer[0] != 0){
 		DirtyDawg->state = DRIVE_STATE;
 		return;
 	}
-	// Saves the speed data
+	
+	// Saves the speed data from the buffer
 	DirtyDawg->forward = DirtyDawg->BT_recieve_buffer[0];
 	DirtyDawg->backward = DirtyDawg->BT_recieve_buffer[1];
 	DirtyDawg->left= DirtyDawg->BT_recieve_buffer[2];
@@ -163,17 +163,22 @@ void Bluetooth(void){
 		DirtyDawg->BT_recieve_buffer[i] = 0;
 	}
 	
-	// Send the content in send buffer to controller
-	for(int i = 0; i < 4; i++){
-		BT_Send(DirtyDawg->BT_send_buffer[i]);
+	//Make sure there is content in send buffer before sending
+	if(DirtyDawg->BT_send_buffer[0] != 0 || DirtyDawg->BT_send_buffer[1] != 0){
+		
+		// Send the content in send buffer to controller
+		for(int i = 0; i < 4; i++){
+			BT_Send(DirtyDawg->BT_send_buffer[i]);
+		}
+			
+		// Clears the content in send buffer
+		for(int i = 0; i < 4 ; i++){
+			DirtyDawg->BT_send_buffer[i] = 0;
+		}
+		
 	}
-	
-	// Clears the content in send buffer
-	for(int i = 0; i < 4 ; i++){
-		DirtyDawg->BT_send_buffer[i] = 0;
-	}
-	
-	
+
+	//Change state
 	DirtyDawg->state = DRIVE_STATE;
 
 }
@@ -189,7 +194,10 @@ void Bluetooth(void){
 /************************************************************************/
 void Sensors(void){
 
-
+	DirtyDawg->front_sensor = TWI_Receive();
+	DirtyDawg->back_sensor = TWI_Receive();
+	DirtyDawg->left_sensor = TWI_Receive();
+	DirtyDawg->right_sensor = TWI_Receive();
 
 
 	//set state

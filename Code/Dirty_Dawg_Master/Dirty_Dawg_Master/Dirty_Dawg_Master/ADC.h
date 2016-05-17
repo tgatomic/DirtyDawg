@@ -10,7 +10,7 @@
 #define ADC_H_
 
 void ADC_init(void);
-uint16_t Read_ADC(void);
+uint16_t Read_ADC(uint8_t ADC_Channel);
 
 
 #endif /* ADC_H_ */

@@ -11,6 +11,7 @@
 #include "PWM.h"
 #include "functions.h"
 #include "Bluetooth.h"
+#include "Error_Codes.h"
 
 void PWM_Init(void){
 	
@@ -67,48 +68,26 @@ void Stop_Moving(void){
 
 void Drive(uint8_t direction, uint8_t speed){
 	
-	/*
-	while(1){
-		OCR0B = DirtyDawg->back_sensor;
-		OCR0A = 50;
-		_delay_ms(1000);
-		OCR0B = 100;
-		OCR0A = 100;
-		_delay_ms(1000);
-		OCR0B = 150;
-		OCR0A = 150;
-		_delay_ms(1000);
-		OCR0B = 200;
-		OCR0A = 200;
-		_delay_ms(1000);
-		OCR0B = 250;
-		OCR0A = 250;
-		_delay_ms(1000);
-		OCR0B = 0;
-		OCR0A = 0;
-		_delay_ms(1000);
-		
-
-
-	}
-	*/
-	
 	
 	//If speed is greater or smaller than the possible value
-	//if( (speed < 0) | (speed > 255) ) Error('E');
+	if( (speed < 0) | (speed > 255) ) Error(BAD_VAL);
 	
 	
 	switch(direction){
 		case F:
+			PWM_BACKWARD = 0x00;
 			PWM_FORWARD = speed;
 			break;
 		case B:
+			PWM_FORWARD = 0x00;
 			PWM_BACKWARD = speed;
 			break;
 		case L:
+			PWM_RIGHT = 0x00;
 			PWM_LEFT = speed;
 			break;
 		case R:
+			PWM_LEFT = 0x00;
 			PWM_RIGHT = speed;
 			break;
 	}
