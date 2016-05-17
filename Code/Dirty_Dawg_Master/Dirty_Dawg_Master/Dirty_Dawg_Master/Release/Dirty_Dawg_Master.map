@@ -26,10 +26,6 @@ Discarded input sections
  .text          0x00000000        0x0 ADC.o
  .data          0x00000000        0x0 ADC.o
  .bss           0x00000000        0x0 ADC.o
- .text.ADC_init
-                0x00000000       0x14 ADC.o
- .text.Read_ADC
-                0x00000000       0x22 ADC.o
  .text          0x00000000        0x0 Bluetooth.o
  .data          0x00000000        0x0 Bluetooth.o
  .bss           0x00000000        0x0 Bluetooth.o
@@ -42,32 +38,37 @@ Discarded input sections
                 0x00000000        0x2 functions.o
  .text.Sense_Light
                 0x00000000        0x2 functions.o
+ .text.Y_LED_On
+                0x00000000        0x4 functions.o
  .text.Y_LED_Off
                 0x00000000        0x6 functions.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
- .text.Lights   0x00000000       0x46 main.o
- .text.Bluetooth
-                0x00000000       0x68 main.o
- .text.Sensors  0x00000000        0xe main.o
- .text.Vroom    0x00000000       0x4e main.o
  .text          0x00000000        0x0 PWM.o
  .data          0x00000000        0x0 PWM.o
  .bss           0x00000000        0x0 PWM.o
- .text.Drive    0x00000000       0x2a PWM.o
  .text          0x00000000        0x0 TWI_LCD.o
  .data          0x00000000        0x0 TWI_LCD.o
  .bss           0x00000000        0x0 TWI_LCD.o
+ .text.Write_Byte
+                0x00000000       0x86 TWI_LCD.o
+ .text.LCD_Toggle_enable
+                0x00000000       0x52 TWI_LCD.o
+ .text.LCD_Byte
+                0x00000000       0x3a TWI_LCD.o
+ .text.LCD_Init
+                0x00000000       0x72 TWI_LCD.o
  .text.LCD_String
                 0x00000000       0x72 TWI_LCD.o
+ .comment       0x00000000       0x31 TWI_LCD.o
  .text          0x00000000        0x0 TWI_Master.o
  .data          0x00000000        0x0 TWI_Master.o
  .bss           0x00000000        0x0 TWI_Master.o
+ .text.TWI_Busy
+                0x00000000        0xa TWI_Master.o
  .text.TWI_Send
                 0x00000000       0x80 TWI_Master.o
- .text.TWI_Receive
-                0x00000000       0x6e TWI_Master.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
@@ -282,7 +283,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x54e
+.text           0x00000000      0x652
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.90/gcc/dev/atmega328/avr5/crtatmega328.o
                 0x00000000                __vector_default
@@ -365,74 +366,76 @@ END GROUP
                 0x000000a2                __vector_20
                 0x000000a6                . = ALIGN (0x2)
  *(.text.*)
+ .text.ADC_init
+                0x000000a6       0x16 ADC.o
+                0x000000a6                ADC_init
+ .text.Read_ADC
+                0x000000bc       0x40 ADC.o
+                0x000000bc                Read_ADC
  .text.UART_Init
-                0x000000a6       0x38 Bluetooth.o
-                0x000000a6                UART_Init
+                0x000000fc       0x38 Bluetooth.o
+                0x000000fc                UART_Init
  .text.BT_Recieve
-                0x000000de        0xe Bluetooth.o
-                0x000000de                BT_Recieve
- .text.BT_Send  0x000000ec        0xe Bluetooth.o
-                0x000000ec                BT_Send
+                0x00000134        0xe Bluetooth.o
+                0x00000134                BT_Recieve
+ .text.BT_Send  0x00000142        0xe Bluetooth.o
+                0x00000142                BT_Send
  .text.Uart_Flush
-                0x000000fa       0x10 Bluetooth.o
-                0x000000fa                Uart_Flush
- .text.Error    0x0000010a       0x3e Bluetooth.o
-                0x0000010a                Error
- .text.BT_Pair  0x00000148       0x88 Bluetooth.o
-                0x00000148                BT_Pair
+                0x00000150       0x10 Bluetooth.o
+                0x00000150                Uart_Flush
+ .text.Error    0x00000160       0x3e Bluetooth.o
+                0x00000160                Error
+ .text.BT_Pair  0x0000019e       0x88 Bluetooth.o
+                0x0000019e                BT_Pair
  .text.__vector_18
-                0x000001d0       0xa8 Bluetooth.o
-                0x000001d0                __vector_18
+                0x00000226       0x84 Bluetooth.o
+                0x00000226                __vector_18
  .text.__vector_5
-                0x00000278        0xe Bluetooth.o
-                0x00000278                __vector_5
+                0x000002aa        0xe Bluetooth.o
+                0x000002aa                __vector_5
  .text.System_Init
-                0x00000286       0x3a functions.o
-                0x00000286                System_Init
- .text.Y_LED_On
-                0x000002c0        0x4 functions.o
-                0x000002c0                Y_LED_On
+                0x000002b8       0x3a functions.o
+                0x000002b8                System_Init
+ .text.Lights   0x000002f2       0x48 main.o
+                0x000002f2                Lights
+ .text.Bluetooth
+                0x0000033a       0x7e main.o
+                0x0000033a                Bluetooth
+ .text.Sensors  0x000003b8       0x56 main.o
+                0x000003b8                Sensors
+ .text.Vroom    0x0000040e       0x4e main.o
+                0x0000040e                Vroom
  .text.startup.main
-                0x000002c4       0x1e main.o
-                0x000002c4                main
+                0x0000045c       0x74 main.o
+                0x0000045c                main
  .text.Stop_Moving
-                0x000002e2        0xe PWM.o
-                0x000002e2                Stop_Moving
+                0x000004d0        0xe PWM.o
+                0x000004d0                Stop_Moving
  .text.PWM_Init
-                0x000002f0       0x22 PWM.o
-                0x000002f0                PWM_Init
- .text.Write_Byte
-                0x00000312       0x86 TWI_LCD.o
-                0x00000312                Write_Byte
- .text.LCD_Toggle_enable
-                0x00000398       0x52 TWI_LCD.o
-                0x00000398                LCD_Toggle_enable
- .text.LCD_Byte
-                0x000003ea       0x3a TWI_LCD.o
-                0x000003ea                LCD_Byte
- .text.LCD_Init
-                0x00000424       0x72 TWI_LCD.o
-                0x00000424                LCD_Init
+                0x000004de       0x22 PWM.o
+                0x000004de                PWM_Init
+ .text.Drive    0x00000500       0x36 PWM.o
+                0x00000500                Drive
  .text.TWI_Master_Init
-                0x00000496       0x28 TWI_Master.o
-                0x00000496                TWI_Master_Init
- .text.TWI_Busy
-                0x000004be        0xa TWI_Master.o
-                0x000004be                TWI_Busy
+                0x00000536       0x28 TWI_Master.o
+                0x00000536                TWI_Master_Init
+ .text.TWI_Receive
+                0x0000055e       0x6e TWI_Master.o
+                0x0000055e                TWI_Receive
  .text.libgcc.div
-                0x000004c8       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
-                0x000004c8                __udivmodsi4
+                0x000005cc       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
+                0x000005cc                __udivmodsi4
  .text.libgcc.div
-                0x0000050c       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_divmodsi4.o)
-                0x0000050c                __divmodsi4
+                0x00000610       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_divmodsi4.o)
+                0x00000610                __divmodsi4
  .text.libgcc.div
-                0x0000053a       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_negsi2.o)
-                0x0000053a                __negsi2
-                0x0000054a                . = ALIGN (0x2)
+                0x0000063e       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_negsi2.o)
+                0x0000063e                __negsi2
+                0x0000064e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000054a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
-                0x0000054a                _exit
-                0x0000054a                exit
+ .fini9         0x0000064e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+                0x0000064e                _exit
+                0x0000064e                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -451,11 +454,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000054a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000064e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000054e                _etext = .
+                0x00000652                _etext = .
 
-.data           0x00800100        0xc load address 0x0000054e
+.data           0x00800100        0xc load address 0x00000652
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -476,8 +479,8 @@ END GROUP
                 0x0080010c                DirtyDawg
                 0x0080010e                status
                 0x0080010f                PROVIDE (__bss_end, .)
-                0x0000054e                __data_load_start = LOADADDR (.data)
-                0x0000055a                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000652                __data_load_start = LOADADDR (.data)
+                0x0000065e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080010f        0x0
                 0x0080010f                PROVIDE (__noinit_start, .)
@@ -531,7 +534,6 @@ END GROUP
  .comment       0x00000030       0x31 functions.o
  .comment       0x00000030       0x31 main.o
  .comment       0x00000030       0x31 PWM.o
- .comment       0x00000030       0x31 TWI_LCD.o
  .comment       0x00000030       0x31 TWI_Master.o
 
 .note.gnu.avr.deviceinfo

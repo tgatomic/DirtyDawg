@@ -14,6 +14,7 @@
 #include "TWI_LCD.h"
 #include "Bluetooth.h"
 #include "ADC.h"
+#include "Error_Codes.h"
 
 #define LIGHT_STATE 0
 #define BLUETOOTH_STATE 1
@@ -194,10 +195,10 @@ void Bluetooth(void){
 /************************************************************************/
 void Sensors(void){
 
-	DirtyDawg->front_sensor = TWI_Receive();
-	DirtyDawg->back_sensor = TWI_Receive();
-	DirtyDawg->left_sensor = TWI_Receive();
-	DirtyDawg->right_sensor = TWI_Receive();
+	DirtyDawg->front_sensor = TWI_Receive(0x03);
+	DirtyDawg->back_sensor = TWI_Receive(0x03);
+	DirtyDawg->left_sensor = TWI_Receive(0x03);
+	DirtyDawg->right_sensor = TWI_Receive(0x03);
 
 
 	//set state

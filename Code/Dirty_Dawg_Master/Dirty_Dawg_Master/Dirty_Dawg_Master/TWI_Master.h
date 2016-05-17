@@ -41,6 +41,7 @@
 void TWI_Master_Init(void);
 int TWI_Busy(void);
 void TWI_Send(uint8_t slaveAddress, uint8_t data);
+uint8_t TWI_Receive(uint8_t slaveAddress);
 
 
 
