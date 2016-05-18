@@ -64,10 +64,10 @@ $EndComp
 Text HLabel 4950 1250 0    60   BiDi ~ 0
 SCL
 $Comp
-L GND #PWR015
+L GND #PWR017
 U 1 1 57175BA8
 P 8650 1700
-F 0 "#PWR015" H 8650 1450 50  0001 C CNN
+F 0 "#PWR017" H 8650 1450 50  0001 C CNN
 F 1 "GND" H 8650 1550 50  0000 C CNN
 F 2 "" H 8650 1700 50  0000 C CNN
 F 3 "" H 8650 1700 50  0000 C CNN
@@ -80,7 +80,7 @@ U 1 1 57175BAE
 P 3300 2800
 F 0 "D9" H 3300 2900 50  0000 C CNN
 F 1 "IR_Recieve" H 3316 2633 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 3300 2800 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 3300 2800 50  0001 C CNN
 F 3 "" H 3300 2800 50  0000 C CNN
 	1    3300 2800
 	0    -1   -1   0   
@@ -91,7 +91,7 @@ U 1 1 57175BB4
 P 2900 2800
 F 0 "D7" H 2900 2900 50  0000 C CNN
 F 1 "LED" V 2900 2700 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 2900 2800 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 2900 2800 50  0001 C CNN
 F 3 "" H 2900 2800 50  0000 C CNN
 	1    2900 2800
 	0    -1   -1   0   
@@ -102,7 +102,7 @@ U 1 1 57175BBA
 P 3700 2800
 F 0 "D11" H 3700 2900 50  0000 C CNN
 F 1 "LED" V 3700 2700 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 3700 2800 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 3700 2800 50  0001 C CNN
 F 3 "" H 3700 2800 50  0000 C CNN
 	1    3700 2800
 	0    -1   -1   0   
@@ -148,7 +148,7 @@ U 1 1 57175BF9
 P 1800 2800
 F 0 "D3" H 1800 2900 50  0000 C CNN
 F 1 "IR_Recieve" H 1816 2633 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 1800 2800 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 1800 2800 50  0001 C CNN
 F 3 "" H 1800 2800 50  0000 C CNN
 	1    1800 2800
 	0    -1   -1   0   
@@ -159,7 +159,7 @@ U 1 1 57175BFF
 P 1400 2800
 F 0 "D1" H 1400 2900 50  0000 C CNN
 F 1 "LED" V 1400 2700 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 1400 2800 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 1400 2800 50  0001 C CNN
 F 3 "" H 1400 2800 50  0000 C CNN
 	1    1400 2800
 	0    -1   -1   0   
@@ -170,7 +170,7 @@ U 1 1 57175C05
 P 2200 2800
 F 0 "D5" H 2200 2900 50  0000 C CNN
 F 1 "LED" V 2200 2700 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 2200 2800 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 2200 2800 50  0001 C CNN
 F 3 "" H 2200 2800 50  0000 C CNN
 	1    2200 2800
 	0    -1   -1   0   
@@ -198,10 +198,10 @@ F 3 "" H 3650 3500 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR016
+L GND #PWR018
 U 1 1 57175C1F
 P 4000 3400
-F 0 "#PWR016" H 4000 3150 50  0001 C CNN
+F 0 "#PWR018" H 4000 3150 50  0001 C CNN
 F 1 "GND" H 4000 3250 50  0000 C CNN
 F 2 "" H 4000 3400 50  0000 C CNN
 F 3 "" H 4000 3400 50  0000 C CNN
@@ -245,7 +245,7 @@ Text Label 2000 1700 0    60   ~ 0
 Signal
 Text HLabel 5600 1050 0    60   BiDi ~ 0
 SDA
-Text HLabel 9050 1050 2    60   Input ~ 0
+Text HLabel 8550 1050 2    60   Input ~ 0
 5V
 Text HLabel 1400 2100 1    60   Input ~ 0
 3V
@@ -255,12 +255,6 @@ Text HLabel 2900 2100 1    60   Input ~ 0
 3V
 Text HLabel 3700 2100 1    60   Input ~ 0
 3V
-Wire Wire Line
-	9050 1050 8550 1050
-Wire Wire Line
-	8550 1550 8650 1550
-Wire Wire Line
-	8650 1550 8650 1700
 Wire Wire Line
 	3300 1900 3300 2100
 Wire Wire Line
@@ -352,10 +346,10 @@ $EndComp
 Text HLabel 5100 4650 0    60   BiDi ~ 0
 SCL
 $Comp
-L GND #PWR017
+L GND #PWR019
 U 1 1 5735BAD5
 P 8700 5100
-F 0 "#PWR017" H 8700 4850 50  0001 C CNN
+F 0 "#PWR019" H 8700 4850 50  0001 C CNN
 F 1 "GND" H 8700 4950 50  0000 C CNN
 F 2 "" H 8700 5100 50  0000 C CNN
 F 3 "" H 8700 5100 50  0000 C CNN
@@ -368,7 +362,7 @@ U 1 1 5735BADB
 P 3350 6200
 F 0 "D10" H 3350 6300 50  0000 C CNN
 F 1 "IR_Recieve" H 3366 6033 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 3350 6200 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 3350 6200 50  0001 C CNN
 F 3 "" H 3350 6200 50  0000 C CNN
 	1    3350 6200
 	0    -1   -1   0   
@@ -379,7 +373,7 @@ U 1 1 5735BAE1
 P 2950 6200
 F 0 "D8" H 2950 6300 50  0000 C CNN
 F 1 "LED" V 2950 6100 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 2950 6200 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 2950 6200 50  0001 C CNN
 F 3 "" H 2950 6200 50  0000 C CNN
 	1    2950 6200
 	0    -1   -1   0   
@@ -390,7 +384,7 @@ U 1 1 5735BAE7
 P 3750 6200
 F 0 "D12" H 3750 6300 50  0000 C CNN
 F 1 "LED" V 3750 6100 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 3750 6200 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 3750 6200 50  0001 C CNN
 F 3 "" H 3750 6200 50  0000 C CNN
 	1    3750 6200
 	0    -1   -1   0   
@@ -436,7 +430,7 @@ U 1 1 5735BB00
 P 1850 6200
 F 0 "D4" H 1850 6300 50  0000 C CNN
 F 1 "IR_Recieve" H 1866 6033 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 1850 6200 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 1850 6200 50  0001 C CNN
 F 3 "" H 1850 6200 50  0000 C CNN
 	1    1850 6200
 	0    -1   -1   0   
@@ -447,7 +441,7 @@ U 1 1 5735BB06
 P 1450 6200
 F 0 "D2" H 1450 6300 50  0000 C CNN
 F 1 "LED" V 1450 6100 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 1450 6200 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 1450 6200 50  0001 C CNN
 F 3 "" H 1450 6200 50  0000 C CNN
 	1    1450 6200
 	0    -1   -1   0   
@@ -458,7 +452,7 @@ U 1 1 5735BB0C
 P 2250 6200
 F 0 "D6" H 2250 6300 50  0000 C CNN
 F 1 "LED" V 2250 6100 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1mmDrill" H 2250 6200 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 2250 6200 50  0001 C CNN
 F 3 "" H 2250 6200 50  0000 C CNN
 	1    2250 6200
 	0    -1   -1   0   
@@ -486,10 +480,10 @@ F 3 "" H 3700 6900 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR018
+L GND #PWR020
 U 1 1 5735BB1E
 P 4050 6800
-F 0 "#PWR018" H 4050 6550 50  0001 C CNN
+F 0 "#PWR020" H 4050 6550 50  0001 C CNN
 F 1 "GND" H 4050 6650 50  0000 C CNN
 F 2 "" H 4050 6800 50  0000 C CNN
 F 3 "" H 4050 6800 50  0000 C CNN
@@ -533,7 +527,7 @@ Text Label 2050 5100 0    60   ~ 0
 Signal
 Text HLabel 5600 4450 0    60   BiDi ~ 0
 SDA
-Text HLabel 9100 4450 2    60   Input ~ 0
+Text HLabel 8600 4450 2    60   Input ~ 0
 5V
 Text HLabel 1450 5500 1    60   Input ~ 0
 3V
@@ -543,8 +537,6 @@ Text HLabel 2950 5500 1    60   Input ~ 0
 3V
 Text HLabel 3750 5500 1    60   Input ~ 0
 3V
-Wire Wire Line
-	9100 4450 8600 4450
 Wire Wire Line
 	8600 4950 8700 4950
 Wire Wire Line
@@ -651,10 +643,10 @@ Wire Wire Line
 Connection ~ 5750 1550
 Connection ~ 9300 3850
 $Comp
-L GND #PWR019
+L GND #PWR021
 U 1 1 5735C5A5
 P 9300 2950
-F 0 "#PWR019" H 9300 2700 50  0001 C CNN
+F 0 "#PWR021" H 9300 2700 50  0001 C CNN
 F 1 "GND" H 9300 2800 50  0000 C CNN
 F 2 "" H 9300 2950 50  0000 C CNN
 F 3 "" H 9300 2950 50  0000 C CNN
@@ -760,4 +752,8 @@ Wire Wire Line
 	5700 2750 5700 4550
 Wire Wire Line
 	5700 4550 5900 4550
+Wire Wire Line
+	8650 1700 8650 1550
+Wire Wire Line
+	8650 1550 8550 1550
 $EndSCHEMATC
