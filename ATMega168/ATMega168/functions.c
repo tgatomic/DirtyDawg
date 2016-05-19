@@ -13,21 +13,21 @@ void System_Init(void){
 	// Enable global interrupt
 	sei();
 	// Enable interrupt on PCINT20 (pin 6 on AtMega 168P)
-	EICRA = (1<<ISC11) | (1<<ISC10);
+	EICRA = (1<<ISC11);
 	EIMSK = (1<<INT1);
 	PCICR = (1<<PCIE2);
 	PCMSK2 = (1<<PCINT20);
 	
 	/*Setting ports - page 75*/
 		
-	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<RIGHT) | (1<<PORTB0); //PB0 is debug greenlight
-	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<PORTD7); //PD7 is debug yellow
+	DDRB = (1<<PORTB1) | (1<<PORTB2) | (1<<PORTB3) | (1<<PORTB0); //PB0 is debug greenlight
+	DDRD = (1<<PORTD3) | (1<<PORTD5) | (1<<PORTD6) | (1<<PORTD7); //PD7 is debug yellow
 	
 	//Turn on the front and backlights
 	_delay_ms(8000);
-	PORTB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<PORTB0);
+	PORTB = (1<<PORTB1) | (1<<PORTB2) | (1<<PORTB0);
 	_delay_ms(8000);
-	PORTB = (0<<BRAKELIGHT) | (0<<HEADLIGHT) | (0<<PORTB0);
+	PORTB = (0<<PORTB1) | (0<<PORTB2) | (0<<PORTB0);
 	
 
 	//Signs the status
@@ -100,19 +100,29 @@ int BT_Init(void){
 	//Wait for 1 second to ensure the device has power
 	_delay_ms(8000);
 
+	for(int i = 0; i<3; i++) BT_Send('-');
+	BT_Send(0x0A); //NL
+	BT_Send(0x0D); //CR
+	_delay_ms(1000);
+	LCD_Byte(0x01, 0x00);
+	_delay_ms(150); //5 ms delay
+	Uart_Flush();
+	
+	return 0;
+	
 	//Sends command to enter command mode
 	for(int i = 0; i<3; i++) BT_Send('$');
-
 	//If it fails to go into command mode
-	if(BT_Recieve() == 'E'){
-		Error(0x01);
-	}
+	LCD_Byte(BT_Recieve(), 0x01);
+	LCD_Byte(BT_Recieve(), 0x01);
+	LCD_Byte(BT_Recieve(), 0x01);
+
 	//Wait for 1 second to ensure the device has power
-	_delay_ms(8000);
+	_delay_ms(1000);
 	
 	Uart_Flush();
 	
-	unsigned char adress[12] = {'0','0','0','6','6','6','7','6','A','1','3','F'};
+	unsigned char adress[12] = {'0','0','0','6','6','6','7','6','A','0','A','A'};
 	
 	BT_Send('c');
 	BT_Send(',');
@@ -124,12 +134,11 @@ int BT_Init(void){
 
 	//Wait two seconds
 	//_delay_ms(8000);
-	_delay_ms(8000);
+	_delay_ms(1000);
 	
 	for(int i = 0; i<6;i++){
 		BT_Recieve();
 	}
-	
 	
 	if(BT_Recieve() == '%'){
 		PORTB = (1<<PORTB1);
@@ -152,7 +161,44 @@ void I2C_Init(void){
 }
 
 void BT_Connect(void){
-	
+
+		//Wait for 1 second to ensure the device has power
+		_delay_ms(8000);
+
+		for(int i = 0; i<3; i++) BT_Send('-');
+		BT_Send(0x0A); //NL
+		BT_Send(0x0D); //CR
+		_delay_ms(1000);
+		LCD_Byte(0x01, 0x00);
+		_delay_ms(150); //5 ms delay
+		Uart_Flush();
+
+		//Sends command to enter command mode
+		for(int i = 0; i<3; i++) BT_Send('$');
+		//If it fails to go into command mode
+		LCD_Byte(BT_Recieve(), 0x01);
+		LCD_Byte(BT_Recieve(), 0x01);
+		LCD_Byte(BT_Recieve(), 0x01);
+
+		//Wait for 1 second to ensure the device has power
+		_delay_ms(1000);
+		
+		Uart_Flush();
+		
+		unsigned char adress[12] = {'0','0','0','6','6','6','7','6','A','0','A','A'};
+		
+		BT_Send('c');
+		BT_Send(',');
+		for(int i = 0; i < 12;i++){
+			BT_Send(adress[i]);
+		}
+		BT_Send(0x0A); //NL
+		BT_Send(0x0D); //CR
+
+		//Wait two seconds
+		//_delay_ms(8000);
+		_delay_ms(1000);
+
 	
 }
 
@@ -182,21 +228,28 @@ void Error(unsigned int errorcode){
 	unsigned long ticks = 0;
 	for(;;){
 		if(ticks%10000 == 0){
-			PINB = (1<<BRAKELIGHT);
+			PINB = (1<<PORTB1);
 			BT_Send(errorcode);
 		}
 		if(ticks%10000 == 50000){
-			PINB = (0<<BRAKELIGHT);
+			PINB = (0<<PORTB1);
 		}
 		ticks++;
 	}
 }
 
 
-void Y_LED_On(void){
+void Yellow_LED_On(void){
 	PORTD |= (1<<PORTD7);
 }
-void Y_LED_Off(void){
+void Yellow_LED_Off(void){
 	PORTD &= (0<<PORTD7);
+}
+
+void Red_LED_On(void){
+	PORTB |= (1<<PORTB1);
+}
+void Red_LED_Off(void){
+	PORTB &= (0<<PORTB1);
 }
 	

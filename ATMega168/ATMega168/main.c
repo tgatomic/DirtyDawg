@@ -33,33 +33,31 @@ int main(void){
 	//while(BT_Init()==0);
 	
 	TWI_Master_Init();
+	
 
 	LCD_Init();
+	BT_Init();
+/*
 	uint8_t array1[] = {'H','E','L','L','O'};
-	uint8_t array2[] = {'W','O','R','L','D'};
+	uint8_t array2[] = {'W','O','R','L','D','!'};
 	LCD_String(array1, ARR_SIZE(array1),array2, ARR_SIZE(array2));
-	
-	Y_LED_Off();
+*/	
+	Yellow_LED_Off();
+	Red_LED_Off();
 	while(TRUE){
-		if(DirtyDawg.state == FALSE)
-			Y_LED_Off();
-		else
-			Y_LED_On();
+		Red_LED_On();
+		_delay_ms(1000);
+		Red_LED_Off();
+		_delay_ms(1000);
 	}
 		
 }
 
 ISR(PCINT2_vect){
-	if(DirtyDawg.state == FALSE)
-		DirtyDawg.state = TRUE;
-	else
-		DirtyDawg.state = FALSE;
+
 }
 
 ISR(INT1_vect){
-	if(DirtyDawg.state == FALSE)
-	DirtyDawg.state = TRUE;
-	else
-	DirtyDawg.state = FALSE;
+	BT_Connect();
 }
 
