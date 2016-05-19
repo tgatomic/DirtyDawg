@@ -80,7 +80,7 @@ U 1 1 57175BAE
 P 3200 3150
 F 0 "D9" H 3200 3250 50  0000 C CNN
 F 1 "IR_Recieve" H 3216 2983 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 3200 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 3200 3150 50  0001 C CNN
 F 3 "" H 3200 3150 50  0000 C CNN
 	1    3200 3150
 	0    -1   -1   0   
@@ -91,7 +91,7 @@ U 1 1 57175BB4
 P 2800 3150
 F 0 "D7" H 2800 3250 50  0000 C CNN
 F 1 "LED" V 2800 3050 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 2800 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 2800 3150 50  0001 C CNN
 F 3 "" H 2800 3150 50  0000 C CNN
 	1    2800 3150
 	0    -1   -1   0   
@@ -102,7 +102,7 @@ U 1 1 57175BBA
 P 3600 3150
 F 0 "D11" H 3600 3250 50  0000 C CNN
 F 1 "LED" V 3600 3050 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 3600 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 3600 3150 50  0001 C CNN
 F 3 "" H 3600 3150 50  0000 C CNN
 	1    3600 3150
 	0    -1   -1   0   
@@ -148,7 +148,7 @@ U 1 1 57175BF9
 P 1700 3150
 F 0 "D3" H 1700 3250 50  0000 C CNN
 F 1 "IR_Recieve" H 1716 2983 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 1700 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 1700 3150 50  0001 C CNN
 F 3 "" H 1700 3150 50  0000 C CNN
 	1    1700 3150
 	0    -1   -1   0   
@@ -159,7 +159,7 @@ U 1 1 57175BFF
 P 1300 3150
 F 0 "D1" H 1300 3250 50  0000 C CNN
 F 1 "LED" V 1300 3050 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 1300 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 1300 3150 50  0001 C CNN
 F 3 "" H 1300 3150 50  0000 C CNN
 	1    1300 3150
 	0    -1   -1   0   
@@ -170,7 +170,7 @@ U 1 1 57175C05
 P 2100 3150
 F 0 "D5" H 2100 3250 50  0000 C CNN
 F 1 "LED" V 2100 3050 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 2100 3150 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 2100 3150 50  0001 C CNN
 F 3 "" H 2100 3150 50  0000 C CNN
 	1    2100 3150
 	0    -1   -1   0   
@@ -192,7 +192,7 @@ U 1 1 57175C18
 P 3550 3850
 F 0 "Q2" H 3850 3900 50  0000 R CNN
 F 1 "Q_NPN_BCE" H 4150 3800 50  0001 R CNN
-F 2 "Transistors_OldSowjetAera:OldSowjetaera_Transistor_Type-I_BigPads" H 3750 3950 50  0001 C CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Inline_Narrow_Oval" H 3750 3950 50  0001 C CNN
 F 3 "" H 3550 3850 50  0000 C CNN
 	1    3550 3850
 	0    -1   -1   0   
@@ -285,7 +285,7 @@ U 1 1 5718B316
 P 3200 6200
 F 0 "D10" H 3200 6300 50  0000 C CNN
 F 1 "IR_Recieve" H 3216 6033 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 3200 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 3200 6200 50  0001 C CNN
 F 3 "" H 3200 6200 50  0000 C CNN
 	1    3200 6200
 	0    -1   -1   0   
@@ -296,7 +296,7 @@ U 1 1 5718B31C
 P 2800 6200
 F 0 "D8" H 2800 6300 50  0000 C CNN
 F 1 "LED" V 2800 6100 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 2800 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 2800 6200 50  0001 C CNN
 F 3 "" H 2800 6200 50  0000 C CNN
 	1    2800 6200
 	0    -1   -1   0   
@@ -307,7 +307,7 @@ U 1 1 5718B322
 P 3600 6200
 F 0 "D12" H 3600 6300 50  0000 C CNN
 F 1 "LED" V 3600 6100 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 3600 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 3600 6200 50  0001 C CNN
 F 3 "" H 3600 6200 50  0000 C CNN
 	1    3600 6200
 	0    -1   -1   0   
@@ -353,7 +353,7 @@ U 1 1 5718B33B
 P 1700 6200
 F 0 "D4" H 1700 6300 50  0000 C CNN
 F 1 "IR_Recieve" H 1716 6033 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 1700 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 1700 6200 50  0001 C CNN
 F 3 "" H 1700 6200 50  0000 C CNN
 	1    1700 6200
 	0    -1   -1   0   
@@ -364,7 +364,7 @@ U 1 1 5718B341
 P 1300 6200
 F 0 "D2" H 1300 6300 50  0000 C CNN
 F 1 "LED" V 1300 6100 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 1300 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 1300 6200 50  0001 C CNN
 F 3 "" H 1300 6200 50  0000 C CNN
 	1    1300 6200
 	0    -1   -1   0   
@@ -375,7 +375,7 @@ U 1 1 5718B347
 P 2100 6200
 F 0 "D6" H 2100 6300 50  0000 C CNN
 F 1 "LED" V 2100 6100 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_1-2mmDrill" H 2100 6200 50  0001 C CNN
+F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 2100 6200 50  0001 C CNN
 F 3 "" H 2100 6200 50  0000 C CNN
 	1    2100 6200
 	0    -1   -1   0   
@@ -397,7 +397,7 @@ U 1 1 5718B353
 P 3550 6900
 F 0 "Q3" H 3850 6950 50  0000 R CNN
 F 1 "Q_NPN_BCE" H 4150 6850 50  0001 R CNN
-F 2 "Transistors_OldSowjetAera:OldSowjetaera_Transistor_Type-I_BigPads" H 3750 7000 50  0001 C CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Inline_Narrow_Oval" H 3750 7000 50  0001 C CNN
 F 3 "" H 3550 6900 50  0000 C CNN
 	1    3550 6900
 	0    -1   -1   0   
