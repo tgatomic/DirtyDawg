@@ -6,12 +6,15 @@
  */ 
 #define F_CPU 8000000UL
 
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include "functions.h"
 #include "TWI_Master.h"
 #include "TWI_LCD.h"
+#include "Suart/MAIN.H"
+#include "Suart/SUART.H"
 
 #define TRUE 1
 #define FALSE 0
@@ -24,10 +27,21 @@ DATA DirtyDawg;
 int main(void){
 
 	DirtyDawg.state = 0;
-	System_Init(); //Checked - OK!
+	//System_Init(); //Checked - OK!
 	//Baud rate max is 19200 (double speed enabled)
 
-	UART_Init(19200); //Checked - OK!
+	//UART_Init(19200); //Checked - OK!
+	
+	
+	  suart_init();
+	  sei();
+	  //sputs("Hallo Peter !\n\r" );
+
+	  for(;;){				// main loop
+		  sputchar( '-' );
+		  while( !kbhit() );			// wait until byte received
+		  sputchar( 'S' );		// sent byte + 1
+	  }
 
 	//Connects to BT device
 	//while(BT_Init()==0);
