@@ -13,8 +13,7 @@
 #include "functions.h"
 #include "TWI_Master.h"
 #include "TWI_LCD.h"
-#include "Suart/MAIN.H"
-#include "Suart/SUART.H"
+#include "SWUART.H"
 
 #define TRUE 1
 #define FALSE 0
@@ -33,21 +32,14 @@ int main(void){
 	//UART_Init(19200); //Checked - OK!
 	
 	
-	  suart_init();
-	  sei();
-	  //sputs("Hallo Peter !\n\r" );
 
-	  for(;;){				// main loop
-		  sputchar( '-' );
-		  while( !kbhit() );			// wait until byte received
-		  sputchar( 'S' );		// sent byte + 1
-	  }
 
 	//Connects to BT device
 	//while(BT_Init()==0);
 	
 	TWI_Master_Init();
 	
+<<<<<<< HEAD
 
 	LCD_Init();
 	BT_Init();
@@ -58,6 +50,27 @@ int main(void){
 */	
 	Yellow_LED_Off();
 	Red_LED_Off();
+=======
+	LCD_Init();
+	
+	UART_Init();
+	
+	suart_init();
+	
+	BT_Init();
+	  
+	sputs("The DirtyDawg Is Awake!\n\r" );
+
+	for(;;){				// main loop
+		sputchar( '-' );
+		while( !kbhit() );			// wait until byte received
+		LCD_Byte( sgetchar(), LCD_CHR );		// sent byte + 
+	}
+
+
+	
+	Y_LED_Off();
+>>>>>>> origin/ATMega168
 	while(TRUE){
 		Red_LED_On();
 		_delay_ms(1000);
