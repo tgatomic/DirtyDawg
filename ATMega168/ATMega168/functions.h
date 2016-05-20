@@ -52,14 +52,15 @@ int status; //Delete later
 /************************************************************************/
 typedef struct data{
 
-	int lightvalue;
-
 	int left_sensor;
 	int right_sensor;
 	int front_sensor;
 	int back_sensor;
 	//Or Distsensor[4]	
 
+	uint8_t accelerometer;
+	uint8_t ECG;
+	
 	//Is one if the controller has prompted for the lights to be turned on
 	uint8_t lights;
 	

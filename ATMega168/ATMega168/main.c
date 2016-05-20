@@ -14,10 +14,17 @@
 #include "TWI_Master.h"
 #include "TWI_LCD.h"
 #include "SWUART.H"
+#include "main.h"
 
 #define TRUE 1
 #define FALSE 0
 #define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
+
+
+#define LCD_STATE 1
+#define BT_STATE 2
+
+uint8_t LCD_initiated = 0;
 
 
 //Name of the main struct with all the data in for the different sensors and values
@@ -25,66 +32,101 @@ DATA DirtyDawg;
 
 int main(void){
 
+	// Sets the starting state
 	DirtyDawg.state = 0;
-	//System_Init(); //Checked - OK!
-	//Baud rate max is 19200 (double speed enabled)
 
-	//UART_Init(19200); //Checked - OK!
+	// Initiate the hardware
+	System_Init();
 	
-	
-
-
-	//Connects to BT device
-	//while(BT_Init()==0);
-	
+	// Initiate the TWI bus as a master
 	TWI_Master_Init();
-	
-<<<<<<< HEAD
 
-	LCD_Init();
-	BT_Init();
-/*
-	uint8_t array1[] = {'H','E','L','L','O'};
-	uint8_t array2[] = {'W','O','R','L','D','!'};
-	LCD_String(array1, ARR_SIZE(array1),array2, ARR_SIZE(array2));
-*/	
-	Yellow_LED_Off();
-	Red_LED_Off();
-=======
+	// Initiate the LCD Screen
 	LCD_Init();
 	
-	UART_Init();
+	// Initiate the hardware defined UART
+	UART_Init(19200);
 	
+	// Initiate the software define UART
 	suart_init();
 	
+	// Initiate/Clear the BlueSmirf from previous commands
 	BT_Init();
+	
+	// Connect the Bluesmirf to the car
+	BT_Connect();
 	  
+	//Prints a message to tell the user that the controller is running
 	sputs("The DirtyDawg Is Awake!\n\r" );
 
+	uint8_t word;
 	for(;;){				// main loop
 		sputchar( '-' );
 		while( !kbhit() );			// wait until byte received
-		LCD_Byte( sgetchar(), LCD_CHR );		// sent byte + 
+		word = sgetchar();
+		LCD_Byte( word, LCD_CHR );		// sent byte + 
+		BT_Send(word);
 	}
 
-
-	
-	Y_LED_Off();
->>>>>>> origin/ATMega168
-	while(TRUE){
-		Red_LED_On();
-		_delay_ms(1000);
-		Red_LED_Off();
-		_delay_ms(1000);
-	}
+	for(;;){
 		
+		
+		switch(DirtyDawg.state){
+			
+			case LCD_STATE:
+				LCD_Update();
+				break;
+			
+			case BT_STATE:
+				BT_Send_Data();
+				break;
+				
+			
+
+		}
+	}	
 }
 
 ISR(PCINT2_vect){
 
 }
-
+/*
 ISR(INT1_vect){
 	BT_Connect();
 }
 
+*/
+
+void LCD_Update(void){
+	
+	// Initiate the distance screen
+	if(LCD_initiated){
+		LCD_String(ROW1, ARR_SIZE(ROW1), ROW2, ARR_SIZE(ROW2))
+		LCD_initiated = 1;
+	}
+	
+	// Prints the distance to front obstacle
+	LCD_Byte(place in screen, LCD_CMD);
+	LCD_Byte(DirtyDawg.front_sensor, LCD_CHR);
+	
+	// Prints the distance to back obstacle
+	LCD_Byte(place in screen, LCD_CMD);
+	LCD_Byte(DirtyDawg.back_sensor, LCD_CHR);
+	
+	// Prints the distance to left obstacle
+	LCD_Byte(place in screen, LCD_CMD);
+	LCD_Byte(DirtyDawg.left_sensor, LCD_CHR);
+	
+	// Prints the distance to right obstacle
+	LCD_Byte(place in screen, LCD_CMD);
+	LCD_Byte(DirtyDawg.right_sensor, LCD_CHR);
+	
+	//Change state
+}
+void BT_Send_Data(void){
+	
+	BT_Send(DirtyDawg.accelerometer);
+	BT_Send(DirtyDawg.ECG);
+	
+	//Change state
+}
