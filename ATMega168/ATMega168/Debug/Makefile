@@ -40,7 +40,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../functions.c \
 ../main.c \
-../Suart/SUART.C \
+../SWUART.c \
 ../TWI_LCD.c \
 ../TWI_Master.c
 
@@ -54,28 +54,28 @@ ASM_SRCS +=
 OBJS +=  \
 functions.o \
 main.o \
-Suart/SUART.o \
+SWUART.o \
 TWI_LCD.o \
 TWI_Master.o
 
 OBJS_AS_ARGS +=  \
 functions.o \
 main.o \
-Suart/SUART.o \
+SWUART.o \
 TWI_LCD.o \
 TWI_Master.o
 
 C_DEPS +=  \
 functions.d \
 main.d \
-Suart/SUART.d \
+SWUART.d \
 TWI_LCD.d \
 TWI_Master.d
 
 C_DEPS_AS_ARGS +=  \
 functions.d \
 main.d \
-Suart/SUART.d \
+SWUART.d \
 TWI_LCD.d \
 TWI_Master.d
 
@@ -97,12 +97,7 @@ LINKER_SCRIPT_DEP+=
 
 
 
-Suart/SUART.o: ../Suart/SUART.C
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega168p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\gcc\dev\atmega168p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
+
 
 
 

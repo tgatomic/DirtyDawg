@@ -16,13 +16,13 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 Allocating common symbols
 Common symbol       size              file
 
-stx_data            0x1               Suart/SUART.o
-srx_mask            0x1               Suart/SUART.o
+stx_data            0x1               SWUART.o
+srx_mask            0x1               SWUART.o
 DirtyDawg           0xd               main.o
-srx_data            0x1               Suart/SUART.o
-stx_count           0x1               Suart/SUART.o
-srx_done            0x1               Suart/SUART.o
-srx_tmp             0x1               Suart/SUART.o
+srx_data            0x1               SWUART.o
+stx_count           0x1               SWUART.o
+srx_done            0x1               SWUART.o
+srx_tmp             0x1               SWUART.o
 status              0x2               functions.o
 
 Discarded input sections
@@ -38,7 +38,6 @@ Discarded input sections
                 0x00000000       0x4a functions.o
  .text.BT_Recieve
                 0x00000000       0x10 functions.o
- .text.BT_Send  0x00000000       0x10 functions.o
  .text.Uart_Flush
                 0x00000000       0x1a functions.o
  .text.I2C_Init
@@ -53,88 +52,36 @@ Discarded input sections
                 0x00000000        0x2 functions.o
  .text.Sense_Light
                 0x00000000        0x2 functions.o
- .text.Error    0x00000000       0x42 functions.o
  .rodata        0x00000000        0xc functions.o
  .text.BT_Init  0x00000000      0x10c functions.o
  .text.Y_LED_On
                 0x00000000        0x4 functions.o
  .text.Y_LED_Off
                 0x00000000        0x6 functions.o
- .debug_info    0x00000000      0x53d functions.o
- .debug_abbrev  0x00000000      0x1c9 functions.o
- .debug_loc     0x00000000      0x199 functions.o
- .debug_aranges
-                0x00000000       0x90 functions.o
- .debug_ranges  0x00000000       0x80 functions.o
- .debug_line    0x00000000      0x277 functions.o
- .debug_str     0x00000000      0x290 functions.o
- .comment       0x00000000       0x31 functions.o
- .debug_frame   0x00000000      0x128 functions.o
  COMMON         0x00000000        0x2 functions.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
- .text          0x00000000        0x0 Suart/SUART.o
- .data          0x00000000        0x0 Suart/SUART.o
- .bss           0x00000000        0x0 Suart/SUART.o
- .text.sgetchar
-                0x00000000       0x12 Suart/SUART.o
- .text.sputs    0x00000000       0x1e Suart/SUART.o
- .rodata.str1.1
-                0x00000000       0x10 Suart/SUART.o
- .text.example_main
-                0x00000000       0x28 Suart/SUART.o
+ .text          0x00000000        0x0 SWUART.o
+ .data          0x00000000        0x0 SWUART.o
+ .bss           0x00000000        0x0 SWUART.o
  .text          0x00000000        0x0 TWI_LCD.o
  .data          0x00000000        0x0 TWI_LCD.o
  .bss           0x00000000        0x0 TWI_LCD.o
- .text.Write_Byte
-                0x00000000       0x86 TWI_LCD.o
- .text.LCD_Toggle_enable
-                0x00000000       0x40 TWI_LCD.o
- .text.LCD_Byte
-                0x00000000       0x3a TWI_LCD.o
- .text.LCD_Init
-                0x00000000       0x3e TWI_LCD.o
  .text.LCD_String
                 0x00000000       0x76 TWI_LCD.o
- .debug_info    0x00000000      0x531 TWI_LCD.o
- .debug_abbrev  0x00000000      0x179 TWI_LCD.o
- .debug_loc     0x00000000      0x37c TWI_LCD.o
- .debug_aranges
-                0x00000000       0x40 TWI_LCD.o
- .debug_ranges  0x00000000       0x30 TWI_LCD.o
- .debug_line    0x00000000      0x1ce TWI_LCD.o
- .debug_str     0x00000000      0x242 TWI_LCD.o
- .comment       0x00000000       0x31 TWI_LCD.o
- .debug_frame   0x00000000       0xb8 TWI_LCD.o
  .text          0x00000000        0x0 TWI_Master.o
  .data          0x00000000        0x0 TWI_Master.o
  .bss           0x00000000        0x0 TWI_Master.o
- .text.TWI_Master_Init
-                0x00000000       0x28 TWI_Master.o
- .text.TWI_Busy
-                0x00000000        0xa TWI_Master.o
  .text.TWI_Send
                 0x00000000       0x86 TWI_Master.o
  .text.TWI_Receive
                 0x00000000       0x74 TWI_Master.o
- .debug_info    0x00000000      0x205 TWI_Master.o
- .debug_abbrev  0x00000000      0x124 TWI_Master.o
- .debug_loc     0x00000000       0xd5 TWI_Master.o
- .debug_aranges
-                0x00000000       0x38 TWI_Master.o
- .debug_ranges  0x00000000       0x28 TWI_Master.o
- .debug_line    0x00000000      0x186 TWI_Master.o
- .debug_str     0x00000000      0x1bc TWI_Master.o
- .comment       0x00000000       0x31 TWI_Master.o
- .debug_frame   0x00000000       0x68 TWI_Master.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.mul
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
- .text.libgcc.div
-                0x00000000       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.prologue
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
@@ -243,7 +190,7 @@ Address of section .data set to 0x800100
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.90/gcc/dev/atmega168p/avr5/crtatmega168p.o
 LOAD functions.o
 LOAD main.o
-LOAD Suart/SUART.o
+LOAD SWUART.o
 LOAD TWI_LCD.o
 LOAD TWI_Master.o
 START GROUP
@@ -346,7 +293,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x28a
+.text           0x00000000      0x486
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.90/gcc/dev/atmega168p/avr5/crtatmega168p.o
                 0x00000000                __vector_default
@@ -404,13 +351,14 @@ END GROUP
  *(.text)
  .text          0x000000a2        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.90/gcc/dev/atmega168p/avr5/crtatmega168p.o
                 0x000000a2                __vector_22
-                0x000000a2                __vector_1
                 0x000000a2                __vector_24
+                0x000000a2                __vector_12
                 0x000000a2                __bad_interrupt
                 0x000000a2                __vector_6
                 0x000000a2                __vector_3
                 0x000000a2                __vector_23
                 0x000000a2                __vector_25
+                0x000000a2                __vector_11
                 0x000000a2                __vector_13
                 0x000000a2                __vector_17
                 0x000000a2                __vector_19
@@ -418,42 +366,71 @@ END GROUP
                 0x000000a2                __vector_4
                 0x000000a2                __vector_9
                 0x000000a2                __vector_21
-                0x000000a2                __vector_15
                 0x000000a2                __vector_8
-                0x000000a2                __vector_14
+                0x000000a2                __vector_10
                 0x000000a2                __vector_16
                 0x000000a2                __vector_18
                 0x000000a2                __vector_20
                 0x000000a6                . = ALIGN (0x2)
  *(.text.*)
- .text.main     0x000000a6       0x20 main.o
-                0x000000a6                main
+ .text.BT_Send  0x000000a6       0x10 functions.o
+                0x000000a6                BT_Send
+ .text.Error    0x000000b6       0x42 functions.o
+                0x000000b6                Error
+ .text.main     0x000000f8       0x34 main.o
+                0x000000f8                main
  .text.__vector_5
-                0x000000c6       0x2c main.o
-                0x000000c6                __vector_5
+                0x0000012c       0x2c main.o
+                0x0000012c                __vector_5
  .text.__vector_2
-                0x000000f2       0x2c main.o
-                0x000000f2                __vector_2
+                0x00000158       0x2c main.o
+                0x00000158                __vector_2
  .text.suart_init
-                0x0000011e       0x34 Suart/SUART.o
-                0x0000011e                suart_init
- .text.__vector_10
-                0x00000152       0x48 Suart/SUART.o
-                0x00000152                __vector_10
- .text.__vector_12
-                0x0000019a       0x74 Suart/SUART.o
-                0x0000019a                __vector_12
+                0x00000184       0x20 SWUART.o
+                0x00000184                suart_init
+ .text.sgetchar
+                0x000001a4       0x12 SWUART.o
+                0x000001a4                sgetchar
+ .text.__vector_1
+                0x000001b6       0x3a SWUART.o
+                0x000001b6                __vector_1
+ .text.__vector_15
+                0x000001f0       0x5a SWUART.o
+                0x000001f0                __vector_15
  .text.sputchar
-                0x0000020e       0x16 Suart/SUART.o
-                0x0000020e                sputchar
- .text.__vector_11
-                0x00000224       0x62 Suart/SUART.o
-                0x00000224                __vector_11
-                0x00000286                . = ALIGN (0x2)
+                0x0000024a       0x16 SWUART.o
+                0x0000024a                sputchar
+ .text.sputs    0x00000260       0x1e SWUART.o
+                0x00000260                sputs
+ .text.__vector_14
+                0x0000027e       0x50 SWUART.o
+                0x0000027e                __vector_14
+ .text.Write_Byte
+                0x000002ce       0x86 TWI_LCD.o
+                0x000002ce                Write_Byte
+ .text.LCD_Toggle_enable
+                0x00000354       0x40 TWI_LCD.o
+                0x00000354                LCD_Toggle_enable
+ .text.LCD_Byte
+                0x00000394       0x3a TWI_LCD.o
+                0x00000394                LCD_Byte
+ .text.LCD_Init
+                0x000003ce       0x3e TWI_LCD.o
+                0x000003ce                LCD_Init
+ .text.TWI_Master_Init
+                0x0000040c       0x28 TWI_Master.o
+                0x0000040c                TWI_Master_Init
+ .text.TWI_Busy
+                0x00000434        0xa TWI_Master.o
+                0x00000434                TWI_Busy
+ .text.libgcc.div
+                0x0000043e       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
+                0x0000043e                __udivmodsi4
+                0x00000482                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000286        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
-                0x00000286                _exit
-                0x00000286                exit
+ .fini9         0x00000482        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+                0x00000482                _exit
+                0x00000482                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -472,45 +449,47 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000286        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000482        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000028a                _etext = .
+                0x00000486                _etext = .
 
-.data           0x00800100        0x0 load address 0x0000028a
+.data           0x00800100       0x1a load address 0x00000486
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  *(.rodata)
  *(.rodata*)
+ .rodata.str1.1
+                0x00800100       0x1a main.o
  *(.gnu.linkonce.d*)
-                0x00800100                . = ALIGN (0x2)
-                0x00800100                _edata = .
-                0x00800100                PROVIDE (__data_end, .)
+                0x0080011a                . = ALIGN (0x2)
+                0x0080011a                _edata = .
+                0x0080011a                PROVIDE (__data_end, .)
 
-.bss            0x00800100       0x13
-                0x00800100                PROVIDE (__bss_start, .)
+.bss            0x0080011a       0x13
+                0x0080011a                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  *(COMMON)
- COMMON         0x00800100        0xd main.o
-                0x00800100                DirtyDawg
- COMMON         0x0080010d        0x6 Suart/SUART.o
-                0x0080010d                stx_data
-                0x0080010e                srx_mask
-                0x0080010f                srx_data
-                0x00800110                stx_count
-                0x00800111                srx_done
-                0x00800112                srx_tmp
-                0x00800113                PROVIDE (__bss_end, .)
-                0x0000028a                __data_load_start = LOADADDR (.data)
-                0x0000028a                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0080011a        0xd main.o
+                0x0080011a                DirtyDawg
+ COMMON         0x00800127        0x6 SWUART.o
+                0x00800127                stx_data
+                0x00800128                srx_mask
+                0x00800129                srx_data
+                0x0080012a                stx_count
+                0x0080012b                srx_done
+                0x0080012c                srx_tmp
+                0x0080012d                PROVIDE (__bss_end, .)
+                0x00000486                __data_load_start = LOADADDR (.data)
+                0x000004a0                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800113        0x0
-                0x00800113                PROVIDE (__noinit_start, .)
+.noinit         0x0080012d        0x0
+                0x0080012d                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800113                PROVIDE (__noinit_end, .)
-                0x00800113                _end = .
-                0x00800113                PROVIDE (__heap_start, .)
+                0x0080012d                PROVIDE (__noinit_end, .)
+                0x0080012d                _end = .
+                0x0080012d                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -551,9 +530,12 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 main.o
+ .comment       0x00000000       0x30 functions.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x31 Suart/SUART.o
+ .comment       0x00000030       0x31 main.o
+ .comment       0x00000030       0x31 SWUART.o
+ .comment       0x00000030       0x31 TWI_LCD.o
+ .comment       0x00000030       0x31 TWI_Master.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x40
@@ -575,47 +557,74 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x88
+.debug_aranges  0x00000000      0x188
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x30 main.o
+                0x00000000       0x90 functions.o
  .debug_aranges
-                0x00000030       0x58 Suart/SUART.o
+                0x00000090       0x30 main.o
+ .debug_aranges
+                0x000000c0       0x50 SWUART.o
+ .debug_aranges
+                0x00000110       0x40 TWI_LCD.o
+ .debug_aranges
+                0x00000150       0x38 TWI_Master.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x47f
+.debug_info     0x00000000     0x1199
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0x202 main.o
- .debug_info    0x00000202      0x27d Suart/SUART.o
+ .debug_info    0x00000000      0x53d functions.o
+ .debug_info    0x0000053d      0x28d main.o
+ .debug_info    0x000007ca      0x299 SWUART.o
+ .debug_info    0x00000a63      0x531 TWI_LCD.o
+ .debug_info    0x00000f94      0x205 TWI_Master.o
 
-.debug_abbrev   0x00000000      0x26e
+.debug_abbrev   0x00000000      0x70e
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x138 main.o
- .debug_abbrev  0x00000138      0x136 Suart/SUART.o
+ .debug_abbrev  0x00000000      0x1c9 functions.o
+ .debug_abbrev  0x000001c9      0x167 main.o
+ .debug_abbrev  0x00000330      0x141 SWUART.o
+ .debug_abbrev  0x00000471      0x179 TWI_LCD.o
+ .debug_abbrev  0x000005ea      0x124 TWI_Master.o
 
-.debug_line     0x00000000      0x24d
+.debug_line     0x00000000      0x816
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000       0xf2 main.o
- .debug_line    0x000000f2      0x15b Suart/SUART.o
+ .debug_line    0x00000000      0x277 functions.o
+ .debug_line    0x00000277      0x10a main.o
+ .debug_line    0x00000381      0x141 SWUART.o
+ .debug_line    0x000004c2      0x1ce TWI_LCD.o
+ .debug_line    0x00000690      0x186 TWI_Master.o
 
-.debug_frame    0x00000000      0x158
+.debug_frame    0x00000000      0x374
  *(.debug_frame)
- .debug_frame   0x00000000       0x64 main.o
- .debug_frame   0x00000064       0xf4 Suart/SUART.o
+ .debug_frame   0x00000000      0x128 functions.o
+ .debug_frame   0x00000128       0x64 main.o
+ .debug_frame   0x0000018c       0xc8 SWUART.o
+ .debug_frame   0x00000254       0xb8 TWI_LCD.o
+ .debug_frame   0x0000030c       0x68 TWI_Master.o
 
-.debug_str      0x00000000      0x288
+.debug_str      0x00000000      0x469
  *(.debug_str)
- .debug_str     0x00000000      0x1fc main.o
-                                0x23a (size before relaxing)
- .debug_str     0x000001fc       0x8c Suart/SUART.o
-                                0x229 (size before relaxing)
+ .debug_str     0x00000000      0x257 functions.o
+                                0x290 (size before relaxing)
+ .debug_str     0x00000257       0xf9 main.o
+                                0x26b (size before relaxing)
+ .debug_str     0x00000350       0x68 SWUART.o
+                                0x214 (size before relaxing)
+ .debug_str     0x000003b8       0x7d TWI_LCD.o
+                                0x242 (size before relaxing)
+ .debug_str     0x00000435       0x34 TWI_Master.o
+                                0x1bc (size before relaxing)
 
-.debug_loc      0x00000000      0x2b1
+.debug_loc      0x00000000      0x858
  *(.debug_loc)
- .debug_loc     0x00000000       0x78 main.o
- .debug_loc     0x00000078      0x239 Suart/SUART.o
+ .debug_loc     0x00000000      0x199 functions.o
+ .debug_loc     0x00000199       0x78 main.o
+ .debug_loc     0x00000211      0x1f6 SWUART.o
+ .debug_loc     0x00000407      0x37c TWI_LCD.o
+ .debug_loc     0x00000783       0xd5 TWI_Master.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -635,10 +644,13 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x68
+.debug_ranges   0x00000000      0x138
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x20 main.o
- .debug_ranges  0x00000020       0x48 Suart/SUART.o
+ .debug_ranges  0x00000000       0x80 functions.o
+ .debug_ranges  0x00000080       0x20 main.o
+ .debug_ranges  0x000000a0       0x40 SWUART.o
+ .debug_ranges  0x000000e0       0x30 TWI_LCD.o
+ .debug_ranges  0x00000110       0x28 TWI_Master.o
 
 .debug_macro
  *(.debug_macro)

@@ -121,10 +121,10 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Suart\SUART.C">
+    <Compile Include="SWUART.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Suart\SUART.H">
+    <Compile Include="SWUART.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="TWI_LCD.c">

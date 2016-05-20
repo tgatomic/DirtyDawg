@@ -6,7 +6,7 @@ functions.c
 
 main.c
 
-Suart\SUART.C
+SWUART.c
 
 TWI_LCD.c
 

@@ -17,7 +17,7 @@
 
 
 volatile u8 stx_count;
-u8 stx_data;
+volatile u8 stx_data;
 
 volatile u8 srx_done;
 volatile u8 srx_data;
@@ -28,12 +28,12 @@ volatile u8 srx_tmp;
 void suart_init( void )
 {
   OCR1A = TCNT1 + 1;				// force first compare
-  TCCR1A = (1 << COM1A1) | (1 << COM1A0);		// set OC1A high, T1 mode 0
-  TCCR1B = (1 << ICNC1) | (1 << CS10);		// noise canceler, 1>0 transition,
+  TCCR1A = (1 << COM1A1) ^ (1 << COM1A0);		// set OC1A high, T1 mode 0
+  TCCR1B = (1 << ICNC1) ^ (1 << CS10);		// noise canceler, 1>0 transition,
 									// CLK/1, T1 mode 0
 									
   TIFR1 = (1 << ICF1);					// clear pending interrupt
-  TIMSK1 = (1 << ICIE1) | ( 1<<OCIE1A) ;		// enable tx and wait for start
+  TIMSK1 = (1 << ICIE1) ^ ( 1<<OCIE1A) ;		// enable tx and wait for start
 
   stx_count = 0;			// nothing to sent
   srx_done = 0;				// nothing received
@@ -56,7 +56,7 @@ ISR( TIMER1_CAPT_vect )		// rx start
   srx_mask = 1;				// bit mask
   TIFR1 = (1 << OCF1B);			// clear pending interrupt
   if( !(SRXPIN & (1 << SRX)))		// still low
-    TIMSK1 = (1 << OCIE1A) | (1 << OCIE1B);	// wait for first bit
+    TIMSK1 = (1 << OCIE1A) ^ (1 << OCIE1B);	// wait for first bit
 }
 
 //TIM1_COMPB_vect	SIG_OUTPUT_COMPARE1B	Timer/Counter1 Compare Match B
@@ -65,7 +65,7 @@ ISR( TIMER1_COMPB_vect )
   u8 in = SRXPIN;			// scan rx line
 
   if( srx_mask ){
-    if( in & 1<<SRX )
+    if( in & (1<<SRX) )
       srx_tmp |= srx_mask;
     srx_mask <<= 1;
     OCR1B += BIT_TIME;			// next bit slice
@@ -73,7 +73,7 @@ ISR( TIMER1_COMPB_vect )
     srx_done = 1;			// mark rx data valid
     srx_data = srx_tmp;			// store rx data
     TIFR1 = (1 << ICF1);			// clear pending interrupt
-    TIMSK1 = (1 << ICIE1) | (1 << OCIE1A);        // enable tx and wait for start
+    TIMSK1 = (1 << ICIE1) ^ (1 << OCIE1A);        // enable tx and wait for start
   }
 }
 
@@ -106,7 +106,7 @@ ISR( TIMER1_COMPA_vect )		// tx bit
     dout = (1 << COM1A1);			// set low on next compare
     if( count != 9 ){			// no start bit
       if( !(stx_data & 1) )		// test inverted data
-	dout = (1 << COM1A1) | (1<<COM1A0);	// set high on next compare
+	dout = (1 << COM1A1) ^ (1<<COM1A0);	// set high on next compare
       stx_data >>= 1;			// shift zero in from left
     }
     TCCR1A = dout;

@@ -24,9 +24,10 @@
 #define DELAY_MS 8 //Equals 1 ms
 #define LCD_WRITE (0<<0)
 
+#endif
+
 #ifndef ARR_SIZE(x)
 #define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
-#endif
 
 void LCD_Init(void);
 void LCD_Byte(uint8_t bits, uint8_t mode);
