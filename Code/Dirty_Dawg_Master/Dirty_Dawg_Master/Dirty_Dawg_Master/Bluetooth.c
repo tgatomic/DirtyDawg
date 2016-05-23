@@ -12,6 +12,7 @@
 #include "Bluetooth.h"
 #include "functions.h"
 #include "Error_Codes.h"
+#include "TWI_LCD.h"
 
 
 void BT_Pair(void){
@@ -116,15 +117,21 @@ void Error(unsigned int errorcode){
 //Interrupt for UART
 ISR(USART_RX_vect){
 	
-	int i;
+	LCD_Byte(UDR0, LCD_CHR);
+	
+	_delay_ms(1000);
+	LCD_Byte(0x01, LCD_CMD);
+	_delay_ms(250);
+	
+	//int i;
 	
 	// Receives the total number of bytes
-	uint8_t nmbr_bytes = UDR0;
+	//uint8_t nmbr_bytes = UDR0;
 	
 	// Saves it in the buffer
-	for( i = 0; i < nmbr_bytes; i++){
-		DirtyDawg->BT_recieve_buffer[i] = BT_Recieve();
-	}
+	//for( i = 0; i < nmbr_bytes; i++){
+		//DirtyDawg->BT_recieve_buffer[i] = BT_Recieve();
+	//}
 	
 	// Test with echoing back the packages
 	//for( i = 0; i < nmbr_bytes; i++){
