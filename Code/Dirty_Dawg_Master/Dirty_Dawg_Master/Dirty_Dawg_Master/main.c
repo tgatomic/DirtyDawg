@@ -44,7 +44,7 @@ int main(void)
 	TWI_Master_Init();
 
 	// Initiate LCD - Working
-	//LCD_Init();
+	LCD_Init();
 
 	// Initiate PWM - Working Drive working as well
 	PWM_Init();
@@ -52,7 +52,9 @@ int main(void)
 	// Initiate ADC - Not tested
 	ADC_init();
 	
+	while(1);
 	
+	 //itoa();
 
 	/************************************************************************/
 	/*								States									*/
@@ -76,7 +78,7 @@ int main(void)
 		// Something thats needs to be done every pass???
 		
 		// Runs only every 10th pass, not so time crucial.
-		if(ticks++ == 10){
+		if(ticks++ == 20){
 			// Saves the current state to another variable
 			DirtyDawg->oldstate = DirtyDawg->state;
 			
@@ -166,6 +168,30 @@ void Bluetooth(void){
 		DirtyDawg->BT_recieve_buffer[i] = 0;
 	}
 	
+	for (int i = 0; i<255; i++)
+	{
+			DirtyDawg->forward = i;
+			DirtyDawg->backward = i+1;
+			DirtyDawg->left= i+2;
+			DirtyDawg->right = i+3;
+			
+			BT_Send('S');
+			BT_Send(DirtyDawg->forward);
+			BT_Send(DirtyDawg->back_sensor);
+			BT_Send(DirtyDawg->left_sensor);
+			BT_Send(DirtyDawg->right_sensor);
+			
+			if(if == 253){
+				i = 0;
+			}
+			_delay_ms(500);
+			
+	}
+	
+	
+	
+	
+	/*
 	//Make sure there is content in send buffer before sending
 	if(DirtyDawg->BT_send_buffer[0] != 0 || DirtyDawg->BT_send_buffer[1] != 0){
 		
@@ -180,7 +206,7 @@ void Bluetooth(void){
 		}
 		
 	}
-
+	*/
 	//Change state
 	DirtyDawg->state = DRIVE_STATE;
 
@@ -197,10 +223,10 @@ void Bluetooth(void){
 /************************************************************************/
 void Sensors(void){
 
-	DirtyDawg->front_sensor = TWI_Receive(0x03);
-	DirtyDawg->back_sensor = TWI_Receive(0x03);
-	DirtyDawg->left_sensor = TWI_Receive(0x03);
-	DirtyDawg->right_sensor = TWI_Receive(0x03);
+	DirtyDawg->front_sensor = TWI_Receive(ATTINY1);
+	DirtyDawg->back_sensor = TWI_Receive(ATTINY1);
+	DirtyDawg->left_sensor = TWI_Receive(ATTINY2);
+	DirtyDawg->right_sensor = TWI_Receive(ATTINY2);
 
 
 	//set state
