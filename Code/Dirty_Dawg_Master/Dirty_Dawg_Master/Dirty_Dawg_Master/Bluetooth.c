@@ -117,12 +117,25 @@ void Error(unsigned int errorcode){
 //Interrupt for UART
 ISR(USART_RX_vect){
 	
+	//DirtyDawg->BT_recieve_buffer[0] = UDR0;
+	uint8_t data = UDR0;
+	//Uart_Flush();
+	
+	//LCD_Byte( DirtyDawg->BT_recieve_buffer[0] , LCD_CHR);
+	LCD_Byte( data , LCD_CHR);
+	
+
+	
+	return;
+	
+	/*
+	
 	LCD_Byte(UDR0, LCD_CHR);
 	
 	_delay_ms(1000);
 	LCD_Byte(0x01, LCD_CMD);
 	_delay_ms(250);
-	
+	*/
 	//int i;
 	
 	// Receives the total number of bytes

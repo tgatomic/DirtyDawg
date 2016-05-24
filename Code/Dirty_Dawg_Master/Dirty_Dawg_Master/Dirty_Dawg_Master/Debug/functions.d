@@ -15,7 +15,8 @@ functions.d functions.o: .././functions.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././functions.h
+ .././functions.h .././TWI_Master.h .././TWI_LCD.h .././Bluetooth.h \
+ .././PWM.h .././ADC.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -50,3 +51,13 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
 .././functions.h:
+
+.././TWI_Master.h:
+
+.././TWI_LCD.h:
+
+.././Bluetooth.h:
+
+.././PWM.h:
+
+.././ADC.h:

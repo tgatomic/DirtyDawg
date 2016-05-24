@@ -17,11 +17,15 @@
 #include "Bluetooth.h"
 #include "ADC.h"
 #include "Error_Codes.h"
+#include "main.h"
 
-#define LIGHT_STATE 0
-#define BLUETOOTH_STATE 1
-#define SENSOR_STATE 2
-#define DRIVE_STATE 3
+uint8_t state;
+#define LIGHT_STATE 0x00
+#define BLUETOOTH_STATE 0x01
+#define SENSOR_STATE 0x02
+#define DRIVE_STATE 0x03
+
+
 
 #define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
 
@@ -33,28 +37,10 @@ void Vroom(void);
 
 int main(void)
 {
-
-	// Initiate the hardware - Working
+	
+	//Placeholder for all the different init function
 	System_Init();
-
-	// Baud rate max is 19200 (double speed enabled) - Working
-	UART_Init(19200);
-
-	// Initiate TWI - Working
-	TWI_Master_Init();
-
-	// Initiate LCD - Working
-	LCD_Init();
-
-	// Initiate PWM - Working Drive working as well
-	PWM_Init();
 	
-	// Initiate ADC - Not tested
-	ADC_init();
-	
-	while(1);
-	
-	 //itoa();
 
 	/************************************************************************/
 	/*								States									*/
@@ -69,30 +55,36 @@ int main(void)
 	/************************************************************************/
 
 	// Set the state to start in
-	DirtyDawg->state = BLUETOOTH_STATE;
+	state = BLUETOOTH_STATE;
 	
 	uint8_t ticks = 0;
+	control_status = 0;
+	
+	//while(DirtyDawg->BT_recieve_buffer[0] != 'S');
+	//BT_Send(OK); // Send Ack back to say that everything is OK.
+	
 	
 	for(;;){
-
+					
 		// Something thats needs to be done every pass???
 		
 		// Runs only every 10th pass, not so time crucial.
 		if(ticks++ == 20){
 			// Saves the current state to another variable
-			DirtyDawg->oldstate = DirtyDawg->state;
+			DirtyDawg->oldstate = state;
 			
 			// Changes the state
-			DirtyDawg->state = LIGHT_STATE;
+			state = LIGHT_STATE;
 			ticks = 0;
 		}
 		
 		// Main state machine
-		switch(DirtyDawg->state){
+		switch(state){
 			case LIGHT_STATE:
 				Lights();
 				break;
 			case BLUETOOTH_STATE:
+				while (1);
 				Bluetooth();
 				break;
 			case SENSOR_STATE:
@@ -102,8 +94,9 @@ int main(void)
 				Vroom();
 				break;
 			
-			// Activates if there is no state or error occurred
+			// Activates if there is no state
 			default:
+				LCD_String(NO_STATE_STR,8,NO_STATE_STR,8);
 				Error(NO_STATE);
 				break;
 		}
@@ -125,13 +118,13 @@ void Lights(void){
 	
 	DirtyDawg->lightvalue = Read_ADC(LDR_Pin);
 
-	if( status & LIGHTS || DirtyDawg->lightvalue < LIGHT_THRESHOLD ){
+	if( control_status & LIGHTS || DirtyDawg->lightvalue < LIGHT_THRESHOLD ){
 		PORTB |= (1<<HEADLIGHT);
 	} else {
 		PORTB &= ~(1<<HEADLIGHT);
 	}
 	
-	DirtyDawg->state = DirtyDawg->oldstate;
+	state = DirtyDawg->oldstate;
 	
 }
 
@@ -147,49 +140,62 @@ void Lights(void){
 /*                                                                      */
 /************************************************************************/
 void Bluetooth(void){
+	
+	LCD_Byte(LCD_CLEAR, LCD_CMD);
+	LCD_Byte('S', LCD_CHR);
+
+	for (int i = 0; i<255; i++)
+	{
+		DirtyDawg->front_sensor = i;
+		DirtyDawg->back_sensor = i+1;
+		DirtyDawg->left_sensor= i+2;
+		DirtyDawg->right_sensor = i+3;
+		
+		BT_Send(START_TRANSMIT);
+		BT_Send(DirtyDawg->front_sensor);
+		BT_Send(DirtyDawg->back_sensor);
+		BT_Send(DirtyDawg->left_sensor);
+		BT_Send(DirtyDawg->right_sensor);
+		
+		if(i == 253){
+			i = 0;
+		}
+		_delay_ms(100);
+		
+	}
 
 	//If there is nothing in receive buffer
-	if(DirtyDawg->BT_recieve_buffer[0] != 0){
-		DirtyDawg->state = DRIVE_STATE;
+	if(DirtyDawg->BT_recieve_buffer[0] == 0){
+		state = DRIVE_STATE;
 		return;
 	}
 	
-	// Saves the speed data from the buffer
-	DirtyDawg->forward = DirtyDawg->BT_recieve_buffer[0];
-	DirtyDawg->backward = DirtyDawg->BT_recieve_buffer[1];
+	// Saves the data form the receive buffer
+	control_status = DirtyDawg->BT_recieve_buffer[0];
+	
+	// Checks and save if we want to drive forward or backwards
+	if(control_status && F_OR_B){
+		DirtyDawg->forward = DirtyDawg->BT_recieve_buffer[1];
+		DirtyDawg->backward = 0x00;
+		
+	} else {
+		DirtyDawg->backward = DirtyDawg->BT_recieve_buffer[1];
+		DirtyDawg->forward = 0x00;
+	}
+	
+	// Saves the direction
 	DirtyDawg->left= DirtyDawg->BT_recieve_buffer[2];
 	DirtyDawg->right = DirtyDawg->BT_recieve_buffer[3];
-	
-	// Saves the button configuration
-	status = DirtyDawg->BT_recieve_buffer[4];
+
 	
 	// Clears the receive buffer
 	for(int i = 0; i < 5 ; i++){
 		DirtyDawg->BT_recieve_buffer[i] = 0;
 	}
 	
-	for (int i = 0; i<255; i++)
-	{
-			DirtyDawg->forward = i;
-			DirtyDawg->backward = i+1;
-			DirtyDawg->left= i+2;
-			DirtyDawg->right = i+3;
-			
-			BT_Send('S');
-			BT_Send(DirtyDawg->forward);
-			BT_Send(DirtyDawg->back_sensor);
-			BT_Send(DirtyDawg->left_sensor);
-			BT_Send(DirtyDawg->right_sensor);
-			
-			if(if == 253){
-				i = 0;
-			}
-			_delay_ms(500);
-			
-	}
+
 	
-	
-	
+
 	
 	/*
 	//Make sure there is content in send buffer before sending
@@ -207,8 +213,9 @@ void Bluetooth(void){
 		
 	}
 	*/
+	
 	//Change state
-	DirtyDawg->state = DRIVE_STATE;
+	state = DRIVE_STATE;
 
 }
 
@@ -230,7 +237,7 @@ void Sensors(void){
 
 
 	//set state
-	DirtyDawg->state = BLUETOOTH_STATE;
+	state = BLUETOOTH_STATE;
 }
 
 /************************************************************************/
@@ -244,11 +251,24 @@ void Sensors(void){
 /************************************************************************/
 void Vroom(void){
 
-	Drive(F, DirtyDawg->forward);
-	Drive(B, DirtyDawg->backward);
-	Drive(L, DirtyDawg->left);
-	Drive(R, DirtyDawg->right);
+	if( control_status && STOP ){
+		Stop_Moving();
+		state = SENSOR_STATE;
+		return;		
+	}
+
+	if(DirtyDawg->forward > DirtyDawg->backward){
+		Drive(F, DirtyDawg->forward);
+	} else {
+		Drive(B, DirtyDawg->backward);
+	}
+	
+	if(DirtyDawg->left > DirtyDawg->right){
+		Drive(L, DirtyDawg->left);
+	} else {
+		Drive(R, DirtyDawg->right);
+	}
 
 
-	DirtyDawg->state = SENSOR_STATE;
+	state = SENSOR_STATE;
 }

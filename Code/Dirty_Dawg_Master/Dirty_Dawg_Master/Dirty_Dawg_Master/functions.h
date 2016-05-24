@@ -41,15 +41,7 @@
 #define TX PORTD1
 #define BT121ADRESS 00033343A13F
 
-/************************************************************************/
-/*								Status                                 */
-/************************************************************************/
 
-uint8_t status;
-
-#define LIGHTS (1<<0)
-#define STOP (1<<1)
-#define F_OR_B (1<<2)
 
 
 
@@ -77,25 +69,39 @@ typedef struct data{
 	uint8_t left;
 	uint8_t right;
 	
-	// Buffer for send and transmit
+	/************************************************************************/
+	/*						BT Send Buffer									*/
+	/*	Position 0 = Front sensor											*/
+	/*	Position 1 = Back sensor											*/
+	/*	Position 2 = Left sensor			 								*/
+	/*	Position 3 = Right sensor											*/                                                               
+	/************************************************************************/
 	uint8_t BT_send_buffer[20];
+	
+	/************************************************************************/
+	/*						BT Receive Buffer								*/
+	/*	Position 0 = status													*/
+	/*	Position 1 = Speed													*/
+	/*	Position 2 = Left													*/
+	/*	Position 3 = Right													*/                                                                    
+	/************************************************************************/
 	uint8_t BT_recieve_buffer[20];
 	
-	// Keeps the record on what state we are in
-	uint8_t state; 
 	
 	
-} *dataptn;
+} *dataptn, DATA;
 
 //Name of the main struct with all the data in for the different sensors and values
 dataptn DirtyDawg;
 
 
 void System_Init(void);
+void Hardware_Init(void);
 
 void INT_Crash(void);
 void Lowrider_Mode(void);
 void Sense_Light(void);
+
 
 
 

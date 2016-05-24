@@ -33,13 +33,9 @@ void LCD_Init(void){
 	LCD_Byte(0x01, LCD_CMD); 
 	_delay_ms(DELAY_MS*5); //5 ms delay
 	
-	//Print welcome message
-	LCD_Byte('B', LCD_CHR);
-	LCD_Byte('O', LCD_CHR);
-	LCD_Byte('O', LCD_CHR);
-	LCD_Byte('T', LCD_CHR);
-	LCD_Byte('E', LCD_CHR);
-	LCD_Byte('D', LCD_CHR);
+	uint8_t welcome[] = {"   DirtyDawg    "};
+	uint8_t welcome2[] = {" welcomes you ! "};
+	LCD_String(welcome,welcome[0], welcome2,welcome2[0]);
 	
 }
 

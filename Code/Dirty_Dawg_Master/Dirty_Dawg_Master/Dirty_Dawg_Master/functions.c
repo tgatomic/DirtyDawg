@@ -5,12 +5,36 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include "functions.h"
-
-
+#include "TWI_Master.h"
+#include "TWI_LCD.h"
+#include "Bluetooth.h"
+#include "PWM.h"
+#include "ADC.h"
 
 void System_Init(void){
 	
-	status = 0;
+	// Initiate the hardware - Working
+	Hardware_Init();
+
+	// Baud rate max is 19200 (double speed enabled) - Working
+	UART_Init(19200);
+	
+	// Initiate TWI - Working
+	TWI_Master_Init();
+
+	// Initiate LCD - Working
+	LCD_Init();
+
+	// Initiate PWM - Working Drive working as well
+	PWM_Init();
+			
+	// Initiate ADC - Working
+	ADC_init();
+
+}
+
+void Hardware_Init(void){
+	
 	
 	/*Setting ports - page 75*/
 		
