@@ -16,24 +16,12 @@
 #include "SWUART.H"
 #include "main.h"
 
-#define TRUE 1
-#define FALSE 0
 #define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
-
-
-#define LCD_STATE 1
-#define BT_STATE 2
-
-uint8_t LCD_initiated = 0;
-
-
-//Name of the main struct with all the data in for the different sensors and values
-DATA DirtyDawg;
 
 int main(void){
 
 	// Sets the starting state
-	DirtyDawg.state = 0;
+	DirtyDawg.state = LCD_STATE;
 
 	// Initiate the hardware
 	System_Init();
@@ -57,32 +45,51 @@ int main(void){
 	BT_Connect();
 	  
 	//Prints a message to tell the user that the controller is running
-	sputs("The DirtyDawg Is Awake!\n\r" );
-
-	uint8_t word;
+//	sputs("The DirtyDawg Is Awake!\n\r" );
+/*
+	uint8_t word, count = 0;
 	for(;;){				// main loop
 		sputchar( '-' );
 		while( !kbhit() );			// wait until byte received
 		word = sgetchar();
 		LCD_Byte( word, LCD_CHR );		// sent byte + 
 		BT_Send(word);
+		if(count++ > 15){
+			LCD_Byte(LCD_CLEAR,LCD_CMD);
+			_delay_ms(150);
+			count = 0;
+		}
 	}
+*/
 
-	for(;;){
-		
-		
+	for(int i = 0; i < 3; i++){
+		front[i] = '0';
+		back[i] = '0';
+		left[i] = '0';
+		right[i] = '0';
+
+	}
+	while(TRUE){
+
 		switch(DirtyDawg.state){
 			
 			case LCD_STATE:
 				LCD_Update();
 				break;
 			
-			case BT_STATE:
+			case SEND_DATA_STATE:
 				BT_Send_Data();
 				break;
+
+			case GET_DATA_STATE:
+				BT_Recieve_Data();
+				break;
+				
+			default:
+				Yellow_LED_On();
+				Error(0x53);
 				
 			
-
 		}
 	}	
 }
@@ -97,36 +104,19 @@ ISR(INT1_vect){
 
 */
 
-void LCD_Update(void){
+ISR(USART_RX_vect){
+	uint8_t data;
+	data = BT_Recieve();
 	
-	// Initiate the distance screen
-	if(LCD_initiated){
-		LCD_String(ROW1, ARR_SIZE(ROW1), ROW2, ARR_SIZE(ROW2))
-		LCD_initiated = 1;
+	// Ignore command response
+	if(data == '%')
+		while(BT_Recieve() != LF);
+	
+	// Get sensor data
+	if(data == 'S'){
+		DirtyDawg.front_sensor = BT_Recieve();
+		DirtyDawg.back_sensor = BT_Recieve();
+		DirtyDawg.left_sensor = BT_Recieve();
+		DirtyDawg.right_sensor = BT_Recieve();
 	}
-	
-	// Prints the distance to front obstacle
-	LCD_Byte(place in screen, LCD_CMD);
-	LCD_Byte(DirtyDawg.front_sensor, LCD_CHR);
-	
-	// Prints the distance to back obstacle
-	LCD_Byte(place in screen, LCD_CMD);
-	LCD_Byte(DirtyDawg.back_sensor, LCD_CHR);
-	
-	// Prints the distance to left obstacle
-	LCD_Byte(place in screen, LCD_CMD);
-	LCD_Byte(DirtyDawg.left_sensor, LCD_CHR);
-	
-	// Prints the distance to right obstacle
-	LCD_Byte(place in screen, LCD_CMD);
-	LCD_Byte(DirtyDawg.right_sensor, LCD_CHR);
-	
-	//Change state
-}
-void BT_Send_Data(void){
-	
-	BT_Send(DirtyDawg.accelerometer);
-	BT_Send(DirtyDawg.ECG);
-	
-	//Change state
 }

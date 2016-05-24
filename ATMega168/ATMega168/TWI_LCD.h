@@ -24,6 +24,9 @@
 #define DELAY_MS 8 //Equals 1 ms
 #define LCD_WRITE (0<<0)
 
+#define LF 0x0A // Line feed
+#define CR 0x0D // Carriage return
+
 #endif
 
 #ifndef ARR_SIZE(x)

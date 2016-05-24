@@ -70,27 +70,31 @@ typedef struct data{
 	
 } *dataptn, DATA;
 
-
+char front[3], back[3], right[3], left[3];
 
 void System_Init(void);
 void UART_Init(unsigned int baud);
+
 int BT_Init(void);
-void I2C_Init(void);
 void BT_Connect(void);
 void Connected(void);
 void INT_Crash(void);
 void Lowrider_Mode(void);
 void Sense_Light(void);
-
+void LCD_Update(void);
+void BT_Send_Data(void);
+void BT_Recieve_Data(void);
 uint8_t BT_Recieve(void);
 void Uart_Flush(void);
 void Error(unsigned int errorcode);
 
-
+//Functions for debugging
 void Yellow_LED_On(void);
 void Yellow_LED_Off(void);
 void Red_LED_On(void);
 void Red_LED_Off(void);
+void Green_LED_On(void);
+void Green_LED_Off(void);
 
 
 #endif // FUNCTIONS_H_

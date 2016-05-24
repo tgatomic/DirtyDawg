@@ -53,11 +53,12 @@ void LCD_Byte(uint8_t bits, uint8_t mode){
 void LCD_Toggle_enable(uint8_t bits){
 	
 	// Toggles the enable pin on the display to activate the code
-	_delay_ms(DELAY_MS*5);
+//	_delay_ms(DELAY_MS*5);
+	_delay_ms(5);
 	Write_Byte(LCD_ADDR, (bits | ENABLE));
-	_delay_ms(DELAY_MS*5);
+	_delay_ms(5);
 	Write_Byte(LCD_ADDR, (bits & ~ENABLE));
-	_delay_ms(DELAY_MS*5);
+	_delay_ms(5);
 		
 }
 

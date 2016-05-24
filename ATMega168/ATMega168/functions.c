@@ -3,8 +3,10 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include "functions.h"
+#include "main.h"
+#include "TWI_LCD.h"
 
-
+uint8_t LCD_initiated = FALSE;
 
 void System_Init(void){
 	
@@ -104,101 +106,52 @@ int BT_Init(void){
 	BT_Send(0x0A); //NL
 	BT_Send(0x0D); //CR
 	_delay_ms(1000);
-	LCD_Byte(0x01, 0x00);
+	LCD_Byte(LCD_CLEAR, LCD_CMD);
 	_delay_ms(150); //5 ms delay
 	Uart_Flush();
 	
 	return 0;
-	
-	//Sends command to enter command mode
-	for(int i = 0; i<3; i++) BT_Send('$');
-	//If it fails to go into command mode
-	LCD_Byte(BT_Recieve(), 0x01);
-	LCD_Byte(BT_Recieve(), 0x01);
-	LCD_Byte(BT_Recieve(), 0x01);
+}
+
+void BT_Connect(void){
 
 	//Wait for 1 second to ensure the device has power
+	_delay_ms(8000);
+
+	for(int i = 0; i < 3; i++) BT_Send('-');
+	BT_Send(LF); //Line feed
+	BT_Send(CR); //Carriage return
 	_delay_ms(1000);
-	
+	LCD_Byte(LCD_CLEAR, LCD_CMD);
+	_delay_ms(150); //5 ms delay
 	Uart_Flush();
-	
+
+	//Sends command to enter command mode
+	for(int i = 0; i < 3; i++) BT_Send('$');
+
+	//Sends response to LCD screen
+	LCD_Byte(BT_Recieve(), LCD_CHR);
+	LCD_Byte(BT_Recieve(), LCD_CHR);
+	LCD_Byte(BT_Recieve(), LCD_CHR);
+
+	Uart_Flush();
+		
+	// Adress to bluesmirf in the car
 	unsigned char adress[12] = {'0','0','0','6','6','6','7','6','A','0','A','A'};
-	
+		
+	// Command to connect with bluesmirf in the car
 	BT_Send('c');
 	BT_Send(',');
 	for(int i = 0; i < 12;i++){
 		BT_Send(adress[i]);
 	}
-	BT_Send(0x0A); //NL
-	BT_Send(0x0D); //CR
+	BT_Send(LF);
+	BT_Send(CR);
 
-	//Wait two seconds
-	//_delay_ms(8000);
+	while(BT_Recieve() != LF);
+
+	// Wait a second
 	_delay_ms(1000);
-	
-	for(int i = 0; i<6;i++){
-		BT_Recieve();
-	}
-	
-	if(BT_Recieve() == '%'){
-		PORTB = (1<<PORTB1);
-		Uart_Flush();
-		return 1;
-		/*
-		if(BT_Recieve()=='C'){
-			status |= BT_CONNECTED;
-		}
-		else if(BT_Recieve()=='E'){
-			Error('E');
-		}*/
-	}
-	return 0;
-}
-
-void I2C_Init(void){
-	
-	
-}
-
-void BT_Connect(void){
-
-		//Wait for 1 second to ensure the device has power
-		_delay_ms(8000);
-
-		for(int i = 0; i<3; i++) BT_Send('-');
-		BT_Send(0x0A); //NL
-		BT_Send(0x0D); //CR
-		_delay_ms(1000);
-		LCD_Byte(0x01, 0x00);
-		_delay_ms(150); //5 ms delay
-		Uart_Flush();
-
-		//Sends command to enter command mode
-		for(int i = 0; i<3; i++) BT_Send('$');
-		//If it fails to go into command mode
-		LCD_Byte(BT_Recieve(), 0x01);
-		LCD_Byte(BT_Recieve(), 0x01);
-		LCD_Byte(BT_Recieve(), 0x01);
-
-		//Wait for 1 second to ensure the device has power
-		_delay_ms(1000);
-		
-		Uart_Flush();
-		
-		unsigned char adress[12] = {'0','0','0','6','6','6','7','6','A','0','A','A'};
-		
-		BT_Send('c');
-		BT_Send(',');
-		for(int i = 0; i < 12;i++){
-			BT_Send(adress[i]);
-		}
-		BT_Send(0x0A); //NL
-		BT_Send(0x0D); //CR
-
-		//Wait two seconds
-		//_delay_ms(8000);
-		_delay_ms(1000);
-
 	
 }
 
@@ -238,7 +191,78 @@ void Error(unsigned int errorcode){
 	}
 }
 
+void LCD_Update(void){
+	
+	// Initiate the distance screen
+	if(!LCD_initiated){
+		LCD_String(ROW1, ARR_SIZE(ROW1), ROW2, ARR_SIZE(ROW2));
+		LCD_initiated = TRUE;
+	}
+	
+	itoa(DirtyDawg.front_sensor, front, 10);
+	itoa(DirtyDawg.back_sensor, back, 10);
+//	itoa(DirtyDawg.left_sensor, left, 10);
+	left[0] = DirtyDawg.left_sensor / 100;
+	left[1] = (DirtyDawg.left_sensor - (left[0] * 100 )) / 10;
+	left[2] = (DirtyDawg.left_sensor - (left[0] * 100 )) - left[1] * 10;
 
+	for(int i = 0; i < 3; i++)
+		left[i] += '0';
+		
+	itoa(DirtyDawg.right_sensor, right, 10);
+	// Prints the distance to front obstacle
+	LCD_Byte(LCD_LINE_1 + 3, LCD_CMD);
+	for(int i = 0; i < 3; i++)
+	LCD_Byte(front[i], LCD_CHR);
+	
+	// Prints the distance to back obstacle
+	LCD_Byte(LCD_LINE_1 + 11, LCD_CMD);
+	for(int i = 0; i < 3; i++)
+	LCD_Byte(back[i], LCD_CHR);
+
+	// Prints the distance to left obstacle
+	LCD_Byte(LCD_LINE_2 + 3, LCD_CMD);
+	for(int i = 0; i < 3; i++)
+	LCD_Byte(left[i], LCD_CHR);
+
+	// Prints the distance to right obstacle
+	LCD_Byte(LCD_LINE_2 + 11, LCD_CMD);
+	for(int i = 0; i < 3; i++)
+	LCD_Byte(right[i], LCD_CHR);
+	_delay_ms(250);
+
+	//Change state
+	DirtyDawg.state = GET_DATA_STATE;
+}
+void BT_Send_Data(void){
+	
+	BT_Send(DirtyDawg.accelerometer);
+	BT_Send(DirtyDawg.ECG);
+	
+	//Change state
+}
+
+void BT_Recieve_Data(void){
+	// Get IR sensor data from the car
+	BT_Send('X');
+	BT_Send('J');
+//	Yellow_LED_On();
+/*	if(BT_Recieve() == 'S'){
+		DirtyDawg.front_sensor = BT_Recieve();
+		DirtyDawg.back_sensor = BT_Recieve();
+		DirtyDawg.left_sensor = BT_Recieve();
+		DirtyDawg.right_sensor = BT_Recieve();
+	}*/
+//	Yellow_LED_Off();
+	BT_Send('O');
+	BT_Send('B');
+	BT_Send('E');
+	BT_Send('Y');
+	// Change state 
+	DirtyDawg.state = LCD_STATE;
+}
+
+// Lights for debugging reason
 void Yellow_LED_On(void){
 	PORTD |= (1<<PORTD7);
 }
@@ -251,5 +275,12 @@ void Red_LED_On(void){
 }
 void Red_LED_Off(void){
 	PORTB &= (0<<PORTB1);
+}
+
+void Green_LED_On(void){
+	PORTD |= (1<<PORTD6);
+}
+void Green_LED_Off(void){
+	PORTD &= (0<<PORTD6);
 }
 	
