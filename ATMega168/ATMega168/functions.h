@@ -43,9 +43,6 @@
 #define BT_STARTED 1<<2
 #define BT_CONNECTED 1<<3
 #define BUTTON 1<<4
-//#define LIGHT_ON 1<<3;
-int status; //Delete later
-
 
 /************************************************************************/
 /*								Datastruct                              */
@@ -73,20 +70,18 @@ typedef struct data{
 char front[3], back[3], right[3], left[3];
 
 void System_Init(void);
-void UART_Init(unsigned int baud);
+void UART_Init(unsigned int);
+void LCD_Update(void);
+void Uart_Flush(void);
+void Error(unsigned int);
 
+// Functions for BlueSmirf
 int BT_Init(void);
 void BT_Connect(void);
-void Connected(void);
-void INT_Crash(void);
-void Lowrider_Mode(void);
-void Sense_Light(void);
-void LCD_Update(void);
 void BT_Send_Data(void);
 void BT_Recieve_Data(void);
 uint8_t BT_Recieve(void);
-void Uart_Flush(void);
-void Error(unsigned int errorcode);
+void BT_Send(uint8_t);
 
 //Functions for debugging
 void Yellow_LED_On(void);

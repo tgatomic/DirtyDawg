@@ -41,9 +41,12 @@ int main(void){
 	// Initiate/Clear the BlueSmirf from previous commands
 	BT_Init();
 	
-	// Connect the Bluesmirf to the car
-	BT_Connect();
+	// Connect the BlueSmirf to the car
+	while(!(DirtyDawg.status & BT_CONNECTED))
+		BT_Connect();
 	  
+	while(TRUE)
+		Green_LED_On();
 	//Prints a message to tell the user that the controller is running
 //	sputs("The DirtyDawg Is Awake!\n\r" );
 /*
@@ -62,15 +65,8 @@ int main(void){
 	}
 */
 
-	for(int i = 0; i < 3; i++){
-		front[i] = '0';
-		back[i] = '0';
-		left[i] = '0';
-		right[i] = '0';
-
-	}
 	while(TRUE){
-
+		
 		switch(DirtyDawg.state){
 			
 			case LCD_STATE:
@@ -88,7 +84,6 @@ int main(void){
 			default:
 				Yellow_LED_On();
 				Error(0x53);
-				
 			
 		}
 	}	
@@ -105,6 +100,7 @@ ISR(INT1_vect){
 */
 
 ISR(USART_RX_vect){
+	LCD_Byte('*',LCD_CHR);
 	uint8_t data;
 	data = BT_Recieve();
 	
