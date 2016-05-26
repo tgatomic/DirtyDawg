@@ -104,54 +104,18 @@ void Error(unsigned int errorcode){
 	unsigned long ticks = 0;
 	for(;;){
 		if(ticks%10000 == 0){
-			PINB = (1<<BRAKELIGHT);
+			//PINB = (1<<BRAKELIGHT);
 			BT_Send(errorcode);
+			LCD_Byte(LCD_CLEAR,LCD_CMD);
+			LCD_Byte(errorcode, LCD_CHR);
 		}
 		if(ticks%10000 == 50000){
-			PINB = (0<<BRAKELIGHT);
+			//PINB = (0<<BRAKELIGHT);
 		}
 		ticks++;
 	}
 }
 
-//Interrupt for UART
-ISR(USART_RX_vect){
-	
-	//DirtyDawg->BT_recieve_buffer[0] = UDR0;
-	uint8_t data = UDR0;
-	//Uart_Flush();
-	
-	//LCD_Byte( DirtyDawg->BT_recieve_buffer[0] , LCD_CHR);
-	LCD_Byte( data , LCD_CHR);
-	
-
-	
-	return;
-	
-	/*
-	
-	LCD_Byte(UDR0, LCD_CHR);
-	
-	_delay_ms(1000);
-	LCD_Byte(0x01, LCD_CMD);
-	_delay_ms(250);
-	*/
-	//int i;
-	
-	// Receives the total number of bytes
-	//uint8_t nmbr_bytes = UDR0;
-	
-	// Saves it in the buffer
-	//for( i = 0; i < nmbr_bytes; i++){
-		//DirtyDawg->BT_recieve_buffer[i] = BT_Recieve();
-	//}
-	
-	// Test with echoing back the packages
-	//for( i = 0; i < nmbr_bytes; i++){
-		///BT_Send(DirtyDawg->BT_recieve_buffer[i]);
-	//}
-	
-}
 
 //Activates if the pairing button is pressed
 ISR(PCINT2_vect){

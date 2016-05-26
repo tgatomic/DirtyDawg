@@ -115,3 +115,13 @@ void Write_Byte(uint8_t addr, uint8_t bits){
 	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
 	
 }
+
+void LCD_Singlestring(uint8_t place, uint8_t *str){
+	
+	LCD_Byte(place, LCD_CMD);
+	while(*str){
+		LCD_Byte(*str++,LCD_CHR);
+	}
+	
+	
+}

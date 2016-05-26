@@ -33,6 +33,7 @@ void LCD_Byte(uint8_t bits, uint8_t mode);
 void LCD_Toggle_enable(uint8_t bits);
 void LCD_String(uint8_t row1[],int row1_elems, uint8_t row2[], int row2_elems);
 void Write_Byte(uint8_t addr, uint8_t bits);
+void LCD_Singlestring(uint8_t place, uint8_t *str);
 
 
 #endif /* TWI_LCD_H_ */

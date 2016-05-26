@@ -92,7 +92,7 @@ typedef struct data{
 } *dataptn, DATA;
 
 //Name of the main struct with all the data in for the different sensors and values
-dataptn DirtyDawg;
+DATA DirtyDawg;
 
 
 void System_Init(void);
