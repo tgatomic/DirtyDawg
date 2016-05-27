@@ -54,7 +54,8 @@ typedef struct data{
 	int lightvalue;
 	
 	// State value
-	int oldstate;
+	uint8_t oldstate;
+	uint8_t state;
 
 	// The distance values received on TWI-bus
 	uint8_t  front_sensor;
@@ -86,7 +87,7 @@ typedef struct data{
 	/*	Position 3 = Right													*/                                                                    
 	/************************************************************************/
 	uint8_t BT_recieve_buffer[20];
-	
+	uint8_t ISR_Vect_Pos;
 	
 	
 } *dataptn, DATA;

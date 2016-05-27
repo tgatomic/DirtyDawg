@@ -101,16 +101,26 @@ void Uart_Flush(void){
 void Error(unsigned int errorcode){
 	
 	//Flashes the red lights and send errorcode through Bluetooth
+	
+	// Convert and print data from buffer
+	LCD_Byte(LCD_CLEAR, LCD_CMD);
+	LCD_Singlestring(LCD_LINE_1, "Errormsg: ");
+	
+	unsigned char ascii[20];
+
+	itoa(errorcode, ascii, 10);
+	for(int i = 0; i < 2; i++){
+		LCD_Byte(ascii[i], LCD_CHR);
+	}
+
 	unsigned long ticks = 0;
 	for(;;){
 		if(ticks%10000 == 0){
-			//PINB = (1<<BRAKELIGHT);
+			PINB = (1<<BRAKELIGHT);
 			BT_Send(errorcode);
-			LCD_Byte(LCD_CLEAR,LCD_CMD);
-			LCD_Byte(errorcode, LCD_CHR);
 		}
 		if(ticks%10000 == 50000){
-			//PINB = (0<<BRAKELIGHT);
+			PINB = (0<<BRAKELIGHT);
 		}
 		ticks++;
 	}

@@ -36,6 +36,7 @@ void LCD_Init(void){
 	uint8_t welcome[] = {"   DirtyDawg    "};
 	uint8_t welcome2[] = {" welcomes you ! "};
 	LCD_String(welcome,welcome[0], welcome2,welcome2[0]);
+	_delay_ms(1500);
 	
 }
 
