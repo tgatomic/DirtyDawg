@@ -5,8 +5,8 @@
 #include "functions.h"
 #include "main.h"
 #include "TWI_LCD.h"
+#include "SWUART.H"
 
-uint8_t LCD_initiated = FALSE;
 
 void System_Init(void){
 	
@@ -71,35 +71,30 @@ void UART_Init(unsigned int baud){
 
 void LCD_Update(void){
 	
-	// Initiate the distance screen
-	if(!LCD_initiated){
-		LCD_String(ROW1, ARR_SIZE(ROW1), ROW2, ARR_SIZE(ROW2));
-		LCD_initiated = TRUE;
-	}
-	
 	// Prints the distance to front obstacle
-	LCD_Byte(LCD_LINE_1 + 3, LCD_CMD);
+	LCD_Byte(LCD_LINE_1, LCD_CMD);
+	LCD_String("F: ");
 	for(int i = 0; i < 3; i++)
-	LCD_Byte(front[i], LCD_CHR);
+		LCD_Byte(front[i], LCD_CHR);
 	
 	// Prints the distance to back obstacle
-	LCD_Byte(LCD_LINE_1 + 11, LCD_CMD);
+	LCD_String("  B: ");
 	for(int i = 0; i < 3; i++)
-	LCD_Byte(back[i], LCD_CHR);
+		LCD_Byte(back[i], LCD_CHR);
 
 	// Prints the distance to left obstacle
-	LCD_Byte(LCD_LINE_2 + 3, LCD_CMD);
+	LCD_Byte(LCD_LINE_2, LCD_CMD);
+	LCD_String("L: ");
 	for(int i = 0; i < 3; i++)
-	LCD_Byte(left[i], LCD_CHR);
+		LCD_Byte(left[i], LCD_CHR);
 
 	// Prints the distance to right obstacle
-	LCD_Byte(LCD_LINE_2 + 11, LCD_CMD);
+	LCD_String("  R: ");
 	for(int i = 0; i < 3; i++)
-	LCD_Byte(right[i], LCD_CHR);
-	_delay_ms(250);
+		LCD_Byte(right[i], LCD_CHR);
 
 	//Change state
-	DirtyDawg.state = GET_DATA_STATE;
+	DirtyDawg.state = SEND_DATA_STATE;
 }
 
 void Uart_Flush(void){
@@ -133,25 +128,27 @@ void BT_Connect(void){
 	_delay_ms(1000);
 
 	for(int i = 0; i < 3; i++) BT_Send('-');
+
 	BT_Send(LF); //Line feed
 	BT_Send(CR); //Carriage return
 	_delay_ms(1000);
-	LCD_Byte(LCD_CLEAR, LCD_CMD);
-	_delay_ms(150); //5 ms delay
+	LCD_Byte(LCD_LINE_2 + 1, LCD_CMD);
+	LCD_Byte('*', LCD_CHR);
+	LCD_Byte(LCD_LINE_2 + 14, LCD_CMD);
+	LCD_Byte('*', LCD_CHR);
+//	_delay_ms(150); //5 ms delay
 	Uart_Flush();
 
 	//Sends command to enter command mode
 	for(int i = 0; i < 3; i++) BT_Send('$');
 
 	//Sends response to LCD screen
-	LCD_Byte(BT_Recieve(), LCD_CHR);
-	LCD_Byte(BT_Recieve(), LCD_CHR);
-	LCD_Byte(BT_Recieve(), LCD_CHR);
+	while(BT_Recieve() != LF);
 
 	Uart_Flush();
 		
 	// Address to BlueSmirf in the car
-	unsigned char adress[12] = {'0','0','0','6','6','6','7','6','A','0','A','A'};
+	uint8_t adress[12] = {'0','0','0','6','6','6','7','6','A','0','A','A'};
 		
 	// Command to connect with BlueSmirf in the car
 	BT_Send('c');
@@ -165,13 +162,17 @@ void BT_Connect(void){
 	// Ignore the message from BlueSmirf "TRYING"
 	while(BT_Recieve() != LF);
 
+	// If a good connection, set status
 	if(BT_Recieve() == '%')
 		DirtyDawg.status |= BT_CONNECTED;
 
 	// Ignore the message from BlueSmirf "CONNECTING"
 	while(BT_Recieve() != LF);
 
-	LCD_Byte('S',LCD_CHR);
+	LCD_Byte(LCD_LINE_2 + 1, LCD_CMD);
+	LCD_Byte(' ', LCD_CHR);
+	LCD_Byte(LCD_LINE_2 + 14, LCD_CMD);
+	LCD_Byte(' ', LCD_CHR);
 	
 }
 
@@ -201,13 +202,15 @@ void Error(unsigned int errorcode){
 	
 	//Flashes the red lights and send errorcode through Bluetooth
 	unsigned long ticks = 0;
+	LCD_Byte(LCD_CLEAR, LCD_CMD);
+	LCD_Byte(LCD_LINE_1 + 5, LCD_CMD);
+	LCD_String("Error");
 	for(;;){
 		if(ticks%10000 == 0){
-			PINB = (1<<PORTB1);
-			BT_Send(errorcode);
+			Red_LED_On();
 		}
 		if(ticks%10000 == 50000){
-			PINB = (0<<PORTB1);
+			Red_LED_Off();
 		}
 		ticks++;
 	}
@@ -215,22 +218,37 @@ void Error(unsigned int errorcode){
 
 
 void BT_Send_Data(void){
+
+//	sputchar( '-' );
+//	while( !kbhit() );			// wait until byte received
+//	DirtyDawg.accelerometer = sgetchar();
+	DirtyDawg.ECG = 100;
 	
-	BT_Send(DirtyDawg.accelerometer);
+	if(DirtyDawg.accelerometer == 'S')
+		DirtyDawg.command |= TURN_LEFT;
+		
+	BT_Send(DirtyDawg.command);
 	BT_Send(DirtyDawg.ECG);
 	
+	// Clear flags
+	// DirtyDawg.command = 0;
+	
 	//Change state
+	DirtyDawg.state = GET_DATA_STATE;
 }
 
 void BT_Recieve_Data(void){
-	// Get IR sensor data from the car
-/*	if(BT_Recieve() == 'S'){
-		DirtyDawg.front_sensor = BT_Recieve();
-		DirtyDawg.back_sensor = BT_Recieve();
-		DirtyDawg.left_sensor = BT_Recieve();
-		DirtyDawg.right_sensor = BT_Recieve();
-	}*/
 
+	// Wait for start command
+	while(BT_Recieve() != 'S');
+
+	// Get IR sensor data from the car
+	DirtyDawg.front_sensor = BT_Recieve();
+	DirtyDawg.back_sensor = BT_Recieve();
+	DirtyDawg.left_sensor = BT_Recieve();
+	DirtyDawg.right_sensor = BT_Recieve();
+
+	// Convert sensor value to ASCII
 	front[0] = DirtyDawg.front_sensor / 100;
 	front[1] = (DirtyDawg.front_sensor - (front[0] * 100 )) / 10;
 	front[2] = (DirtyDawg.front_sensor - (front[0] * 100 )) - front[1] * 10;

@@ -10,6 +10,7 @@
 /************************************************************************/
 /*								Steering                                */
 /************************************************************************/
+/*
 #define FORWARD PORTD3
 #define BACKWARD PORTD5
 #define LEFT PORTD6
@@ -22,7 +23,7 @@
 #define R 2
 #define F 3
 #define B 4
-
+*/
 /************************************************************************/
 /*								Sensor                                  */
 /************************************************************************/
@@ -33,7 +34,6 @@
 /************************************************************************/
 #define RX PORTD0
 #define TX PORTD1
-#define BT121ADRESS 00033343A13F
 
 /************************************************************************/
 /*								Status                                 */
@@ -42,27 +42,32 @@
 #define UART_STARTED 1<<1
 #define BT_STARTED 1<<2
 #define BT_CONNECTED 1<<3
-#define BUTTON 1<<4
+#define LIGHT_BUTTON 1<<4
+
+/************************************************************************/
+/*	                 Command flags for the car                          */
+/************************************************************************/
+#define LIGHT 1<<0
+#define STOP 1<<1
+#define BACKWARD 1<<2
+#define TURN_LEFT 1<<3
+#define TURN_RIGHT 1<<4
 
 /************************************************************************/
 /*								Datastruct                              */
 /************************************************************************/
 typedef struct data{
 
-	int left_sensor;
-	int right_sensor;
-	int front_sensor;
-	int back_sensor;
-	//Or Distsensor[4]	
-
+	uint8_t left_sensor;
+	uint8_t right_sensor;
+	uint8_t front_sensor;
+	uint8_t back_sensor;
 	uint8_t accelerometer;
 	uint8_t ECG;
-	
-	//Is one if the controller has prompted for the lights to be turned on
-	uint8_t lights;
-	
+
+	// Byte of commands to car
+	uint8_t command;
 	uint8_t status;
-	
 	uint8_t state; 
 	
 } *dataptn, DATA;

@@ -42,11 +42,13 @@ int main(void){
 	BT_Init();
 	
 	// Connect the BlueSmirf to the car
+	LCD_Byte(LCD_LINE_1 + 3, LCD_CMD);
+	LCD_String("DirtyDawg!");
+	LCD_Byte(LCD_LINE_2 + 3, LCD_CMD);
+	LCD_String("Connecting");
 	while(!(DirtyDawg.status & BT_CONNECTED))
 		BT_Connect();
 	  
-	while(TRUE)
-		Green_LED_On();
 	//Prints a message to tell the user that the controller is running
 //	sputs("The DirtyDawg Is Awake!\n\r" );
 /*
@@ -64,7 +66,16 @@ int main(void){
 		}
 	}
 */
+	// When active connection send '=' to car 
+	BT_Send('=');
 
+	// Prepare the LCD for distance data
+	LCD_Byte(LCD_LINE_1, LCD_CMD);
+	LCD_String(ROW1);
+	LCD_Byte(LCD_LINE_2, LCD_CMD);
+	LCD_String(ROW2);
+
+	// Main loop
 	while(TRUE){
 		
 		switch(DirtyDawg.state){
@@ -90,7 +101,12 @@ int main(void){
 }
 
 ISR(PCINT2_vect){
-
+	if(DirtyDawg.status & LIGHT_BUTTON){
+		DirtyDawg.command ^= LIGHT;
+		DirtyDawg.status &= ~LIGHT_BUTTON;
+	}
+	else
+		DirtyDawg.status |= LIGHT_BUTTON;
 }
 /*
 ISR(INT1_vect){
@@ -100,7 +116,10 @@ ISR(INT1_vect){
 */
 
 ISR(USART_RX_vect){
-	LCD_Byte('*',LCD_CHR);
+	;
+//	LCD_Byte(LCD_LINE_2 + 15, LCD_CMD);
+//	LCD_Byte('I', LCD_CHR);
+/*
 	uint8_t data;
 	data = BT_Recieve();
 	
@@ -114,5 +133,5 @@ ISR(USART_RX_vect){
 		DirtyDawg.back_sensor = BT_Recieve();
 		DirtyDawg.left_sensor = BT_Recieve();
 		DirtyDawg.right_sensor = BT_Recieve();
-	}
+	} */
 }

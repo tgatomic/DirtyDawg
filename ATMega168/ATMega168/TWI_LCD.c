@@ -62,29 +62,8 @@ void LCD_Toggle_enable(uint8_t bits){
 		
 }
 
-void LCD_String(uint8_t row1[],int row1_elems, uint8_t row2[], int row2_elems){
-	
-	// Command to print on first line
-	LCD_Byte(LCD_LINE_1, LCD_CMD);
-	
-	// Prints the characters on that line
-	for(int i = 0; i < row1_elems ;i++){
-		LCD_Byte(row1[i], LCD_CHR);
-	}
-	
-	// Command to print on second line
-	LCD_Byte(LCD_LINE_2, LCD_CMD);
-	
-	// Prints the characters on that line
-	for(int i = 0; i < row2_elems ;i++){
-		LCD_Byte(row2[i], LCD_CHR);
-	}
-
-}
-
 void Write_Byte(uint8_t addr, uint8_t bits){
-	
-		
+			
 	//Sends the start condition
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
 		
@@ -108,4 +87,11 @@ void Write_Byte(uint8_t addr, uint8_t bits){
 	//Sends the stop condition
 	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
 	
+}
+
+void LCD_String(uint8_t *text){
+	
+	while(*text){
+		LCD_Byte(*text++, LCD_CHR);
+	}
 }

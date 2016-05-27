@@ -14,7 +14,7 @@ functions.d functions.o: .././functions.c \
  c:\skola\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\skola\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  c:\skola\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././functions.h .././main.h .././TWI_LCD.h
+ .././functions.h .././main.h .././TWI_LCD.h .././SWUART.H
 
 c:\skola\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -51,3 +51,5 @@ c:\skola\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\inte
 .././main.h:
 
 .././TWI_LCD.h:
+
+.././SWUART.H:
