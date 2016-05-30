@@ -218,15 +218,21 @@ void Error(unsigned int errorcode){
 
 
 void BT_Send_Data(void){
-
-//	sputchar( '-' );
-//	while( !kbhit() );			// wait until byte received
-//	DirtyDawg.accelerometer = sgetchar();
-	DirtyDawg.ECG = 100;
+	uint8_t ECG_hi, ECG_lo;
+	sputchar( '-' );
+	while( !kbhit() );			// wait until byte received
+	DirtyDawg.accelerometer = sgetchar();
+	ECG_hi = sgetchar();
+	ECG_lo = sgetchar();
 	
-	if(DirtyDawg.accelerometer == 'S')
+	if(DirtyDawg.accelerometer == TILT_LEFT)
 		DirtyDawg.command |= TURN_LEFT;
-		
+	else if(DirtyDawg.accelerometer == TILT_RIGHT)
+		DirtyDawg.command |= TURN_RIGHT;
+	else
+		DirtyDawg.command &= ~(TURN_LEFT | TURN_RIGHT);
+	
+	DirtyDawg.ECG = ECG_lo;
 	BT_Send(DirtyDawg.command);
 	BT_Send(DirtyDawg.ECG);
 	
