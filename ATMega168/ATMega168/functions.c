@@ -218,12 +218,18 @@ void Error(unsigned int errorcode){
 
 
 void BT_Send_Data(void){
+	
 	uint8_t ECG_hi, ECG_lo;
-	sputchar( '-' );
-	while( !kbhit() );			// wait until byte received
+	Green_LED_On();
+
+//	sputchar( '-' );
+//	while( !kbhit() );			// wait until byte received
+	while(sgetchar() != '-');
 	DirtyDawg.accelerometer = sgetchar();
 	ECG_hi = sgetchar();
 	ECG_lo = sgetchar();
+
+	Green_LED_Off();
 	
 	if(DirtyDawg.accelerometer == TILT_LEFT)
 		DirtyDawg.command |= TURN_LEFT;
@@ -235,7 +241,6 @@ void BT_Send_Data(void){
 	DirtyDawg.ECG = ECG_lo;
 	BT_Send(DirtyDawg.command);
 	BT_Send(DirtyDawg.ECG);
-	
 	// Clear flags
 	// DirtyDawg.command = 0;
 	
