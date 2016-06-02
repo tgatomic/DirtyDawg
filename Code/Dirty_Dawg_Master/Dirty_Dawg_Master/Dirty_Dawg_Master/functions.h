@@ -89,6 +89,8 @@ typedef struct data{
 	uint8_t BT_recieve_buffer[20];
 	uint8_t ISR_Vect_Pos;
 	
+	uint8_t TWI_Receive_Buffer[10];
+	
 	
 } *dataptn, DATA;
 

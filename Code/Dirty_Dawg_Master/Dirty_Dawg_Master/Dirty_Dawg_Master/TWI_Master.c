@@ -8,6 +8,7 @@
 
 #include <avr/io.h>
 #include "TWI_Master.h"
+#include "TWI_LCD.h"
 #include "functions.h"
 #include "Bluetooth.h"
 
@@ -100,38 +101,70 @@ void TWI_Send(uint8_t slaveAddress, uint8_t data){
 	*/
 }
 
-uint8_t TWI_Receive(uint8_t slaveAddress){
-	
-	uint8_t data;
-	
+void TWI_Receive(uint8_t slaveAddress, uint8_t nmr_bytes){
 	
 	//Sends the start condition
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
-		
+
 	while(!TWI_Busy());
 	if((TWSR & MASK) != START)Error(START);
-		
-	//Loads the slave address and set the R/W bit to 0
-	TWDR = (slaveAddress<<1) | (1<<0);
-	TWCR = (1<<TWINT) & ~(1<<TWEN);
-		
+
+	//Loads the slave address and set the R/W bit to 1
+	TWDR = (slaveAddress<<1) | (0<<0);
+	TWCR = (1<<TWINT) | (1<<TWEN); //MAYBE 1<<TWEA also???
+
 	while(!TWI_Busy());
-	if((TWSR & MASK) != MR_ADDRESS_ACK)Error(MR_ADDRESS_ACK);
-		
-		
-	//Receives the data
-	data = TWDR;
-	TWDR = MR_BYTE_NACK;
+	if((TWSR & MASK) != MT_ADDRESS_ACK)Error(MT_ADDRESS_ACK);
+
+
+	//Tell the ATTiny that we want data from position 0 in buffer
+	TWDR = 0x00;
 	TWCR = (1<<TWINT) | (1<<TWEN);
 	while(!TWI_Busy());
-		
-		
+	if((TWSR & MASK) != MT_BYTE_ACK)Error(MT_BYTE_ACK);
+
+
+	//Sends the start condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+	while(!TWI_Busy());
+	if((TWSR & MASK) != REPEAT_START)Error(REPEAT_START);
+
+	//Loads the slave address and set the R/W bit to 0
+	TWDR = (slaveAddress<<1) | (1<<0);
+	TWCR = (1<<TWINT) | (1<<TWEN);
+
+	//Waits and check the message back
+	while(!TWI_Busy());
+	if((TWSR & MASK) != MR_ADDRESS_ACK)Error(MR_ADDRESS_ACK);
+	
+	
+	//Repeat the receive function as many times as nmr_bytes	
+	int i = 0;
+	if(nmr_bytes > 1){	
+		for(; i < (nmr_bytes-1);){
+			DirtyDawg.TWI_Receive_Buffer[i++] = TWI_Read_Ack();
+		}
+	}
+
+	TWCR = (1<<TWINT) | (1<<TWEN);
+	while(!TWI_Busy());
+	DirtyDawg.TWI_Receive_Buffer[i] = TWDR;
+	
 	//Sends the stop condition
 	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+	while(TWCR & (1<<TWSTO));
 	
-	
-	return data;
 }
+
+uint8_t TWI_Read_Ack(void){
+	
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWEA);
+	while(!TWI_Busy());
+	
+	return 	TWDR;
+}	
+
+
 
 /*
 

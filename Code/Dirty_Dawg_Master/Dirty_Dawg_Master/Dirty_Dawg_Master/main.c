@@ -21,13 +21,32 @@
 #include "main.h"
 
 
-
-
 int main(void)
 {
 	
 	//Placeholder for all the different init function
 	System_Init();
+	
+	_delay_ms(1000);
+	
+	LCD_Byte(LCD_CLEAR, LCD_CMD);
+	unsigned char ascii[20];
+	
+	while(1){
+		PORTB |= (1<<PORTB0);
+		
+		LCD_Byte(LCD_CLEAR, LCD_CMD);
+		LCD_Singlestring(LCD_LINE_1, "Received: ");
+		
+		TWI_Receive(ATTINY1,1);
+		itoa(DirtyDawg.TWI_Receive_Buffer[0], ascii, 10);
+		for(int i = 0; i < 3; i++){
+			LCD_Byte(ascii[i], LCD_CHR);
+		}
+		_delay_ms(250);
+		PORTB &= (0<<PORTB0);
+		_delay_ms(250);
+	}
 	
 
 	/************************************************************************/
@@ -230,13 +249,20 @@ void Bluetooth(void){
 /************************************************************************/
 void Sensors(void){
 
-	DirtyDawg.front_sensor = TWI_Receive(ATTINY1);
-	DirtyDawg.back_sensor = TWI_Receive(ATTINY1);
-	DirtyDawg.left_sensor = TWI_Receive(ATTINY2);
-	DirtyDawg.right_sensor = TWI_Receive(ATTINY2);
+	// Front sensor
+	TWI_Receive(ATTINY1,1); 
+	
+	// Left and Right sensor
+	TWI_Receive(ATTINY2,2);
+	
+	// Saving the data from buffer 0-255
+	DirtyDawg.front_sensor = DirtyDawg.TWI_Receive_Buffer[0];
+	DirtyDawg.back_sensor = 0;
+	DirtyDawg.left_sensor = DirtyDawg.TWI_Receive_Buffer[1];
+	DirtyDawg.right_sensor = DirtyDawg.TWI_Receive_Buffer[2];
 
 
-	//set state
+	// Change state
 	DirtyDawg.state = BLUETOOTH_STATE;
 }
 

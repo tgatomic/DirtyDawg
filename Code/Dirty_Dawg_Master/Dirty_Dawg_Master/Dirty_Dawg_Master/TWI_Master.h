@@ -37,14 +37,15 @@
 #define START 0x08
 #define REPEAT_START 0x10
 
-#define ATTINY1 0x03
+#define ATTINY1 0x1A
 #define ATTINY2 0x06
 
 
 void TWI_Master_Init(void);
 int TWI_Busy(void);
 void TWI_Send(uint8_t slaveAddress, uint8_t data);
-uint8_t TWI_Receive(uint8_t slaveAddress);
+void TWI_Receive(uint8_t slaveAddress, uint8_t nmr_bytes);
+uint8_t TWI_Read_Ack(void);
 
 
 

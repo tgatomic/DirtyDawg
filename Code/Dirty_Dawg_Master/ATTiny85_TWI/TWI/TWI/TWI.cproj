@@ -109,22 +109,7 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="functions.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="functions.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="main.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="TWI_Slave.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="TWI_Slave.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="usiTwiSlave.c">
