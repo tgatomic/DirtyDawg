@@ -11,6 +11,10 @@
 void System_Init(void){
 	
 	DirtyDawg.status = 0;
+	DirtyDawg.front_sensor = 0;
+	DirtyDawg.back_sensor = 0;
+	DirtyDawg.left_sensor = 0;
+	DirtyDawg.right_sensor = 0;
 	
 	// Enable global interrupt
 	sei();
@@ -35,10 +39,6 @@ void System_Init(void){
 	//Signs the status
 	DirtyDawg.status = MCU_STARTED;
 	
-	
-	//PORT is output register
-	//Pin is input register
-
 }
 
 void UART_Init(unsigned int baud){
@@ -55,7 +55,6 @@ void UART_Init(unsigned int baud){
 	UBRR0H = (unsigned char) (baudrate>>8);
 	UBRR0L = (unsigned char) (baudrate);
 
-	
 	//Enables Receive and Transmit over UART
 	UCSR0B = (1<<RXEN0) | (1<<TXEN0); //RXCIE and TXCIE for interrupt based UART.
 	
@@ -65,7 +64,7 @@ void UART_Init(unsigned int baud){
 	//Disables Parity
 	UCSR0C |= (0<<UPM01) | (0<<UPM00);
 	
-	
+	// Set status flag
 	DirtyDawg.status |= UART_STARTED;
 }
 
@@ -106,20 +105,59 @@ void Uart_Flush(void){
 /************************************************************************/
 /*                 Functions for the BlueSmirf                          */
 /************************************************************************/
-int BT_Init(void){
+void BT_Init(void){
 	
 	//Wait for 1 second to ensure the device has power
 	_delay_ms(1000);
 
+	// Send "---" to ensure BlueSmirf is not in command mode
 	for(int i = 0; i<3; i++) BT_Send('-');
 	BT_Send(0x0A); //NL
 	BT_Send(0x0D); //CR
 	_delay_ms(1000);
 	LCD_Byte(LCD_CLEAR, LCD_CMD);
-	_delay_ms(150); //5 ms delay
+	_delay_ms(150);
+	Uart_Flush();
+
+}
+
+void BT_Connection_Check(void){
+	
+	// Send command to end command mode
+	for(int i = 0; i < 3; i++) BT_Send('-');
+
+	BT_Send(LF); //Line feed
+	BT_Send(CR); //Carriage return
+	_delay_ms(1000);
+	Uart_Flush();
+
+	//Sends command to enter command mode
+	for(int i = 0; i < 3; i++) BT_Send('$');
+
+	// Ignore the message from BlueSmirf "CMD"
+	while(BT_Recieve() != LF);
+
+	// Check if connected
+	BT_Send('G');
+	BT_Send('K');
+	BT_Send(LF);
+	BT_Send(CR);
+
+	if(BT_Recieve() == '1')
+		DirtyDawg.status |= BT_CONNECTED;
+	else
+		DirtyDawg.status &= ~BT_CONNECTED;
+
 	Uart_Flush();
 	
-	return 0;
+	// End command mode
+	for(int i = 0; i < 3; i++) BT_Send('-');
+
+	BT_Send(LF); //Line feed
+	BT_Send(CR); //Carriage return
+	_delay_ms(1000);
+	Uart_Flush();
+
 }
 
 void BT_Connect(void){
@@ -136,13 +174,12 @@ void BT_Connect(void){
 	LCD_Byte('*', LCD_CHR);
 	LCD_Byte(LCD_LINE_2 + 14, LCD_CMD);
 	LCD_Byte('*', LCD_CHR);
-//	_delay_ms(150); //5 ms delay
 	Uart_Flush();
 
 	//Sends command to enter command mode
 	for(int i = 0; i < 3; i++) BT_Send('$');
 
-	//Sends response to LCD screen
+	// Ignore the message from BlueSmirf "CMD"
 	while(BT_Recieve() != LF);
 
 	Uart_Flush();
@@ -176,26 +213,60 @@ void BT_Connect(void){
 	
 }
 
+void BT_Disconnect(void){
+
+	//Wait for 1 second to ensure the device has power
+	_delay_ms(1000);
+
+	// Send "---" to ensure BlueSmirf is not in command mode
+	for(int i = 0; i < 3; i++) BT_Send('-');
+
+	BT_Send(LF); //Line feed
+	BT_Send(CR); //Carriage return
+	_delay_ms(1000);
+	Uart_Flush();
+
+	//Sends command to enter command mode
+	for(int i = 0; i < 3; i++) BT_Send('$');
+
+	// Ignore the message from BlueSmirf "CMD"
+	while(BT_Recieve() != LF);
+
+	Uart_Flush();
+	
+	// Command to disconnect with BlueSmirf in the car
+	BT_Send('K');
+	BT_Send(',');
+	BT_Send(LF);
+	BT_Send(CR);
+
+	// Ignore the message from BlueSmirf "KILL"
+	while(BT_Recieve() != LF);
+
+	// If a good connection, set status
+	if(BT_Recieve() == '%')
+		DirtyDawg.status &= ~BT_CONNECTED;
+
+	// Ignore the message from BlueSmirf "CONNECTING"
+	Uart_Flush();	
+}
+
 uint8_t BT_Recieve(void){
 	
 	//Wait for data to be received (wait for flag to be set)
 	while(!(UCSR0A & (1<<RXC0)));
-	
+
 	//Returns the data from buffer
 	return UDR0;
 }
 
 void BT_Send(uint8_t data){
 	
-	//PORTB = ~(1<<PORTB1);
-	//_delay_ms(1000);
 	//Waits for the transmit buffer to be empty (wait for flag)
 	while(!(UCSR0A & (1<<UDRE0)));
 	
 	//Put data in buffer and sends it
 	UDR0 = data;
-	//PORTB = (1<<PORTB1);
-	//_delay_ms(1000);
 }
 
 void Error(unsigned int errorcode){
@@ -222,15 +293,14 @@ void BT_Send_Data(void){
 	uint8_t ECG_hi, ECG_lo;
 	Green_LED_On();
 
-//	sputchar( '-' );
+	sputchar( '-' );
 //	while( !kbhit() );			// wait until byte received
-	while(sgetchar() != '-');
-	DirtyDawg.accelerometer = sgetchar();
-	ECG_hi = sgetchar();
-	ECG_lo = sgetchar();
+//	DirtyDawg.accelerometer = sgetchar();
+//	ECG_hi = sgetchar();
+//	ECG_lo = sgetchar();
 
-	Green_LED_Off();
-	
+//	Green_LED_Off();
+
 	if(DirtyDawg.accelerometer == TILT_LEFT)
 		DirtyDawg.command |= TURN_LEFT;
 	else if(DirtyDawg.accelerometer == TILT_RIGHT)
@@ -249,40 +319,64 @@ void BT_Send_Data(void){
 }
 
 void BT_Recieve_Data(void){
+	uint16_t timeout;
+	uint8_t ch;
+	Green_LED_Off();
+	timeout = 20000;
 
-	// Wait for start command
-	while(BT_Recieve() != 'S');
-
-	// Get IR sensor data from the car
-	DirtyDawg.front_sensor = BT_Recieve();
-	DirtyDawg.back_sensor = BT_Recieve();
-	DirtyDawg.left_sensor = BT_Recieve();
-	DirtyDawg.right_sensor = BT_Recieve();
-
-	// Convert sensor value to ASCII
-	front[0] = DirtyDawg.front_sensor / 100;
-	front[1] = (DirtyDawg.front_sensor - (front[0] * 100 )) / 10;
-	front[2] = (DirtyDawg.front_sensor - (front[0] * 100 )) - front[1] * 10;
-
-	back[0] = DirtyDawg.back_sensor / 100;
-	back[1] = (DirtyDawg.back_sensor - (back[0] * 100 )) / 10;
-	back[2] = (DirtyDawg.back_sensor - (back[0] * 100 )) - back[1] * 10;
-
-	left[0] = DirtyDawg.left_sensor / 100;
-	left[1] = (DirtyDawg.left_sensor - (left[0] * 100 )) / 10;
-	left[2] = (DirtyDawg.left_sensor - (left[0] * 100 )) - left[1] * 10;
-
-	right[0] = DirtyDawg.right_sensor / 100;
-	right[1] = (DirtyDawg.right_sensor - (right[0] * 100 )) / 10;
-	right[2] = (DirtyDawg.right_sensor - (right[0] * 100 )) - right[1] * 10;
-
-	for(int i = 0; i < 3; i++){
-		front[i] += '0';
-		back[i] += '0';
-		left[i] += '0';
-		right[i] += '0';
+	// Wait for start command or timeout
+//	while((ch = BT_Recieve()) != 'S');
+	while((ch != 'S') && (--timeout > 0)){
+		if(UCSR0A & (1<<RXC0))
+			ch = UDR0;
+		if(timeout > 10000)
+			Yellow_LED_On();
+		else
+			Yellow_LED_Off();
 	}
 
+	// If start command received
+	if(ch == 'S'){
+		// Get IR sensor data from the car
+		DirtyDawg.front_sensor = BT_Recieve();
+		DirtyDawg.back_sensor = BT_Recieve();
+		DirtyDawg.left_sensor = BT_Recieve();
+		DirtyDawg.right_sensor = BT_Recieve();
+
+		// Convert sensor value to ASCII
+		front[0] = DirtyDawg.front_sensor / 100;
+		front[1] = (DirtyDawg.front_sensor - (front[0] * 100 )) / 10;
+		front[2] = (DirtyDawg.front_sensor - (front[0] * 100 )) - front[1] * 10;
+
+		back[0] = DirtyDawg.back_sensor / 100;
+		back[1] = (DirtyDawg.back_sensor - (back[0] * 100 )) / 10;
+		back[2] = (DirtyDawg.back_sensor - (back[0] * 100 )) - back[1] * 10;
+
+		left[0] = DirtyDawg.left_sensor / 100;
+		left[1] = (DirtyDawg.left_sensor - (left[0] * 100 )) / 10;
+		left[2] = (DirtyDawg.left_sensor - (left[0] * 100 )) - left[1] * 10;
+
+		right[0] = DirtyDawg.right_sensor / 100;
+		right[1] = (DirtyDawg.right_sensor - (right[0] * 100 )) / 10;
+		right[2] = (DirtyDawg.right_sensor - (right[0] * 100 )) - right[1] * 10;
+
+		for(int i = 0; i < 3; i++){
+			front[i] += '0';
+			back[i] += '0';
+			left[i] += '0';
+			right[i] += '0';
+		}
+	}
+	// If timeout
+	else if(timeout < 1){
+		for(int i = 0; i < 3; i++){
+			front[i] = '-';
+			back[i] = '-';
+			left[i] = '-';
+			right[i] = '-';
+		}
+		
+	}
 	// Change state 
 	DirtyDawg.state = LCD_STATE;
 }

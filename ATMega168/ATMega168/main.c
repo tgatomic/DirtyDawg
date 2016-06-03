@@ -46,26 +46,10 @@ int main(void){
 	LCD_String("DirtyDawg!");
 	LCD_Byte(LCD_LINE_2 + 3, LCD_CMD);
 	LCD_String("Connecting");
+	BT_Connection_Check();
 	while(!(DirtyDawg.status & BT_CONNECTED))
 		BT_Connect();
 	  
-	//Prints a message to tell the user that the controller is running
-//	sputs("The DirtyDawg Is Awake!\n\r" );
-/*
-	uint8_t word, count = 0;
-	for(;;){				// main loop
-		sputchar( '-' );
-		while( !kbhit() );			// wait until byte received
-		word = sgetchar();
-		LCD_Byte( word, LCD_CHR );		// sent byte + 
-		BT_Send(word);
-		if(count++ > 15){
-			LCD_Byte(LCD_CLEAR,LCD_CMD);
-			_delay_ms(150);
-			count = 0;
-		}
-	}
-*/
 	// When active connection send '=' to car 
 	BT_Send('=');
 
@@ -74,20 +58,23 @@ int main(void){
 	LCD_String(ROW1);
 	LCD_Byte(LCD_LINE_2, LCD_CMD);
 	LCD_String(ROW2);
-
+	
 	// Main loop
 	while(TRUE){
 		
 		switch(DirtyDawg.state){
 			
+			// Put sensor data to LCD
 			case LCD_STATE:
 				LCD_Update();
 				break;
 			
+			// Send commands to the car
 			case SEND_DATA_STATE:
 				BT_Send_Data();
 				break;
 
+			// Get sensor data from the car
 			case GET_DATA_STATE:
 				BT_Recieve_Data();
 				break;
@@ -97,6 +84,7 @@ int main(void){
 				Error(0x53);
 			
 		}
+		_delay_ms(250);
 	}	
 }
 

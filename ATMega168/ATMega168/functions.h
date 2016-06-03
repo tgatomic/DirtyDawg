@@ -88,8 +88,10 @@ void Uart_Flush(void);
 void Error(unsigned int);
 
 // Functions for BlueSmirf
-int BT_Init(void);
+void BT_Init(void);
+void BT_Connection_Check(void);
 void BT_Connect(void);
+void BT_Disconnect(void);
 void BT_Send_Data(void);
 void BT_Recieve_Data(void);
 uint8_t BT_Recieve(void);
