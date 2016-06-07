@@ -35,11 +35,11 @@ int main(void){
 	// Initiate the hardware defined UART
 	UART_Init(19200);
 	
-	// Initiate the software define UART
-	suart_init();
-	
 	// Initiate/Clear the BlueSmirf from previous commands
 	BT_Init();
+
+	// Initiate the software define UART
+	suart_init();
 	
 	// Connect the BlueSmirf to the car
 	LCD_Byte(LCD_LINE_1 + 3, LCD_CMD);
@@ -59,6 +59,7 @@ int main(void){
 	LCD_Byte(LCD_LINE_2, LCD_CMD);
 	LCD_String(ROW2);
 	
+	uint8_t loop = 0;
 	// Main loop
 	while(TRUE){
 		
@@ -71,7 +72,12 @@ int main(void){
 			
 			// Send commands to the car
 			case SEND_DATA_STATE:
-				BT_Send_Data();
+				loop++;
+				if(loop > 3){
+					BT_Send_Data();
+					loop = 0;
+				}
+				DirtyDawg.state = GET_DATA_STATE;
 				break;
 
 			// Get sensor data from the car

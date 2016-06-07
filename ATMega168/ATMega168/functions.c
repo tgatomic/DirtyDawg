@@ -295,21 +295,22 @@ void BT_Send_Data(void){
 
 	sputchar( '-' );
 //	while( !kbhit() );			// wait until byte received
-//	DirtyDawg.accelerometer = sgetchar();
+	DirtyDawg.accelerometer = sgetchar();
 //	ECG_hi = sgetchar();
 //	ECG_lo = sgetchar();
 
 //	Green_LED_Off();
-
+/*
 	if(DirtyDawg.accelerometer == TILT_LEFT)
 		DirtyDawg.command |= TURN_LEFT;
 	else if(DirtyDawg.accelerometer == TILT_RIGHT)
 		DirtyDawg.command |= TURN_RIGHT;
 	else
 		DirtyDawg.command &= ~(TURN_LEFT | TURN_RIGHT);
-	
+*/	
 	DirtyDawg.ECG = ECG_lo;
-	BT_Send(DirtyDawg.command);
+//	BT_Send(DirtyDawg.command);
+	BT_Send(DirtyDawg.accelerometer);
 	BT_Send(DirtyDawg.ECG);
 	// Clear flags
 	// DirtyDawg.command = 0;
@@ -323,7 +324,7 @@ void BT_Recieve_Data(void){
 	uint8_t ch;
 	Green_LED_Off();
 	timeout = 20000;
-
+	ch = 0;
 	// Wait for start command or timeout
 //	while((ch = BT_Recieve()) != 'S');
 	while((ch != 'S') && (--timeout > 0)){
