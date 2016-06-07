@@ -3,42 +3,42 @@ ATMega168.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         0000005e  00800100  00000bd8  00000c6c  2**0
+  0 .data         0000005e  00800100  00000bd4  00000c68  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000bd8  00000000  00000000  00000094  2**1
+  1 .text         00000bd4  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          0000001b  0080015e  0080015e  00000cca  2**0
+  2 .bss          0000001b  0080015e  0080015e  00000cc6  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000cca  2**0
+  3 .comment      00000030  00000000  00000000  00000cc6  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000cfc  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000cf8  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000001a8  00000000  00000000  00000d3c  2**0
+  5 .debug_aranges 000001a8  00000000  00000000  00000d38  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001dcc  00000000  00000000  00000ee4  2**0
+  6 .debug_info   00001de7  00000000  00000000  00000ee0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000828  00000000  00000000  00002cb0  2**0
+  7 .debug_abbrev 00000828  00000000  00000000  00002cc7  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000099d  00000000  00000000  000034d8  2**0
+  8 .debug_line   0000099b  00000000  00000000  000034ef  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000003e4  00000000  00000000  00003e78  2**2
+  9 .debug_frame  000003d8  00000000  00000000  00003e8c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000004cd  00000000  00000000  0000425c  2**0
+ 10 .debug_str    000004cd  00000000  00000000  00004264  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000b8b  00000000  00000000  00004729  2**0
+ 11 .debug_loc    00000b5c  00000000  00000000  00004731  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000158  00000000  00000000  000052b4  2**0
+ 12 .debug_ranges 00000158  00000000  00000000  0000528d  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
-   4:	0c 94 3c 04 	jmp	0x878	; 0x878 <__vector_1>
+   4:	0c 94 3a 04 	jmp	0x874	; 0x874 <__vector_1>
    8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
    c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  14:	0c 94 f5 03 	jmp	0x7ea	; 0x7ea <__vector_5>
+  14:	0c 94 f3 03 	jmp	0x7e6	; 0x7e6 <__vector_5>
   18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
@@ -47,11 +47,11 @@ Disassembly of section .text:
   2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  38:	0c 94 91 04 	jmp	0x922	; 0x922 <__vector_14>
-  3c:	0c 94 59 04 	jmp	0x8b2	; 0x8b2 <__vector_15>
+  38:	0c 94 8f 04 	jmp	0x91e	; 0x91e <__vector_14>
+  3c:	0c 94 57 04 	jmp	0x8ae	; 0x8ae <__vector_15>
   40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  48:	0c 94 19 04 	jmp	0x832	; 0x832 <__vector_18>
+  48:	0c 94 17 04 	jmp	0x82e	; 0x82e <__vector_18>
   4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
@@ -72,7 +72,7 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e8 ed       	ldi	r30, 0xD8	; 216
+  7a:	e4 ed       	ldi	r30, 0xD4	; 212
   7c:	fb e0       	ldi	r31, 0x0B	; 11
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
@@ -94,8 +94,8 @@ Disassembly of section .text:
   94:	a9 37       	cpi	r26, 0x79	; 121
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
-  9a:	0e 94 8c 03 	call	0x718	; 0x718 <main>
-  9e:	0c 94 ea 05 	jmp	0xbd4	; 0xbd4 <_exit>
+  9a:	0e 94 8a 03 	call	0x714	; 0x714 <main>
+  9e:	0c 94 e8 05 	jmp	0xbd0	; 0xbd0 <_exit>
 
 000000a2 <__bad_interrupt>:
   a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -205,7 +205,7 @@ void UART_Init(unsigned int baud){
  112:	72 e4       	ldi	r23, 0x42	; 66
  114:	8f e0       	ldi	r24, 0x0F	; 15
  116:	90 e0       	ldi	r25, 0x00	; 0
- 118:	0e 94 b7 05 	call	0xb6e	; 0xb6e <__divmodsi4>
+ 118:	0e 94 b5 05 	call	0xb6a	; 0xb6a <__divmodsi4>
  11c:	21 50       	subi	r18, 0x01	; 1
  11e:	31 09       	sbc	r19, r1
 	//Double speed use frequency/8/baud
@@ -255,11 +255,11 @@ void LCD_Update(void){
 	LCD_Byte(LCD_LINE_1, LCD_CMD);
  14e:	60 e0       	ldi	r22, 0x00	; 0
  150:	80 e8       	ldi	r24, 0x80	; 128
- 152:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 152:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_String("F: ");
  156:	8c e0       	ldi	r24, 0x0C	; 12
  158:	91 e0       	ldi	r25, 0x01	; 1
- 15a:	0e 94 58 05 	call	0xab0	; 0xab0 <LCD_String>
+ 15a:	0e 94 56 05 	call	0xaac	; 0xaac <LCD_String>
  15e:	c7 e6       	ldi	r28, 0x67	; 103
  160:	d1 e0       	ldi	r29, 0x01	; 1
  162:	0a e6       	ldi	r16, 0x6A	; 106
@@ -268,7 +268,7 @@ void LCD_Update(void){
 		LCD_Byte(front[i], LCD_CHR);
  166:	61 e0       	ldi	r22, 0x01	; 1
  168:	89 91       	ld	r24, Y+
- 16a:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 16a:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 void LCD_Update(void){
 	
 	// Prints the distance to front obstacle
@@ -284,7 +284,7 @@ void LCD_Update(void){
 	LCD_String("  B: ");
  174:	80 e1       	ldi	r24, 0x10	; 16
  176:	91 e0       	ldi	r25, 0x01	; 1
- 178:	0e 94 58 05 	call	0xab0	; 0xab0 <LCD_String>
+ 178:	0e 94 56 05 	call	0xaac	; 0xaac <LCD_String>
  17c:	ce e5       	ldi	r28, 0x5E	; 94
  17e:	d1 e0       	ldi	r29, 0x01	; 1
  180:	01 e6       	ldi	r16, 0x61	; 97
@@ -293,7 +293,7 @@ void LCD_Update(void){
 		LCD_Byte(back[i], LCD_CHR);
  184:	61 e0       	ldi	r22, 0x01	; 1
  186:	89 91       	ld	r24, Y+
- 188:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 188:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	for(int i = 0; i < 3; i++)
 		LCD_Byte(front[i], LCD_CHR);
 	
@@ -309,11 +309,11 @@ void LCD_Update(void){
 	LCD_Byte(LCD_LINE_2, LCD_CMD);
  192:	60 e0       	ldi	r22, 0x00	; 0
  194:	80 ec       	ldi	r24, 0xC0	; 192
- 196:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 196:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_String("L: ");
  19a:	86 e1       	ldi	r24, 0x16	; 22
  19c:	91 e0       	ldi	r25, 0x01	; 1
- 19e:	0e 94 58 05 	call	0xab0	; 0xab0 <LCD_String>
+ 19e:	0e 94 56 05 	call	0xaac	; 0xaac <LCD_String>
  1a2:	c4 e6       	ldi	r28, 0x64	; 100
  1a4:	d1 e0       	ldi	r29, 0x01	; 1
  1a6:	07 e6       	ldi	r16, 0x67	; 103
@@ -322,7 +322,7 @@ void LCD_Update(void){
 		LCD_Byte(left[i], LCD_CHR);
  1aa:	61 e0       	ldi	r22, 0x01	; 1
  1ac:	89 91       	ld	r24, Y+
- 1ae:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 1ae:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 		LCD_Byte(back[i], LCD_CHR);
 
 	// Prints the distance to left obstacle
@@ -338,7 +338,7 @@ void LCD_Update(void){
 	LCD_String("  R: ");
  1b8:	8a e1       	ldi	r24, 0x1A	; 26
  1ba:	91 e0       	ldi	r25, 0x01	; 1
- 1bc:	0e 94 58 05 	call	0xab0	; 0xab0 <LCD_String>
+ 1bc:	0e 94 56 05 	call	0xaac	; 0xaac <LCD_String>
  1c0:	c1 e6       	ldi	r28, 0x61	; 97
  1c2:	d1 e0       	ldi	r29, 0x01	; 1
  1c4:	04 e6       	ldi	r16, 0x64	; 100
@@ -347,7 +347,7 @@ void LCD_Update(void){
 		LCD_Byte(right[i], LCD_CHR);
  1c8:	61 e0       	ldi	r22, 0x01	; 1
  1ca:	89 91       	ld	r24, Y+
- 1cc:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 1cc:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	for(int i = 0; i < 3; i++)
 		LCD_Byte(left[i], LCD_CHR);
 
@@ -479,7 +479,7 @@ void BT_Send(uint8_t data){
 	LCD_Byte(LCD_CLEAR, LCD_CMD);
  262:	60 e0       	ldi	r22, 0x00	; 0
  264:	81 e0       	ldi	r24, 0x01	; 1
- 266:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 266:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
  26a:	8b e7       	ldi	r24, 0x7B	; 123
  26c:	92 e9       	ldi	r25, 0x92	; 146
  26e:	01 97       	sbiw	r24, 0x01	; 1
@@ -663,19 +663,19 @@ void BT_Connect(void){
 	LCD_Byte(LCD_LINE_2 + 1, LCD_CMD);
  398:	60 e0       	ldi	r22, 0x00	; 0
  39a:	81 ec       	ldi	r24, 0xC1	; 193
- 39c:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 39c:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_Byte('*', LCD_CHR);
  3a0:	61 e0       	ldi	r22, 0x01	; 1
  3a2:	8a e2       	ldi	r24, 0x2A	; 42
- 3a4:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 3a4:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_Byte(LCD_LINE_2 + 14, LCD_CMD);
  3a8:	60 e0       	ldi	r22, 0x00	; 0
  3aa:	8e ec       	ldi	r24, 0xCE	; 206
- 3ac:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 3ac:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_Byte('*', LCD_CHR);
  3b0:	61 e0       	ldi	r22, 0x01	; 1
  3b2:	8a e2       	ldi	r24, 0x2A	; 42
- 3b4:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 3b4:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	Uart_Flush();
  3b8:	0e 94 f3 00 	call	0x1e6	; 0x1e6 <Uart_Flush>
 
@@ -774,19 +774,19 @@ void BT_Connect(void){
 	LCD_Byte(LCD_LINE_2 + 1, LCD_CMD);
  444:	60 e0       	ldi	r22, 0x00	; 0
  446:	81 ec       	ldi	r24, 0xC1	; 193
- 448:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 448:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_Byte(' ', LCD_CHR);
  44c:	61 e0       	ldi	r22, 0x01	; 1
  44e:	80 e2       	ldi	r24, 0x20	; 32
- 450:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 450:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_Byte(LCD_LINE_2 + 14, LCD_CMD);
  454:	60 e0       	ldi	r22, 0x00	; 0
  456:	8e ec       	ldi	r24, 0xCE	; 206
- 458:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 458:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_Byte(' ', LCD_CHR);
  45c:	61 e0       	ldi	r22, 0x01	; 1
  45e:	80 e2       	ldi	r24, 0x20	; 32
- 460:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 460:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	
 }
  464:	2c 96       	adiw	r28, 0x0c	; 12
@@ -838,15 +838,15 @@ void Error(unsigned int errorcode){
 	LCD_Byte(LCD_CLEAR, LCD_CMD);
  48c:	60 e0       	ldi	r22, 0x00	; 0
  48e:	81 e0       	ldi	r24, 0x01	; 1
- 490:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 490:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_Byte(LCD_LINE_1 + 5, LCD_CMD);
  494:	60 e0       	ldi	r22, 0x00	; 0
  496:	85 e8       	ldi	r24, 0x85	; 133
- 498:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 498:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_String("Error");
  49c:	80 e2       	ldi	r24, 0x20	; 32
  49e:	91 e0       	ldi	r25, 0x01	; 1
- 4a0:	0e 94 58 05 	call	0xab0	; 0xab0 <LCD_String>
+ 4a0:	0e 94 56 05 	call	0xaac	; 0xaac <LCD_String>
 }
 
 void Error(unsigned int errorcode){
@@ -873,7 +873,7 @@ void Error(unsigned int errorcode){
  4bc:	b6 01       	movw	r22, r12
  4be:	a5 01       	movw	r20, r10
  4c0:	94 01       	movw	r18, r8
- 4c2:	0e 94 95 05 	call	0xb2a	; 0xb2a <__udivmodsi4>
+ 4c2:	0e 94 93 05 	call	0xb26	; 0xb26 <__udivmodsi4>
  4c6:	67 2b       	or	r22, r23
  4c8:	68 2b       	or	r22, r24
  4ca:	69 2b       	or	r22, r25
@@ -904,435 +904,422 @@ void Green_LED_On(void){
  4e0:	08 95       	ret
 
 000004e2 <BT_Send_Data>:
-		ticks++;
-	}
-}
 
 
 void BT_Send_Data(void){
- 4e2:	cf 93       	push	r28
- 4e4:	df 93       	push	r29
 	
 	uint8_t ECG_hi, ECG_lo;
 	Green_LED_On();
- 4e6:	0e 94 6f 02 	call	0x4de	; 0x4de <Green_LED_On>
+ 4e2:	0e 94 6f 02 	call	0x4de	; 0x4de <Green_LED_On>
 
 	sputchar( '-' );
- 4ea:	8d e2       	ldi	r24, 0x2D	; 45
- 4ec:	0e 94 86 04 	call	0x90c	; 0x90c <sputchar>
-//	while( !kbhit() );			// wait until byte received
-	DirtyDawg.accelerometer = sgetchar();
- 4f0:	0e 94 33 04 	call	0x866	; 0x866 <sgetchar>
- 4f4:	ca e6       	ldi	r28, 0x6A	; 106
- 4f6:	d1 e0       	ldi	r29, 0x01	; 1
- 4f8:	8c 83       	std	Y+4, r24	; 0x04
-	else if(DirtyDawg.accelerometer == TILT_RIGHT)
-		DirtyDawg.command |= TURN_RIGHT;
-	else
-		DirtyDawg.command &= ~(TURN_LEFT | TURN_RIGHT);
-*/	
-	DirtyDawg.ECG = ECG_lo;
- 4fa:	1d 82       	std	Y+5, r1	; 0x05
-//	BT_Send(DirtyDawg.command);
-	BT_Send(DirtyDawg.accelerometer);
- 4fc:	0e 94 08 01 	call	0x210	; 0x210 <BT_Send>
-	BT_Send(DirtyDawg.ECG);
- 500:	8d 81       	ldd	r24, Y+5	; 0x05
- 502:	0e 94 08 01 	call	0x210	; 0x210 <BT_Send>
+ 4e6:	8d e2       	ldi	r24, 0x2D	; 45
+ 4e8:	0e 94 84 04 	call	0x908	; 0x908 <sputchar>
+	BT_Send(sgetchar());
+ 4ec:	0e 94 31 04 	call	0x862	; 0x862 <sgetchar>
+ 4f0:	0e 94 08 01 	call	0x210	; 0x210 <BT_Send>
+	BT_Send(sgetchar());
+ 4f4:	0e 94 31 04 	call	0x862	; 0x862 <sgetchar>
+ 4f8:	0e 94 08 01 	call	0x210	; 0x210 <BT_Send>
+	BT_Send(sgetchar());
+ 4fc:	0e 94 31 04 	call	0x862	; 0x862 <sgetchar>
+ 500:	0e 94 08 01 	call	0x210	; 0x210 <BT_Send>
+//	BT_Send(DirtyDawg.ECG);
 	// Clear flags
 	// DirtyDawg.command = 0;
 	
 	//Change state
 	DirtyDawg.state = GET_DATA_STATE;
- 506:	83 e0       	ldi	r24, 0x03	; 3
- 508:	88 87       	std	Y+8, r24	; 0x08
-}
- 50a:	df 91       	pop	r29
- 50c:	cf 91       	pop	r28
- 50e:	08 95       	ret
+ 504:	83 e0       	ldi	r24, 0x03	; 3
+ 506:	80 93 72 01 	sts	0x0172, r24
+ 50a:	08 95       	ret
 
-00000510 <Green_LED_Off>:
+0000050c <Green_LED_Off>:
 
 void Green_LED_On(void){
 	PORTD |= (1<<PORTD6);
 }
 void Green_LED_Off(void){
 	PORTD &= (0<<PORTD6);
- 510:	8b b1       	in	r24, 0x0b	; 11
- 512:	1b b8       	out	0x0b, r1	; 11
- 514:	08 95       	ret
+ 50c:	8b b1       	in	r24, 0x0b	; 11
+ 50e:	1b b8       	out	0x0b, r1	; 11
+ 510:	08 95       	ret
 
-00000516 <BT_Recieve_Data>:
+00000512 <BT_Recieve_Data>:
 	
 	//Change state
 	DirtyDawg.state = GET_DATA_STATE;
 }
 
 void BT_Recieve_Data(void){
- 516:	cf 92       	push	r12
- 518:	df 92       	push	r13
- 51a:	ef 92       	push	r14
- 51c:	ff 92       	push	r15
- 51e:	0f 93       	push	r16
- 520:	1f 93       	push	r17
- 522:	cf 93       	push	r28
- 524:	df 93       	push	r29
+ 512:	cf 92       	push	r12
+ 514:	df 92       	push	r13
+ 516:	ef 92       	push	r14
+ 518:	ff 92       	push	r15
+ 51a:	0f 93       	push	r16
+ 51c:	1f 93       	push	r17
+ 51e:	cf 93       	push	r28
+ 520:	df 93       	push	r29
 	uint16_t timeout;
 	uint8_t ch;
 	Green_LED_Off();
- 526:	0e 94 88 02 	call	0x510	; 0x510 <Green_LED_Off>
- 52a:	cf e1       	ldi	r28, 0x1F	; 31
- 52c:	de e4       	ldi	r29, 0x4E	; 78
- 52e:	10 e0       	ldi	r17, 0x00	; 0
+ 522:	0e 94 86 02 	call	0x50c	; 0x50c <Green_LED_Off>
+ 526:	cf e1       	ldi	r28, 0x1F	; 31
+ 528:	de e4       	ldi	r29, 0x4E	; 78
+ 52a:	10 e0       	ldi	r17, 0x00	; 0
 	timeout = 20000;
 	ch = 0;
 	// Wait for start command or timeout
 //	while((ch = BT_Recieve()) != 'S');
 	while((ch != 'S') && (--timeout > 0)){
 		if(UCSR0A & (1<<RXC0))
- 530:	0f 2e       	mov	r0, r31
- 532:	f0 ec       	ldi	r31, 0xC0	; 192
- 534:	ef 2e       	mov	r14, r31
- 536:	f1 2c       	mov	r15, r1
- 538:	f0 2d       	mov	r31, r0
+ 52c:	0f 2e       	mov	r0, r31
+ 52e:	f0 ec       	ldi	r31, 0xC0	; 192
+ 530:	ef 2e       	mov	r14, r31
+ 532:	f1 2c       	mov	r15, r1
+ 534:	f0 2d       	mov	r31, r0
 			ch = UDR0;
- 53a:	0f 2e       	mov	r0, r31
- 53c:	f6 ec       	ldi	r31, 0xC6	; 198
- 53e:	cf 2e       	mov	r12, r31
- 540:	d1 2c       	mov	r13, r1
- 542:	f0 2d       	mov	r31, r0
+ 536:	0f 2e       	mov	r0, r31
+ 538:	f6 ec       	ldi	r31, 0xC6	; 198
+ 53a:	cf 2e       	mov	r12, r31
+ 53c:	d1 2c       	mov	r13, r1
+ 53e:	f0 2d       	mov	r31, r0
 	timeout = 20000;
 	ch = 0;
 	// Wait for start command or timeout
 //	while((ch = BT_Recieve()) != 'S');
 	while((ch != 'S') && (--timeout > 0)){
 		if(UCSR0A & (1<<RXC0))
- 544:	d7 01       	movw	r26, r14
- 546:	8c 91       	ld	r24, X
- 548:	88 23       	and	r24, r24
- 54a:	14 f4       	brge	.+4      	; 0x550 <BT_Recieve_Data+0x3a>
+ 540:	d7 01       	movw	r26, r14
+ 542:	8c 91       	ld	r24, X
+ 544:	88 23       	and	r24, r24
+ 546:	14 f4       	brge	.+4      	; 0x54c <BT_Recieve_Data+0x3a>
 			ch = UDR0;
- 54c:	f6 01       	movw	r30, r12
- 54e:	10 81       	ld	r17, Z
+ 548:	f6 01       	movw	r30, r12
+ 54a:	10 81       	ld	r17, Z
 		if(timeout > 10000)
- 550:	c1 31       	cpi	r28, 0x11	; 17
- 552:	f7 e2       	ldi	r31, 0x27	; 39
- 554:	df 07       	cpc	r29, r31
- 556:	18 f0       	brcs	.+6      	; 0x55e <BT_Recieve_Data+0x48>
+ 54c:	c1 31       	cpi	r28, 0x11	; 17
+ 54e:	f7 e2       	ldi	r31, 0x27	; 39
+ 550:	df 07       	cpc	r29, r31
+ 552:	18 f0       	brcs	.+6      	; 0x55a <BT_Recieve_Data+0x48>
 			Yellow_LED_On();
- 558:	0e 94 3f 02 	call	0x47e	; 0x47e <Yellow_LED_On>
- 55c:	02 c0       	rjmp	.+4      	; 0x562 <BT_Recieve_Data+0x4c>
+ 554:	0e 94 3f 02 	call	0x47e	; 0x47e <Yellow_LED_On>
+ 558:	02 c0       	rjmp	.+4      	; 0x55e <BT_Recieve_Data+0x4c>
 		else
 			Yellow_LED_Off();
- 55e:	0e 94 41 02 	call	0x482	; 0x482 <Yellow_LED_Off>
+ 55a:	0e 94 41 02 	call	0x482	; 0x482 <Yellow_LED_Off>
 	Green_LED_Off();
 	timeout = 20000;
 	ch = 0;
 	// Wait for start command or timeout
 //	while((ch = BT_Recieve()) != 'S');
 	while((ch != 'S') && (--timeout > 0)){
- 562:	13 35       	cpi	r17, 0x53	; 83
- 564:	89 f1       	breq	.+98     	; 0x5c8 <BT_Recieve_Data+0xb2>
- 566:	21 97       	sbiw	r28, 0x01	; 1
- 568:	69 f7       	brne	.-38     	; 0x544 <BT_Recieve_Data+0x2e>
- 56a:	14 c0       	rjmp	.+40     	; 0x594 <BT_Recieve_Data+0x7e>
+ 55e:	13 35       	cpi	r17, 0x53	; 83
+ 560:	89 f1       	breq	.+98     	; 0x5c4 <BT_Recieve_Data+0xb2>
+ 562:	21 97       	sbiw	r28, 0x01	; 1
+ 564:	69 f7       	brne	.-38     	; 0x540 <BT_Recieve_Data+0x2e>
+ 566:	14 c0       	rjmp	.+40     	; 0x590 <BT_Recieve_Data+0x7e>
 		right[0] = DirtyDawg.right_sensor / 100;
 		right[1] = (DirtyDawg.right_sensor - (right[0] * 100 )) / 10;
 		right[2] = (DirtyDawg.right_sensor - (right[0] * 100 )) - right[1] * 10;
 
 		for(int i = 0; i < 3; i++){
 			front[i] += '0';
- 56c:	20 81       	ld	r18, Z
- 56e:	20 5d       	subi	r18, 0xD0	; 208
- 570:	21 93       	st	Z+, r18
+ 568:	20 81       	ld	r18, Z
+ 56a:	20 5d       	subi	r18, 0xD0	; 208
+ 56c:	21 93       	st	Z+, r18
 			back[i] += '0';
- 572:	dc 01       	movw	r26, r24
- 574:	2c 91       	ld	r18, X
- 576:	20 5d       	subi	r18, 0xD0	; 208
- 578:	2d 93       	st	X+, r18
- 57a:	cd 01       	movw	r24, r26
+ 56e:	dc 01       	movw	r26, r24
+ 570:	2c 91       	ld	r18, X
+ 572:	20 5d       	subi	r18, 0xD0	; 208
+ 574:	2d 93       	st	X+, r18
+ 576:	cd 01       	movw	r24, r26
 			left[i] += '0';
- 57c:	28 81       	ld	r18, Y
- 57e:	20 5d       	subi	r18, 0xD0	; 208
- 580:	29 93       	st	Y+, r18
+ 578:	28 81       	ld	r18, Y
+ 57a:	20 5d       	subi	r18, 0xD0	; 208
+ 57c:	29 93       	st	Y+, r18
 			right[i] += '0';
- 582:	db 01       	movw	r26, r22
- 584:	2c 91       	ld	r18, X
- 586:	20 5d       	subi	r18, 0xD0	; 208
- 588:	2d 93       	st	X+, r18
- 58a:	bd 01       	movw	r22, r26
+ 57e:	db 01       	movw	r26, r22
+ 580:	2c 91       	ld	r18, X
+ 582:	20 5d       	subi	r18, 0xD0	; 208
+ 584:	2d 93       	st	X+, r18
+ 586:	bd 01       	movw	r22, r26
 
 		right[0] = DirtyDawg.right_sensor / 100;
 		right[1] = (DirtyDawg.right_sensor - (right[0] * 100 )) / 10;
 		right[2] = (DirtyDawg.right_sensor - (right[0] * 100 )) - right[1] * 10;
 
 		for(int i = 0; i < 3; i++){
- 58c:	e4 17       	cp	r30, r20
- 58e:	f5 07       	cpc	r31, r21
- 590:	69 f7       	brne	.-38     	; 0x56c <BT_Recieve_Data+0x56>
- 592:	16 c0       	rjmp	.+44     	; 0x5c0 <BT_Recieve_Data+0xaa>
- 594:	e7 e6       	ldi	r30, 0x67	; 103
- 596:	f1 e0       	ldi	r31, 0x01	; 1
- 598:	2e e5       	ldi	r18, 0x5E	; 94
- 59a:	31 e0       	ldi	r19, 0x01	; 1
- 59c:	c4 e6       	ldi	r28, 0x64	; 100
- 59e:	d1 e0       	ldi	r29, 0x01	; 1
- 5a0:	61 e6       	ldi	r22, 0x61	; 97
- 5a2:	71 e0       	ldi	r23, 0x01	; 1
- 5a4:	4a e6       	ldi	r20, 0x6A	; 106
- 5a6:	51 e0       	ldi	r21, 0x01	; 1
+ 588:	e4 17       	cp	r30, r20
+ 58a:	f5 07       	cpc	r31, r21
+ 58c:	69 f7       	brne	.-38     	; 0x568 <BT_Recieve_Data+0x56>
+ 58e:	16 c0       	rjmp	.+44     	; 0x5bc <BT_Recieve_Data+0xaa>
+ 590:	e7 e6       	ldi	r30, 0x67	; 103
+ 592:	f1 e0       	ldi	r31, 0x01	; 1
+ 594:	2e e5       	ldi	r18, 0x5E	; 94
+ 596:	31 e0       	ldi	r19, 0x01	; 1
+ 598:	c4 e6       	ldi	r28, 0x64	; 100
+ 59a:	d1 e0       	ldi	r29, 0x01	; 1
+ 59c:	61 e6       	ldi	r22, 0x61	; 97
+ 59e:	71 e0       	ldi	r23, 0x01	; 1
+ 5a0:	4a e6       	ldi	r20, 0x6A	; 106
+ 5a2:	51 e0       	ldi	r21, 0x01	; 1
 		}
 	}
 	// If timeout
 	else if(timeout < 1){
 		for(int i = 0; i < 3; i++){
 			front[i] = '-';
- 5a8:	8d e2       	ldi	r24, 0x2D	; 45
- 5aa:	81 93       	st	Z+, r24
+ 5a4:	8d e2       	ldi	r24, 0x2D	; 45
+ 5a6:	81 93       	st	Z+, r24
 			back[i] = '-';
- 5ac:	d9 01       	movw	r26, r18
- 5ae:	8d 93       	st	X+, r24
- 5b0:	9d 01       	movw	r18, r26
+ 5a8:	d9 01       	movw	r26, r18
+ 5aa:	8d 93       	st	X+, r24
+ 5ac:	9d 01       	movw	r18, r26
 			left[i] = '-';
- 5b2:	89 93       	st	Y+, r24
+ 5ae:	89 93       	st	Y+, r24
 			right[i] = '-';
- 5b4:	db 01       	movw	r26, r22
- 5b6:	8d 93       	st	X+, r24
- 5b8:	bd 01       	movw	r22, r26
+ 5b0:	db 01       	movw	r26, r22
+ 5b2:	8d 93       	st	X+, r24
+ 5b4:	bd 01       	movw	r22, r26
 			right[i] += '0';
 		}
 	}
 	// If timeout
 	else if(timeout < 1){
 		for(int i = 0; i < 3; i++){
- 5ba:	e4 17       	cp	r30, r20
- 5bc:	f5 07       	cpc	r31, r21
- 5be:	a9 f7       	brne	.-22     	; 0x5aa <BT_Recieve_Data+0x94>
+ 5b6:	e4 17       	cp	r30, r20
+ 5b8:	f5 07       	cpc	r31, r21
+ 5ba:	a9 f7       	brne	.-22     	; 0x5a6 <BT_Recieve_Data+0x94>
 			right[i] = '-';
 		}
 		
 	}
 	// Change state 
 	DirtyDawg.state = LCD_STATE;
- 5c0:	81 e0       	ldi	r24, 0x01	; 1
- 5c2:	80 93 72 01 	sts	0x0172, r24
- 5c6:	9f c0       	rjmp	.+318    	; 0x706 <BT_Recieve_Data+0x1f0>
+ 5bc:	81 e0       	ldi	r24, 0x01	; 1
+ 5be:	80 93 72 01 	sts	0x0172, r24
+ 5c2:	9f c0       	rjmp	.+318    	; 0x702 <BT_Recieve_Data+0x1f0>
 	}
 
 	// If start command received
 	if(ch == 'S'){
 		// Get IR sensor data from the car
 		DirtyDawg.front_sensor = BT_Recieve();
- 5c8:	0e 94 00 01 	call	0x200	; 0x200 <BT_Recieve>
- 5cc:	ca e6       	ldi	r28, 0x6A	; 106
- 5ce:	d1 e0       	ldi	r29, 0x01	; 1
- 5d0:	8a 83       	std	Y+2, r24	; 0x02
+ 5c4:	0e 94 00 01 	call	0x200	; 0x200 <BT_Recieve>
+ 5c8:	ca e6       	ldi	r28, 0x6A	; 106
+ 5ca:	d1 e0       	ldi	r29, 0x01	; 1
+ 5cc:	8a 83       	std	Y+2, r24	; 0x02
 		DirtyDawg.back_sensor = BT_Recieve();
- 5d2:	0e 94 00 01 	call	0x200	; 0x200 <BT_Recieve>
- 5d6:	8b 83       	std	Y+3, r24	; 0x03
+ 5ce:	0e 94 00 01 	call	0x200	; 0x200 <BT_Recieve>
+ 5d2:	8b 83       	std	Y+3, r24	; 0x03
 		DirtyDawg.left_sensor = BT_Recieve();
- 5d8:	0e 94 00 01 	call	0x200	; 0x200 <BT_Recieve>
- 5dc:	88 83       	st	Y, r24
+ 5d4:	0e 94 00 01 	call	0x200	; 0x200 <BT_Recieve>
+ 5d8:	88 83       	st	Y, r24
 		DirtyDawg.right_sensor = BT_Recieve();
- 5de:	0e 94 00 01 	call	0x200	; 0x200 <BT_Recieve>
- 5e2:	38 2f       	mov	r19, r24
- 5e4:	89 83       	std	Y+1, r24	; 0x01
+ 5da:	0e 94 00 01 	call	0x200	; 0x200 <BT_Recieve>
+ 5de:	38 2f       	mov	r19, r24
+ 5e0:	89 83       	std	Y+1, r24	; 0x01
 
 		// Convert sensor value to ASCII
 		front[0] = DirtyDawg.front_sensor / 100;
- 5e6:	ea 81       	ldd	r30, Y+2	; 0x02
- 5e8:	29 e2       	ldi	r18, 0x29	; 41
- 5ea:	e2 9f       	mul	r30, r18
- 5ec:	f1 2d       	mov	r31, r1
- 5ee:	11 24       	eor	r1, r1
- 5f0:	f2 95       	swap	r31
- 5f2:	ff 70       	andi	r31, 0x0F	; 15
- 5f4:	0f 2e       	mov	r0, r31
- 5f6:	f7 e6       	ldi	r31, 0x67	; 103
- 5f8:	ef 2e       	mov	r14, r31
- 5fa:	f1 e0       	ldi	r31, 0x01	; 1
- 5fc:	ff 2e       	mov	r15, r31
- 5fe:	f0 2d       	mov	r31, r0
- 600:	d7 01       	movw	r26, r14
- 602:	fc 93       	st	X, r31
+ 5e2:	ea 81       	ldd	r30, Y+2	; 0x02
+ 5e4:	29 e2       	ldi	r18, 0x29	; 41
+ 5e6:	e2 9f       	mul	r30, r18
+ 5e8:	f1 2d       	mov	r31, r1
+ 5ea:	11 24       	eor	r1, r1
+ 5ec:	f2 95       	swap	r31
+ 5ee:	ff 70       	andi	r31, 0x0F	; 15
+ 5f0:	0f 2e       	mov	r0, r31
+ 5f2:	f7 e6       	ldi	r31, 0x67	; 103
+ 5f4:	ef 2e       	mov	r14, r31
+ 5f6:	f1 e0       	ldi	r31, 0x01	; 1
+ 5f8:	ff 2e       	mov	r15, r31
+ 5fa:	f0 2d       	mov	r31, r0
+ 5fc:	d7 01       	movw	r26, r14
+ 5fe:	fc 93       	st	X, r31
 		front[1] = (DirtyDawg.front_sensor - (front[0] * 100 )) / 10;
- 604:	4c e9       	ldi	r20, 0x9C	; 156
- 606:	5f 2f       	mov	r21, r31
- 608:	45 03       	mulsu	r20, r21
- 60a:	c0 01       	movw	r24, r0
- 60c:	11 24       	eor	r1, r1
- 60e:	8e 0f       	add	r24, r30
- 610:	91 1d       	adc	r25, r1
- 612:	0a e0       	ldi	r16, 0x0A	; 10
- 614:	10 e0       	ldi	r17, 0x00	; 0
- 616:	b8 01       	movw	r22, r16
- 618:	0e 94 81 05 	call	0xb02	; 0xb02 <__divmodhi4>
- 61c:	d7 01       	movw	r26, r14
- 61e:	11 96       	adiw	r26, 0x01	; 1
- 620:	6c 93       	st	X, r22
- 622:	11 97       	sbiw	r26, 0x01	; 1
- 624:	f4 9f       	mul	r31, r20
- 626:	e0 0d       	add	r30, r0
- 628:	11 24       	eor	r1, r1
+ 600:	4c e9       	ldi	r20, 0x9C	; 156
+ 602:	5f 2f       	mov	r21, r31
+ 604:	45 03       	mulsu	r20, r21
+ 606:	c0 01       	movw	r24, r0
+ 608:	11 24       	eor	r1, r1
+ 60a:	8e 0f       	add	r24, r30
+ 60c:	91 1d       	adc	r25, r1
+ 60e:	0a e0       	ldi	r16, 0x0A	; 10
+ 610:	10 e0       	ldi	r17, 0x00	; 0
+ 612:	b8 01       	movw	r22, r16
+ 614:	0e 94 7f 05 	call	0xafe	; 0xafe <__divmodhi4>
+ 618:	d7 01       	movw	r26, r14
+ 61a:	11 96       	adiw	r26, 0x01	; 1
+ 61c:	6c 93       	st	X, r22
+ 61e:	11 97       	sbiw	r26, 0x01	; 1
+ 620:	f4 9f       	mul	r31, r20
+ 622:	e0 0d       	add	r30, r0
+ 624:	11 24       	eor	r1, r1
 		front[2] = (DirtyDawg.front_sensor - (front[0] * 100 )) - front[1] * 10;
- 62a:	66 0f       	add	r22, r22
- 62c:	86 2f       	mov	r24, r22
- 62e:	88 0f       	add	r24, r24
- 630:	88 0f       	add	r24, r24
- 632:	68 0f       	add	r22, r24
- 634:	e6 1b       	sub	r30, r22
- 636:	12 96       	adiw	r26, 0x02	; 2
- 638:	ec 93       	st	X, r30
+ 626:	66 0f       	add	r22, r22
+ 628:	86 2f       	mov	r24, r22
+ 62a:	88 0f       	add	r24, r24
+ 62c:	88 0f       	add	r24, r24
+ 62e:	68 0f       	add	r22, r24
+ 630:	e6 1b       	sub	r30, r22
+ 632:	12 96       	adiw	r26, 0x02	; 2
+ 634:	ec 93       	st	X, r30
 
 		back[0] = DirtyDawg.back_sensor / 100;
- 63a:	eb 81       	ldd	r30, Y+3	; 0x03
- 63c:	e2 9f       	mul	r30, r18
- 63e:	f1 2d       	mov	r31, r1
- 640:	11 24       	eor	r1, r1
- 642:	f2 95       	swap	r31
- 644:	ff 70       	andi	r31, 0x0F	; 15
- 646:	0f 2e       	mov	r0, r31
- 648:	fe e5       	ldi	r31, 0x5E	; 94
- 64a:	ef 2e       	mov	r14, r31
- 64c:	f1 e0       	ldi	r31, 0x01	; 1
- 64e:	ff 2e       	mov	r15, r31
- 650:	f0 2d       	mov	r31, r0
- 652:	d7 01       	movw	r26, r14
- 654:	fc 93       	st	X, r31
+ 636:	eb 81       	ldd	r30, Y+3	; 0x03
+ 638:	e2 9f       	mul	r30, r18
+ 63a:	f1 2d       	mov	r31, r1
+ 63c:	11 24       	eor	r1, r1
+ 63e:	f2 95       	swap	r31
+ 640:	ff 70       	andi	r31, 0x0F	; 15
+ 642:	0f 2e       	mov	r0, r31
+ 644:	fe e5       	ldi	r31, 0x5E	; 94
+ 646:	ef 2e       	mov	r14, r31
+ 648:	f1 e0       	ldi	r31, 0x01	; 1
+ 64a:	ff 2e       	mov	r15, r31
+ 64c:	f0 2d       	mov	r31, r0
+ 64e:	d7 01       	movw	r26, r14
+ 650:	fc 93       	st	X, r31
 		back[1] = (DirtyDawg.back_sensor - (back[0] * 100 )) / 10;
- 656:	5f 2f       	mov	r21, r31
- 658:	45 03       	mulsu	r20, r21
- 65a:	c0 01       	movw	r24, r0
- 65c:	11 24       	eor	r1, r1
- 65e:	8e 0f       	add	r24, r30
- 660:	91 1d       	adc	r25, r1
- 662:	b8 01       	movw	r22, r16
- 664:	0e 94 81 05 	call	0xb02	; 0xb02 <__divmodhi4>
- 668:	d7 01       	movw	r26, r14
- 66a:	11 96       	adiw	r26, 0x01	; 1
- 66c:	6c 93       	st	X, r22
- 66e:	11 97       	sbiw	r26, 0x01	; 1
- 670:	f4 9f       	mul	r31, r20
- 672:	e0 0d       	add	r30, r0
- 674:	11 24       	eor	r1, r1
+ 652:	5f 2f       	mov	r21, r31
+ 654:	45 03       	mulsu	r20, r21
+ 656:	c0 01       	movw	r24, r0
+ 658:	11 24       	eor	r1, r1
+ 65a:	8e 0f       	add	r24, r30
+ 65c:	91 1d       	adc	r25, r1
+ 65e:	b8 01       	movw	r22, r16
+ 660:	0e 94 7f 05 	call	0xafe	; 0xafe <__divmodhi4>
+ 664:	d7 01       	movw	r26, r14
+ 666:	11 96       	adiw	r26, 0x01	; 1
+ 668:	6c 93       	st	X, r22
+ 66a:	11 97       	sbiw	r26, 0x01	; 1
+ 66c:	f4 9f       	mul	r31, r20
+ 66e:	e0 0d       	add	r30, r0
+ 670:	11 24       	eor	r1, r1
 		back[2] = (DirtyDawg.back_sensor - (back[0] * 100 )) - back[1] * 10;
- 676:	66 0f       	add	r22, r22
- 678:	86 2f       	mov	r24, r22
- 67a:	88 0f       	add	r24, r24
- 67c:	88 0f       	add	r24, r24
- 67e:	68 0f       	add	r22, r24
- 680:	e6 1b       	sub	r30, r22
- 682:	12 96       	adiw	r26, 0x02	; 2
- 684:	ec 93       	st	X, r30
+ 672:	66 0f       	add	r22, r22
+ 674:	86 2f       	mov	r24, r22
+ 676:	88 0f       	add	r24, r24
+ 678:	88 0f       	add	r24, r24
+ 67a:	68 0f       	add	r22, r24
+ 67c:	e6 1b       	sub	r30, r22
+ 67e:	12 96       	adiw	r26, 0x02	; 2
+ 680:	ec 93       	st	X, r30
 
 		left[0] = DirtyDawg.left_sensor / 100;
- 686:	e8 81       	ld	r30, Y
- 688:	e2 9f       	mul	r30, r18
- 68a:	f1 2d       	mov	r31, r1
- 68c:	11 24       	eor	r1, r1
- 68e:	f2 95       	swap	r31
- 690:	ff 70       	andi	r31, 0x0F	; 15
- 692:	c4 e6       	ldi	r28, 0x64	; 100
- 694:	d1 e0       	ldi	r29, 0x01	; 1
- 696:	f8 83       	st	Y, r31
+ 682:	e8 81       	ld	r30, Y
+ 684:	e2 9f       	mul	r30, r18
+ 686:	f1 2d       	mov	r31, r1
+ 688:	11 24       	eor	r1, r1
+ 68a:	f2 95       	swap	r31
+ 68c:	ff 70       	andi	r31, 0x0F	; 15
+ 68e:	c4 e6       	ldi	r28, 0x64	; 100
+ 690:	d1 e0       	ldi	r29, 0x01	; 1
+ 692:	f8 83       	st	Y, r31
 		left[1] = (DirtyDawg.left_sensor - (left[0] * 100 )) / 10;
- 698:	5f 2f       	mov	r21, r31
- 69a:	45 03       	mulsu	r20, r21
- 69c:	c0 01       	movw	r24, r0
- 69e:	11 24       	eor	r1, r1
- 6a0:	8e 0f       	add	r24, r30
- 6a2:	91 1d       	adc	r25, r1
- 6a4:	b8 01       	movw	r22, r16
- 6a6:	0e 94 81 05 	call	0xb02	; 0xb02 <__divmodhi4>
- 6aa:	69 83       	std	Y+1, r22	; 0x01
- 6ac:	f4 9f       	mul	r31, r20
- 6ae:	e0 0d       	add	r30, r0
- 6b0:	11 24       	eor	r1, r1
+ 694:	5f 2f       	mov	r21, r31
+ 696:	45 03       	mulsu	r20, r21
+ 698:	c0 01       	movw	r24, r0
+ 69a:	11 24       	eor	r1, r1
+ 69c:	8e 0f       	add	r24, r30
+ 69e:	91 1d       	adc	r25, r1
+ 6a0:	b8 01       	movw	r22, r16
+ 6a2:	0e 94 7f 05 	call	0xafe	; 0xafe <__divmodhi4>
+ 6a6:	69 83       	std	Y+1, r22	; 0x01
+ 6a8:	f4 9f       	mul	r31, r20
+ 6aa:	e0 0d       	add	r30, r0
+ 6ac:	11 24       	eor	r1, r1
 		left[2] = (DirtyDawg.left_sensor - (left[0] * 100 )) - left[1] * 10;
- 6b2:	66 0f       	add	r22, r22
- 6b4:	86 2f       	mov	r24, r22
- 6b6:	88 0f       	add	r24, r24
- 6b8:	88 0f       	add	r24, r24
- 6ba:	68 0f       	add	r22, r24
- 6bc:	e6 1b       	sub	r30, r22
- 6be:	ea 83       	std	Y+2, r30	; 0x02
+ 6ae:	66 0f       	add	r22, r22
+ 6b0:	86 2f       	mov	r24, r22
+ 6b2:	88 0f       	add	r24, r24
+ 6b4:	88 0f       	add	r24, r24
+ 6b6:	68 0f       	add	r22, r24
+ 6b8:	e6 1b       	sub	r30, r22
+ 6ba:	ea 83       	std	Y+2, r30	; 0x02
 
 		right[0] = DirtyDawg.right_sensor / 100;
- 6c0:	32 9f       	mul	r19, r18
- 6c2:	21 2d       	mov	r18, r1
- 6c4:	11 24       	eor	r1, r1
- 6c6:	22 95       	swap	r18
- 6c8:	2f 70       	andi	r18, 0x0F	; 15
- 6ca:	e1 e6       	ldi	r30, 0x61	; 97
- 6cc:	f1 e0       	ldi	r31, 0x01	; 1
- 6ce:	20 83       	st	Z, r18
+ 6bc:	32 9f       	mul	r19, r18
+ 6be:	21 2d       	mov	r18, r1
+ 6c0:	11 24       	eor	r1, r1
+ 6c2:	22 95       	swap	r18
+ 6c4:	2f 70       	andi	r18, 0x0F	; 15
+ 6c6:	e1 e6       	ldi	r30, 0x61	; 97
+ 6c8:	f1 e0       	ldi	r31, 0x01	; 1
+ 6ca:	20 83       	st	Z, r18
 		right[1] = (DirtyDawg.right_sensor - (right[0] * 100 )) / 10;
- 6d0:	42 03       	mulsu	r20, r18
- 6d2:	c0 01       	movw	r24, r0
- 6d4:	11 24       	eor	r1, r1
- 6d6:	83 0f       	add	r24, r19
- 6d8:	91 1d       	adc	r25, r1
- 6da:	b8 01       	movw	r22, r16
- 6dc:	0e 94 81 05 	call	0xb02	; 0xb02 <__divmodhi4>
- 6e0:	61 83       	std	Z+1, r22	; 0x01
- 6e2:	24 9f       	mul	r18, r20
- 6e4:	30 0d       	add	r19, r0
- 6e6:	11 24       	eor	r1, r1
+ 6cc:	42 03       	mulsu	r20, r18
+ 6ce:	c0 01       	movw	r24, r0
+ 6d0:	11 24       	eor	r1, r1
+ 6d2:	83 0f       	add	r24, r19
+ 6d4:	91 1d       	adc	r25, r1
+ 6d6:	b8 01       	movw	r22, r16
+ 6d8:	0e 94 7f 05 	call	0xafe	; 0xafe <__divmodhi4>
+ 6dc:	61 83       	std	Z+1, r22	; 0x01
+ 6de:	24 9f       	mul	r18, r20
+ 6e0:	30 0d       	add	r19, r0
+ 6e2:	11 24       	eor	r1, r1
 		right[2] = (DirtyDawg.right_sensor - (right[0] * 100 )) - right[1] * 10;
- 6e8:	66 0f       	add	r22, r22
- 6ea:	86 2f       	mov	r24, r22
- 6ec:	88 0f       	add	r24, r24
- 6ee:	88 0f       	add	r24, r24
- 6f0:	68 0f       	add	r22, r24
- 6f2:	36 1b       	sub	r19, r22
- 6f4:	32 83       	std	Z+2, r19	; 0x02
- 6f6:	e7 e6       	ldi	r30, 0x67	; 103
- 6f8:	f1 e0       	ldi	r31, 0x01	; 1
- 6fa:	c7 01       	movw	r24, r14
- 6fc:	61 e6       	ldi	r22, 0x61	; 97
- 6fe:	71 e0       	ldi	r23, 0x01	; 1
- 700:	4a e6       	ldi	r20, 0x6A	; 106
- 702:	51 e0       	ldi	r21, 0x01	; 1
- 704:	33 cf       	rjmp	.-410    	; 0x56c <BT_Recieve_Data+0x56>
+ 6e4:	66 0f       	add	r22, r22
+ 6e6:	86 2f       	mov	r24, r22
+ 6e8:	88 0f       	add	r24, r24
+ 6ea:	88 0f       	add	r24, r24
+ 6ec:	68 0f       	add	r22, r24
+ 6ee:	36 1b       	sub	r19, r22
+ 6f0:	32 83       	std	Z+2, r19	; 0x02
+ 6f2:	e7 e6       	ldi	r30, 0x67	; 103
+ 6f4:	f1 e0       	ldi	r31, 0x01	; 1
+ 6f6:	c7 01       	movw	r24, r14
+ 6f8:	61 e6       	ldi	r22, 0x61	; 97
+ 6fa:	71 e0       	ldi	r23, 0x01	; 1
+ 6fc:	4a e6       	ldi	r20, 0x6A	; 106
+ 6fe:	51 e0       	ldi	r21, 0x01	; 1
+ 700:	33 cf       	rjmp	.-410    	; 0x568 <BT_Recieve_Data+0x56>
 		}
 		
 	}
 	// Change state 
 	DirtyDawg.state = LCD_STATE;
 }
- 706:	df 91       	pop	r29
- 708:	cf 91       	pop	r28
- 70a:	1f 91       	pop	r17
- 70c:	0f 91       	pop	r16
- 70e:	ff 90       	pop	r15
- 710:	ef 90       	pop	r14
- 712:	df 90       	pop	r13
- 714:	cf 90       	pop	r12
- 716:	08 95       	ret
+ 702:	df 91       	pop	r29
+ 704:	cf 91       	pop	r28
+ 706:	1f 91       	pop	r17
+ 708:	0f 91       	pop	r16
+ 70a:	ff 90       	pop	r15
+ 70c:	ef 90       	pop	r14
+ 70e:	df 90       	pop	r13
+ 710:	cf 90       	pop	r12
+ 712:	08 95       	ret
 
-00000718 <main>:
+00000714 <main>:
 #define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
 
 int main(void){
 
 	// Sets the starting state
 	DirtyDawg.state = LCD_STATE;
- 718:	ca e6       	ldi	r28, 0x6A	; 106
- 71a:	d1 e0       	ldi	r29, 0x01	; 1
- 71c:	81 e0       	ldi	r24, 0x01	; 1
- 71e:	88 87       	std	Y+8, r24	; 0x08
+ 714:	ca e6       	ldi	r28, 0x6A	; 106
+ 716:	d1 e0       	ldi	r29, 0x01	; 1
+ 718:	81 e0       	ldi	r24, 0x01	; 1
+ 71a:	88 87       	std	Y+8, r24	; 0x08
 
 	// Initiate the hardware
 	System_Init();
- 720:	0e 94 53 00 	call	0xa6	; 0xa6 <System_Init>
+ 71c:	0e 94 53 00 	call	0xa6	; 0xa6 <System_Init>
+	
+	// Initiate the software define UART
+	suart_init();
+ 720:	0e 94 21 04 	call	0x842	; 0x842 <suart_init>
 	
 	// Initiate the TWI bus as a master
 	TWI_Master_Init();
- 724:	0e 94 68 05 	call	0xad0	; 0xad0 <TWI_Master_Init>
+ 724:	0e 94 66 05 	call	0xacc	; 0xacc <TWI_Master_Init>
 
 	// Initiate the LCD Screen
 	LCD_Init();
- 728:	0e 94 39 05 	call	0xa72	; 0xa72 <LCD_Init>
+ 728:	0e 94 37 05 	call	0xa6e	; 0xa6e <LCD_Init>
 	
 	// Initiate the hardware defined UART
 	UART_Init(19200);
@@ -1344,929 +1331,925 @@ int main(void){
 	BT_Init();
  734:	0e 94 10 01 	call	0x220	; 0x220 <BT_Init>
 
-	// Initiate the software define UART
-	suart_init();
- 738:	0e 94 23 04 	call	0x846	; 0x846 <suart_init>
-	
 	// Connect the BlueSmirf to the car
 	LCD_Byte(LCD_LINE_1 + 3, LCD_CMD);
- 73c:	60 e0       	ldi	r22, 0x00	; 0
- 73e:	83 e8       	ldi	r24, 0x83	; 131
- 740:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 738:	60 e0       	ldi	r22, 0x00	; 0
+ 73a:	83 e8       	ldi	r24, 0x83	; 131
+ 73c:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_String("DirtyDawg!");
- 744:	86 e2       	ldi	r24, 0x26	; 38
- 746:	91 e0       	ldi	r25, 0x01	; 1
- 748:	0e 94 58 05 	call	0xab0	; 0xab0 <LCD_String>
+ 740:	86 e2       	ldi	r24, 0x26	; 38
+ 742:	91 e0       	ldi	r25, 0x01	; 1
+ 744:	0e 94 56 05 	call	0xaac	; 0xaac <LCD_String>
 	LCD_Byte(LCD_LINE_2 + 3, LCD_CMD);
- 74c:	60 e0       	ldi	r22, 0x00	; 0
- 74e:	83 ec       	ldi	r24, 0xC3	; 195
- 750:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 748:	60 e0       	ldi	r22, 0x00	; 0
+ 74a:	83 ec       	ldi	r24, 0xC3	; 195
+ 74c:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_String("Connecting");
- 754:	81 e3       	ldi	r24, 0x31	; 49
- 756:	91 e0       	ldi	r25, 0x01	; 1
- 758:	0e 94 58 05 	call	0xab0	; 0xab0 <LCD_String>
+ 750:	81 e3       	ldi	r24, 0x31	; 49
+ 752:	91 e0       	ldi	r25, 0x01	; 1
+ 754:	0e 94 56 05 	call	0xaac	; 0xaac <LCD_String>
 	BT_Connection_Check();
- 75c:	0e 94 3e 01 	call	0x27c	; 0x27c <BT_Connection_Check>
+ 758:	0e 94 3e 01 	call	0x27c	; 0x27c <BT_Connection_Check>
 	while(!(DirtyDawg.status & BT_CONNECTED))
- 760:	8f 81       	ldd	r24, Y+7	; 0x07
- 762:	83 fd       	sbrc	r24, 3
- 764:	05 c0       	rjmp	.+10     	; 0x770 <main+0x58>
+ 75c:	8f 81       	ldd	r24, Y+7	; 0x07
+ 75e:	83 fd       	sbrc	r24, 3
+ 760:	05 c0       	rjmp	.+10     	; 0x76c <main+0x58>
 		BT_Connect();
- 766:	0e 94 9d 01 	call	0x33a	; 0x33a <BT_Connect>
+ 762:	0e 94 9d 01 	call	0x33a	; 0x33a <BT_Connect>
 	LCD_Byte(LCD_LINE_1 + 3, LCD_CMD);
 	LCD_String("DirtyDawg!");
 	LCD_Byte(LCD_LINE_2 + 3, LCD_CMD);
 	LCD_String("Connecting");
 	BT_Connection_Check();
 	while(!(DirtyDawg.status & BT_CONNECTED))
- 76a:	8f 81       	ldd	r24, Y+7	; 0x07
- 76c:	83 ff       	sbrs	r24, 3
- 76e:	fb cf       	rjmp	.-10     	; 0x766 <main+0x4e>
+ 766:	8f 81       	ldd	r24, Y+7	; 0x07
+ 768:	83 ff       	sbrs	r24, 3
+ 76a:	fb cf       	rjmp	.-10     	; 0x762 <main+0x4e>
 		BT_Connect();
 	  
 	// When active connection send '=' to car 
 	BT_Send('=');
- 770:	8d e3       	ldi	r24, 0x3D	; 61
- 772:	0e 94 08 01 	call	0x210	; 0x210 <BT_Send>
+ 76c:	8d e3       	ldi	r24, 0x3D	; 61
+ 76e:	0e 94 08 01 	call	0x210	; 0x210 <BT_Send>
 
 	// Prepare the LCD for distance data
 	LCD_Byte(LCD_LINE_1, LCD_CMD);
- 776:	60 e0       	ldi	r22, 0x00	; 0
- 778:	80 e8       	ldi	r24, 0x80	; 128
- 77a:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 772:	60 e0       	ldi	r22, 0x00	; 0
+ 774:	80 e8       	ldi	r24, 0x80	; 128
+ 776:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_String(ROW1);
- 77e:	8c e3       	ldi	r24, 0x3C	; 60
- 780:	91 e0       	ldi	r25, 0x01	; 1
- 782:	0e 94 58 05 	call	0xab0	; 0xab0 <LCD_String>
+ 77a:	8c e3       	ldi	r24, 0x3C	; 60
+ 77c:	91 e0       	ldi	r25, 0x01	; 1
+ 77e:	0e 94 56 05 	call	0xaac	; 0xaac <LCD_String>
 	LCD_Byte(LCD_LINE_2, LCD_CMD);
- 786:	60 e0       	ldi	r22, 0x00	; 0
- 788:	80 ec       	ldi	r24, 0xC0	; 192
- 78a:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ 782:	60 e0       	ldi	r22, 0x00	; 0
+ 784:	80 ec       	ldi	r24, 0xC0	; 192
+ 786:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_String(ROW2);
- 78e:	8d e4       	ldi	r24, 0x4D	; 77
- 790:	91 e0       	ldi	r25, 0x01	; 1
- 792:	0e 94 58 05 	call	0xab0	; 0xab0 <LCD_String>
+ 78a:	8d e4       	ldi	r24, 0x4D	; 77
+ 78c:	91 e0       	ldi	r25, 0x01	; 1
+ 78e:	0e 94 56 05 	call	0xaac	; 0xaac <LCD_String>
 	
 	uint8_t loop = 0;
- 796:	10 e0       	ldi	r17, 0x00	; 0
+ 792:	10 e0       	ldi	r17, 0x00	; 0
 	// Main loop
 	while(TRUE){
 		
 		switch(DirtyDawg.state){
- 798:	ca e6       	ldi	r28, 0x6A	; 106
- 79a:	d1 e0       	ldi	r29, 0x01	; 1
+ 794:	ca e6       	ldi	r28, 0x6A	; 106
+ 796:	d1 e0       	ldi	r29, 0x01	; 1
 				loop++;
 				if(loop > 3){
 					BT_Send_Data();
 					loop = 0;
 				}
 				DirtyDawg.state = GET_DATA_STATE;
- 79c:	03 e0       	ldi	r16, 0x03	; 3
+ 798:	03 e0       	ldi	r16, 0x03	; 3
 			// Send commands to the car
 			case SEND_DATA_STATE:
 				loop++;
 				if(loop > 3){
 					BT_Send_Data();
 					loop = 0;
- 79e:	f1 2c       	mov	r15, r1
+ 79a:	f1 2c       	mov	r15, r1
 	
 	uint8_t loop = 0;
 	// Main loop
 	while(TRUE){
 		
 		switch(DirtyDawg.state){
- 7a0:	88 85       	ldd	r24, Y+8	; 0x08
- 7a2:	82 30       	cpi	r24, 0x02	; 2
- 7a4:	39 f0       	breq	.+14     	; 0x7b4 <main+0x9c>
- 7a6:	83 30       	cpi	r24, 0x03	; 3
- 7a8:	69 f0       	breq	.+26     	; 0x7c4 <main+0xac>
- 7aa:	81 30       	cpi	r24, 0x01	; 1
- 7ac:	71 f4       	brne	.+28     	; 0x7ca <main+0xb2>
+ 79c:	88 85       	ldd	r24, Y+8	; 0x08
+ 79e:	82 30       	cpi	r24, 0x02	; 2
+ 7a0:	39 f0       	breq	.+14     	; 0x7b0 <main+0x9c>
+ 7a2:	83 30       	cpi	r24, 0x03	; 3
+ 7a4:	69 f0       	breq	.+26     	; 0x7c0 <main+0xac>
+ 7a6:	81 30       	cpi	r24, 0x01	; 1
+ 7a8:	71 f4       	brne	.+28     	; 0x7c6 <main+0xb2>
 			
 			// Put sensor data to LCD
 			case LCD_STATE:
 				LCD_Update();
- 7ae:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Update>
+ 7aa:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Update>
 				break;
- 7b2:	11 c0       	rjmp	.+34     	; 0x7d6 <main+0xbe>
+ 7ae:	11 c0       	rjmp	.+34     	; 0x7d2 <main+0xbe>
 			
 			// Send commands to the car
 			case SEND_DATA_STATE:
 				loop++;
- 7b4:	1f 5f       	subi	r17, 0xFF	; 255
+ 7b0:	1f 5f       	subi	r17, 0xFF	; 255
 				if(loop > 3){
- 7b6:	14 30       	cpi	r17, 0x04	; 4
- 7b8:	18 f0       	brcs	.+6      	; 0x7c0 <main+0xa8>
+ 7b2:	14 30       	cpi	r17, 0x04	; 4
+ 7b4:	18 f0       	brcs	.+6      	; 0x7bc <main+0xa8>
 					BT_Send_Data();
- 7ba:	0e 94 71 02 	call	0x4e2	; 0x4e2 <BT_Send_Data>
+ 7b6:	0e 94 71 02 	call	0x4e2	; 0x4e2 <BT_Send_Data>
 					loop = 0;
- 7be:	1f 2d       	mov	r17, r15
+ 7ba:	1f 2d       	mov	r17, r15
 				}
 				DirtyDawg.state = GET_DATA_STATE;
- 7c0:	08 87       	std	Y+8, r16	; 0x08
+ 7bc:	08 87       	std	Y+8, r16	; 0x08
 				break;
- 7c2:	09 c0       	rjmp	.+18     	; 0x7d6 <main+0xbe>
+ 7be:	09 c0       	rjmp	.+18     	; 0x7d2 <main+0xbe>
 
 			// Get sensor data from the car
 			case GET_DATA_STATE:
 				BT_Recieve_Data();
- 7c4:	0e 94 8b 02 	call	0x516	; 0x516 <BT_Recieve_Data>
+ 7c0:	0e 94 89 02 	call	0x512	; 0x512 <BT_Recieve_Data>
 				break;
- 7c8:	06 c0       	rjmp	.+12     	; 0x7d6 <main+0xbe>
+ 7c4:	06 c0       	rjmp	.+12     	; 0x7d2 <main+0xbe>
 				
 			default:
 				Yellow_LED_On();
- 7ca:	0e 94 3f 02 	call	0x47e	; 0x47e <Yellow_LED_On>
+ 7c6:	0e 94 3f 02 	call	0x47e	; 0x47e <Yellow_LED_On>
 				Error(0x53);
- 7ce:	83 e5       	ldi	r24, 0x53	; 83
- 7d0:	90 e0       	ldi	r25, 0x00	; 0
- 7d2:	0e 94 46 02 	call	0x48c	; 0x48c <Error>
- 7d6:	2f e7       	ldi	r18, 0x7F	; 127
- 7d8:	8a e1       	ldi	r24, 0x1A	; 26
- 7da:	96 e0       	ldi	r25, 0x06	; 6
- 7dc:	21 50       	subi	r18, 0x01	; 1
- 7de:	80 40       	sbci	r24, 0x00	; 0
- 7e0:	90 40       	sbci	r25, 0x00	; 0
- 7e2:	e1 f7       	brne	.-8      	; 0x7dc <main+0xc4>
- 7e4:	00 c0       	rjmp	.+0      	; 0x7e6 <main+0xce>
- 7e6:	00 00       	nop
- 7e8:	db cf       	rjmp	.-74     	; 0x7a0 <main+0x88>
+ 7ca:	83 e5       	ldi	r24, 0x53	; 83
+ 7cc:	90 e0       	ldi	r25, 0x00	; 0
+ 7ce:	0e 94 46 02 	call	0x48c	; 0x48c <Error>
+ 7d2:	2f e7       	ldi	r18, 0x7F	; 127
+ 7d4:	8a e1       	ldi	r24, 0x1A	; 26
+ 7d6:	96 e0       	ldi	r25, 0x06	; 6
+ 7d8:	21 50       	subi	r18, 0x01	; 1
+ 7da:	80 40       	sbci	r24, 0x00	; 0
+ 7dc:	90 40       	sbci	r25, 0x00	; 0
+ 7de:	e1 f7       	brne	.-8      	; 0x7d8 <main+0xc4>
+ 7e0:	00 c0       	rjmp	.+0      	; 0x7e2 <main+0xce>
+ 7e2:	00 00       	nop
+ 7e4:	db cf       	rjmp	.-74     	; 0x79c <main+0x88>
 
-000007ea <__vector_5>:
+000007e6 <__vector_5>:
 		}
 		_delay_ms(250);
 	}	
 }
 
 ISR(PCINT2_vect){
- 7ea:	1f 92       	push	r1
+ 7e6:	1f 92       	push	r1
+ 7e8:	0f 92       	push	r0
+ 7ea:	0f b6       	in	r0, 0x3f	; 63
  7ec:	0f 92       	push	r0
- 7ee:	0f b6       	in	r0, 0x3f	; 63
- 7f0:	0f 92       	push	r0
- 7f2:	11 24       	eor	r1, r1
- 7f4:	2f 93       	push	r18
- 7f6:	8f 93       	push	r24
- 7f8:	9f 93       	push	r25
- 7fa:	ef 93       	push	r30
- 7fc:	ff 93       	push	r31
+ 7ee:	11 24       	eor	r1, r1
+ 7f0:	2f 93       	push	r18
+ 7f2:	8f 93       	push	r24
+ 7f4:	9f 93       	push	r25
+ 7f6:	ef 93       	push	r30
+ 7f8:	ff 93       	push	r31
 	if(DirtyDawg.status & LIGHT_BUTTON){
- 7fe:	80 91 71 01 	lds	r24, 0x0171
- 802:	84 ff       	sbrs	r24, 4
- 804:	09 c0       	rjmp	.+18     	; 0x818 <__vector_5+0x2e>
+ 7fa:	80 91 71 01 	lds	r24, 0x0171
+ 7fe:	84 ff       	sbrs	r24, 4
+ 800:	09 c0       	rjmp	.+18     	; 0x814 <__vector_5+0x2e>
 		DirtyDawg.command ^= LIGHT;
- 806:	ea e6       	ldi	r30, 0x6A	; 106
- 808:	f1 e0       	ldi	r31, 0x01	; 1
- 80a:	26 81       	ldd	r18, Z+6	; 0x06
- 80c:	91 e0       	ldi	r25, 0x01	; 1
- 80e:	92 27       	eor	r25, r18
- 810:	96 83       	std	Z+6, r25	; 0x06
+ 802:	ea e6       	ldi	r30, 0x6A	; 106
+ 804:	f1 e0       	ldi	r31, 0x01	; 1
+ 806:	26 81       	ldd	r18, Z+6	; 0x06
+ 808:	91 e0       	ldi	r25, 0x01	; 1
+ 80a:	92 27       	eor	r25, r18
+ 80c:	96 83       	std	Z+6, r25	; 0x06
 		DirtyDawg.status &= ~LIGHT_BUTTON;
- 812:	80 7e       	andi	r24, 0xE0	; 224
- 814:	87 83       	std	Z+7, r24	; 0x07
- 816:	03 c0       	rjmp	.+6      	; 0x81e <__vector_5+0x34>
+ 80e:	80 7e       	andi	r24, 0xE0	; 224
+ 810:	87 83       	std	Z+7, r24	; 0x07
+ 812:	03 c0       	rjmp	.+6      	; 0x81a <__vector_5+0x34>
 	}
 	else
 		DirtyDawg.status |= LIGHT_BUTTON;
- 818:	80 61       	ori	r24, 0x10	; 16
- 81a:	80 93 71 01 	sts	0x0171, r24
+ 814:	80 61       	ori	r24, 0x10	; 16
+ 816:	80 93 71 01 	sts	0x0171, r24
 }
- 81e:	ff 91       	pop	r31
- 820:	ef 91       	pop	r30
- 822:	9f 91       	pop	r25
- 824:	8f 91       	pop	r24
- 826:	2f 91       	pop	r18
+ 81a:	ff 91       	pop	r31
+ 81c:	ef 91       	pop	r30
+ 81e:	9f 91       	pop	r25
+ 820:	8f 91       	pop	r24
+ 822:	2f 91       	pop	r18
+ 824:	0f 90       	pop	r0
+ 826:	0f be       	out	0x3f, r0	; 63
  828:	0f 90       	pop	r0
- 82a:	0f be       	out	0x3f, r0	; 63
- 82c:	0f 90       	pop	r0
- 82e:	1f 90       	pop	r1
- 830:	18 95       	reti
+ 82a:	1f 90       	pop	r1
+ 82c:	18 95       	reti
 
-00000832 <__vector_18>:
+0000082e <__vector_18>:
 	BT_Connect();
 }
 
 */
 
 ISR(USART_RX_vect){
- 832:	1f 92       	push	r1
+ 82e:	1f 92       	push	r1
+ 830:	0f 92       	push	r0
+ 832:	0f b6       	in	r0, 0x3f	; 63
  834:	0f 92       	push	r0
- 836:	0f b6       	in	r0, 0x3f	; 63
- 838:	0f 92       	push	r0
- 83a:	11 24       	eor	r1, r1
+ 836:	11 24       	eor	r1, r1
 		DirtyDawg.front_sensor = BT_Recieve();
 		DirtyDawg.back_sensor = BT_Recieve();
 		DirtyDawg.left_sensor = BT_Recieve();
 		DirtyDawg.right_sensor = BT_Recieve();
 	} */
 }
+ 838:	0f 90       	pop	r0
+ 83a:	0f be       	out	0x3f, r0	; 63
  83c:	0f 90       	pop	r0
- 83e:	0f be       	out	0x3f, r0	; 63
- 840:	0f 90       	pop	r0
- 842:	1f 90       	pop	r1
- 844:	18 95       	reti
+ 83e:	1f 90       	pop	r1
+ 840:	18 95       	reti
 
-00000846 <suart_init>:
+00000842 <suart_init>:
 
 
 void suart_init( void )
 {
 	// Enable interrupt
 	sei();
- 846:	78 94       	sei
+ 842:	78 94       	sei
 	
 	// Set the port HIGH
 	SBIT(PORTD,STX) = 1;
- 848:	5b 9a       	sbi	0x0b, 3	; 11
+ 844:	5b 9a       	sbi	0x0b, 3	; 11
 
 	// Set the prescaler to 1
 	TCCR0B = (1 << CS00);	
- 84a:	81 e0       	ldi	r24, 0x01	; 1
- 84c:	85 bd       	out	0x25, r24	; 37
+ 846:	81 e0       	ldi	r24, 0x01	; 1
+ 848:	85 bd       	out	0x25, r24	; 37
 	
 	// Enable output compare interrupt
 	TIMSK0 = (1 << OCIE0A);		
- 84e:	92 e0       	ldi	r25, 0x02	; 2
- 850:	90 93 6e 00 	sts	0x006E, r25
+ 84a:	92 e0       	ldi	r25, 0x02	; 2
+ 84c:	90 93 6e 00 	sts	0x006E, r25
 
 	// Falling edge
 	EICRA = (1 << ISC01);
- 854:	90 93 69 00 	sts	0x0069, r25
+ 850:	90 93 69 00 	sts	0x0069, r25
 	
 	// Enable edge interrupt			
 	EIMSK = (1 << INT0);			
- 858:	8d bb       	out	0x1d, r24	; 29
+ 854:	8d bb       	out	0x1d, r24	; 29
 
 	// Nothing to send
 	stx_count = 0;	
- 85a:	10 92 76 01 	sts	0x0176, r1
+ 856:	10 92 76 01 	sts	0x0176, r1
 	
 	// Nothing to receive			
 	srx_done = 0;	
- 85e:	10 92 77 01 	sts	0x0177, r1
+ 85a:	10 92 77 01 	sts	0x0177, r1
 	
 	// Sets the output	        
 	STXDDR |= 1 << STX;			
- 862:	53 9a       	sbi	0x0a, 3	; 10
- 864:	08 95       	ret
+ 85e:	53 9a       	sbi	0x0a, 3	; 10
+ 860:	08 95       	ret
 
-00000866 <sgetchar>:
+00000862 <sgetchar>:
 }
 
 
 u8 sgetchar (void)      // Receive Byte
 {
 	while (!srx_done);      // wait until byte is received
- 866:	80 91 77 01 	lds	r24, 0x0177
- 86a:	88 23       	and	r24, r24
- 86c:	e1 f3       	breq	.-8      	; 0x866 <sgetchar>
+ 862:	80 91 77 01 	lds	r24, 0x0177
+ 866:	88 23       	and	r24, r24
+ 868:	e1 f3       	breq	.-8      	; 0x862 <sgetchar>
 	srx_done = 0;
- 86e:	10 92 77 01 	sts	0x0177, r1
+ 86a:	10 92 77 01 	sts	0x0177, r1
 	return srx_data;
 }
- 872:	80 91 75 01 	lds	r24, 0x0175
- 876:	08 95       	ret
+ 86e:	80 91 75 01 	lds	r24, 0x0175
+ 872:	08 95       	ret
 
-00000878 <__vector_1>:
+00000874 <__vector_1>:
 
 
 ISR (INT0_vect)    // RX start
 {
- 878:	1f 92       	push	r1
+ 874:	1f 92       	push	r1
+ 876:	0f 92       	push	r0
+ 878:	0f b6       	in	r0, 0x3f	; 63
  87a:	0f 92       	push	r0
- 87c:	0f b6       	in	r0, 0x3f	; 63
- 87e:	0f 92       	push	r0
- 880:	11 24       	eor	r1, r1
- 882:	8f 93       	push	r24
+ 87c:	11 24       	eor	r1, r1
+ 87e:	8f 93       	push	r24
 	// scan 1.5 bits after start (to set timing right)
 	OCR0B = TCNT0 + (u8)((BIT_TIME * 3) / 2);
- 884:	86 b5       	in	r24, 0x26	; 38
- 886:	80 53       	subi	r24, 0x30	; 48
- 888:	88 bd       	out	0x28, r24	; 40
+ 880:	86 b5       	in	r24, 0x26	; 38
+ 882:	8f 58       	subi	r24, 0x8F	; 143
+ 884:	88 bd       	out	0x28, r24	; 40
 
 	// Clear bit storage
 	srx_tmp = 0;  
- 88a:	10 92 78 01 	sts	0x0178, r1
+ 886:	10 92 78 01 	sts	0x0178, r1
 	
 	// Set bit-mask      
 	srx_mask = 1;        
- 88e:	81 e0       	ldi	r24, 0x01	; 1
- 890:	80 93 74 01 	sts	0x0174, r24
+ 88a:	81 e0       	ldi	r24, 0x01	; 1
+ 88c:	80 93 74 01 	sts	0x0174, r24
 	if( !(SRXPIN & 1<<SRX))  {  // still low
- 894:	4a 99       	sbic	0x09, 2	; 9
- 896:	04 c0       	rjmp	.+8      	; 0x8a0 <__vector_1+0x28>
+ 890:	4a 99       	sbic	0x09, 2	; 9
+ 892:	04 c0       	rjmp	.+8      	; 0x89c <__vector_1+0x28>
 		EIMSK &= ~(1 << INT0);			// disable edge interrupt
- 898:	e8 98       	cbi	0x1d, 0	; 29
+ 894:	e8 98       	cbi	0x1d, 0	; 29
 		TIMSK0 = 1<<OCIE0A^1<<OCIE0B;  // wait for first bit
- 89a:	86 e0       	ldi	r24, 0x06	; 6
- 89c:	80 93 6e 00 	sts	0x006E, r24
+ 896:	86 e0       	ldi	r24, 0x06	; 6
+ 898:	80 93 6e 00 	sts	0x006E, r24
 	}
 	TIFR0 = (1<<OCF0B);      // clear pending interrupt ? why does that output compare int occur?
- 8a0:	84 e0       	ldi	r24, 0x04	; 4
- 8a2:	85 bb       	out	0x15, r24	; 21
+ 89c:	84 e0       	ldi	r24, 0x04	; 4
+ 89e:	85 bb       	out	0x15, r24	; 21
 	EIFR |= (1 << INTF0);		// clear any pending edge interrupt
- 8a4:	e0 9a       	sbi	0x1c, 0	; 28
+ 8a0:	e0 9a       	sbi	0x1c, 0	; 28
 }
- 8a6:	8f 91       	pop	r24
+ 8a2:	8f 91       	pop	r24
+ 8a4:	0f 90       	pop	r0
+ 8a6:	0f be       	out	0x3f, r0	; 63
  8a8:	0f 90       	pop	r0
- 8aa:	0f be       	out	0x3f, r0	; 63
- 8ac:	0f 90       	pop	r0
- 8ae:	1f 90       	pop	r1
- 8b0:	18 95       	reti
+ 8aa:	1f 90       	pop	r1
+ 8ac:	18 95       	reti
 
-000008b2 <__vector_15>:
+000008ae <__vector_15>:
 
 
 ISR (TIMER0_COMPB_vect)
 {
- 8b2:	1f 92       	push	r1
+ 8ae:	1f 92       	push	r1
+ 8b0:	0f 92       	push	r0
+ 8b2:	0f b6       	in	r0, 0x3f	; 63
  8b4:	0f 92       	push	r0
- 8b6:	0f b6       	in	r0, 0x3f	; 63
- 8b8:	0f 92       	push	r0
- 8ba:	11 24       	eor	r1, r1
- 8bc:	8f 93       	push	r24
- 8be:	9f 93       	push	r25
+ 8b6:	11 24       	eor	r1, r1
+ 8b8:	8f 93       	push	r24
+ 8ba:	9f 93       	push	r25
 	u8 in = SRXPIN;      // scan RX line
- 8c0:	99 b1       	in	r25, 0x09	; 9
+ 8bc:	99 b1       	in	r25, 0x09	; 9
 
 	if (srx_mask) {
- 8c2:	80 91 74 01 	lds	r24, 0x0174
- 8c6:	88 23       	and	r24, r24
- 8c8:	71 f0       	breq	.+28     	; 0x8e6 <__vector_15+0x34>
+ 8be:	80 91 74 01 	lds	r24, 0x0174
+ 8c2:	88 23       	and	r24, r24
+ 8c4:	71 f0       	breq	.+28     	; 0x8e2 <__vector_15+0x34>
 		if (in & 1 << SRX)
- 8ca:	92 ff       	sbrs	r25, 2
- 8cc:	05 c0       	rjmp	.+10     	; 0x8d8 <__vector_15+0x26>
+ 8c6:	92 ff       	sbrs	r25, 2
+ 8c8:	05 c0       	rjmp	.+10     	; 0x8d4 <__vector_15+0x26>
 			srx_tmp |= srx_mask;
- 8ce:	90 91 78 01 	lds	r25, 0x0178
- 8d2:	98 2b       	or	r25, r24
- 8d4:	90 93 78 01 	sts	0x0178, r25
+ 8ca:	90 91 78 01 	lds	r25, 0x0178
+ 8ce:	98 2b       	or	r25, r24
+ 8d0:	90 93 78 01 	sts	0x0178, r25
 		srx_mask <<= 1; 
- 8d8:	88 0f       	add	r24, r24
- 8da:	80 93 74 01 	sts	0x0174, r24
+ 8d4:	88 0f       	add	r24, r24
+ 8d6:	80 93 74 01 	sts	0x0174, r24
 		OCR0B += BIT_TIME;      // next bit slice
- 8de:	88 b5       	in	r24, 0x28	; 40
- 8e0:	85 57       	subi	r24, 0x75	; 117
- 8e2:	88 bd       	out	0x28, r24	; 40
- 8e4:	0c c0       	rjmp	.+24     	; 0x8fe <__vector_15+0x4c>
+ 8da:	88 b5       	in	r24, 0x28	; 40
+ 8dc:	8f 55       	subi	r24, 0x5F	; 95
+ 8de:	88 bd       	out	0x28, r24	; 40
+ 8e0:	0c c0       	rjmp	.+24     	; 0x8fa <__vector_15+0x4c>
 		} else {
 		srx_done = 1;      // mark RX data valid
- 8e6:	81 e0       	ldi	r24, 0x01	; 1
- 8e8:	80 93 77 01 	sts	0x0177, r24
+ 8e2:	81 e0       	ldi	r24, 0x01	; 1
+ 8e4:	80 93 77 01 	sts	0x0177, r24
 		srx_data = srx_tmp;      // store RX data
- 8ec:	90 91 78 01 	lds	r25, 0x0178
- 8f0:	90 93 75 01 	sts	0x0175, r25
+ 8e8:	90 91 78 01 	lds	r25, 0x0178
+ 8ec:	90 93 75 01 	sts	0x0175, r25
 
 		TIMSK0 = 1<<OCIE0A;        // enable TX and wait for start
- 8f4:	92 e0       	ldi	r25, 0x02	; 2
- 8f6:	90 93 6e 00 	sts	0x006E, r25
+ 8f0:	92 e0       	ldi	r25, 0x02	; 2
+ 8f2:	90 93 6e 00 	sts	0x006E, r25
 		EIFR |= (1 << INTF0);		// clear any pending edge interrupt: This hinders the in0-vect from beeing triggerd again just now which may occur by falling edges in the serial data bits
- 8fa:	e0 9a       	sbi	0x1c, 0	; 28
+ 8f6:	e0 9a       	sbi	0x1c, 0	; 28
 		EIMSK = 1 << INT0;	// Re-enable edge interrupt
- 8fc:	8d bb       	out	0x1d, r24	; 29
+ 8f8:	8d bb       	out	0x1d, r24	; 29
 	}
 
 }
- 8fe:	9f 91       	pop	r25
- 900:	8f 91       	pop	r24
+ 8fa:	9f 91       	pop	r25
+ 8fc:	8f 91       	pop	r24
+ 8fe:	0f 90       	pop	r0
+ 900:	0f be       	out	0x3f, r0	; 63
  902:	0f 90       	pop	r0
- 904:	0f be       	out	0x3f, r0	; 63
- 906:	0f 90       	pop	r0
- 908:	1f 90       	pop	r1
- 90a:	18 95       	reti
+ 904:	1f 90       	pop	r1
+ 906:	18 95       	reti
 
-0000090c <sputchar>:
+00000908 <sputchar>:
 
 
 void sputchar (u8 val)      // Send byte
 {
 	// Until last byte is finished
 	while (stx_count);      
- 90c:	90 91 76 01 	lds	r25, 0x0176
- 910:	91 11       	cpse	r25, r1
- 912:	fc cf       	rjmp	.-8      	; 0x90c <sputchar>
+ 908:	90 91 76 01 	lds	r25, 0x0176
+ 90c:	91 11       	cpse	r25, r1
+ 90e:	fc cf       	rjmp	.-8      	; 0x908 <sputchar>
 	stx_data = ~val;      // Invert data for Stop bit generation
- 914:	80 95       	com	r24
- 916:	80 93 73 01 	sts	0x0173, r24
+ 910:	80 95       	com	r24
+ 912:	80 93 73 01 	sts	0x0173, r24
 	stx_count = 10;      // 10 bits: Start + data + Stop
- 91a:	8a e0       	ldi	r24, 0x0A	; 10
- 91c:	80 93 76 01 	sts	0x0176, r24
- 920:	08 95       	ret
+ 916:	8a e0       	ldi	r24, 0x0A	; 10
+ 918:	80 93 76 01 	sts	0x0176, r24
+ 91c:	08 95       	ret
 
-00000922 <__vector_14>:
+0000091e <__vector_14>:
 	sputchar (*txt++);
 }
 
 
 ISR (TIMER0_COMPA_vect)    // TX bit
 {
- 922:	1f 92       	push	r1
+ 91e:	1f 92       	push	r1
+ 920:	0f 92       	push	r0
+ 922:	0f b6       	in	r0, 0x3f	; 63
  924:	0f 92       	push	r0
- 926:	0f b6       	in	r0, 0x3f	; 63
- 928:	0f 92       	push	r0
- 92a:	11 24       	eor	r1, r1
- 92c:	8f 93       	push	r24
- 92e:	9f 93       	push	r25
+ 926:	11 24       	eor	r1, r1
+ 928:	8f 93       	push	r24
+ 92a:	9f 93       	push	r25
 	u8 dout;
 	u8 count;
 
 	OCR0A += BIT_TIME;      // Next bit slice
- 930:	87 b5       	in	r24, 0x27	; 39
- 932:	85 57       	subi	r24, 0x75	; 117
- 934:	87 bd       	out	0x27, r24	; 39
+ 92c:	87 b5       	in	r24, 0x27	; 39
+ 92e:	8f 55       	subi	r24, 0x5F	; 95
+ 930:	87 bd       	out	0x27, r24	; 39
 	count = stx_count;
- 936:	80 91 76 01 	lds	r24, 0x0176
+ 932:	80 91 76 01 	lds	r24, 0x0176
 
 	if (count) {
- 93a:	88 23       	and	r24, r24
- 93c:	99 f0       	breq	.+38     	; 0x964 <__vector_14+0x42>
+ 936:	88 23       	and	r24, r24
+ 938:	99 f0       	breq	.+38     	; 0x960 <__vector_14+0x42>
 		stx_count = --count;    // Count down
- 93e:	81 50       	subi	r24, 0x01	; 1
- 940:	80 93 76 01 	sts	0x0176, r24
+ 93a:	81 50       	subi	r24, 0x01	; 1
+ 93c:	80 93 76 01 	sts	0x0176, r24
 
 		dout = 0;
 		if (count != 9) {      // No start bit
- 944:	89 30       	cpi	r24, 0x09	; 9
- 946:	49 f0       	breq	.+18     	; 0x95a <__vector_14+0x38>
+ 940:	89 30       	cpi	r24, 0x09	; 9
+ 942:	49 f0       	breq	.+18     	; 0x956 <__vector_14+0x38>
 			if (!(stx_data & 1))    // Test inverted data
- 948:	80 91 73 01 	lds	r24, 0x0173
- 94c:	98 2f       	mov	r25, r24
- 94e:	90 95       	com	r25
- 950:	91 70       	andi	r25, 0x01	; 1
+ 944:	80 91 73 01 	lds	r24, 0x0173
+ 948:	98 2f       	mov	r25, r24
+ 94a:	90 95       	com	r25
+ 94c:	91 70       	andi	r25, 0x01	; 1
 
 			dout = 1;
 			stx_data >>= 1;      // Shift zero in from left
- 952:	86 95       	lsr	r24
- 954:	80 93 73 01 	sts	0x0173, r24
- 958:	01 c0       	rjmp	.+2      	; 0x95c <__vector_14+0x3a>
+ 94e:	86 95       	lsr	r24
+ 950:	80 93 73 01 	sts	0x0173, r24
+ 954:	01 c0       	rjmp	.+2      	; 0x958 <__vector_14+0x3a>
 	count = stx_count;
 
 	if (count) {
 		stx_count = --count;    // Count down
 
 		dout = 0;
- 95a:	90 e0       	ldi	r25, 0x00	; 0
+ 956:	90 e0       	ldi	r25, 0x00	; 0
 
 			dout = 1;
 			stx_data >>= 1;      // Shift zero in from left
 		}
 
 		SBIT(PORTD,STX) = dout;
- 95c:	90 fd       	sbrc	r25, 0
- 95e:	5b 9a       	sbi	0x0b, 3	; 11
- 960:	90 ff       	sbrs	r25, 0
- 962:	5b 98       	cbi	0x0b, 3	; 11
+ 958:	90 fd       	sbrc	r25, 0
+ 95a:	5b 9a       	sbi	0x0b, 3	; 11
+ 95c:	90 ff       	sbrs	r25, 0
+ 95e:	5b 98       	cbi	0x0b, 3	; 11
 	}
 }
- 964:	9f 91       	pop	r25
- 966:	8f 91       	pop	r24
+ 960:	9f 91       	pop	r25
+ 962:	8f 91       	pop	r24
+ 964:	0f 90       	pop	r0
+ 966:	0f be       	out	0x3f, r0	; 63
  968:	0f 90       	pop	r0
- 96a:	0f be       	out	0x3f, r0	; 63
- 96c:	0f 90       	pop	r0
- 96e:	1f 90       	pop	r1
- 970:	18 95       	reti
+ 96a:	1f 90       	pop	r1
+ 96c:	18 95       	reti
 
-00000972 <Write_Byte>:
+0000096e <Write_Byte>:
 	Write_Byte(LCD_ADDR, (bits & ~ENABLE));
 	_delay_ms(5);
 		
 }
 
 void Write_Byte(uint8_t addr, uint8_t bits){
- 972:	cf 93       	push	r28
- 974:	df 93       	push	r29
- 976:	c8 2f       	mov	r28, r24
- 978:	d6 2f       	mov	r29, r22
+ 96e:	cf 93       	push	r28
+ 970:	df 93       	push	r29
+ 972:	c8 2f       	mov	r28, r24
+ 974:	d6 2f       	mov	r29, r22
 			
 	//Sends the start condition
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
- 97a:	84 ea       	ldi	r24, 0xA4	; 164
- 97c:	80 93 bc 00 	sts	0x00BC, r24
+ 976:	84 ea       	ldi	r24, 0xA4	; 164
+ 978:	80 93 bc 00 	sts	0x00BC, r24
 		
 	while(!TWI_Busy());
- 980:	0e 94 7c 05 	call	0xaf8	; 0xaf8 <TWI_Busy>
- 984:	89 2b       	or	r24, r25
- 986:	e1 f3       	breq	.-8      	; 0x980 <Write_Byte+0xe>
+ 97c:	0e 94 7a 05 	call	0xaf4	; 0xaf4 <TWI_Busy>
+ 980:	89 2b       	or	r24, r25
+ 982:	e1 f3       	breq	.-8      	; 0x97c <Write_Byte+0xe>
 	if((TWSR & MASK) != START)Error(START);
- 988:	80 91 b9 00 	lds	r24, 0x00B9
- 98c:	88 7f       	andi	r24, 0xF8	; 248
- 98e:	88 30       	cpi	r24, 0x08	; 8
- 990:	21 f0       	breq	.+8      	; 0x99a <Write_Byte+0x28>
- 992:	88 e0       	ldi	r24, 0x08	; 8
- 994:	90 e0       	ldi	r25, 0x00	; 0
- 996:	0e 94 46 02 	call	0x48c	; 0x48c <Error>
+ 984:	80 91 b9 00 	lds	r24, 0x00B9
+ 988:	88 7f       	andi	r24, 0xF8	; 248
+ 98a:	88 30       	cpi	r24, 0x08	; 8
+ 98c:	21 f0       	breq	.+8      	; 0x996 <Write_Byte+0x28>
+ 98e:	88 e0       	ldi	r24, 0x08	; 8
+ 990:	90 e0       	ldi	r25, 0x00	; 0
+ 992:	0e 94 46 02 	call	0x48c	; 0x48c <Error>
 		
 	//Loads the slave address and set the R/W bit to 0
 	TWDR = (addr<<1) | LCD_WRITE;
- 99a:	cc 0f       	add	r28, r28
- 99c:	c0 93 bb 00 	sts	0x00BB, r28
+ 996:	cc 0f       	add	r28, r28
+ 998:	c0 93 bb 00 	sts	0x00BB, r28
 	TWCR = (1<<TWINT) | (1<<TWEN); 
- 9a0:	84 e8       	ldi	r24, 0x84	; 132
- 9a2:	80 93 bc 00 	sts	0x00BC, r24
+ 99c:	84 e8       	ldi	r24, 0x84	; 132
+ 99e:	80 93 bc 00 	sts	0x00BC, r24
 		
 	while(!TWI_Busy());
- 9a6:	0e 94 7c 05 	call	0xaf8	; 0xaf8 <TWI_Busy>
- 9aa:	89 2b       	or	r24, r25
- 9ac:	e1 f3       	breq	.-8      	; 0x9a6 <Write_Byte+0x34>
+ 9a2:	0e 94 7a 05 	call	0xaf4	; 0xaf4 <TWI_Busy>
+ 9a6:	89 2b       	or	r24, r25
+ 9a8:	e1 f3       	breq	.-8      	; 0x9a2 <Write_Byte+0x34>
 	if((TWSR & MASK) !=  MT_ADDRESS_ACK)Error((TWSR & MASK));
- 9ae:	80 91 b9 00 	lds	r24, 0x00B9
- 9b2:	88 7f       	andi	r24, 0xF8	; 248
- 9b4:	88 31       	cpi	r24, 0x18	; 24
- 9b6:	31 f0       	breq	.+12     	; 0x9c4 <Write_Byte+0x52>
- 9b8:	80 91 b9 00 	lds	r24, 0x00B9
- 9bc:	88 7f       	andi	r24, 0xF8	; 248
- 9be:	90 e0       	ldi	r25, 0x00	; 0
- 9c0:	0e 94 46 02 	call	0x48c	; 0x48c <Error>
+ 9aa:	80 91 b9 00 	lds	r24, 0x00B9
+ 9ae:	88 7f       	andi	r24, 0xF8	; 248
+ 9b0:	88 31       	cpi	r24, 0x18	; 24
+ 9b2:	31 f0       	breq	.+12     	; 0x9c0 <Write_Byte+0x52>
+ 9b4:	80 91 b9 00 	lds	r24, 0x00B9
+ 9b8:	88 7f       	andi	r24, 0xF8	; 248
+ 9ba:	90 e0       	ldi	r25, 0x00	; 0
+ 9bc:	0e 94 46 02 	call	0x48c	; 0x48c <Error>
 		
 	//Sends the data to the slave
 	TWDR = bits; //4bits
- 9c4:	d0 93 bb 00 	sts	0x00BB, r29
+ 9c0:	d0 93 bb 00 	sts	0x00BB, r29
 	TWCR = (1<<TWINT) | (1<<TWEN);
- 9c8:	84 e8       	ldi	r24, 0x84	; 132
- 9ca:	80 93 bc 00 	sts	0x00BC, r24
+ 9c4:	84 e8       	ldi	r24, 0x84	; 132
+ 9c6:	80 93 bc 00 	sts	0x00BC, r24
 	
 	while(!TWI_Busy());
- 9ce:	0e 94 7c 05 	call	0xaf8	; 0xaf8 <TWI_Busy>
- 9d2:	89 2b       	or	r24, r25
- 9d4:	e1 f3       	breq	.-8      	; 0x9ce <Write_Byte+0x5c>
+ 9ca:	0e 94 7a 05 	call	0xaf4	; 0xaf4 <TWI_Busy>
+ 9ce:	89 2b       	or	r24, r25
+ 9d0:	e1 f3       	breq	.-8      	; 0x9ca <Write_Byte+0x5c>
 	if((TWSR & MASK) !=  MT_BYTE_ACK)Error((TWSR & MASK));
- 9d6:	80 91 b9 00 	lds	r24, 0x00B9
- 9da:	88 7f       	andi	r24, 0xF8	; 248
- 9dc:	88 32       	cpi	r24, 0x28	; 40
- 9de:	31 f0       	breq	.+12     	; 0x9ec <Write_Byte+0x7a>
- 9e0:	80 91 b9 00 	lds	r24, 0x00B9
- 9e4:	88 7f       	andi	r24, 0xF8	; 248
- 9e6:	90 e0       	ldi	r25, 0x00	; 0
- 9e8:	0e 94 46 02 	call	0x48c	; 0x48c <Error>
+ 9d2:	80 91 b9 00 	lds	r24, 0x00B9
+ 9d6:	88 7f       	andi	r24, 0xF8	; 248
+ 9d8:	88 32       	cpi	r24, 0x28	; 40
+ 9da:	31 f0       	breq	.+12     	; 0x9e8 <Write_Byte+0x7a>
+ 9dc:	80 91 b9 00 	lds	r24, 0x00B9
+ 9e0:	88 7f       	andi	r24, 0xF8	; 248
+ 9e2:	90 e0       	ldi	r25, 0x00	; 0
+ 9e4:	0e 94 46 02 	call	0x48c	; 0x48c <Error>
 		
 	//Sends the stop condition
 	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
- 9ec:	84 e9       	ldi	r24, 0x94	; 148
- 9ee:	80 93 bc 00 	sts	0x00BC, r24
+ 9e8:	84 e9       	ldi	r24, 0x94	; 148
+ 9ea:	80 93 bc 00 	sts	0x00BC, r24
 	
 }
- 9f2:	df 91       	pop	r29
- 9f4:	cf 91       	pop	r28
- 9f6:	08 95       	ret
+ 9ee:	df 91       	pop	r29
+ 9f0:	cf 91       	pop	r28
+ 9f2:	08 95       	ret
 
-000009f8 <LCD_Toggle_enable>:
+000009f4 <LCD_Toggle_enable>:
 	Write_Byte(LCD_ADDR, bits_low);
 	LCD_Toggle_enable(bits_low);
 	
 }
 
 void LCD_Toggle_enable(uint8_t bits){
- 9f8:	cf 93       	push	r28
- 9fa:	c8 2f       	mov	r28, r24
- 9fc:	81 ee       	ldi	r24, 0xE1	; 225
- 9fe:	94 e0       	ldi	r25, 0x04	; 4
- a00:	01 97       	sbiw	r24, 0x01	; 1
- a02:	f1 f7       	brne	.-4      	; 0xa00 <LCD_Toggle_enable+0x8>
- a04:	00 c0       	rjmp	.+0      	; 0xa06 <LCD_Toggle_enable+0xe>
- a06:	00 00       	nop
+ 9f4:	cf 93       	push	r28
+ 9f6:	c8 2f       	mov	r28, r24
+ 9f8:	81 ee       	ldi	r24, 0xE1	; 225
+ 9fa:	94 e0       	ldi	r25, 0x04	; 4
+ 9fc:	01 97       	sbiw	r24, 0x01	; 1
+ 9fe:	f1 f7       	brne	.-4      	; 0x9fc <LCD_Toggle_enable+0x8>
+ a00:	00 c0       	rjmp	.+0      	; 0xa02 <LCD_Toggle_enable+0xe>
+ a02:	00 00       	nop
 	
 	// Toggles the enable pin on the display to activate the code
 //	_delay_ms(DELAY_MS*5);
 	_delay_ms(5);
 	Write_Byte(LCD_ADDR, (bits | ENABLE));
- a08:	6c 2f       	mov	r22, r28
- a0a:	64 60       	ori	r22, 0x04	; 4
- a0c:	87 e2       	ldi	r24, 0x27	; 39
- a0e:	0e 94 b9 04 	call	0x972	; 0x972 <Write_Byte>
- a12:	81 ee       	ldi	r24, 0xE1	; 225
- a14:	94 e0       	ldi	r25, 0x04	; 4
- a16:	01 97       	sbiw	r24, 0x01	; 1
- a18:	f1 f7       	brne	.-4      	; 0xa16 <LCD_Toggle_enable+0x1e>
- a1a:	00 c0       	rjmp	.+0      	; 0xa1c <LCD_Toggle_enable+0x24>
- a1c:	00 00       	nop
+ a04:	6c 2f       	mov	r22, r28
+ a06:	64 60       	ori	r22, 0x04	; 4
+ a08:	87 e2       	ldi	r24, 0x27	; 39
+ a0a:	0e 94 b7 04 	call	0x96e	; 0x96e <Write_Byte>
+ a0e:	81 ee       	ldi	r24, 0xE1	; 225
+ a10:	94 e0       	ldi	r25, 0x04	; 4
+ a12:	01 97       	sbiw	r24, 0x01	; 1
+ a14:	f1 f7       	brne	.-4      	; 0xa12 <LCD_Toggle_enable+0x1e>
+ a16:	00 c0       	rjmp	.+0      	; 0xa18 <LCD_Toggle_enable+0x24>
+ a18:	00 00       	nop
 	_delay_ms(5);
 	Write_Byte(LCD_ADDR, (bits & ~ENABLE));
- a1e:	6c 2f       	mov	r22, r28
- a20:	6b 7f       	andi	r22, 0xFB	; 251
- a22:	87 e2       	ldi	r24, 0x27	; 39
- a24:	0e 94 b9 04 	call	0x972	; 0x972 <Write_Byte>
- a28:	81 ee       	ldi	r24, 0xE1	; 225
- a2a:	94 e0       	ldi	r25, 0x04	; 4
- a2c:	01 97       	sbiw	r24, 0x01	; 1
- a2e:	f1 f7       	brne	.-4      	; 0xa2c <LCD_Toggle_enable+0x34>
- a30:	00 c0       	rjmp	.+0      	; 0xa32 <LCD_Toggle_enable+0x3a>
- a32:	00 00       	nop
+ a1a:	6c 2f       	mov	r22, r28
+ a1c:	6b 7f       	andi	r22, 0xFB	; 251
+ a1e:	87 e2       	ldi	r24, 0x27	; 39
+ a20:	0e 94 b7 04 	call	0x96e	; 0x96e <Write_Byte>
+ a24:	81 ee       	ldi	r24, 0xE1	; 225
+ a26:	94 e0       	ldi	r25, 0x04	; 4
+ a28:	01 97       	sbiw	r24, 0x01	; 1
+ a2a:	f1 f7       	brne	.-4      	; 0xa28 <LCD_Toggle_enable+0x34>
+ a2c:	00 c0       	rjmp	.+0      	; 0xa2e <LCD_Toggle_enable+0x3a>
+ a2e:	00 00       	nop
 	_delay_ms(5);
 		
 }
- a34:	cf 91       	pop	r28
- a36:	08 95       	ret
+ a30:	cf 91       	pop	r28
+ a32:	08 95       	ret
 
-00000a38 <LCD_Byte>:
+00000a34 <LCD_Byte>:
 	LCD_Byte(0x01, LCD_CMD); 
 	_delay_ms(DELAY_MS*5); //5 ms delay
 	
 }
 
 void LCD_Byte(uint8_t bits, uint8_t mode){
- a38:	cf 93       	push	r28
- a3a:	df 93       	push	r29
- a3c:	c6 2f       	mov	r28, r22
- a3e:	c8 60       	ori	r28, 0x08	; 8
+ a34:	cf 93       	push	r28
+ a36:	df 93       	push	r29
+ a38:	c6 2f       	mov	r28, r22
+ a3a:	c8 60       	ori	r28, 0x08	; 8
 	
 	uint8_t bits_high, bits_low;
 	
 	//Divides the data in two 4 bit values
 	bits_high = mode | (bits & 0xF0) | LCD_BACKLIGHT;
- a40:	d8 2f       	mov	r29, r24
- a42:	d0 7f       	andi	r29, 0xF0	; 240
- a44:	dc 2b       	or	r29, r28
+ a3c:	d8 2f       	mov	r29, r24
+ a3e:	d0 7f       	andi	r29, 0xF0	; 240
+ a40:	dc 2b       	or	r29, r28
 	bits_low = mode | ((bits<<4) & 0xF0) | LCD_BACKLIGHT;
- a46:	90 e1       	ldi	r25, 0x10	; 16
- a48:	89 9f       	mul	r24, r25
- a4a:	90 01       	movw	r18, r0
- a4c:	11 24       	eor	r1, r1
- a4e:	c2 2b       	or	r28, r18
+ a42:	90 e1       	ldi	r25, 0x10	; 16
+ a44:	89 9f       	mul	r24, r25
+ a46:	90 01       	movw	r18, r0
+ a48:	11 24       	eor	r1, r1
+ a4a:	c2 2b       	or	r28, r18
 	
 	// Send the high bits
 	Write_Byte(LCD_ADDR, bits_high);
- a50:	6d 2f       	mov	r22, r29
- a52:	87 e2       	ldi	r24, 0x27	; 39
- a54:	0e 94 b9 04 	call	0x972	; 0x972 <Write_Byte>
+ a4c:	6d 2f       	mov	r22, r29
+ a4e:	87 e2       	ldi	r24, 0x27	; 39
+ a50:	0e 94 b7 04 	call	0x96e	; 0x96e <Write_Byte>
 	LCD_Toggle_enable(bits_high);
- a58:	8d 2f       	mov	r24, r29
- a5a:	0e 94 fc 04 	call	0x9f8	; 0x9f8 <LCD_Toggle_enable>
+ a54:	8d 2f       	mov	r24, r29
+ a56:	0e 94 fa 04 	call	0x9f4	; 0x9f4 <LCD_Toggle_enable>
 	
 	// Send the low bits
 	Write_Byte(LCD_ADDR, bits_low);
- a5e:	6c 2f       	mov	r22, r28
- a60:	87 e2       	ldi	r24, 0x27	; 39
- a62:	0e 94 b9 04 	call	0x972	; 0x972 <Write_Byte>
+ a5a:	6c 2f       	mov	r22, r28
+ a5c:	87 e2       	ldi	r24, 0x27	; 39
+ a5e:	0e 94 b7 04 	call	0x96e	; 0x96e <Write_Byte>
 	LCD_Toggle_enable(bits_low);
- a66:	8c 2f       	mov	r24, r28
- a68:	0e 94 fc 04 	call	0x9f8	; 0x9f8 <LCD_Toggle_enable>
+ a62:	8c 2f       	mov	r24, r28
+ a64:	0e 94 fa 04 	call	0x9f4	; 0x9f4 <LCD_Toggle_enable>
 	
 }
- a6c:	df 91       	pop	r29
- a6e:	cf 91       	pop	r28
- a70:	08 95       	ret
+ a68:	df 91       	pop	r29
+ a6a:	cf 91       	pop	r28
+ a6c:	08 95       	ret
 
-00000a72 <LCD_Init>:
+00000a6e <LCD_Init>:
 
 
 void LCD_Init(void){
 	
 	// Basic initialization
 	LCD_Byte(0x33, LCD_CMD); 
- a72:	60 e0       	ldi	r22, 0x00	; 0
- a74:	83 e3       	ldi	r24, 0x33	; 51
- a76:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ a6e:	60 e0       	ldi	r22, 0x00	; 0
+ a70:	83 e3       	ldi	r24, 0x33	; 51
+ a72:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	LCD_Byte(0x32, LCD_CMD);
- a7a:	60 e0       	ldi	r22, 0x00	; 0
- a7c:	82 e3       	ldi	r24, 0x32	; 50
- a7e:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ a76:	60 e0       	ldi	r22, 0x00	; 0
+ a78:	82 e3       	ldi	r24, 0x32	; 50
+ a7a:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	 
 	// Entry mode, move cursor left to right 
 	LCD_Byte(0x06, LCD_CMD); 
- a82:	60 e0       	ldi	r22, 0x00	; 0
- a84:	86 e0       	ldi	r24, 0x06	; 6
- a86:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ a7e:	60 e0       	ldi	r22, 0x00	; 0
+ a80:	86 e0       	ldi	r24, 0x06	; 6
+ a82:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	
 	// Display on, Cursor off, Blink off
 	LCD_Byte(0x0C, LCD_CMD); 
- a8a:	60 e0       	ldi	r22, 0x00	; 0
- a8c:	8c e0       	ldi	r24, 0x0C	; 12
- a8e:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ a86:	60 e0       	ldi	r22, 0x00	; 0
+ a88:	8c e0       	ldi	r24, 0x0C	; 12
+ a8a:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	
 	// Set to 4-bit ooperation, 2 lines and 5x7 dots
 	LCD_Byte(0x28, LCD_CMD); 
- a92:	60 e0       	ldi	r22, 0x00	; 0
- a94:	88 e2       	ldi	r24, 0x28	; 40
- a96:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ a8e:	60 e0       	ldi	r22, 0x00	; 0
+ a90:	88 e2       	ldi	r24, 0x28	; 40
+ a92:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	
 	// Clears display and DDRAM
 	LCD_Byte(0x01, LCD_CMD); 
- a9a:	60 e0       	ldi	r22, 0x00	; 0
- a9c:	81 e0       	ldi	r24, 0x01	; 1
- a9e:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
- aa2:	8f e0       	ldi	r24, 0x0F	; 15
- aa4:	97 e2       	ldi	r25, 0x27	; 39
- aa6:	01 97       	sbiw	r24, 0x01	; 1
- aa8:	f1 f7       	brne	.-4      	; 0xaa6 <LCD_Init+0x34>
- aaa:	00 c0       	rjmp	.+0      	; 0xaac <LCD_Init+0x3a>
- aac:	00 00       	nop
- aae:	08 95       	ret
+ a96:	60 e0       	ldi	r22, 0x00	; 0
+ a98:	81 e0       	ldi	r24, 0x01	; 1
+ a9a:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
+ a9e:	8f e0       	ldi	r24, 0x0F	; 15
+ aa0:	97 e2       	ldi	r25, 0x27	; 39
+ aa2:	01 97       	sbiw	r24, 0x01	; 1
+ aa4:	f1 f7       	brne	.-4      	; 0xaa2 <LCD_Init+0x34>
+ aa6:	00 c0       	rjmp	.+0      	; 0xaa8 <LCD_Init+0x3a>
+ aa8:	00 00       	nop
+ aaa:	08 95       	ret
 
-00000ab0 <LCD_String>:
+00000aac <LCD_String>:
 	//Sends the stop condition
 	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
 	
 }
 
 void LCD_String(uint8_t *text){
- ab0:	cf 93       	push	r28
- ab2:	df 93       	push	r29
- ab4:	ec 01       	movw	r28, r24
+ aac:	cf 93       	push	r28
+ aae:	df 93       	push	r29
+ ab0:	ec 01       	movw	r28, r24
 	
 	while(*text){
- ab6:	88 81       	ld	r24, Y
- ab8:	88 23       	and	r24, r24
- aba:	39 f0       	breq	.+14     	; 0xaca <LCD_String+0x1a>
- abc:	21 96       	adiw	r28, 0x01	; 1
+ ab2:	88 81       	ld	r24, Y
+ ab4:	88 23       	and	r24, r24
+ ab6:	39 f0       	breq	.+14     	; 0xac6 <LCD_String+0x1a>
+ ab8:	21 96       	adiw	r28, 0x01	; 1
 		LCD_Byte(*text++, LCD_CHR);
- abe:	61 e0       	ldi	r22, 0x01	; 1
- ac0:	0e 94 1c 05 	call	0xa38	; 0xa38 <LCD_Byte>
+ aba:	61 e0       	ldi	r22, 0x01	; 1
+ abc:	0e 94 1a 05 	call	0xa34	; 0xa34 <LCD_Byte>
 	
 }
 
 void LCD_String(uint8_t *text){
 	
 	while(*text){
- ac4:	89 91       	ld	r24, Y+
- ac6:	81 11       	cpse	r24, r1
- ac8:	fa cf       	rjmp	.-12     	; 0xabe <LCD_String+0xe>
+ ac0:	89 91       	ld	r24, Y+
+ ac2:	81 11       	cpse	r24, r1
+ ac4:	fa cf       	rjmp	.-12     	; 0xaba <LCD_String+0xe>
 		LCD_Byte(*text++, LCD_CHR);
 	}
 }
- aca:	df 91       	pop	r29
- acc:	cf 91       	pop	r28
- ace:	08 95       	ret
+ ac6:	df 91       	pop	r29
+ ac8:	cf 91       	pop	r28
+ aca:	08 95       	ret
 
-00000ad0 <TWI_Master_Init>:
+00000acc <TWI_Master_Init>:
 
 
 void TWI_Master_Init (void){
 	
 	//Sets the power reduction register for TWI to 0.
 	PRR &= ~(1<<PRTWI);
- ad0:	e4 e6       	ldi	r30, 0x64	; 100
- ad2:	f0 e0       	ldi	r31, 0x00	; 0
- ad4:	80 81       	ld	r24, Z
- ad6:	8f 77       	andi	r24, 0x7F	; 127
- ad8:	80 83       	st	Z, r24
+ acc:	e4 e6       	ldi	r30, 0x64	; 100
+ ace:	f0 e0       	ldi	r31, 0x00	; 0
+ ad0:	80 81       	ld	r24, Z
+ ad2:	8f 77       	andi	r24, 0x7F	; 127
+ ad4:	80 83       	st	Z, r24
 	
 	//Sets the prescaler to 1 by setting TWPS1 and 0 to 0
 	TWSR &= ~(1<<TWPS1) & ~(1<<TWPS0); 
- ada:	e9 eb       	ldi	r30, 0xB9	; 185
- adc:	f0 e0       	ldi	r31, 0x00	; 0
- ade:	80 81       	ld	r24, Z
- ae0:	8c 7f       	andi	r24, 0xFC	; 252
- ae2:	80 83       	st	Z, r24
+ ad6:	e9 eb       	ldi	r30, 0xB9	; 185
+ ad8:	f0 e0       	ldi	r31, 0x00	; 0
+ ada:	80 81       	ld	r24, Z
+ adc:	8c 7f       	andi	r24, 0xFC	; 252
+ ade:	80 83       	st	Z, r24
 	
 	//Sets the speed of TWI to 100khz
 	TWBR = 0x20;
- ae4:	80 e2       	ldi	r24, 0x20	; 32
- ae6:	80 93 b8 00 	sts	0x00B8, r24
+ ae0:	80 e2       	ldi	r24, 0x20	; 32
+ ae2:	80 93 b8 00 	sts	0x00B8, r24
 		TWWC - Write Collision Flag
 		TWEN - Enable Bit
 		TWIE - Interrupt Enable
 
 	************************************************************************/
 	TWDR = 0xFF;
- aea:	8f ef       	ldi	r24, 0xFF	; 255
- aec:	80 93 bb 00 	sts	0x00BB, r24
+ ae6:	8f ef       	ldi	r24, 0xFF	; 255
+ ae8:	80 93 bb 00 	sts	0x00BB, r24
 	TWCR = (0<<TWINT) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWWC) | (1<<TWIE) | (1<<TWEN);
- af0:	85 e0       	ldi	r24, 0x05	; 5
- af2:	80 93 bc 00 	sts	0x00BC, r24
- af6:	08 95       	ret
+ aec:	85 e0       	ldi	r24, 0x05	; 5
+ aee:	80 93 bc 00 	sts	0x00BC, r24
+ af2:	08 95       	ret
 
-00000af8 <TWI_Busy>:
+00000af4 <TWI_Busy>:
 
 }
 
 int TWI_Busy(void){
 	//Returns 0 if the MCU is busy
 	return TWCR & (1<<TWINT);
- af8:	80 91 bc 00 	lds	r24, 0x00BC
- afc:	80 78       	andi	r24, 0x80	; 128
+ af4:	80 91 bc 00 	lds	r24, 0x00BC
+ af8:	80 78       	andi	r24, 0x80	; 128
 }
- afe:	90 e0       	ldi	r25, 0x00	; 0
- b00:	08 95       	ret
+ afa:	90 e0       	ldi	r25, 0x00	; 0
+ afc:	08 95       	ret
 
-00000b02 <__divmodhi4>:
- b02:	97 fb       	bst	r25, 7
- b04:	07 2e       	mov	r0, r23
- b06:	16 f4       	brtc	.+4      	; 0xb0c <__divmodhi4+0xa>
- b08:	00 94       	com	r0
- b0a:	07 d0       	rcall	.+14     	; 0xb1a <__divmodhi4_neg1>
- b0c:	77 fd       	sbrc	r23, 7
- b0e:	09 d0       	rcall	.+18     	; 0xb22 <__divmodhi4_neg2>
- b10:	0e 94 d6 05 	call	0xbac	; 0xbac <__udivmodhi4>
- b14:	07 fc       	sbrc	r0, 7
- b16:	05 d0       	rcall	.+10     	; 0xb22 <__divmodhi4_neg2>
- b18:	3e f4       	brtc	.+14     	; 0xb28 <__divmodhi4_exit>
+00000afe <__divmodhi4>:
+ afe:	97 fb       	bst	r25, 7
+ b00:	07 2e       	mov	r0, r23
+ b02:	16 f4       	brtc	.+4      	; 0xb08 <__divmodhi4+0xa>
+ b04:	00 94       	com	r0
+ b06:	07 d0       	rcall	.+14     	; 0xb16 <__divmodhi4_neg1>
+ b08:	77 fd       	sbrc	r23, 7
+ b0a:	09 d0       	rcall	.+18     	; 0xb1e <__divmodhi4_neg2>
+ b0c:	0e 94 d4 05 	call	0xba8	; 0xba8 <__udivmodhi4>
+ b10:	07 fc       	sbrc	r0, 7
+ b12:	05 d0       	rcall	.+10     	; 0xb1e <__divmodhi4_neg2>
+ b14:	3e f4       	brtc	.+14     	; 0xb24 <__divmodhi4_exit>
 
-00000b1a <__divmodhi4_neg1>:
- b1a:	90 95       	com	r25
- b1c:	81 95       	neg	r24
- b1e:	9f 4f       	sbci	r25, 0xFF	; 255
- b20:	08 95       	ret
+00000b16 <__divmodhi4_neg1>:
+ b16:	90 95       	com	r25
+ b18:	81 95       	neg	r24
+ b1a:	9f 4f       	sbci	r25, 0xFF	; 255
+ b1c:	08 95       	ret
 
-00000b22 <__divmodhi4_neg2>:
- b22:	70 95       	com	r23
- b24:	61 95       	neg	r22
- b26:	7f 4f       	sbci	r23, 0xFF	; 255
+00000b1e <__divmodhi4_neg2>:
+ b1e:	70 95       	com	r23
+ b20:	61 95       	neg	r22
+ b22:	7f 4f       	sbci	r23, 0xFF	; 255
 
-00000b28 <__divmodhi4_exit>:
- b28:	08 95       	ret
+00000b24 <__divmodhi4_exit>:
+ b24:	08 95       	ret
 
-00000b2a <__udivmodsi4>:
- b2a:	a1 e2       	ldi	r26, 0x21	; 33
- b2c:	1a 2e       	mov	r1, r26
- b2e:	aa 1b       	sub	r26, r26
- b30:	bb 1b       	sub	r27, r27
- b32:	fd 01       	movw	r30, r26
- b34:	0d c0       	rjmp	.+26     	; 0xb50 <__udivmodsi4_ep>
+00000b26 <__udivmodsi4>:
+ b26:	a1 e2       	ldi	r26, 0x21	; 33
+ b28:	1a 2e       	mov	r1, r26
+ b2a:	aa 1b       	sub	r26, r26
+ b2c:	bb 1b       	sub	r27, r27
+ b2e:	fd 01       	movw	r30, r26
+ b30:	0d c0       	rjmp	.+26     	; 0xb4c <__udivmodsi4_ep>
 
-00000b36 <__udivmodsi4_loop>:
- b36:	aa 1f       	adc	r26, r26
- b38:	bb 1f       	adc	r27, r27
- b3a:	ee 1f       	adc	r30, r30
- b3c:	ff 1f       	adc	r31, r31
- b3e:	a2 17       	cp	r26, r18
- b40:	b3 07       	cpc	r27, r19
- b42:	e4 07       	cpc	r30, r20
- b44:	f5 07       	cpc	r31, r21
- b46:	20 f0       	brcs	.+8      	; 0xb50 <__udivmodsi4_ep>
- b48:	a2 1b       	sub	r26, r18
- b4a:	b3 0b       	sbc	r27, r19
- b4c:	e4 0b       	sbc	r30, r20
- b4e:	f5 0b       	sbc	r31, r21
+00000b32 <__udivmodsi4_loop>:
+ b32:	aa 1f       	adc	r26, r26
+ b34:	bb 1f       	adc	r27, r27
+ b36:	ee 1f       	adc	r30, r30
+ b38:	ff 1f       	adc	r31, r31
+ b3a:	a2 17       	cp	r26, r18
+ b3c:	b3 07       	cpc	r27, r19
+ b3e:	e4 07       	cpc	r30, r20
+ b40:	f5 07       	cpc	r31, r21
+ b42:	20 f0       	brcs	.+8      	; 0xb4c <__udivmodsi4_ep>
+ b44:	a2 1b       	sub	r26, r18
+ b46:	b3 0b       	sbc	r27, r19
+ b48:	e4 0b       	sbc	r30, r20
+ b4a:	f5 0b       	sbc	r31, r21
 
-00000b50 <__udivmodsi4_ep>:
- b50:	66 1f       	adc	r22, r22
- b52:	77 1f       	adc	r23, r23
- b54:	88 1f       	adc	r24, r24
- b56:	99 1f       	adc	r25, r25
- b58:	1a 94       	dec	r1
- b5a:	69 f7       	brne	.-38     	; 0xb36 <__udivmodsi4_loop>
- b5c:	60 95       	com	r22
- b5e:	70 95       	com	r23
- b60:	80 95       	com	r24
- b62:	90 95       	com	r25
- b64:	9b 01       	movw	r18, r22
- b66:	ac 01       	movw	r20, r24
- b68:	bd 01       	movw	r22, r26
- b6a:	cf 01       	movw	r24, r30
- b6c:	08 95       	ret
+00000b4c <__udivmodsi4_ep>:
+ b4c:	66 1f       	adc	r22, r22
+ b4e:	77 1f       	adc	r23, r23
+ b50:	88 1f       	adc	r24, r24
+ b52:	99 1f       	adc	r25, r25
+ b54:	1a 94       	dec	r1
+ b56:	69 f7       	brne	.-38     	; 0xb32 <__udivmodsi4_loop>
+ b58:	60 95       	com	r22
+ b5a:	70 95       	com	r23
+ b5c:	80 95       	com	r24
+ b5e:	90 95       	com	r25
+ b60:	9b 01       	movw	r18, r22
+ b62:	ac 01       	movw	r20, r24
+ b64:	bd 01       	movw	r22, r26
+ b66:	cf 01       	movw	r24, r30
+ b68:	08 95       	ret
 
-00000b6e <__divmodsi4>:
- b6e:	05 2e       	mov	r0, r21
- b70:	97 fb       	bst	r25, 7
- b72:	1e f4       	brtc	.+6      	; 0xb7a <__divmodsi4+0xc>
- b74:	00 94       	com	r0
- b76:	0e 94 ce 05 	call	0xb9c	; 0xb9c <__negsi2>
- b7a:	57 fd       	sbrc	r21, 7
- b7c:	07 d0       	rcall	.+14     	; 0xb8c <__divmodsi4_neg2>
- b7e:	0e 94 95 05 	call	0xb2a	; 0xb2a <__udivmodsi4>
- b82:	07 fc       	sbrc	r0, 7
- b84:	03 d0       	rcall	.+6      	; 0xb8c <__divmodsi4_neg2>
- b86:	4e f4       	brtc	.+18     	; 0xb9a <__divmodsi4_exit>
- b88:	0c 94 ce 05 	jmp	0xb9c	; 0xb9c <__negsi2>
+00000b6a <__divmodsi4>:
+ b6a:	05 2e       	mov	r0, r21
+ b6c:	97 fb       	bst	r25, 7
+ b6e:	1e f4       	brtc	.+6      	; 0xb76 <__divmodsi4+0xc>
+ b70:	00 94       	com	r0
+ b72:	0e 94 cc 05 	call	0xb98	; 0xb98 <__negsi2>
+ b76:	57 fd       	sbrc	r21, 7
+ b78:	07 d0       	rcall	.+14     	; 0xb88 <__divmodsi4_neg2>
+ b7a:	0e 94 93 05 	call	0xb26	; 0xb26 <__udivmodsi4>
+ b7e:	07 fc       	sbrc	r0, 7
+ b80:	03 d0       	rcall	.+6      	; 0xb88 <__divmodsi4_neg2>
+ b82:	4e f4       	brtc	.+18     	; 0xb96 <__divmodsi4_exit>
+ b84:	0c 94 cc 05 	jmp	0xb98	; 0xb98 <__negsi2>
 
-00000b8c <__divmodsi4_neg2>:
- b8c:	50 95       	com	r21
- b8e:	40 95       	com	r20
- b90:	30 95       	com	r19
- b92:	21 95       	neg	r18
- b94:	3f 4f       	sbci	r19, 0xFF	; 255
- b96:	4f 4f       	sbci	r20, 0xFF	; 255
- b98:	5f 4f       	sbci	r21, 0xFF	; 255
+00000b88 <__divmodsi4_neg2>:
+ b88:	50 95       	com	r21
+ b8a:	40 95       	com	r20
+ b8c:	30 95       	com	r19
+ b8e:	21 95       	neg	r18
+ b90:	3f 4f       	sbci	r19, 0xFF	; 255
+ b92:	4f 4f       	sbci	r20, 0xFF	; 255
+ b94:	5f 4f       	sbci	r21, 0xFF	; 255
 
-00000b9a <__divmodsi4_exit>:
- b9a:	08 95       	ret
+00000b96 <__divmodsi4_exit>:
+ b96:	08 95       	ret
 
-00000b9c <__negsi2>:
- b9c:	90 95       	com	r25
- b9e:	80 95       	com	r24
- ba0:	70 95       	com	r23
- ba2:	61 95       	neg	r22
- ba4:	7f 4f       	sbci	r23, 0xFF	; 255
- ba6:	8f 4f       	sbci	r24, 0xFF	; 255
- ba8:	9f 4f       	sbci	r25, 0xFF	; 255
- baa:	08 95       	ret
+00000b98 <__negsi2>:
+ b98:	90 95       	com	r25
+ b9a:	80 95       	com	r24
+ b9c:	70 95       	com	r23
+ b9e:	61 95       	neg	r22
+ ba0:	7f 4f       	sbci	r23, 0xFF	; 255
+ ba2:	8f 4f       	sbci	r24, 0xFF	; 255
+ ba4:	9f 4f       	sbci	r25, 0xFF	; 255
+ ba6:	08 95       	ret
 
-00000bac <__udivmodhi4>:
- bac:	aa 1b       	sub	r26, r26
- bae:	bb 1b       	sub	r27, r27
- bb0:	51 e1       	ldi	r21, 0x11	; 17
- bb2:	07 c0       	rjmp	.+14     	; 0xbc2 <__udivmodhi4_ep>
+00000ba8 <__udivmodhi4>:
+ ba8:	aa 1b       	sub	r26, r26
+ baa:	bb 1b       	sub	r27, r27
+ bac:	51 e1       	ldi	r21, 0x11	; 17
+ bae:	07 c0       	rjmp	.+14     	; 0xbbe <__udivmodhi4_ep>
 
-00000bb4 <__udivmodhi4_loop>:
- bb4:	aa 1f       	adc	r26, r26
- bb6:	bb 1f       	adc	r27, r27
- bb8:	a6 17       	cp	r26, r22
- bba:	b7 07       	cpc	r27, r23
- bbc:	10 f0       	brcs	.+4      	; 0xbc2 <__udivmodhi4_ep>
- bbe:	a6 1b       	sub	r26, r22
- bc0:	b7 0b       	sbc	r27, r23
+00000bb0 <__udivmodhi4_loop>:
+ bb0:	aa 1f       	adc	r26, r26
+ bb2:	bb 1f       	adc	r27, r27
+ bb4:	a6 17       	cp	r26, r22
+ bb6:	b7 07       	cpc	r27, r23
+ bb8:	10 f0       	brcs	.+4      	; 0xbbe <__udivmodhi4_ep>
+ bba:	a6 1b       	sub	r26, r22
+ bbc:	b7 0b       	sbc	r27, r23
 
-00000bc2 <__udivmodhi4_ep>:
- bc2:	88 1f       	adc	r24, r24
- bc4:	99 1f       	adc	r25, r25
- bc6:	5a 95       	dec	r21
- bc8:	a9 f7       	brne	.-22     	; 0xbb4 <__udivmodhi4_loop>
- bca:	80 95       	com	r24
- bcc:	90 95       	com	r25
- bce:	bc 01       	movw	r22, r24
- bd0:	cd 01       	movw	r24, r26
- bd2:	08 95       	ret
+00000bbe <__udivmodhi4_ep>:
+ bbe:	88 1f       	adc	r24, r24
+ bc0:	99 1f       	adc	r25, r25
+ bc2:	5a 95       	dec	r21
+ bc4:	a9 f7       	brne	.-22     	; 0xbb0 <__udivmodhi4_loop>
+ bc6:	80 95       	com	r24
+ bc8:	90 95       	com	r25
+ bca:	bc 01       	movw	r22, r24
+ bcc:	cd 01       	movw	r24, r26
+ bce:	08 95       	ret
 
-00000bd4 <_exit>:
- bd4:	f8 94       	cli
+00000bd0 <_exit>:
+ bd0:	f8 94       	cli
 
-00000bd6 <__stop_program>:
- bd6:	ff cf       	rjmp	.-2      	; 0xbd6 <__stop_program>
+00000bd2 <__stop_program>:
+ bd2:	ff cf       	rjmp	.-2      	; 0xbd2 <__stop_program>

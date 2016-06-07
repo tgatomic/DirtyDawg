@@ -294,8 +294,11 @@ void BT_Send_Data(void){
 	Green_LED_On();
 
 	sputchar( '-' );
+	BT_Send(sgetchar());
+	BT_Send(sgetchar());
+	BT_Send(sgetchar());
 //	while( !kbhit() );			// wait until byte received
-	DirtyDawg.accelerometer = sgetchar();
+//	DirtyDawg.accelerometer = sgetchar();
 //	ECG_hi = sgetchar();
 //	ECG_lo = sgetchar();
 
@@ -308,10 +311,9 @@ void BT_Send_Data(void){
 	else
 		DirtyDawg.command &= ~(TURN_LEFT | TURN_RIGHT);
 */	
-	DirtyDawg.ECG = ECG_lo;
+//	DirtyDawg.ECG = ECG_lo;
 //	BT_Send(DirtyDawg.command);
-	BT_Send(DirtyDawg.accelerometer);
-	BT_Send(DirtyDawg.ECG);
+//	BT_Send(DirtyDawg.ECG);
 	// Clear flags
 	// DirtyDawg.command = 0;
 	

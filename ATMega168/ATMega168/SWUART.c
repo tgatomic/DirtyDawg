@@ -8,7 +8,7 @@
 
 #define PRESCALE 1
 #define XTAL	8000000UL
-#define BAUD 57600
+#define BAUD 19200
 
 #include <avr/io.h>
 #include <avr/interrupt.h>

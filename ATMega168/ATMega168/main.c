@@ -26,6 +26,9 @@ int main(void){
 	// Initiate the hardware
 	System_Init();
 	
+	// Initiate the software define UART
+	suart_init();
+	
 	// Initiate the TWI bus as a master
 	TWI_Master_Init();
 
@@ -38,9 +41,6 @@ int main(void){
 	// Initiate/Clear the BlueSmirf from previous commands
 	BT_Init();
 
-	// Initiate the software define UART
-	suart_init();
-	
 	// Connect the BlueSmirf to the car
 	LCD_Byte(LCD_LINE_1 + 3, LCD_CMD);
 	LCD_String("DirtyDawg!");
