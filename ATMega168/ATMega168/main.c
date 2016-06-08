@@ -17,6 +17,7 @@
 #include "main.h"
 
 #define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
+volatile uint8_t portbhistory = 0;     // default is high because the pull-up
 
 int main(void){
 
@@ -59,7 +60,6 @@ int main(void){
 	LCD_Byte(LCD_LINE_2, LCD_CMD);
 	LCD_String(ROW2);
 	
-	uint8_t loop = 0;
 	// Main loop
 	while(TRUE){
 		
@@ -72,12 +72,7 @@ int main(void){
 			
 			// Send commands to the car
 			case SEND_DATA_STATE:
-				loop++;
-				if(loop > 3){
-					BT_Send_Data();
-					loop = 0;
-				}
-				DirtyDawg.state = GET_DATA_STATE;
+				BT_Send_Data();
 				break;
 
 			// Get sensor data from the car
@@ -90,17 +85,39 @@ int main(void){
 				Error(0x53);
 			
 		}
-		_delay_ms(250);
+//		_delay_ms(250);
 	}	
 }
 
 ISR(PCINT2_vect){
-	if(DirtyDawg.status & LIGHT_BUTTON){
-		DirtyDawg.command ^= LIGHT;
-		DirtyDawg.status &= ~LIGHT_BUTTON;
-	}
-	else
-		DirtyDawg.status |= LIGHT_BUTTON;
+    uint8_t changedbits;
+
+    changedbits = PIND ^ portbhistory;
+    portbhistory = PIND;
+
+    // Interrupt PCINT20
+	// Toggles light on and off
+    if(changedbits & (1 << PIND4)){
+		if(DirtyDawg.status & LIGHT_BUTTON){
+			DirtyDawg.command ^= LIGHT;
+			DirtyDawg.status &= ~LIGHT_BUTTON;
+		}
+		else{
+			DirtyDawg.status |= LIGHT_BUTTON;
+		}
+    }
+
+    // Interrupt PCINT21
+	// Toggles reverse and forward
+    if(changedbits & (1 << PIND5)){
+		if(DirtyDawg.status & REVERSE_BUTTON){
+			DirtyDawg.command ^= REVERSE;
+			DirtyDawg.status &= ~REVERSE_BUTTON;
+		}
+		else{
+			DirtyDawg.status |= REVERSE_BUTTON;
+		}
+    }
 }
 /*
 ISR(INT1_vect){

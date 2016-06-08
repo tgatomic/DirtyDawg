@@ -20,11 +20,13 @@ void System_Init(void){
 	
 	// Enable global interrupt
 	sei();
-	// Enable interrupt on PCINT20 (pin 6 on AtMega 168P)
+	// Enable interrupt on 
+	// PCINT20 (pin 6 on AtMega 168P)
+	// PCINT21 (pin 11 on AtMega 168P)
 	EICRA = (1<<ISC11);
 	EIMSK = (1<<INT1);
 	PCICR = (1<<PCIE2);
-	PCMSK2 = (1<<PCINT20);
+	PCMSK2 = (1<<PCINT20) | (1<<PCINT21);
 	
 	/*Setting ports - page 75*/
 		
@@ -32,9 +34,9 @@ void System_Init(void){
 	DDRD = (1<<PORTD3) | (1<<PORTD5) | (1<<PORTD6) | (1<<PORTD7); //PD7 is debug yellow
 	
 	//Turn on the front and backlights
-	_delay_ms(8000);
+	_delay_ms(2000);
 	PORTB = (1<<PORTB1) | (1<<PORTB2) | (1<<PORTB0);
-	_delay_ms(8000);
+	_delay_ms(2000);
 	PORTB = (0<<PORTB1) | (0<<PORTB2) | (0<<PORTB0);
 	
 
@@ -315,28 +317,29 @@ void BT_Send_Data(void){
 	BT_Send(DirtyDawg.ECG);
 	// Clear flags
 	// DirtyDawg.command = 0;
-	
+
 	//Change state
 	DirtyDawg.state = GET_DATA_STATE;
 }
 
 void BT_Recieve_Data(void){
-	uint16_t timeout;
+//	uint16_t timeout;
 	uint8_t ch;
 	Green_LED_Off();
-	timeout = 20000;
+//	timeout = 40000;
 	ch = 0;
+	Uart_Flush();
 	// Wait for start command or timeout
-//	while((ch = BT_Recieve()) != 'S');
-	while((ch != 'S') && (--timeout > 0)){
+	while((ch = BT_Recieve()) != 'S');
+/*	while((ch != 'S') && (--timeout > 0)){
 		if(UCSR0A & (1<<RXC0))
 			ch = UDR0;
-		if(timeout > 10000)
+		if(timeout > 20000)
 			Yellow_LED_On();
 		else
 			Yellow_LED_Off();
 	}
-
+*/
 	// If start command received
 	if(ch == 'S'){
 		// Get IR sensor data from the car
@@ -369,7 +372,7 @@ void BT_Recieve_Data(void){
 			right[i] += '0';
 		}
 	}
-	// If timeout
+/*	// If timeout
 	else if(timeout < 1){
 		for(int i = 0; i < 3; i++){
 			front[i] = '-';
@@ -378,7 +381,8 @@ void BT_Recieve_Data(void){
 			right[i] = '-';
 		}
 		
-	}
+	} */
+
 	// Change state 
 	DirtyDawg.state = LCD_STATE;
 }

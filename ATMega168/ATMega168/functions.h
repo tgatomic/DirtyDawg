@@ -43,6 +43,7 @@
 #define BT_STARTED 1<<2
 #define BT_CONNECTED 1<<3
 #define LIGHT_BUTTON 1<<4
+#define REVERSE_BUTTON 1<<5
 
 /************************************************************************/
 /*							Tilt status                                 */
@@ -56,7 +57,7 @@
 /************************************************************************/
 #define LIGHT 1<<0
 #define STOP 1<<1
-#define BACKWARD 1<<2
+#define REVERSE 1<<2
 #define TURN_LEFT 1<<3
 #define TURN_RIGHT 1<<4
 
