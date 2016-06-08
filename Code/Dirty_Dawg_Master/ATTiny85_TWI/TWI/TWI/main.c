@@ -1,8 +1,12 @@
 
+#define		F_CPU 8000000UL
+
 #include 	<stdlib.h>
 #include 	<avr/io.h>
 #include 	<avr/interrupt.h>
 #include 	<avr/pgmspace.h>
+#include	<util/delay.h>
+#include	"ADC.h"
 
 //################################################################## USI-TWI-I2C
 
@@ -46,14 +50,18 @@ int main(void)
 	usiTwiSlaveInit(SLAVE_ADDR_ATTINY);	// TWI slave init
 	sei();  // Re-enable interrupts
 	
+	ADC_init();
 	
-	
-	
+
 	// The data you want to be sent to 328p is saved in txbuffer[]
 	// Ex:
-	txbuffer[0] = 0x53;
+
 	
-	while(1);
+	while(1){
+		txbuffer[0] = Read_ADC(3);
+		_delay_ms(1000);
+
+	}
 } 
 
 

@@ -37,6 +37,7 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../ADC.c \
 ../main.c \
 ../usiTwiSlave.c
 
@@ -48,18 +49,22 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+ADC.o \
 main.o \
 usiTwiSlave.o
 
 OBJS_AS_ARGS +=  \
+ADC.o \
 main.o \
 usiTwiSlave.o
 
 C_DEPS +=  \
+ADC.d \
 main.d \
 usiTwiSlave.d
 
 C_DEPS_AS_ARGS +=  \
+ADC.d \
 main.d \
 usiTwiSlave.d
 
@@ -77,6 +82,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

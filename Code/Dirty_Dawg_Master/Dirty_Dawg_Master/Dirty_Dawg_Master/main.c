@@ -31,21 +31,30 @@ int main(void)
 	
 	LCD_Byte(LCD_CLEAR, LCD_CMD);
 	unsigned char ascii[20];
+	LCD_Singlestring(LCD_LINE_1, "Sending");
 	
 	while(1){
-		PORTB |= (1<<PORTB0);
+		//PORTB |= (1<<PORTB0);
 		
-		LCD_Byte(LCD_CLEAR, LCD_CMD);
-		LCD_Singlestring(LCD_LINE_1, "Received: ");
+		//LCD_Byte(LCD_CLEAR, LCD_CMD);
+		//LCD_Singlestring(LCD_LINE_1, "Received: ");
 		
 		TWI_Receive(ATTINY1,1);
-		itoa(DirtyDawg.TWI_Receive_Buffer[0], ascii, 10);
-		for(int i = 0; i < 3; i++){
-			LCD_Byte(ascii[i], LCD_CHR);
-		}
-		_delay_ms(250);
-		PORTB &= (0<<PORTB0);
-		_delay_ms(250);
+		//itoa(DirtyDawg.TWI_Receive_Buffer[0], ascii, 10);
+		//for(int i = 0; i < 3; i++){
+			//LCD_Byte(ascii[i], LCD_CHR);
+		//}
+		//_delay_ms(250);
+		//PORTB &= (0<<PORTB0);
+		//_delay_ms(250);
+		
+		BT_Send('S');
+		BT_Send(DirtyDawg.TWI_Receive_Buffer[0]);
+		BT_Send(100);
+		BT_Send(101);
+		BT_Send(102);
+		
+		
 	}
 	
 
@@ -170,6 +179,7 @@ void Bluetooth(void){
 	DirtyDawg.right_sensor = i+3;
 		
 	BT_Send(START_TRANSMIT);
+	_delay_ms(25); //delay for 168 to catch up
 	BT_Send(DirtyDawg.front_sensor);
 	BT_Send(DirtyDawg.back_sensor);
 	BT_Send(DirtyDawg.left_sensor);
@@ -366,7 +376,9 @@ ISR(USART_RX_vect){
 	else{
 		DirtyDawg.BT_recieve_buffer[DirtyDawg.ISR_Vect_Pos++] = data;
 	}
+	DirtyDawg.ISR_Vect_Pos = 0;
 	
+	return;
 
 	// If receive buffer is full ( the whole packet is recieved);
 	if(DirtyDawg.ISR_Vect_Pos == 2){

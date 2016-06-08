@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:Project-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -51,7 +52,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L Linkura U5
+L Linkura-RESCUE-Project U5
 U 1 1 5717C731
 P 4000 6600
 F 0 "U5" H 4300 6750 60  0000 C CNN

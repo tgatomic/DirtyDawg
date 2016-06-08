@@ -56,7 +56,7 @@ U 1 1 5717C731
 P 4000 6600
 F 0 "U5" H 4300 6750 60  0000 C CNN
 F 1 "Linkura" H 3800 6650 60  0000 C CNN
-F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 4000 6600 60  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 4000 6600 60  0001 C CNN
 F 3 "" H 4000 6600 60  0000 C CNN
 	1    4000 6600
 	-1   0    0    1   
@@ -67,7 +67,7 @@ U 1 1 5717CD37
 P 5000 2650
 F 0 "DS1" H 4200 3050 50  0000 C CNN
 F 1 "I2C_LCD16X2" H 5700 3050 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x03_Pitch2.00mm" H 5000 2600 50  0001 C CIN
+F 2 "Pin_Headers:Pin_Header_Straight_1x04" H 5000 2600 50  0001 C CIN
 F 3 "" H 5000 2650 50  0000 C CNN
 	1    5000 2650
 	1    0    0    -1  
@@ -89,7 +89,7 @@ U 1 1 5717DAA2
 P 5750 4000
 F 0 "SW1" H 5900 4110 50  0000 C CNN
 F 1 "Reverse" H 5750 3900 50  0000 C CNN
-F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 5750 4000 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 5750 4000 50  0001 C CNN
 F 3 "" H 5750 4000 50  0000 C CNN
 	1    5750 4000
 	0    1    1    0   
@@ -100,7 +100,7 @@ U 1 1 5717DAF5
 P 6350 4300
 F 0 "SW2" H 6500 4410 50  0000 C CNN
 F 1 "Pairing" H 6350 4220 50  0000 C CNN
-F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 6350 4300 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 6350 4300 50  0001 C CNN
 F 3 "" H 6350 4300 50  0000 C CNN
 	1    6350 4300
 	0    1    1    0   
@@ -111,7 +111,7 @@ U 1 1 5717DB44
 P 6950 4600
 F 0 "SW3" H 7100 4710 50  0000 C CNN
 F 1 "Lights" H 6950 4520 50  0000 C CNN
-F 2 "Wire_Connections_Bridges:WireConnection_1.50mmDrill" H 6950 4600 50  0001 C CNN
+F 2 "Holes:SolderWirePad1mmmodified" H 6950 4600 50  0001 C CNN
 F 3 "" H 6950 4600 50  0000 C CNN
 	1    6950 4600
 	0    1    1    0   
@@ -190,7 +190,7 @@ U 1 1 573DC2FF
 P 2200 2050
 F 0 "R2" V 2280 2050 50  0000 C CNN
 F 1 "330" V 2200 2050 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM15mm" V 2130 2050 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 2130 2050 50  0001 C CNN
 F 3 "" H 2200 2050 50  0000 C CNN
 	1    2200 2050
 	0    1    1    0   
@@ -201,7 +201,7 @@ U 1 1 573DC39C
 P 1850 2300
 F 0 "R1" V 1930 2300 50  0000 C CNN
 F 1 "1k" V 1850 2300 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM15mm" V 1780 2300 50  0001 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Vertical_RM5mm" V 1780 2300 50  0001 C CNN
 F 3 "" H 1850 2300 50  0000 C CNN
 	1    1850 2300
 	1    0    0    -1  
