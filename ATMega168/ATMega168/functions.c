@@ -1,4 +1,6 @@
 
+#define F_CPU 8000000UL
+
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -293,27 +295,24 @@ void BT_Send_Data(void){
 	uint8_t ECG_hi, ECG_lo;
 	Green_LED_On();
 
-	sputchar( '-' );
-	BT_Send(sgetchar());
-	BT_Send(sgetchar());
-	BT_Send(sgetchar());
+//	sputchar( '-' );
 //	while( !kbhit() );			// wait until byte received
-//	DirtyDawg.accelerometer = sgetchar();
-//	ECG_hi = sgetchar();
-//	ECG_lo = sgetchar();
+	while(sgetchar() != 'S');
 
-//	Green_LED_Off();
-/*
+	DirtyDawg.accelerometer = sgetchar();
+	ECG_hi = sgetchar();
+	ECG_lo = sgetchar();
+
 	if(DirtyDawg.accelerometer == TILT_LEFT)
 		DirtyDawg.command |= TURN_LEFT;
 	else if(DirtyDawg.accelerometer == TILT_RIGHT)
 		DirtyDawg.command |= TURN_RIGHT;
 	else
 		DirtyDawg.command &= ~(TURN_LEFT | TURN_RIGHT);
-*/	
-//	DirtyDawg.ECG = ECG_lo;
-//	BT_Send(DirtyDawg.command);
-//	BT_Send(DirtyDawg.ECG);
+
+	DirtyDawg.ECG = ECG_lo;
+	BT_Send(DirtyDawg.command);
+	BT_Send(DirtyDawg.ECG);
 	// Clear flags
 	// DirtyDawg.command = 0;
 	

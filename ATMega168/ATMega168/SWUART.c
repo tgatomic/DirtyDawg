@@ -8,16 +8,15 @@
 
 #define PRESCALE 1
 #define XTAL	8000000UL
-#define BAUD 19200
+#define BAUD	57600
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "SWUART.h"
 
 
-//#define BIT_TIME  (u8)((XTAL / BAUD) / PRESCALE) -Doesn't work at the moment
+//#define BIT_TIME  (u8)((XTAL / BAUD) / PRESCALE)
 #define BIT_TIME  (u16)((XTAL + BAUD/2) / BAUD)
-
 
 volatile u8 stx_count;
 u8 stx_data;
