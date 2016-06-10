@@ -294,7 +294,7 @@ void Error(unsigned int errorcode){
 
 void BT_Send_Data(void){
 	
-	uint8_t ECG_hi, ECG_lo;
+	uint8_t ECG_hi, ECG_lo, stop_go;
 //	Green_LED_On();
 
 //	sputchar( '-' );
@@ -302,9 +302,14 @@ void BT_Send_Data(void){
 	while(sgetchar() != 'S');
 
 	DirtyDawg.accelerometer = sgetchar();
-	ECG_hi = sgetchar();
+	stop_go = sgetchar();
 	ECG_lo = sgetchar();
 
+	if(stop_go)
+		DirtyDawg.command &= ~STOP;
+	else
+		DirtyDawg.command |= STOP;
+		
 	if(DirtyDawg.accelerometer == TILT_LEFT)
 		DirtyDawg.command |= TURN_LEFT;
 	else if(DirtyDawg.accelerometer == TILT_RIGHT)

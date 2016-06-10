@@ -27,9 +27,6 @@ int main(void){
 	// Initiate the hardware
 	System_Init();
 	
-	// Initiate the software define UART
-	suart_init();
-	
 	// Initiate the TWI bus as a master
 	TWI_Master_Init();
 
@@ -39,6 +36,9 @@ int main(void){
 	// Initiate the hardware defined UART
 	UART_Init(19200);
 	
+	// Initiate the software define UART
+	suart_init();
+
 	// Initiate/Clear the BlueSmirf from previous commands
 	BT_Init();
 
