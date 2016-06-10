@@ -81,7 +81,7 @@ int main(void){
 				break;
 				
 			default:
-				Yellow_LED_On();
+//				Yellow_LED_On();
 				Error(0x53);
 			
 		}

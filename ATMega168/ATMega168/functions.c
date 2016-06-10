@@ -295,7 +295,7 @@ void Error(unsigned int errorcode){
 void BT_Send_Data(void){
 	
 	uint8_t ECG_hi, ECG_lo;
-	Green_LED_On();
+//	Green_LED_On();
 
 //	sputchar( '-' );
 //	while( !kbhit() );			// wait until byte received
@@ -325,7 +325,7 @@ void BT_Send_Data(void){
 void BT_Recieve_Data(void){
 //	uint16_t timeout;
 	uint8_t ch;
-	Green_LED_Off();
+//	Green_LED_Off();
 //	timeout = 40000;
 	ch = 0;
 	Uart_Flush();
