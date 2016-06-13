@@ -23,7 +23,7 @@ void LCD_Init(void){
 	// Display on, Cursor off, Blink off
 	LCD_Byte(0x0C, LCD_CMD); 
 	
-	// Set to 4-bit ooperation, 2 lines and 5x7 dots
+	// Set to 4-bit operation, 2 lines and 5x7 dots
 	LCD_Byte(0x28, LCD_CMD); 
 	
 	// Clears display and DDRAM
@@ -53,7 +53,6 @@ void LCD_Byte(uint8_t bits, uint8_t mode){
 void LCD_Toggle_enable(uint8_t bits){
 	
 	// Toggles the enable pin on the display to activate the code
-//	_delay_ms(DELAY_MS*5);
 	_delay_ms(5);
 	Write_Byte(LCD_ADDR, (bits | ENABLE));
 	_delay_ms(5);

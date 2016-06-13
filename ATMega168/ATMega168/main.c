@@ -17,7 +17,7 @@
 #include "main.h"
 
 #define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
-volatile uint8_t portbhistory = 0;     // default is high because the pull-up
+volatile uint8_t portbhistory = 0;
 
 int main(void){
 
@@ -81,11 +81,9 @@ int main(void){
 				break;
 				
 			default:
-//				Yellow_LED_On();
 				Error(0x53);
 			
 		}
-//		_delay_ms(250);
 	}	
 }
 
@@ -119,12 +117,6 @@ ISR(PCINT2_vect){
 		}
     }
 }
-/*
-ISR(INT1_vect){
-	BT_Connect();
-}
-
-*/
 
 ISR(USART_RX_vect){
 	;

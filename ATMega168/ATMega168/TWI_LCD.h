@@ -9,13 +9,13 @@
 #ifndef TWI_LCD_H_
 #define TWI_LCD_H_
 
-#define LCD_CMD 0
-#define LCD_CHR 1
-#define LCD_ADDR 0x27
+#define LCD_CMD 0		// Command to LCD
+#define LCD_CHR 1		// Character to LCD
+#define LCD_ADDR 0x27	// TWI address to LCD
 
-#define LCD_LINE_1 0x80
-#define LCD_LINE_2 0xC0
-#define LCD_CLEAR 0x01
+#define LCD_LINE_1 0x80	// Set cursor on line one
+#define LCD_LINE_2 0xC0	// Set cursor on line two
+#define LCD_CLEAR 0x01	// Clear screen
 
 #define LCD_BACKLIGHT 0x08 //ON, 0x00 = OFF
 #define LCD_BACKLIGHT_OFF 0x00

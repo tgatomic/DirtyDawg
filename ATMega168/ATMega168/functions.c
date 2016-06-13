@@ -33,11 +33,10 @@ void System_Init(void){
 	DDRB = (1<<PORTB1) | (1<<PORTB2) | (1<<PORTB3) | (1<<PORTB0); //PB0 is debug greenlight
 	DDRD = (1<<PORTD3) | (1<<PORTD5) | (1<<PORTD6) | (1<<PORTD7); //PD7 is debug yellow
 	
-	//Turn on the front and backlights
+	//Turn on and off the red LED for 2 seconds
+	PORTB |= (1<<PORTB1);
 	_delay_ms(2000);
-	PORTB = (1<<PORTB1) | (1<<PORTB2) | (1<<PORTB0);
-	_delay_ms(2000);
-	PORTB = (0<<PORTB1) | (0<<PORTB2) | (0<<PORTB0);
+	PORTB &= (0<<PORTB1);
 	
 
 	//Signs the status
@@ -62,7 +61,7 @@ void UART_Init(unsigned int baud){
 	//Enables Receive and Transmit over UART
 	UCSR0B = (1<<RXEN0) | (1<<TXEN0); //RXCIE and TXCIE for interrupt based UART.
 	
-	//Sets to 1 stop bit and 8 databits
+	//Sets to 1 stop bit and 8 data bits
 	UCSR0C = (0<<USBS0) | (3<<UCSZ00);
 	
 	//Disables Parity
@@ -111,14 +110,15 @@ void Uart_Flush(void){
 /************************************************************************/
 void BT_Init(void){
 	
-	//Wait for 1 second to ensure the device has power
+	// Wait for 1 second to ensure the device has power
 	_delay_ms(1000);
 
 	// Send "---" to ensure BlueSmirf is not in command mode
 	for(int i = 0; i<3; i++) BT_Send('-');
-	BT_Send(0x0A); //NL
-	BT_Send(0x0D); //CR
+	BT_Send(LF); // Line feed
+	BT_Send(CR); // Carriage return
 	_delay_ms(1000);
+	// Clear LCD display
 	LCD_Byte(LCD_CLEAR, LCD_CMD);
 	_delay_ms(150);
 	Uart_Flush();
@@ -135,7 +135,7 @@ void BT_Connection_Check(void){
 	_delay_ms(1000);
 	Uart_Flush();
 
-	//Sends command to enter command mode
+	// Sends command to enter command mode
 	for(int i = 0; i < 3; i++) BT_Send('$');
 
 	// Ignore the message from BlueSmirf "CMD"
@@ -275,7 +275,7 @@ void BT_Send(uint8_t data){
 
 void Error(unsigned int errorcode){
 	
-	//Flashes the red lights and send errorcode through Bluetooth
+	//Flashes the red lights and show message on LCD
 	unsigned long ticks = 0;
 	LCD_Byte(LCD_CLEAR, LCD_CMD);
 	LCD_Byte(LCD_LINE_1 + 5, LCD_CMD);
@@ -294,16 +294,15 @@ void Error(unsigned int errorcode){
 
 void BT_Send_Data(void){
 	
-	uint8_t ECG_hi, ECG_lo, stop_go;
-//	Green_LED_On();
+	uint8_t stop_go;
 
-//	sputchar( '-' );
-//	while( !kbhit() );			// wait until byte received
+	// Wait for start command from Linkura device
 	while(sgetchar() != 'S');
 
-	DirtyDawg.accelerometer = sgetchar();
-	stop_go = sgetchar();
-	ECG_lo = sgetchar();
+	// Get accelerometer and ECG data from Linkura device
+	DirtyDawg.accelerometer = sgetchar(); // Store the tilt 
+	stop_go = sgetchar(); // Stop the car or go
+	DirtyDawg.ECG = sgetchar(); // ECG data
 
 	if(stop_go)
 		DirtyDawg.command &= ~STOP;
@@ -317,34 +316,24 @@ void BT_Send_Data(void){
 	else
 		DirtyDawg.command &= ~(TURN_LEFT | TURN_RIGHT);
 
-	DirtyDawg.ECG = ECG_lo;
+	// Send command flags and ECG data to car
 	BT_Send(DirtyDawg.command);
 	BT_Send(DirtyDawg.ECG);
-	// Clear flags
-	// DirtyDawg.command = 0;
 
-	//Change state
+	// Change state
 	DirtyDawg.state = GET_DATA_STATE;
 }
 
 void BT_Recieve_Data(void){
-//	uint16_t timeout;
+
 	uint8_t ch;
-//	Green_LED_Off();
-//	timeout = 40000;
+
 	ch = 0;
 	Uart_Flush();
-	// Wait for start command or timeout
+
+	// Wait for start command
 	while((ch = BT_Recieve()) != 'S');
-/*	while((ch != 'S') && (--timeout > 0)){
-		if(UCSR0A & (1<<RXC0))
-			ch = UDR0;
-		if(timeout > 20000)
-			Yellow_LED_On();
-		else
-			Yellow_LED_Off();
-	}
-*/
+
 	// If start command received
 	if(ch == 'S'){
 		// Get IR sensor data from the car
@@ -377,16 +366,6 @@ void BT_Recieve_Data(void){
 			right[i] += '0';
 		}
 	}
-/*	// If timeout
-	else if(timeout < 1){
-		for(int i = 0; i < 3; i++){
-			front[i] = '-';
-			back[i] = '-';
-			left[i] = '-';
-			right[i] = '-';
-		}
-		
-	} */
 
 	// Change state 
 	DirtyDawg.state = LCD_STATE;
