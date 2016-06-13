@@ -103,15 +103,15 @@ void Error(unsigned int errorcode){
 	//Flashes the red lights and send errorcode through Bluetooth
 	
 	// Convert and print data from buffer
-	LCD_Byte(LCD_CLEAR, LCD_CMD);
-	LCD_Singlestring(LCD_LINE_1, "Errormsg: ");
+	//LCD_Byte(LCD_CLEAR, LCD_CMD);
+	//LCD_Singlestring(LCD_LINE_1, "Errormsg: ");
 	
-	unsigned char ascii[20];
+	//unsigned char ascii[20];
 
-	itoa(errorcode, ascii, 10);
-	for(int i = 0; i < 2; i++){
-		LCD_Byte(ascii[i], LCD_CHR);
-	}
+	//itoa(errorcode, ascii, 10);
+	//for(int i = 0; i < 2; i++){
+		//LCD_Byte(ascii[i], LCD_CHR);
+	//}
 
 	unsigned long ticks = 0;
 	for(;;){
@@ -129,5 +129,5 @@ void Error(unsigned int errorcode){
 
 //Activates if the pairing button is pressed
 ISR(PCINT2_vect){
-	BT_Pair();
+	//BT_Pair();
 }

@@ -12,14 +12,14 @@
 /************************************************************************/
 /*								Steering                                */
 /************************************************************************/
-#define FORWARD PORTD3
-#define BACKWARD PORTD5
-#define LEFT PORTD6
-#define RIGHT PORTB3
-#define PWM_FORWARD OCR2B
-#define PWM_BACKWARD OCR0B
-#define PWM_LEFT OCR0A
-#define PWM_RIGHT OCR2A
+#define FORWARD PORTB3
+#define BACKWARD PORTD3
+#define LEFT PORTD5
+#define RIGHT PORTD6
+#define PWM_FORWARD OCR2A
+#define PWM_BACKWARD OCR2B
+#define PWM_LEFT OCR0B
+#define PWM_RIGHT OCR0A
 #define F 1
 #define B 2
 #define L 3
@@ -77,7 +77,7 @@ typedef struct data{
 	/*	Position 2 = Left sensor			 								*/
 	/*	Position 3 = Right sensor											*/                                                               
 	/************************************************************************/
-	uint8_t BT_send_buffer[20];
+	volatile uint8_t BT_send_buffer[20];
 	
 	/************************************************************************/
 	/*						BT Receive Buffer								*/
@@ -86,16 +86,18 @@ typedef struct data{
 	/*	Position 2 = Left													*/
 	/*	Position 3 = Right													*/                                                                    
 	/************************************************************************/
-	uint8_t BT_recieve_buffer[20];
-	uint8_t ISR_Vect_Pos;
+	volatile  uint8_t BT_recieve_buffer[20];
+	volatile uint8_t ISR_Vect_Pos;
 	
-	uint8_t TWI_Receive_Buffer[10];
+	volatile uint8_t TWI_Receive_Buffer[10];
+	
+	uint8_t control_status;
 	
 	
 } *dataptn, DATA;
 
 //Name of the main struct with all the data in for the different sensors and values
-DATA DirtyDawg;
+volatile DATA DirtyDawg;
 
 
 void System_Init(void);

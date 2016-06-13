@@ -23,7 +23,7 @@ void System_Init(void){
 	TWI_Master_Init();
 
 	// Initiate LCD - Working
-	LCD_Init();
+	//LCD_Init();
 
 	// Initiate PWM - Working Drive working as well
 	PWM_Init();
@@ -38,8 +38,8 @@ void Hardware_Init(void){
 	
 	/*Setting ports - page 75*/
 		
-	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT) | (1<<RIGHT) | (1<<PORTB0); //PB0 is debug green light
-	DDRD = (1<<FORWARD) | (1<<BACKWARD) | (1<<LEFT) | (1<<PORTD7); //PD7 is debug yellow
+	DDRB = (1<<BRAKELIGHT) | (1<<HEADLIGHT)  | (1<<PORTB0) | (1<<FORWARD); //PB0 is debug green light
+	DDRD = (1<<RIGHT) | (1<<BACKWARD) | (1<<LEFT); //PD7 is debug yellow
 	
 	//Turn on the front and backlights
 	_delay_ms(1000);

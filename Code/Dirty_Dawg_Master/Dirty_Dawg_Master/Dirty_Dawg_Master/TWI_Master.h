@@ -38,7 +38,7 @@
 #define REPEAT_START 0x10
 
 #define ATTINY1 0x1A
-#define ATTINY2 0x06
+#define ATTINY2 0x1B
 
 
 void TWI_Master_Init(void);

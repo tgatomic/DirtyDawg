@@ -13,13 +13,12 @@
 /*								Status                                 */
 /************************************************************************/
 
-uint8_t control_status;
-
 #define LIGHTS (1<<0)
 #define STOP (1<<1)
-#define F_OR_B (1<<2)
+#define REVERSE (1<<2)
 #define TURN_LEFT (1<<3)
 #define TURN_RIGHT (1<<4)
+
 
 //If everything is 0, we will drive forward..
 
@@ -50,6 +49,8 @@ uint8_t flags;
 #define PAIRING_STATE 0x04
 
 
+
+
 #define ARR_SIZE(x)  (sizeof(x) / sizeof(x[0]))
 
 void Lights(void);
@@ -57,7 +58,7 @@ void Bluetooth(void);
 void Sensors(void);
 void Vroom(void);
 void Pairing(void);
-
+void test(void);
 
 
 

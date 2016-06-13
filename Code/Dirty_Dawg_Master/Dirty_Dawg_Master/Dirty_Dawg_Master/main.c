@@ -27,36 +27,14 @@ int main(void)
 	//Placeholder for all the different init function
 	System_Init();
 	
+	Drive(L,255);
 	_delay_ms(1000);
-	
-	LCD_Byte(LCD_CLEAR, LCD_CMD);
-	unsigned char ascii[20];
-	LCD_Singlestring(LCD_LINE_1, "Sending");
-	
-	while(1){
-		//PORTB |= (1<<PORTB0);
-		
-		//LCD_Byte(LCD_CLEAR, LCD_CMD);
-		//LCD_Singlestring(LCD_LINE_1, "Received: ");
-		
-		TWI_Receive(ATTINY1,1);
-		//itoa(DirtyDawg.TWI_Receive_Buffer[0], ascii, 10);
-		//for(int i = 0; i < 3; i++){
-			//LCD_Byte(ascii[i], LCD_CHR);
-		//}
-		//_delay_ms(250);
-		//PORTB &= (0<<PORTB0);
-		//_delay_ms(250);
-		
-		BT_Send('S');
-		BT_Send(DirtyDawg.TWI_Receive_Buffer[0]);
-		BT_Send(100);
-		BT_Send(101);
-		BT_Send(102);
-		
-		
-	}
-	
+	Drive(L,0);
+	Drive(R,255);
+	_delay_ms(1000);
+	Drive(R,0);
+	Drive(L,0);
+
 
 	/************************************************************************/
 	/*								States									*/
@@ -74,7 +52,7 @@ int main(void)
 	DirtyDawg.state = PAIRING_STATE;
 	
 	uint8_t ticks = 0;
-	control_status = 0;
+	DirtyDawg.control_status = 0;
 	DirtyDawg.ISR_Vect_Pos = 0;
 	flags = 0;
 	
@@ -82,18 +60,18 @@ int main(void)
 	for(;;){
 					
 		// Something thats needs to be done every pass???
-		
+		_delay_ms(1000);
 		// MAYBECONNECTION TIMEOUT MESSAGE?
 		
 		// Runs only every 10th pass, not so time crucial.
-		if(ticks++ == 20){
+		/*if(ticks++ == 20){
 			// Saves the current state to another variable
 			DirtyDawg.oldstate = DirtyDawg.state;
 			
 			// Changes the state
-			DirtyDawg.state = BLUETOOTH_STATE;
+			DirtyDawg.state = LIGHT_STATE;
 			ticks = 0;
-		}
+		}*/
 		if(!(flags & PAIRED)){
 			DirtyDawg.state = PAIRING_STATE;
 		}
@@ -101,13 +79,15 @@ int main(void)
 		// Main state machine
 		switch(DirtyDawg.state){
 			case LIGHT_STATE:
-				Lights();
+				//Lights();
+				DirtyDawg.state = BLUETOOTH_STATE;
 				break;
 			case BLUETOOTH_STATE:
 				Bluetooth();
 				break;
 			case SENSOR_STATE:
-				Sensors();
+				//Sensors();
+				DirtyDawg.state = BLUETOOTH_STATE;
 				break;
 			case DRIVE_STATE:
 				Vroom();
@@ -118,7 +98,7 @@ int main(void)
 			
 			// Activates if there is no state
 			default:
-				LCD_String(NO_STATE_STR,8,NO_STATE_STR,8);
+				//LCD_String(NO_STATE_STR,8,NO_STATE_STR,8);
 				Error(NO_STATE);
 				break;
 		}
@@ -140,10 +120,10 @@ void Lights(void){
 	
 	DirtyDawg.lightvalue = Read_ADC(LDR_Pin);
 
-	if( control_status & LIGHTS || DirtyDawg.lightvalue < LIGHT_THRESHOLD ){
-		PORTB |= (1<<HEADLIGHT);
+	if( DirtyDawg.control_status & LIGHTS || DirtyDawg.lightvalue < LIGHT_THRESHOLD ){
+		PORTB |= (1<<BRAKELIGHT);
 	} else {
-		PORTB &= ~(1<<HEADLIGHT);
+		PORTB &= ~(1<<BRAKELIGHT);
 	}
 	
 	DirtyDawg.state = DirtyDawg.oldstate;
@@ -161,90 +141,85 @@ void Lights(void){
 /*     -																*/
 /*                                                                      */
 /************************************************************************/
-int i = 0;
+int x = 0;
 
 void Bluetooth(void){
 	
-	unsigned char ascii[20];
+	//unsigned char ascii[20];
 
-	LCD_Singlestring(LCD_LINE_1, "Sending: ");
-	itoa(i, ascii, 10);
-	for(int i = 0; i < 3; i++){
-		LCD_Byte(ascii[i], LCD_CHR);
+	//LCD_Singlestring(LCD_LINE_1, "Sending: ");
+	//itoa(i, ascii, 10);
+	//for(int i = 0; i < 3; i++){
+		//LCD_Byte(ascii[i], LCD_CHR);
+	//}
+
+	DirtyDawg.front_sensor = x++;
+	DirtyDawg.back_sensor = x+1;
+	DirtyDawg.left_sensor= x+2;
+	DirtyDawg.right_sensor = x+3;
+	
+	if( x == 250){
+		x = 0;
 	}
-
-	DirtyDawg.front_sensor = i++;
-	DirtyDawg.back_sensor = i+1;
-	DirtyDawg.left_sensor= i+2;
-	DirtyDawg.right_sensor = i+3;
 		
 	BT_Send(START_TRANSMIT);
-	_delay_ms(25); //delay for 168 to catch up
+	_delay_ms(50); //delay for 168 to catch up
 	BT_Send(DirtyDawg.front_sensor);
+	_delay_ms(50);
 	BT_Send(DirtyDawg.back_sensor);
+	_delay_ms(50);
 	BT_Send(DirtyDawg.left_sensor);
+	_delay_ms(50);
 	BT_Send(DirtyDawg.right_sensor);
+	_delay_ms(50);
+
+
+	//If there is nothing in receive buffer
+	//if(DirtyDawg.BT_recieve_buffer[0] == 0){
+		//DirtyDawg.state = DRIVE_STATE;
+		//return;
+	//}
 	
+	if( DirtyDawg.BT_recieve_buffer[0] & STOP ){
+		Stop_Moving();
+		//DirtyDawg.state = BLUETOOTH_STATE;
+		//return;
+		} else {
 		
-	if(i == 253){
-		i = 0;
+		if(DirtyDawg.BT_recieve_buffer[0] & REVERSE){
+			Drive(F,0x00);
+			Drive(B, DirtyDawg.BT_recieve_buffer[1]);
+			} else {
+			Drive(B,0x00);
+			Drive(F, DirtyDawg.BT_recieve_buffer[1]);
+		}
+		
 	}
-	_delay_ms(500);
+	
+	if(DirtyDawg.BT_recieve_buffer[0] & TURN_LEFT){
+		Drive(R, 0);
+		Drive(L, 253);
+	}
+	else if(DirtyDawg.BT_recieve_buffer[0] & TURN_RIGHT){
+		Drive(L, 0);
+		Drive(R, 253);
 		
+		} else {
+		Drive(R, 0);
+		Drive(L, 0);
+		
+	}
+	
+	if((DirtyDawg.BT_recieve_buffer[0] & LIGHTS)){
+		PORTB |= (1<<PORTB0);
+		
+		} else{
+		PORTB &= ~(1<<PORTB0);
+		
+	}
+
 	//Change state
 	DirtyDawg.state = BLUETOOTH_STATE;
-/*
-	//If there is nothing in receive buffer
-	if(DirtyDawg.BT_recieve_buffer[0] == 0){
-		state = DRIVE_STATE;
-		return;
-	}
-	
-	// Saves the data form the receive buffer
-	control_status = DirtyDawg.BT_recieve_buffer[0];
-	
-	// Checks and save if we want to drive forward or backwards
-	if(control_status && F_OR_B){
-		DirtyDawg.forward = DirtyDawg.BT_recieve_buffer[1];
-		DirtyDawg.backward = 0x00;
-		
-	} else {
-		DirtyDawg.backward = DirtyDawg.BT_recieve_buffer[1];
-		DirtyDawg.forward = 0x00;
-	}
-	
-	// Saves the direction
-	DirtyDawg.left= DirtyDawg.BT_recieve_buffer[2];
-	DirtyDawg.right = DirtyDawg.BT_recieve_buffer[3];
-
-	
-	// Clears the receive buffer
-	for(int i = 0; i < 5 ; i++){
-		DirtyDawg.BT_recieve_buffer[i] = 0;
-	}
-	
-*/
-	
-
-	
-	/*
-	//Make sure there is content in send buffer before sending
-	if(DirtyDawg->BT_send_buffer[0] != 0 || DirtyDawg->BT_send_buffer[1] != 0){
-		
-		// Send the content in send buffer to controller
-		for(int i = 0; i < 4; i++){
-			BT_Send(DirtyDawg->BT_send_buffer[i]);
-		}
-			
-		// Clears the content in send buffer
-		for(int i = 0; i < 4 ; i++){
-			DirtyDawg->BT_send_buffer[i] = 0;
-		}
-		
-	}
-	*/
-	
-
 
 }
 
@@ -287,9 +262,9 @@ void Sensors(void){
 /************************************************************************/
 void Vroom(void){
 
-	if( control_status && STOP ){
+	if( DirtyDawg.control_status & STOP ){
 		Stop_Moving();
-		DirtyDawg.state = SENSOR_STATE;
+		DirtyDawg.state = BLUETOOTH_STATE;
 		return;		
 	}
 
@@ -299,14 +274,19 @@ void Vroom(void){
 		Drive(B, DirtyDawg.backward);
 	}
 	
-	if(DirtyDawg.left > DirtyDawg.right){
-		Drive(L, DirtyDawg.left);
-	} else {
-		Drive(R, DirtyDawg.right);
+	if((DirtyDawg.control_status & TURN_LEFT)){
+		Drive(R, 0);
+		Drive(L, 253);
 	}
-
-
-	DirtyDawg.state = SENSOR_STATE;
+	else if((DirtyDawg.control_status & TURN_RIGHT)){
+		Drive(L, 0);
+		Drive(R, 253);
+	} else {
+		Drive(R, 0);
+		Drive(L, 0);
+	}
+	
+	DirtyDawg.state = BLUETOOTH_STATE;
 }
 
 /************************************************************************/
@@ -321,29 +301,36 @@ void Vroom(void){
 
 void Pairing(void){
 	
+
 	while (!(flags & PAIRED)){
 		
-		LCD_Byte(LCD_CLEAR, LCD_CMD);	
+		Stop_Moving();
+		//LCD_Byte(LCD_CLEAR, LCD_CMD);	
 	
 		// Waits here until it is paired
-		LCD_Byte(LCD_CLEAR, LCD_CMD);
-		LCD_Singlestring(LCD_LINE_1, "Connecting");
-		LCD_Byte(LCD_LINE_1+10, LCD_CMD);
+		//LCD_Byte(LCD_CLEAR, LCD_CMD);
+		//LCD_Singlestring(LCD_LINE_1, "Connecting");
+		//LCD_Byte(LCD_LINE_1+10, LCD_CMD);
 		
 		//DirtyDawg.BT_recieve_buffer[0] = 'S';
 		int i = 0;
 		while(!(flags & PAIRED)){
-			
+			PORTB |= (1<<PORTB0);
+			_delay_ms(1000);
 			if(i == 3){
-				LCD_Singlestring(LCD_LINE_1+10, "   ");
-				LCD_Byte(LCD_LINE_1+10, LCD_CMD);
+				//LCD_Singlestring(LCD_LINE_1+10, "   ");
+				//LCD_Byte(LCD_LINE_1+10, LCD_CMD);
 				i = 0;
 			}
-			LCD_Byte('.', LCD_CHR);
+			//LCD_Byte('.', LCD_CHR);
+			PORTB &= ~(1<<PORTB0);
 			_delay_ms(1000);
 			i++;
 		}
 	}
+	DirtyDawg.control_status = (1<<STOP); 
+	DirtyDawg.BT_recieve_buffer[0] = DirtyDawg.control_status;
+	DirtyDawg.BT_recieve_buffer[1] = 0;
 	DirtyDawg.state = BLUETOOTH_STATE;
 }
 
@@ -361,51 +348,119 @@ ISR(USART_RX_vect){
 		if(data == 'D'){
 			while(BT_Recieve() != 'T');
 			flags &= ~PAIRED;
-			LCD_Byte(LCD_CLEAR, LCD_CMD);
-			LCD_Singlestring(LCD_LINE_1, "DISCONNECTED");
+			DirtyDawg.ISR_Vect_Pos = 0;
+			//LCD_Byte(LCD_CLEAR, LCD_CMD);
+			//LCD_Singlestring(LCD_LINE_1, "DISCONNECTED");
 		}
 		else if(data == 'C'){
 			while(BT_Recieve() != '=');
-			DirtyDawg.BT_recieve_buffer[0] = '=';
+			//DirtyDawg.BT_recieve_buffer[0] = '=';
 			flags |= PAIRED;
-			LCD_Byte(LCD_CLEAR, LCD_CMD);
-			LCD_Singlestring(LCD_LINE_1, "CONNECTED");
+			//LCD_Byte(LCD_CLEAR, LCD_CMD);
+			//LCD_Singlestring(LCD_LINE_1, "CONNECTED");
+			DirtyDawg.ISR_Vect_Pos = 0;
 			DirtyDawg.state = BLUETOOTH_STATE;
 		}
 	}
 	else{
-		DirtyDawg.BT_recieve_buffer[DirtyDawg.ISR_Vect_Pos++] = data;
+		//DirtyDawg.BT_recieve_buffer[DirtyDawg.ISR_Vect_Pos++] = data;
+		if(data < 22){
+			DirtyDawg.BT_recieve_buffer[0] = data;
+			DirtyDawg.BT_recieve_buffer[1] = BT_Recieve();
+			return;
+			
+			if( DirtyDawg.BT_recieve_buffer[0] & STOP ){
+				Stop_Moving();
+				//DirtyDawg.state = BLUETOOTH_STATE;
+				//return;
+			} else {
+				
+				if(DirtyDawg.BT_recieve_buffer[0] & REVERSE){
+					Drive(F,0x00);
+					Drive(B, DirtyDawg.BT_recieve_buffer[1]);
+				} else {
+					Drive(B,0x00);
+					Drive(F, DirtyDawg.BT_recieve_buffer[1]);
+				}
+				
+			}
+			
+			if(DirtyDawg.BT_recieve_buffer[0] & TURN_LEFT){
+				Drive(R, 0);
+				Drive(L, 253);
+			}
+			else if(DirtyDawg.BT_recieve_buffer[0] & TURN_RIGHT){
+				Drive(L, 0);
+				Drive(R, 253);
+					
+				} else {
+				Drive(R, 0);
+				Drive(L, 0);
+					
+			}
+			
+			if((DirtyDawg.BT_recieve_buffer[0] & LIGHTS)){
+				PORTB |= (1<<PORTB0);
+				
+			} else{
+				PORTB &= ~(1<<PORTB0);
+				
+			}
+			
+
+			
+			
+		}
 	}
-	DirtyDawg.ISR_Vect_Pos = 0;
+	/*
+	if(DirtyDawg.ISR_Vect_Pos >= 2){
+		DirtyDawg.ISR_Vect_Pos = 0;
+	}
+	*/
+	
 	
 	return;
 
-	// If receive buffer is full ( the whole packet is recieved);
-	if(DirtyDawg.ISR_Vect_Pos == 2){
+}
+
+void test(void){
+	
+	if( DirtyDawg.BT_recieve_buffer[0] & STOP ){
+		Stop_Moving();
+		//DirtyDawg.state = BLUETOOTH_STATE;
+		//return;
+		} else {
 		
-		LCD_Byte(LCD_LINE_2,LCD_CMD);
-		
-		// Convert and print data from buffer
-		unsigned char ascii[20];
-		unsigned char ascii2[20];
-		itoa(DirtyDawg.BT_recieve_buffer[0], ascii, 10);
-		for(int i = 0; i < 3; i++){
-			LCD_Byte(ascii[i], LCD_CHR);
+		if(DirtyDawg.BT_recieve_buffer[0] & REVERSE){
+			Drive(F,0x00);
+			Drive(B, DirtyDawg.BT_recieve_buffer[1]);
+			} else {
+			Drive(B,0x00);
+			Drive(F, DirtyDawg.BT_recieve_buffer[1]);
 		}
 		
-		LCD_Byte(' ', LCD_CHR);
-		
-		itoa(DirtyDawg.BT_recieve_buffer[1], ascii2, 10);
-		for(int i = 0; i < 3; i++){
-			LCD_Byte(ascii2[i], LCD_CHR);
-		}
-		
-		LCD_Byte(LCD_LINE_1,LCD_CMD);
-		// Zero vector
-		DirtyDawg.ISR_Vect_Pos = 0;
 	}
 	
-	DirtyDawg.BT_recieve_buffer[DirtyDawg.ISR_Vect_Pos++] = data;
+	if(DirtyDawg.BT_recieve_buffer[0] & TURN_LEFT){
+		Drive(R, 0);
+		Drive(L, 253);
+	}
+	else if(DirtyDawg.BT_recieve_buffer[0] & TURN_RIGHT){
+		Drive(L, 0);
+		Drive(R, 253);
+		
+		} else {
+		Drive(R, 0);
+		Drive(L, 0);
+		
+	}
 	
+	if((DirtyDawg.BT_recieve_buffer[0] & LIGHTS)){
+		PORTB |= (1<<PORTB0);
+		
+		} else{
+		PORTB &= ~(1<<PORTB0);
+		
+	}
 	
 }
