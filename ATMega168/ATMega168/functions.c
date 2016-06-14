@@ -86,12 +86,12 @@ void LCD_Update(void){
 
 	// Prints the distance to left obstacle
 	LCD_Byte(LCD_LINE_2, LCD_CMD);
-	LCD_String("L: ");
+	LCD_String("P: ");
 	for(int i = 0; i < 3; i++)
 		LCD_Byte(left[i], LCD_CHR);
 
 	// Prints the distance to right obstacle
-	LCD_String("  R: ");
+	LCD_String("  T: ");
 	for(int i = 0; i < 3; i++)
 		LCD_Byte(right[i], LCD_CHR);
 
@@ -292,6 +292,8 @@ void Error(unsigned int errorcode){
 void BT_Send_Data(void){
 	
 	uint8_t stop_go;
+	// Enable edge interrupt
+	EIMSK |= (1 << INT0);
 
 	// Wait for start command from Linkura device
 	while(sgetchar() != 'S');
@@ -301,10 +303,18 @@ void BT_Send_Data(void){
 	stop_go = sgetchar(); // Stop the car or go
 	DirtyDawg.ECG = sgetchar(); // ECG data
 
-	if(stop_go)
-		DirtyDawg.command &= ~STOP;
-	else
+	DirtyDawg.back_sensor = DirtyDawg.ECG;
+	DirtyDawg.front_sensor = DirtyDawg.command;
+	DirtyDawg.left_sensor = stop_go;
+	DirtyDawg.right_sensor = DirtyDawg.accelerometer;
+
+	// Disable edge interrupt
+	EIMSK &= ~(1 << INT0);
+
+	if((stop_go == 0) && (DirtyDawg.ECG == 0))
 		DirtyDawg.command |= STOP;
+	else
+		DirtyDawg.command &= ~STOP;
 		
 	if(DirtyDawg.accelerometer == TILT_LEFT)
 		DirtyDawg.command |= TURN_LEFT;
@@ -312,6 +322,9 @@ void BT_Send_Data(void){
 		DirtyDawg.command |= TURN_RIGHT;
 	else
 		DirtyDawg.command &= ~(TURN_LEFT | TURN_RIGHT);
+
+	// Start signal
+	BT_Send('S');
 
 	// Send command flags and ECG data to car
 	BT_Send(DirtyDawg.command);
@@ -329,18 +342,19 @@ void BT_Recieve_Data(void){
 	Uart_Flush();
 
 	// Wait for start command
-	while((ch = BT_Recieve()) != 'S');
+//	while((ch = BT_Recieve()) != 'S');
 
 	// If start command received
-	if(ch == 'S'){
+//	if(ch == 'S'){
 		// Get IR sensor data from the car
-		DirtyDawg.front_sensor = BT_Recieve();
+/*		DirtyDawg.front_sensor = BT_Recieve();
 		DirtyDawg.back_sensor = BT_Recieve();
 		DirtyDawg.left_sensor = BT_Recieve();
 		DirtyDawg.right_sensor = BT_Recieve();
-
+		DirtyDawg.left_sensor = 0;
+		DirtyDawg.right_sensor = 0;
 		DirtyDawg.back_sensor = DirtyDawg.ECG;
-		DirtyDawg.front_sensor = DirtyDawg.command;
+		DirtyDawg.front_sensor = DirtyDawg.command; */
 		// Convert sensor value to ASCII
 		front[0] = DirtyDawg.front_sensor / 100;
 		front[1] = (DirtyDawg.front_sensor - (front[0] * 100 )) / 10;
@@ -364,7 +378,7 @@ void BT_Recieve_Data(void){
 			left[i] += '0';
 			right[i] += '0';
 		}
-	}
+//	}
 
 	// Change state 
 	DirtyDawg.state = LCD_STATE;
@@ -385,6 +399,7 @@ void Test_Car_Commands(void){
 	// Stop
 	DirtyDawg.command = STOP;
 	DirtyDawg.ECG = 0;
+	BT_Send('S');
 	BT_Send(DirtyDawg.command);
 	BT_Send(DirtyDawg.ECG);
 
@@ -393,6 +408,7 @@ void Test_Car_Commands(void){
 	// Drive forward
 	DirtyDawg.command = 0;
 	DirtyDawg.ECG = 100;
+	BT_Send('S');
 	BT_Send(DirtyDawg.command);
 	BT_Send(DirtyDawg.ECG);
 
@@ -401,6 +417,7 @@ void Test_Car_Commands(void){
 	// Reverse
 	DirtyDawg.command = REVERSE;
 	DirtyDawg.ECG = 100;
+	BT_Send('S');
 	BT_Send(DirtyDawg.command);
 	BT_Send(DirtyDawg.ECG);
 	
@@ -409,6 +426,7 @@ void Test_Car_Commands(void){
 	// Turn on lights
 	DirtyDawg.command = LIGHT;
 	DirtyDawg.ECG = 0;
+	BT_Send('S');
 	BT_Send(DirtyDawg.command);
 	BT_Send(DirtyDawg.ECG);
 
@@ -417,6 +435,7 @@ void Test_Car_Commands(void){
 	// Turn left
 	DirtyDawg.command = TURN_LEFT;
 	DirtyDawg.ECG = 0;
+	BT_Send('S');
 	BT_Send(DirtyDawg.command);
 	BT_Send(DirtyDawg.ECG);
 
@@ -425,6 +444,7 @@ void Test_Car_Commands(void){
 	// Turn right
 	DirtyDawg.command = TURN_RIGHT;
 	DirtyDawg.ECG = 0;
+	BT_Send('S');
 	BT_Send(DirtyDawg.command);
 	BT_Send(DirtyDawg.ECG);
 
@@ -433,6 +453,7 @@ void Test_Car_Commands(void){
 	// Stop
 	DirtyDawg.command = STOP;
 	DirtyDawg.ECG = 0;
+	BT_Send('S');
 	BT_Send(DirtyDawg.command);
 	BT_Send(DirtyDawg.ECG);
 

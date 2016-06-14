@@ -10,7 +10,7 @@
 #define MAIN_H_
 
 #define ROW1 "C:      S:      "
-#define ROW2 "L:      R:      "
+#define ROW2 "P:      T:      "
 
 #define TRUE 1
 #define FALSE 0

@@ -42,10 +42,10 @@ void suart_init( void )
 	TIMSK0 = (1 << OCIE0A);		
 
 	// Falling edge
-	EICRA = (1 << ISC01);
+	EICRA |= (1 << ISC01);
 	
 	// Enable edge interrupt			
-	EIMSK = (1 << INT0);			
+	EIMSK |= (1 << INT0);			
 
 	// Nothing to send
 	stx_count = 0;	
