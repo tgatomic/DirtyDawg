@@ -75,12 +75,12 @@ void LCD_Update(void){
 	
 	// Prints the distance to front obstacle
 	LCD_Byte(LCD_LINE_1, LCD_CMD);
-	LCD_String("F: ");
+	LCD_String("C: ");
 	for(int i = 0; i < 3; i++)
 		LCD_Byte(front[i], LCD_CHR);
 	
 	// Prints the distance to back obstacle
-	LCD_String("  B: ");
+	LCD_String("  S: ");
 	for(int i = 0; i < 3; i++)
 		LCD_Byte(back[i], LCD_CHR);
 
@@ -110,14 +110,11 @@ void Uart_Flush(void){
 /************************************************************************/
 void BT_Init(void){
 	
-	// Wait for 1 second to ensure the device has power
-	_delay_ms(1000);
-
 	// Send "---" to ensure BlueSmirf is not in command mode
 	for(int i = 0; i<3; i++) BT_Send('-');
 	BT_Send(LF); // Line feed
 	BT_Send(CR); // Carriage return
-	_delay_ms(1000);
+	_delay_ms(250);
 	// Clear LCD display
 	LCD_Byte(LCD_CLEAR, LCD_CMD);
 	_delay_ms(150);
@@ -132,7 +129,7 @@ void BT_Connection_Check(void){
 
 	BT_Send(LF); //Line feed
 	BT_Send(CR); //Carriage return
-	_delay_ms(1000);
+	_delay_ms(500);
 	Uart_Flush();
 
 	// Sends command to enter command mode
@@ -159,7 +156,7 @@ void BT_Connection_Check(void){
 
 	BT_Send(LF); //Line feed
 	BT_Send(CR); //Carriage return
-	_delay_ms(1000);
+	_delay_ms(500);
 	Uart_Flush();
 
 }
@@ -167,13 +164,13 @@ void BT_Connection_Check(void){
 void BT_Connect(void){
 
 	//Wait for 1 second to ensure the device has power
-	_delay_ms(1000);
+	//_delay_ms(1000);
 
 	for(int i = 0; i < 3; i++) BT_Send('-');
 
 	BT_Send(LF); //Line feed
 	BT_Send(CR); //Carriage return
-	_delay_ms(1000);
+	_delay_ms(500);
 	LCD_Byte(LCD_LINE_2 + 1, LCD_CMD);
 	LCD_Byte('*', LCD_CHR);
 	LCD_Byte(LCD_LINE_2 + 14, LCD_CMD);
@@ -342,6 +339,8 @@ void BT_Recieve_Data(void){
 		DirtyDawg.left_sensor = BT_Recieve();
 		DirtyDawg.right_sensor = BT_Recieve();
 
+		DirtyDawg.back_sensor = DirtyDawg.ECG;
+		DirtyDawg.front_sensor = DirtyDawg.command;
 		// Convert sensor value to ASCII
 		front[0] = DirtyDawg.front_sensor / 100;
 		front[1] = (DirtyDawg.front_sensor - (front[0] * 100 )) / 10;
@@ -371,6 +370,75 @@ void BT_Recieve_Data(void){
 	DirtyDawg.state = LCD_STATE;
 }
 
+void Test_Car_Commands(void){
+/*	
+	#define LIGHT 1<<0
+	#define STOP 1<<1
+	#define REVERSE 1<<2
+	#define TURN_LEFT 1<<3
+	#define TURN_RIGHT 1<<4
+*/
+	LCD_Byte(LCD_CLEAR,LCD_CMD);
+	LCD_Byte(LCD_LINE_1, LCD_CMD);
+	LCD_String("Test commands");
+
+	// Stop
+	DirtyDawg.command = STOP;
+	DirtyDawg.ECG = 0;
+	BT_Send(DirtyDawg.command);
+	BT_Send(DirtyDawg.ECG);
+
+	_delay_ms(2000);
+
+	// Drive forward
+	DirtyDawg.command = 0;
+	DirtyDawg.ECG = 100;
+	BT_Send(DirtyDawg.command);
+	BT_Send(DirtyDawg.ECG);
+
+	_delay_ms(2000);
+	
+	// Reverse
+	DirtyDawg.command = REVERSE;
+	DirtyDawg.ECG = 100;
+	BT_Send(DirtyDawg.command);
+	BT_Send(DirtyDawg.ECG);
+	
+	_delay_ms(2000);
+	
+	// Turn on lights
+	DirtyDawg.command = LIGHT;
+	DirtyDawg.ECG = 0;
+	BT_Send(DirtyDawg.command);
+	BT_Send(DirtyDawg.ECG);
+
+	_delay_ms(2000);
+	
+	// Turn left
+	DirtyDawg.command = TURN_LEFT;
+	DirtyDawg.ECG = 0;
+	BT_Send(DirtyDawg.command);
+	BT_Send(DirtyDawg.ECG);
+
+	_delay_ms(2000);
+	
+	// Turn right
+	DirtyDawg.command = TURN_RIGHT;
+	DirtyDawg.ECG = 0;
+	BT_Send(DirtyDawg.command);
+	BT_Send(DirtyDawg.ECG);
+
+	_delay_ms(2000);
+
+	// Stop
+	DirtyDawg.command = STOP;
+	DirtyDawg.ECG = 0;
+	BT_Send(DirtyDawg.command);
+	BT_Send(DirtyDawg.ECG);
+
+	LCD_Byte(LCD_CLEAR,LCD_CMD);
+
+}
 // Lights for debugging reason
 void Yellow_LED_On(void){
 	PORTD |= (1<<PORTD7);

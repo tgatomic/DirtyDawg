@@ -30,11 +30,11 @@ int main(void){
 	// Initiate the TWI bus as a master
 	TWI_Master_Init();
 
-	// Initiate the LCD Screen
-	LCD_Init();
-	
 	// Initiate the hardware defined UART
 	UART_Init(19200);
+	
+	// Initiate the LCD Screen
+	LCD_Init();
 	
 	// Initiate the software define UART
 	suart_init();
@@ -53,6 +53,10 @@ int main(void){
 	  
 	// When active connection send '=' to car 
 	BT_Send('=');
+	
+//	_delay_ms(500);
+//	Test_Car_Commands();
+	
 
 	// Prepare the LCD for distance data
 	LCD_Byte(LCD_LINE_1, LCD_CMD);
@@ -109,7 +113,8 @@ ISR(PCINT2_vect){
 	// Toggles reverse and forward
     if(changedbits & (1 << PIND5)){
 		if(DirtyDawg.status & REVERSE_BUTTON){
-			DirtyDawg.command ^= REVERSE;
+			// DirtyDawg.command ^= REVERSE;
+			Test_Car_Commands();
 			DirtyDawg.status &= ~REVERSE_BUTTON;
 		}
 		else{

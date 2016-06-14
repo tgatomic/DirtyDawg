@@ -9,7 +9,7 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-#define ROW1 "F:      B:      "
+#define ROW1 "C:      S:      "
 #define ROW2 "L:      R:      "
 
 #define TRUE 1

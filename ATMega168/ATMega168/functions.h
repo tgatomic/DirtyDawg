@@ -87,6 +87,7 @@ void UART_Init(unsigned int);
 void LCD_Update(void);
 void Uart_Flush(void);
 void Error(unsigned int);
+void Test_Car_Commands(void);
 
 // Functions for BlueSmirf
 void BT_Init(void);

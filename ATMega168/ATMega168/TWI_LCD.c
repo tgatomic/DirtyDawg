@@ -28,7 +28,7 @@ void LCD_Init(void){
 	
 	// Clears display and DDRAM
 	LCD_Byte(0x01, LCD_CMD); 
-	_delay_ms(DELAY_MS*5); //5 ms delay
+	_delay_ms(5); //5 ms delay
 	
 }
 
